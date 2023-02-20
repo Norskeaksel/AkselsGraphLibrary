@@ -1,25 +1,24 @@
 class Graph {
     private var nrOfNodes = 0
     private val AdjacencyList = mutableListOf<MutableList<Pair<Double, Int>>>()
-    private val node2Index = mutableMapOf<Any, Int>()
-    private val index2Node = mutableMapOf<Int, Any>()
+    private val node2id = mutableMapOf<Any, Int>()
+    private val id2Node = mutableMapOf<Int, Any>()
 
     fun addNode(node: Any) {
-        if (node2Index.containsKey(node)) {
+        if (node2id.containsKey(node)) {
             System.err.println("Node already exists")
             return
         }
-        node2Index[node] = nrOfNodes
-        index2Node[nrOfNodes] = node
-        nrOfNodes++
+        node2id[node] = nrOfNodes
+        id2Node[nrOfNodes++] = node
         AdjacencyList.add(mutableListOf())
     }
 
     fun addEdge(node1: Any, node2: Any, weight: Double=1.0) {
-        val index1 = node2Index[node1] ?: addNode(node1).run { node2Index[node1]!! }
-        val index2 = node2Index[node2] ?: addNode(node2).run { node2Index[node2]!! }
-        AdjacencyList[index1].add(Pair(weight, index2))
-        AdjacencyList[index2].add(Pair(weight, index1))
+        val id1 = node2id[node1] ?: addNode(node1).run { node2id[node1]!! }
+        val id2 = node2id[node2] ?: addNode(node2).run { node2id[node2]!! }
+        AdjacencyList[id1].add(Pair(weight, id2))
+        AdjacencyList[id2].add(Pair(weight, id1))
     }
 
     fun connect(node1: Any, node2: Any, weight: Double=1.0){
@@ -28,11 +27,14 @@ class Graph {
     }
 
     fun getEdges(node: Any): List<Pair<Double, Int>> {
-        val index = node2Index[node] ?: return emptyList()
-        return AdjacencyList[index]
+        val id = node2id[node] ?: return emptyList()
+        return AdjacencyList[id]
     }
 
-    fun getIndex(node: Any): Int? = node2Index[node]
+    fun getId(node: Any): Int? = node2id[node]
 
+    fun getAdjacencyList() = AdjacencyList
+
+    fun nodes() = id2Node.values
     fun size() = nrOfNodes
 }
