@@ -1,25 +1,4 @@
 
 fun main(args: Array<String>) {
-    val graph = AdjacencyMatrix<String>()
-    val singapore = graph.createVertex("Singapore")
-    val tokyo = graph.createVertex("Tokyo")
-    val hongKong = graph.createVertex("Hong Kong")
-    val detroit = graph.createVertex("Detroit")
-    val sanFrancisco = graph.createVertex("San Francisco")
-    val washingtonDC = graph.createVertex("Washington DC")
-    val austinTexas = graph.createVertex("Austin Texas")
-    val seattle = graph.createVertex("Seattle")
-    graph.addUndirectedEdge(singapore, hongKong, 300.0)
-    graph.addUndirectedEdge(singapore, tokyo, 500.0)
-    graph.addUndirectedEdge(hongKong, tokyo, 250.0)
-    graph.addUndirectedEdge(tokyo, detroit, 450.0)
-    graph.addUndirectedEdge(tokyo, washingtonDC, 300.0)
-    graph.addUndirectedEdge(hongKong, sanFrancisco, 600.0)
-    graph.addUndirectedEdge(detroit, austinTexas, 50.0)
-    graph.addUndirectedEdge(austinTexas, washingtonDC, 292.0)
-    graph.addUndirectedEdge(sanFrancisco, washingtonDC,
-        337.0)
-    graph.addUndirectedEdge(washingtonDC, seattle, 277.0)
-    graph.addUndirectedEdge(sanFrancisco, seattle, 218.0)
-    graph.addUndirectedEdge(austinTexas, sanFrancisco, 297.0)
+    
 }

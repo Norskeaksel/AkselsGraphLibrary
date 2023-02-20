@@ -1,6 +1,16 @@
-class Graph0{
+fun Boolean.toInt() = if (this) 1 else 0
+fun readString() = readLine()!!
+fun readStrings() = readString().split(" ")
+fun readInt() = readString().toInt()
+fun readInts() = readStrings().map { it.toInt() }
+fun readLong() = readString().toLong()
+fun readLongs() = readStrings().map { it.toLong() }
+fun readDouble() = readString().toDouble()
+fun readDoubles() = readStrings().map { it.toDouble() }
+
+class Graph {
     data class Tile(val x: Int, val y: Int){
-       var data: Any? = null
+        var data: Any? = null
     }
     private var nrOfNodes = 0
     private val AdjacencyList = mutableListOf<MutableList<Pair<Double, Int>>>()
@@ -66,4 +76,59 @@ class Graph0{
 
     fun nodes() = id2Node.values
     fun size() = nrOfNodes
+}
+
+class DFS2(val graph: Graph) {
+    val adjacencyList = graph.getAdjacencyList()
+    val size = graph.size()
+    var visited = IntArray(size)
+
+    private fun dfs(id:Int, currentVisited:MutableList<Int>){
+        visited[id] = 1
+        currentVisited.add(id)
+        adjacencyList[id].forEach { (d, v) ->
+            val node = graph.getNode(v) as Graph.Tile
+            val data = node.data as Pair<Boolean, Boolean>
+            if (visited[v] == 0 && !data.first)
+                dfs(v, currentVisited)
+        }
+    }
+
+    fun dfsRecursive(startId:Int): List<Int> {
+        val currentVisited = mutableListOf<Int>()
+        dfs(startId, currentVisited)
+        return currentVisited
+    }
+}
+fun solve(): String {
+    val n = readInt()
+    val (ax, ay) = readInts()
+    val (bx, by) = readInts()
+    val (cx, cy) = readInts()
+    val graph = Graph()
+    for(y in 1 until n){
+        for(x in 1 until n){
+            val blocked = y==ay || x==ax
+            val goal = y==cy || x==cx
+            val t =Graph.Tile(x, y)
+            t.data = Pair(blocked, goal)
+            graph.addNode(t)
+            graph.connectTile(t)
+        }
+    }
+    val dfsResults = DFS2(graph)
+    val start = graph.getId(Graph.Tile(bx, by))
+    val visited = dfsResults.dfsRecursive(start!!)
+    if(visited.contains(graph.getId(Graph.Tile(cx, cy))))
+        return "YES"
+    else
+        return "NO"
+}
+
+fun main(args: Array<String>) {
+    val n = 1//readInt()
+    repeat(n) {
+        val ans = solve()
+        println(ans)
+    }
 }
