@@ -1,6 +1,5 @@
-class DFS(val graph: Graph) {
-    val adjacencyList = graph.getAdjacencyList()
-    val size = graph.size()
+class DFS(val graph: AdjacencyList) {
+    val size = graph.size
     var visited = IntArray(size)
 
     fun dfsIterative(startId:Int): List<Int> {
@@ -15,7 +14,7 @@ class DFS(val graph: Graph) {
 
             visited[currentId] = 1
             currentVisited.add(currentId)
-            adjacencyList[currentId].forEach { (d, v) ->
+            graph[currentId].forEach { (d, v) ->
                 if (visited[v] == 0) {
                     stack.add(v)
                 }
@@ -27,7 +26,7 @@ class DFS(val graph: Graph) {
     private fun dfs(id:Int, currentVisited:MutableList<Int>){
         visited[id] = 1
         currentVisited.add(id)
-        adjacencyList[id].forEach { (d, v) ->
+        graph[id].forEach { (d, v) ->
             if (visited[v] == 0)
                 dfs(v, currentVisited)
         }
