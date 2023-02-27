@@ -1,6 +1,7 @@
 class DFS(val graph: AdjacencyList) {
     val size = graph.size
     var visited = IntArray(size)
+    var currentVisited = mutableListOf<Int>()
 
     fun dfsIterative(startId:Int): List<Int> {
         val stack = ArrayDeque<Int>()
@@ -23,18 +24,17 @@ class DFS(val graph: AdjacencyList) {
         return currentVisited
     }
 
-    private fun dfs(id:Int, currentVisited:MutableList<Int>){
-        visited[id] = 1
-        currentVisited.add(id)
-        graph[id].forEach { (d, v) ->
-            if (visited[v] == 0)
-                dfs(v, currentVisited)
-        }
-    }
-
-    fun dfsRecursive(startId:Int): List<Int> {
+    fun dfsRecursive(start: Int): List<Int> {
         val currentVisited = mutableListOf<Int>()
-        dfs(startId, currentVisited)
+        DeepRecursiveFunction<Int, Unit> { id ->
+            visited[id] = 1
+            currentVisited.add(id)
+            graph[id].forEach {(d, v) ->
+                if (visited[v] == 0) {
+                    this.callRecursive(v)
+                }
+            }
+        }.invoke(start)
         return currentVisited
     }
 }

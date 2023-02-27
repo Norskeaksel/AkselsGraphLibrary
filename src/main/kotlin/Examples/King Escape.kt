@@ -1,3 +1,5 @@
+import kotlin.system.measureTimeMillis
+
 fun Boolean.toInt() = if (this) 1 else 0
 fun readString() = readLine()!!
 fun readStrings() = readString().split(" ")
@@ -14,27 +16,34 @@ fun solve(): String {
     val (bx, by) = readInts()
     val (cx, cy) = readInts()
     val grid = Grid(n, n)
-    for (y in 0 until n) {
-        for (x in 0 until n) {
-            val blocked = y == ay || x == ax
-            val goal = y == cy || x == cx
-            val u = Grid.Tile(x, y)
-            u.data = Pair(blocked, goal)
-            grid.addNode(u)
-            val neighbours = grid.getStraightNeighbours(u)
-            neighbours.forEach { v ->
-                v.data?.let {
-                    it as Pair<*, *>
-                    if (it.first == false)
-                        grid.connect(u, v)
+    val buildingGraphTime = measureTimeMillis {
+        for (y in 0 until n) {
+            for (x in 0 until n) {
+                val blocked = y == ay || x == ax
+                val goal = y == cy || x == cx
+                val u = Grid.Tile(x, y)
+                u.data = Pair(blocked, goal)
+                grid.addNode(u)
+                val neighbours = grid.getStraightNeighbours(u)
+                neighbours.forEach { v ->
+                    v.data?.let {
+                        it as Pair<*, *>
+                        if (it.first == false)
+                            grid.connect(u, v)
+                    }
                 }
             }
         }
     }
-    val start = grid.node2Id(bx, by)
-    val graph = grid.getAdjacencyList()
-    val dfsResults = DFS(graph)
-    val visited = dfsResults.dfsRecursive(start)
+    System.err.println("Building graph time: $buildingGraphTime ms")
+    var visited: List<Int>
+    val dfsTime = measureTimeMillis {
+        val start = grid.node2Id(bx, by)
+        val graph = grid.getAdjacencyList()
+        val dfsResults = DFS(graph)
+        visited = dfsResults.dfsRecursive(start)
+    }
+    System.err.println("DFS time: $dfsTime ms")
     if (visited.contains(grid.node2Id(cx, cy)))
         return "YES"
     else
@@ -43,8 +52,11 @@ fun solve(): String {
 
 fun main(args: Array<String>) {
     val n = 1
-    repeat(n) {
-        val ans = solve()
-        println(ans)
+    val timeInMillis = measureTimeMillis {
+        repeat(n) {
+            val ans = solve()
+            println(ans)
+        }
     }
+    //System.err.println("Total time: $timeInMillis ms")
 }
