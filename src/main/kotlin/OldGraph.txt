@@ -19,7 +19,7 @@ interface OldGraph<T> {
         addDirectedEdge(destination, source, weight)
     }
 
-    fun getEdges(source: Vertex<T>): ArrayList<Edge<T>>
+    fun getEdges(source: Vertex<T>): ArrayList<oldEdge<T>>
     fun weight(
         source: Vertex<T>,
         destination: Vertex<T>
@@ -77,14 +77,14 @@ interface OldGraph<T> {
 
 data class Vertex<T>(val index: Int, val data: T)
 
-data class Edge<T>(
+data class oldEdge<T>(
     val source: Vertex<T>,
     val destination: Vertex<T>,
     val weight: Double = 1.0
 )
 
 class OldAdjacencyList<T> : OldGraph<T> {
-    private val adjacencies: HashMap<Vertex<T>, ArrayList<Edge<T>>> = HashMap()
+    private val adjacencies: HashMap<Vertex<T>, ArrayList<oldEdge<T>>> = HashMap()
     private val vertex: HashMap<T, Vertex<T>> = HashMap()
     val size: Int get() = adjacencies.size
     val vertices: Set<Vertex<T>> get() = adjacencies.keys
@@ -106,7 +106,7 @@ class OldAdjacencyList<T> : OldGraph<T> {
         destination: Vertex<T>,
         weight: Double
     ) {
-        val edge = Edge(source, destination, weight)
+        val edge = oldEdge(source, destination, weight)
         adjacencies[source]?.add(edge)
     }
 
@@ -155,12 +155,12 @@ class AdjacencyMatrix<T> : OldGraph<T> {
         weights[source.index][destination.index] = weight
     }
 
-    override fun getEdges(source: Vertex<T>): ArrayList<Edge<T>> {
-        val edges = arrayListOf<Edge<T>>()
+    override fun getEdges(source: Vertex<T>): ArrayList<oldEdge<T>> {
+        val edges = arrayListOf<oldEdge<T>>()
         (0 until weights.size).forEach { column ->
             val weight = weights[source.index][column]
             if (weight != null) {
-                edges.add(Edge(source, vertices[column], weight))
+                edges.add(oldEdge(source, vertices[column], weight))
             }
         }
         return edges
@@ -239,12 +239,12 @@ class DijkstraResults<T>(private val graph: OldAdjacencyList<T>) {
     }
 }
 
-fun <T> Prim(graph: OldAdjacencyList<T>): Pair<Int, ArrayList<Edge<T>>> {
-    val edges = ArrayList<Edge<T>>()
+fun <T> Prim(graph: OldAdjacencyList<T>): Pair<Int, ArrayList<oldEdge<T>>> {
+    val edges = ArrayList<oldEdge<T>>()
     var cost = 0.0
     val start = graph.vertices.first()
     val visited = mutableSetOf(start)
-    val pq = PriorityQueue<Edge<T>>(compareBy { it.weight })
+    val pq = PriorityQueue<oldEdge<T>>(compareBy { it.weight })
     pq.addAll(graph.getEdges(start))
     visited.add(start)
     while (true) {
