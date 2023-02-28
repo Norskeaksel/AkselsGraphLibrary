@@ -73,7 +73,6 @@ interface OldGraph<T> {
         }
         return visited
     }
-
 }
 
 data class Vertex<T>(val index: Int, val data: T)

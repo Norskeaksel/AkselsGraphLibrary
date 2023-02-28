@@ -35,15 +35,10 @@ fun solve(): String {
             }
         }
     }
-    System.err.println("Building graph time: $buildingGraphTime ms")
-    var visited: List<Int>
-    val dfsTime = measureTimeMillis {
-        val start = grid.node2Id(bx, by)
-        val graph = grid.getAdjacencyList()
-        val dfsResults = DFS(graph)
-        visited = dfsResults.dfsRecursive(start)
-    }
-    System.err.println("DFS time: $dfsTime ms")
+    val start = grid.node2Id(bx, by)
+    val adjacencyList = grid.getAdjacencyList()
+    val dfsResults = DFS(adjacencyList)
+    val visited = dfsResults.dfsRecursive(start)
     if (visited.contains(grid.node2Id(cx, cy)))
         return "YES"
     else
