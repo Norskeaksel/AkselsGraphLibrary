@@ -2,3 +2,5 @@
 target
 consoleApp.iml
 MergeFiles.md
+out
+*.impl
