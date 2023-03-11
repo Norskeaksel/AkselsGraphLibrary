@@ -29,6 +29,8 @@ fun readInts(n: Int) = List(n) { read().toInt() }
 
 @JvmField
 val _writer = PrintWriter(OUTPUT, false)
+
+// https://codeforces.com/problemset/problem/1033/A
 fun main() {
     _writer.solve(); _writer.flush()
 }
