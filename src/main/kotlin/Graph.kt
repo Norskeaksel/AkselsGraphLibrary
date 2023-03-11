@@ -1,4 +1,4 @@
-class Graph0{
+class Graph{
 
     private var nrOfNodes = 0
     private val adjacencyList:AdjacencyList = mutableListOf()

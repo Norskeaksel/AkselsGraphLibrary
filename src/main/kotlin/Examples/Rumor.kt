@@ -21,16 +21,17 @@ fun main() {
         val (x, y) = readInts()
         g.connect(x, y)
     }
-    val dfs = DFS(g)
+    val dfs = DFS(g.getAdjacencyList())
     val components = mutableListOf<List<Int>>()
     for(i in 0 until g.size()) {
         if(dfs.visited[i] == 1) continue
-        val component = dfs.dfsRecursive(i)
+        dfs.dfsRecursive(i)
+        val component = dfs.getCurrentVisited()
         if(component.isNotEmpty())
             components.add(component)
     }
 
-    //println(graphs)
+    System.err.println(components)
     var sum = 0L
     components.forEach { component ->
         val min = component.map { c[it] }.min()
