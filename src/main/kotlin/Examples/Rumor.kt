@@ -24,7 +24,7 @@ fun main() {
     val dfs = DFS(g.getAdjacencyList())
     val components = mutableListOf<List<Int>>()
     for(i in 0 until g.size()) {
-        if(dfs.visited[i] == 1) continue
+        if(dfs.visited[i]) continue
         dfs.dfsRecursive(i)
         val component = dfs.getCurrentVisited()
         if(component.isNotEmpty())

@@ -1,26 +1,23 @@
-import kotlin.math.max
-
 class DFS(val graph: AdjacencyList) {
     val size = graph.size
-    var visited = IntArray(size)
+    var visited = BooleanArray(size)
     var depth = 0
     private var currentVisited = mutableListOf<Int>()
 
     fun dfsIterative(startId: Int) {
-        depth = 0
         currentVisited.clear()
         val stack = ArrayDeque<Int>()
         stack.add(startId)
         while (stack.isNotEmpty()) {
             val currentId = stack.last()
             stack.removeLast()
-            if (visited[currentId] == 1)
+            if (visited[currentId])
                 continue
 
-            visited[currentId] = 1
+            visited[currentId] = true
             currentVisited.add(currentId)
             graph[currentId].forEach { (d, v) ->
-                if (visited[v] == 0) {
+                if (!visited[v]) {
                     stack.add(v)
                 }
             }
@@ -31,16 +28,15 @@ class DFS(val graph: AdjacencyList) {
         var currentDepth = 0
         currentVisited.clear()
         DeepRecursiveFunction<Int, Unit> { id ->
-            visited[id] = 1
+            visited[id] = true
             currentVisited.add(id)
             currentDepth++
-            depth = max(depth, currentDepth)
+            depth = if(depth > currentDepth) depth else currentDepth
             graph[id].forEach { (d, v) ->
-                if (visited[v] == 0) {
+                if (!visited[v]) {
                     this.callRecursive(v)
                 }
             }
-            currentDepth--
         }.invoke(start)
     }
     fun getCurrentVisited() = // Deep Copy

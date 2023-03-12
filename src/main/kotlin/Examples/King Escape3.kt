@@ -2,34 +2,6 @@ import java.io.PrintWriter
 import java.util.*
 import kotlin.collections.ArrayDeque
 
-/** IO code start */
-//@JvmField val INPUT = File("src/main/kotlin/input.txt").inputStream()
-@JvmField
-val INPUT = System.`in`
-
-//@JvmField val OUTPUT = File("src/main/kotlin/output.txt").outputStream()
-@JvmField
-val OUTPUT = System.out
-
-@JvmField
-val _reader = INPUT.bufferedReader()
-fun readLine(): String? = _reader.readLine()
-fun readLn() = _reader.readLine()!!
-
-@JvmField
-var _tokenizer: StringTokenizer = StringTokenizer("")
-fun read(): String {
-    while (_tokenizer.hasMoreTokens().not()) _tokenizer = StringTokenizer(_reader.readLine() ?: return "", " ")
-    return _tokenizer.nextToken()
-}
-
-fun Boolean.toInt() = if (this) 1 else 0
-fun readInt() = read().toInt()
-fun readInts(n: Int) = List(n) { read().toInt() }
-
-@JvmField
-val _writer = PrintWriter(OUTPUT, false)
-
 // https://codeforces.com/problemset/problem/1033/A
 fun main() {
     _writer.solve(); _writer.flush()
