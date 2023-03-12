@@ -7,7 +7,7 @@ class Grid(private val width: Int, private val height: Int) {
     private val nodes = Array(size) { Tile(-1, -1) }
     private val adjacencyList = adjacencyListInit(size)
 
-    fun node2Id(x: Int, y: Int) = x + y * width
+    fun xy2Id(x: Int, y: Int) = x + y * width
     fun node2Id(t: Tile) = t.x + t.y * width
     fun id2Node(id: Int) = nodes[id]
     fun getNodes(): List<Tile> = nodes.filter { it.x != -1 }
@@ -35,18 +35,18 @@ class Grid(private val width: Int, private val height: Int) {
     // @formatter:off
     fun getStraightNeighbours(t: Tile) =
         listOfNotNull(
-            if(t.x > 0)        id2Node(node2Id(t.x - 1, t.y)) else null,
-            if(t.x < width-1)  id2Node(node2Id(t.x + 1, t.y)) else null,
-            if(t.y > 0)        id2Node(node2Id(t.x, t.y - 1)) else null,
-            if(t.y < height-1) id2Node(node2Id(t.x, t.y + 1)) else null
+            if(t.x > 0)        id2Node(xy2Id(t.x - 1, t.y)) else null,
+            if(t.x < width-1)  id2Node(xy2Id(t.x + 1, t.y)) else null,
+            if(t.y > 0)        id2Node(xy2Id(t.x, t.y - 1)) else null,
+            if(t.y < height-1) id2Node(xy2Id(t.x, t.y + 1)) else null
         )
 
     // @formatter:off
     fun getDiagonalNeighgbours(t: Tile) =
         listOfNotNull(
-            if(t.x > 0 && t.y > 0)              id2Node(node2Id(t.x - 1, t.y - 1)) else null,
-            if(t.x < width-1 && t.y > 0)        id2Node(node2Id(t.x + 1, t.y - 1)) else null,
-            if(t.x > 0 && t.y < height-1)       id2Node(node2Id(t.x - 1, t.y + 1)) else null,
-            if(t.x < width-1 && t.y < height-1) id2Node(node2Id(t.x + 1, t.y + 1)) else null
+            if(t.x > 0 && t.y > 0)              id2Node(xy2Id(t.x - 1, t.y - 1)) else null,
+            if(t.x < width-1 && t.y > 0)        id2Node(xy2Id(t.x + 1, t.y - 1)) else null,
+            if(t.x > 0 && t.y < height-1)       id2Node(xy2Id(t.x - 1, t.y + 1)) else null,
+            if(t.x < width-1 && t.y < height-1) id2Node(xy2Id(t.x + 1, t.y + 1)) else null
         )
 }
