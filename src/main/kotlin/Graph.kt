@@ -1,7 +1,7 @@
 class Graph{
 
     private var nrOfNodes = 0
-    private val adjacencyList:AdjacencyList = mutableListOf()
+    private val graph:AdjacencyList = mutableListOf()
     private val node2id = mutableMapOf<Any, Int>()
     private val id2Node = mutableMapOf<Int, Any>()
 
@@ -12,13 +12,13 @@ class Graph{
         }
         node2id[node] = nrOfNodes
         id2Node[nrOfNodes++] = node
-        adjacencyList.add(mutableListOf())
+        graph.add(mutableListOf())
     }
 
     fun addEdge(node1: Any, node2: Any, weight: Double=1.0) {
         val id1 = node2id[node1] ?: addNode(node1).run { node2id[node1]!! }
         val id2 = node2id[node2] ?: addNode(node2).run { node2id[node2]!! }
-        adjacencyList[id1].add(Pair(weight, id2))
+        graph[id1].add(Pair(weight, id2))
     }
 
     fun connect(node1: Any, node2: Any, weight: Double=1.0){
@@ -28,13 +28,13 @@ class Graph{
 
     fun getEdges(node: Any): List<Pair<Double, Int>> {
         val id = node2id[node] ?: return emptyList()
-        return adjacencyList[id]
+        return graph[id]
     }
 
     fun getId(node: Any): Int? = node2id[node]
     fun getNode(id: Int): Any? = id2Node[id]
 
-    fun getAdjacencyList() = adjacencyList
+    fun getAdjacencyList() = graph
 
     fun nodes() = id2Node.values
     fun size() = nrOfNodes

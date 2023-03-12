@@ -20,7 +20,7 @@ fun main(){
             g.addEdge(u,v,w.toDouble())
         }
         val distance = Dijkstra(g.getAdjacencyList()).run {
-            this.findShortestPaths(s)
+            this.dijkstra(s)
             this.distance
         }
         repeat(q){

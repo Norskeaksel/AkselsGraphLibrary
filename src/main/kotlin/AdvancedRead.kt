@@ -15,9 +15,9 @@ fun read(): String {
     while (_tokenizer.hasMoreTokens().not()) _tokenizer = StringTokenizer(_reader.readLine() ?: return "", " ")
     return _tokenizer.nextToken()
 }
-fun readInt() = read().toInt()
-fun readDouble() = read().toDouble()
-fun readLong() = read().toLong()
+//fun readInt() = read().toInt()
+//fun readDouble() = read().toDouble()
+//fun readLong() = read().toLong()
 fun readStrings(n: Int) = List(n) { read() }
 fun readLines(n: Int) = List(n) { readLn() }
 fun readInts(n: Int) = List(n) { read().toInt() }
