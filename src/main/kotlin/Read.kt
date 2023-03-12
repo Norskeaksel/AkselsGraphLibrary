@@ -1,8 +1,9 @@
+import java.io.File
 import java.io.PrintWriter
 import java.util.*
 
-//@JvmField val INPUT = File("input.txt").inputStream()
-@JvmField val INPUT = System.`in`
+@JvmField val INPUT = File("input.txt").inputStream()
+//@JvmField val INPUT = System.`in`
 //@JvmField val OUTPUT = File("output.txt").outputStream()
 @JvmField val OUTPUT = System.out
 

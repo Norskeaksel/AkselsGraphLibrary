@@ -1,4 +1,5 @@
 package Examples
+// https://codeforces.com/problemset/problem/522/A
 
 import BFS
 import Graph
