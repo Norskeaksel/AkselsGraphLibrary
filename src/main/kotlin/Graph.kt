@@ -37,4 +37,12 @@ class Graph{
 
     fun nodes() = id2Node.values
     fun size() = nrOfNodes
+    override fun toString(): String {
+        return buildString {
+            graph.forEachIndexed { id, edges ->
+                val edgeString = edges.joinToString { it.second.toString() }
+                append("${getNode(id)} ----> [ $edgeString ]\n")
+            }
+        }
+    }
 }
