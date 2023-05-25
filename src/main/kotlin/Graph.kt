@@ -1,5 +1,4 @@
 class Graph{
-
     private var nrOfNodes = 0
     private val graph:AdjacencyList = mutableListOf()
     private val node2id = mutableMapOf<Any, Int>()
