@@ -36,6 +36,6 @@ class Graph{
 
     fun getAdjacencyList() = graph
 
-    fun nodes() = id2Node.values
+    fun getNodes() = id2Node.values
     fun size() = nrOfNodes
 }
