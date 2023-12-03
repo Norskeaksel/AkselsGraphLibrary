@@ -37,7 +37,7 @@ class Dijkstra(private val graph: AdjacencyList) {
                     distance[e.second] = newDist
                     parent[e.second] = u
                     if (!visited[e.second])
-                        pq.add(Pair(newDist, e.second))
+                        pq.add(Edge(newDist, e.second))
                 }
             }
         }
