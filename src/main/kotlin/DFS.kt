@@ -22,6 +22,7 @@ class DFS(val graph: AdjacencyList) {
                 }
             }
         }
+        depth = currentVisited.size
     }
 
     fun dfsRecursive(start: Int) {
