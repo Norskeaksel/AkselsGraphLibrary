@@ -26,19 +26,17 @@ class DFS(val graph: AdjacencyList) {
     }
 
     fun dfsRecursive(start: Int) {
-        var currentDepth = 0
         currentVisited.clear()
         DeepRecursiveFunction<Int, Unit> { id ->
             visited[id] = true
             currentVisited.add(id)
-            currentDepth++
-            depth = if(depth > currentDepth) depth else currentDepth
             graph[id].forEach { (d, v) ->
                 if (!visited[v]) {
                     this.callRecursive(v)
                 }
             }
         }.invoke(start)
+        depth = currentVisited.size
     }
     fun getCurrentVisited() = // Deep Copy
         currentVisited.map { it }.toList()
