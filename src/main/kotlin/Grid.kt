@@ -1,4 +1,4 @@
-class Grid(private val width: Int, private val height: Int) {
+class Grid(private val width: Int, val height: Int) {
     data class Tile(val x: Int, val y: Int, var data: Any? = null)
 
     private val size = width * height
@@ -6,8 +6,9 @@ class Grid(private val width: Int, private val height: Int) {
     private val adjacencyList = adjacencyListInit(size)
 
     fun xy2Id(x: Int, y: Int) = x + y * width
+    fun id2Node(id: Int) = if (id in 0 until size) nodes[id] else null
+    fun xy2Node(x: Int, y: Int) = id2Node(xy2Id(x, y))
     fun node2Id(t: Tile) = t.x + t.y * width
-    fun id2Node(id: Int) = nodes[id]
     fun getNodes(): List<Tile> = nodes.filter { it.x != -1 }
     fun getEdges(t: Tile): List<Edge> = adjacencyList[node2Id(t)]
     fun getAdjacencyList() = adjacencyList
@@ -32,18 +33,18 @@ class Grid(private val width: Int, private val height: Int) {
     // @formatter:off
     fun getStraightNeighbours(t: Tile) =
         listOfNotNull(
-            if(t.x > 0)        id2Node(xy2Id(t.x - 1, t.y)) else null,
-            if(t.x < width-1)  id2Node(xy2Id(t.x + 1, t.y)) else null,
-            if(t.y > 0)        id2Node(xy2Id(t.x, t.y - 1)) else null,
-            if(t.y < height-1) id2Node(xy2Id(t.x, t.y + 1)) else null
+            if(t.x > 0)        xy2Node(t.x - 1, t.y) else null,
+            if(t.x < width-1)  xy2Node(t.x + 1, t.y) else null,
+            if(t.y > 0)        xy2Node(t.x, t.y - 1) else null,
+            if(t.y < height-1) xy2Node(t.x, t.y + 1) else null
         )
 
     fun getDiagonalNeighbours(t: Tile) =
         listOfNotNull(
-            if(t.x > 0 && t.y > 0)              id2Node(xy2Id(t.x - 1, t.y - 1)) else null,
-            if(t.x < width-1 && t.y > 0)        id2Node(xy2Id(t.x + 1, t.y - 1)) else null,
-            if(t.x > 0 && t.y < height-1)       id2Node(xy2Id(t.x - 1, t.y + 1)) else null,
-            if(t.x < width-1 && t.y < height-1) id2Node(xy2Id(t.x + 1, t.y + 1)) else null
+            if(t.x > 0 && t.y > 0)              xy2Node(t.x - 1, t.y - 1) else null,
+            if(t.x < width-1 && t.y > 0)        xy2Node(t.x + 1, t.y - 1) else null,
+            if(t.x > 0 && t.y < height-1)       xy2Node(t.x - 1, t.y + 1) else null,
+            if(t.x < width-1 && t.y < height-1) xy2Node(t.x + 1, t.y + 1) else null
         )
     // @formatter:on
 
