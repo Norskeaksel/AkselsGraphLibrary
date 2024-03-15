@@ -13,10 +13,7 @@ fun main() {
 
 fun PrintWriter.execute() {
     val (n, s, t) = readInts(3)
-    val graph = IntGraph()
-    repeat(n) {
-        graph.addNode(n)
-    }
+    val graph = IntGraph(n)
     repeat(n){i ->
         val nodes = readDoubles(n)
         nodes.forEachIndexed{ j, d ->

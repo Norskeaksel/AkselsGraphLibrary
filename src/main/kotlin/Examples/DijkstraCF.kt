@@ -8,7 +8,7 @@ fun main(){
     val (n,m) = readInts(2)
     val g = IntGraph()
     repeat(n+1){
-        g.addNode(it)
+        g.addNodes(it)
     }
     repeat(m){
         val (u,v, w) = readInts(3)

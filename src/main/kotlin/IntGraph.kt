@@ -1,8 +1,11 @@
-class IntGraph {
-    private var size = 0
-    private val graph:AdjacencyList = mutableListOf()
+class IntGraph(private var size: Int = 0) {
+    private val graph: AdjacencyList = mutableListOf()
 
-    fun addNode(nr: Int) {
+    init {
+        addNodes(size)
+    }
+
+    fun addNodes(nr: Int) {
         if (nr >= graph.size) {
             for (i in graph.size..nr) {
                 graph.add(mutableListOf())
