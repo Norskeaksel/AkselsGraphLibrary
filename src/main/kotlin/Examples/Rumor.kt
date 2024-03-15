@@ -2,23 +2,19 @@ package Examples
 
 import DFS
 import Graph
+import readInts
 
 //https://codeforces.com/problemset/problem/893/C
 
-
-fun readString() = readLine()!!
-fun readStrings() = readString().split(" ")
-fun readInts() = readStrings().map { it.toInt() }
-
 fun main() {
     val g = Graph()
-    val (n, m) = readInts()
-    val c = readInts()
+    val (n, m) = readInts(2)
+    val c = readInts(n)
     repeat(n) {
         g.addNode(it + 1)
     }
     repeat(m) {
-        val (x, y) = readInts()
+        val (x, y) = readInts(2)
         g.connect(x, y)
     }
     val dfs = DFS(g.getAdjacencyList())

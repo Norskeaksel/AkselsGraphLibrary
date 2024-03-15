@@ -6,7 +6,6 @@ class Dijkstra(private val graph: AdjacencyList) {
 
     private fun resetDistances() = distance.fill(Double.POSITIVE_INFINITY)
     private fun resetParents() = parent.fill(-1)
-    fun getDistance(destination: Int) = distance[destination]
 
     fun getPath(destination: Int): List<Int> {
         val path = mutableListOf<Int>()
