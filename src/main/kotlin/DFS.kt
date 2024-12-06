@@ -28,6 +28,8 @@ class DFS(val graph: AdjacencyList) {
     fun dfsRecursive(start: Int) {
         currentVisited.clear()
         DeepRecursiveFunction<Int, Unit> { id ->
+            if(visited[id])
+                return@DeepRecursiveFunction
             visited[id] = true
             currentVisited.add(id)
             graph[id].forEach { (d, v) ->
