@@ -25,13 +25,13 @@ class Graph {
         addEdge(node2, node1, weight)
     }
 
-    fun getEdges(node: Any): List<Pair<Double, Int>> {
+    fun getNodeEdges(node: Any): List<Pair<Double, Int>> {
         val id = node2id[node] ?: return emptyList()
         return graph[id]
     }
 
-    fun getId(node: Any): Int? = node2id[node]
-    fun getNode(id: Int): Any? = id2Node[id]
+    fun node2id(node: Any): Int? = node2id[node]
+    fun id2Node(id: Int): Any? = id2Node[id]
 
     fun getAdjacencyList() = graph
 
@@ -40,17 +40,20 @@ class Graph {
     override fun toString(): String {
         return buildString {
             graph.forEachIndexed { id, edges ->
-                val edgeString = edges.joinToString { it.second.toString() }
-                append("${getNode(id)} ----> [ $edgeString ]\n")
+                val edgeString = edges.joinToString { id2Node(it.second).toString() }
+                append("${id2Node(id)} ----> [$edgeString]\n")
             }
         }
     }
 
-    fun printConnections() {
+    fun printIdConnections() {
         for (i in graph.indices) {
             System.err.print("$i: ")
             val edges = graph[i].map { it.second }.sorted()
             System.err.println(edges)
         }
+    }
+    fun printNodeConnections() {
+        println(toString())
     }
 }
