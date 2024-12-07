@@ -1,13 +1,10 @@
-import java.io.PrintWriter
-import java.util.*
-import kotlin.collections.ArrayDeque
-
 // https://codeforces.com/problemset/problem/1033/A
 fun main() {
-    _writer.solve(); _writer.flush()
+    val ans = kingEscape3(); _writer.flush()
+    println(ans)
 }
 
-fun PrintWriter.solve() {
+fun kingEscape3(): String {
     val n = readInt()
     var (ax, ay) = readInts(2)
     var (bx, by) = readInts(2)
@@ -38,8 +35,8 @@ fun PrintWriter.solve() {
             stack.add(id)
         }
     }
-    if (visited[cy * n + cx])
-        println("YES")
+    return if (visited[cy * n + cx])
+        "YES"
     else
-        println("NO")
+       "NO"
 }

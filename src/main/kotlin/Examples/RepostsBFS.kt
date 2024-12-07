@@ -6,17 +6,16 @@ import Graph
 import _writer
 import readInt
 import readStrings
-import java.io.PrintWriter
 import java.util.*
 import kotlin.math.max
 
 
-fun main() { _writer.solve2(); _writer.flush() }
-fun PrintWriter.solve2() {
+fun main() { print(RepostsBFS()); _writer.flush() }
+fun RepostsBFS(): Int {
     val n = readInt()
     val g = Graph()
     repeat(n){
-        val (v,e,u) = readStrings(3).map { it.lowercase(Locale.getDefault()) }
+        val (v,_,u) = readStrings(3).map { it.lowercase(Locale.getDefault()) }
         g.addEdge(u,v)
     }
     val bfs = BFS(g.getAdjacencyList())
@@ -25,5 +24,5 @@ fun PrintWriter.solve2() {
         bfs.bfsRecursive(listOf(it))
         longestChain = max(longestChain, bfs.distances.maxOrNull()!!.toInt()+1)
     }
-    println(longestChain)
+    return longestChain
 }

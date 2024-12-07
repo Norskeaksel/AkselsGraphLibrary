@@ -6,17 +6,16 @@ import Graph
 import _writer
 import readInt
 import readStrings
-import java.io.PrintWriter
 import java.util.*
 import kotlin.math.max
 
 
-fun main() { _writer.solve(); _writer.flush() }
-fun PrintWriter.solve() {
+fun main() { print(repostsDFS()); _writer.flush() }
+fun repostsDFS(): Int {
     val n = readInt()
     val g = Graph()
     repeat(n){
-        val (v,e,u) = readStrings(3).map { it.lowercase(Locale.getDefault()) }
+        val (v,_,u) = readStrings(3).map { it.lowercase(Locale.getDefault()) }
         g.addEdge(u,v)
     }
     val dfs = DFS(g.getAdjacencyList())
@@ -25,5 +24,5 @@ fun PrintWriter.solve() {
         dfs.dfsRecursive(it)
         longestChain = max(longestChain, dfs.depth)
     }
-    println(longestChain)
+    return longestChain
 }

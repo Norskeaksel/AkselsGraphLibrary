@@ -5,7 +5,7 @@ import java.io.PrintWriter
 import java.util.*
 
 @JvmField
-val INPUT: InputStream = "src/main/kotlin/SampleInput.txt".let { path ->
+var INPUT: InputStream = "src/main/kotlin/SampleInput.txt".let { path ->
     if (File(path).exists())
         File("src/main/kotlin/SampleInput.txt").inputStream()
     else System.`in`
@@ -20,7 +20,7 @@ val OUTPUT: OutputStream = "src/main/kotlin/ProgramOutput.txt".let { path ->
 }
 
 @JvmField
-val _reader = INPUT.bufferedReader()
+var _reader = INPUT.bufferedReader()
 fun readLine(): String? = _reader.readLine()
 fun readString() = _reader.readLine()!!
 

@@ -1,3 +1,5 @@
+import kotlin.math.max
+
 class DFS(val graph: AdjacencyList) {
     val size = graph.size
     var visited = BooleanArray(size)
@@ -27,20 +29,25 @@ class DFS(val graph: AdjacencyList) {
     }
 
     fun dfsRecursive(start: Int) {
+        var currentDepth = 0
         currentVisited.clear()
         DeepRecursiveFunction<Int, Unit> { id ->
             if(visited[id])
                 return@DeepRecursiveFunction
             visited[id] = true
+            // Just visited this node
             currentVisited.add(id)
+            currentDepth++
+            depth = max(depth, currentDepth)
             graph[id].forEach { (d, v) ->
                 if (!visited[v]) {
                     this.callRecursive(v)
                 }
             }
+            //Done with this node. Backtracking to previous one.
+            currentDepth--
             prossessed.add(id)
         }.invoke(start)
-        depth = currentVisited.size
     }
 
     fun topologicalSort(): List<Int> {
@@ -50,5 +57,5 @@ class DFS(val graph: AdjacencyList) {
         return prossessed.reversed() //Reversed depending on the order
     }
     fun getCurrentVisited() = // Deep Copy
-        currentVisited.map { it }.toList()
+        currentVisited.map { it }
 }
