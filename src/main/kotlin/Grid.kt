@@ -49,4 +49,14 @@ class Grid(private val width: Int, val height: Int) {
     // @formatter:on
 
     fun getAllNeighbours(t: Tile) = getStraightNeighbours(t) + getDiagonalNeighbours(t)
+    fun connectGrid(getNeighbours: (t:Tile) -> List<Tile>){
+        for(x in 0 until width){
+            for(y in 0 until height){
+                val neighbours = getNeighbours(xy2Node(x,y)!!)
+                neighbours.forEach {
+                    addEdge(xy2Node(x,y)!!, it)
+                }
+            }
+        }
+    }
 }
