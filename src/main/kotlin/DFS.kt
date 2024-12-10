@@ -32,7 +32,7 @@ class DFS(val graph: AdjacencyList) {
         var currentDepth = 0
         currentVisited.clear()
         DeepRecursiveFunction<Int, Unit> { id ->
-            if(visited[id])
+            if (visited[id])
                 return@DeepRecursiveFunction
             visited[id] = true
             // Just visited this node
@@ -40,9 +40,7 @@ class DFS(val graph: AdjacencyList) {
             currentDepth++
             depth = max(depth, currentDepth)
             graph[id].forEach { (d, v) ->
-                if (!visited[v]) {
-                    this.callRecursive(v)
-                }
+                this.callRecursive(v)
             }
             //Done with this node. Backtracking to previous one.
             currentDepth--
@@ -51,11 +49,12 @@ class DFS(val graph: AdjacencyList) {
     }
 
     fun topologicalSort(): List<Int> {
-        for(i in 0 until size){
+        for (i in 0 until size) {
             dfsRecursive(i)
         }
         return prossessed.reversed() //Reversed depending on the order
     }
+
     fun getCurrentVisited() = // Deep Copy
         currentVisited.map { it }
 }
