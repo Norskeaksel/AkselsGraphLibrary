@@ -1,4 +1,4 @@
-class Grid(private val width: Int, val height: Int) {
+class Grid(private val width: Int, private val height: Int) {
     data class Tile(val x: Int, val y: Int, var data: Any? = null)
 
     private val size = width * height
