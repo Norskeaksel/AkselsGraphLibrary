@@ -4,6 +4,7 @@ package Examples
 
 import DFS
 import Grid
+import Tile
 
 fun numbersConnectedToSymbol(input: List<String>): Int {
     val grid = Grid(input[0].length, input.size)
@@ -33,7 +34,7 @@ private fun initializeGrid(input: List<String>, grid: Grid, padWithDuplicates:Bo
                         ns.toIntOrNull() != null -> if(padWithDuplicates) ns else "0"
                         else -> ns[i]
                     }
-                    val t = Grid.Tile(x++, y, value)
+                    val t = Tile(x++, y, value)
                     if (it == 0)
                         grid.addNode(t)
                     else {
