@@ -1,3 +1,7 @@
+import graphClasses._writer
+import graphClasses.readInt
+import graphClasses.readInts
+
 // https://codeforces.com/problemset/problem/1033/A
 fun main() {
     val ans = kingEscape3(); _writer.flush()

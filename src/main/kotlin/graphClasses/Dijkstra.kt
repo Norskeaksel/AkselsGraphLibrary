@@ -1,3 +1,5 @@
+package graphClasses
+
 import java.util.*
 
 class Dijkstra(private val graph: AdjacencyList) {

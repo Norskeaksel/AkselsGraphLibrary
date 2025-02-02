@@ -1,8 +1,8 @@
 package Examples
 //https://codeforces.com/problemset/problem/20/C
-import Dijkstra
-import IntGraph
-import readInts
+import graphClasses.Dijkstra
+import graphClasses.IntGraph
+import graphClasses.readInts
 
 fun main(){
     val (n,m) = readInts(2)

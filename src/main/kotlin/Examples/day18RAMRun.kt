@@ -1,7 +1,7 @@
 package Examples
 
-import BFS
-import Grid
+import graphClasses.BFS
+import graphClasses.Grid
 
 fun day18a(input: List<String>, gridSize: Int, lineCount: Int): Int {
     val grid = Grid(gridSize, gridSize)

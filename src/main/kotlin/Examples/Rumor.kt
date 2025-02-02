@@ -1,8 +1,8 @@
 package Examples
 
-import DFS
-import Graph
-import readInts
+import graphClasses.DFS
+import graphClasses.Graph
+import graphClasses.readInts
 
 //https://codeforces.com/problemset/problem/893/C
 
@@ -22,7 +22,7 @@ fun rumor(): Long {
     for (i in 0 until g.size()) {
         if (dfs.visited[i]) continue
         dfs.dfsRecursive(i)
-        val component = dfs.getCurrentVisited()
+        val component = dfs.getCurrentVisitedIds()
         if (component.isNotEmpty())
             components.add(component)
     }

@@ -1,3 +1,5 @@
+package graphClasses
+
 class Graph {
     private var nrOfNodes = 0
     private val graph: AdjacencyList = mutableListOf()

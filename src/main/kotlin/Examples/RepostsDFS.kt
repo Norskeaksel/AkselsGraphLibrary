@@ -1,11 +1,11 @@
 package Examples
 //https://codeforces.com/problemset/problem/522/A
 
-import DFS
-import Graph
-import _writer
-import readInt
-import readStrings
+import graphClasses.DFS
+import graphClasses.Graph
+import graphClasses._writer
+import graphClasses.readInt
+import graphClasses.readStrings
 import java.util.*
 import kotlin.math.max
 

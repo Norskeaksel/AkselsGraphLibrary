@@ -1,9 +1,9 @@
 package Examples
 
-import BFS
-import Grid
-import Tile
-import getPath
+import graphClasses.BFS
+import graphClasses.Grid
+import graphClasses.Tile
+import graphClasses.getPath
 
 fun day20a(input: List<String>, cheatGoal:Int, fairTime:Int): Int {
     val shadowGrid = input.map { it + it }

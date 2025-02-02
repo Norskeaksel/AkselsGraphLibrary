@@ -1,7 +1,7 @@
 package Examples
 
-import DFS
-import Grid
+import graphClasses.DFS
+import graphClasses.Grid
 
 fun day10a(input: List<String>): Long {
     var ans = 0L
@@ -18,7 +18,7 @@ fun day10a(input: List<String>): Long {
         if (it.data != '0')
             return@forEach
         dfs.dfsSimple(grid.node2Id(it))
-        val visitedNines = dfs.getCurrentVisited().count { grid.id2Node(it)?.data == '9' }
+        val visitedNines = dfs.getCurrentVisitedIds().count { grid.id2Node(it)?.data == '9' }
         ans += visitedNines
     }
     return ans

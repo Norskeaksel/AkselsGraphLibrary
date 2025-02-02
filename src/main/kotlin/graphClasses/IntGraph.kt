@@ -1,3 +1,5 @@
+package graphClasses
+
 class IntGraph(private var size: Int = 0) {
     private val graph: AdjacencyList = mutableListOf()
 

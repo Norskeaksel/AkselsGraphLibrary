@@ -2,9 +2,9 @@
 
 package Examples
 
-import DFS
-import Grid
-import Tile
+import graphClasses.DFS
+import graphClasses.Grid
+import graphClasses.Tile
 
 fun numbersConnectedToSymbol(input: List<String>): Int {
     val grid = Grid(input[0].length, input.size)

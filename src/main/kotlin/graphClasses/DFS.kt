@@ -1,3 +1,5 @@
+package graphClasses
+
 import kotlin.math.max
 
 class DFS(val graph: AdjacencyList) {
@@ -21,7 +23,7 @@ class DFS(val graph: AdjacencyList) {
     }
 
     fun dfsIterative(startId: Int) {
-        clearCurrentVisited()
+        clearCurrentVisitedIds()
         val stack = ArrayDeque<Int>()
         stack.add(startId)
         while (stack.isNotEmpty()) {
@@ -44,7 +46,7 @@ class DFS(val graph: AdjacencyList) {
 
     fun dfsRecursive(start: Int) {
         var currentDepth = 0
-        clearCurrentVisited()
+        clearCurrentVisitedIds()
         DeepRecursiveFunction<Int, Unit> { id ->
             if (visited[id])
                 return@DeepRecursiveFunction
@@ -71,10 +73,10 @@ class DFS(val graph: AdjacencyList) {
         return prossessed.reversed() //Reversed depending on the order
     }
 
-    fun getCurrentVisited() = // Deep Copy
+    fun getCurrentVisitedIds() = // Deep Copy
         currentVisitedIds.map { it }
 
-    fun clearCurrentVisited() {
+    fun clearCurrentVisitedIds() {
         currentVisitedIds.clear()
     }
 

@@ -1,3 +1,5 @@
+package graphClasses
+
 class BFS (val graph: AdjacencyList) {
     constructor(grid: Grid) : this(grid.getAdjacencyList())
 
@@ -34,6 +36,7 @@ class BFS (val graph: AdjacencyList) {
             }
         }
     }
+    fun bfsIterative(startId:Int) = bfsIterative(listOf(startId))
 
     fun bfsRecursive(startIds: List<Int>) {
         currentVisited.clear()
@@ -57,4 +60,6 @@ class BFS (val graph: AdjacencyList) {
             this.callRecursive(queue)
         }.invoke(ArrayDeque(startIds))
     }
+
+    fun bfsRecursive(startId:Int) = bfsRecursive(listOf(startId))
 }

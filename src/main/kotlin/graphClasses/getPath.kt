@@ -1,3 +1,5 @@
+package graphClasses
+
 fun getPath(destination: Int?, parent: IntArray): List<Int> {
     val path = mutableListOf<Int>()
     destination?.let { dest ->
@@ -8,5 +10,5 @@ fun getPath(destination: Int?, parent: IntArray): List<Int> {
         }
         path.add(current)
     }
-    return path.reversed()
+    return path
 }
