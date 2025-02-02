@@ -1,5 +1,4 @@
 import kotlin.math.max
-import kotlin.math.min
 
 class DFS(val graph: AdjacencyList) {
     constructor(grid: Grid) : this(grid.getAdjacencyList())
@@ -8,21 +7,16 @@ class DFS(val graph: AdjacencyList) {
     var visited = BooleanArray(size)
     var prossessed = mutableListOf<Int>()
     var depth = 0
-    var depths = IntArray(size) { Int.MAX_VALUE }
-    private var currentVisited = mutableListOf<Int>()
     private var currentVisitedDepts = mutableListOf<Int>()
     val parent = IntArray(graph.size) { -1 }
+    private var currentVisitedIds = mutableListOf<Int>()
 
-    fun dfsSimple(startId: Int, depth: Int = 0) {
-        if (visited[startId])
+    fun dfsSimple(startId: Int) {
+        if (startId in currentVisitedIds) // O(n) operation, could be optimized to O(1)
             return
-        visited[startId] = true
-        currentVisited.add(startId)
-        currentVisitedDepts.add(depth)
-        depths[startId] = min(depths[startId], depth)
-        graph[startId].forEach { (_, v) ->
-            parent[v] = startId
-            dfsSimple(v, depth + 1)
+        currentVisitedIds.add(startId)
+        graph[startId].forEach { (_, connectedNodeId) ->
+            dfsSimple(connectedNodeId)
         }
     }
 
@@ -37,7 +31,7 @@ class DFS(val graph: AdjacencyList) {
                 continue
 
             visited[currentId] = true
-            currentVisited.add(currentId)
+            currentVisitedIds.add(currentId)
             graph[currentId].forEach { (d, v) ->
                 if (!visited[v]) {
                     parent[v] = startId
@@ -45,7 +39,7 @@ class DFS(val graph: AdjacencyList) {
                 }
             }
         }
-        depth = currentVisited.size
+        depth = currentVisitedIds.size
     }
 
     fun dfsRecursive(start: Int) {
@@ -56,7 +50,7 @@ class DFS(val graph: AdjacencyList) {
                 return@DeepRecursiveFunction
             visited[id] = true
             // Just visited this node
-            currentVisited.add(id)
+            currentVisitedIds.add(id)
             currentVisitedDepts.add(currentDepth)
             currentDepth++
             depth = max(depth, currentDepth)
@@ -78,10 +72,10 @@ class DFS(val graph: AdjacencyList) {
     }
 
     fun getCurrentVisited() = // Deep Copy
-        currentVisited.map { it }
+        currentVisitedIds.map { it }
 
     fun clearCurrentVisited() {
-        currentVisited.clear()
+        currentVisitedIds.clear()
     }
 
     fun getVisitedDepths() = currentVisitedDepts.map { it }

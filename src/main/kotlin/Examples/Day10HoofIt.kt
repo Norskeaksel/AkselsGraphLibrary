@@ -17,7 +17,7 @@ fun day10a(input: List<String>): Long {
         val dfs = DFS(grid)
         if (it.data != '0')
             return@forEach
-        dfs.dfsRecursive(grid.node2Id(it))
+        dfs.dfsSimple(grid.node2Id(it))
         val visitedNines = dfs.getCurrentVisited().count { grid.id2Node(it)?.data == '9' }
         ans += visitedNines
     }
