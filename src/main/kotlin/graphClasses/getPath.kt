@@ -10,5 +10,5 @@ fun getPath(destination: Int?, parent: IntArray): List<Int> {
         }
         path.add(current)
     }
-    return path
+    return path.reversed()
 }
