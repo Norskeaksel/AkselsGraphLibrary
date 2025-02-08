@@ -8,7 +8,7 @@ class BFS (val graph: AdjacencyList) {
     val distances = IntArray(size)
     var currentVisited = mutableListOf<Int>()
     var currentVisitedDistances = mutableListOf<Int>()
-    val parent = IntArray(graph.size) { -1 }
+    val parents = IntArray(graph.size) { -1 }
 
     fun bfsIterative(startIds: List<Int>) {
         currentVisited.clear()
@@ -30,7 +30,7 @@ class BFS (val graph: AdjacencyList) {
             graph[currentId].forEach { (d, v) ->
                 if(!visited[v]) {
                     queue.add(v)
-                    parent[v] = currentId
+                    parents[v] = currentId
                     distances[v] = (currentDistance + d).toInt()
                 }
             }
