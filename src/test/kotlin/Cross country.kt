@@ -34,6 +34,6 @@ class CrossCountry {
         }
         val dijkstra = Dijkstra(graph.getAdjacencyList())
         dijkstra.dijkstra(s)
-        assertThat(dijkstra.distance[t].toInt()).isEqualTo(11)
+        assertThat(dijkstra.distances[t].toInt()).isEqualTo(11)
     }
 }

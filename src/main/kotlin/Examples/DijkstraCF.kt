@@ -2,6 +2,7 @@ package Examples
 //https://codeforces.com/problemset/problem/20/C
 import graphClasses.Dijkstra
 import graphClasses.IntGraph
+import graphClasses.getPath
 import graphClasses.readInts
 
 fun main(){
@@ -16,7 +17,7 @@ fun main(){
     }
     val dijkstra = Dijkstra(g.getAdjacencyList())
     dijkstra.dijkstra(1)
-    val path = dijkstra.getPath(n)
+    val path = getPath(n, dijkstra.parents)
     if(path.size == 1 && path[0] !=1){
         println(-1)
         return

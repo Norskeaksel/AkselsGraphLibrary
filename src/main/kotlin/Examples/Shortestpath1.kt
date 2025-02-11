@@ -21,7 +21,7 @@ fun main(){
         }
         val distance = Dijkstra(g.getAdjacencyList()).run {
             this.dijkstra(s)
-            this.distance
+            this.distances
         }
         repeat(q){
             val goal = readInt()

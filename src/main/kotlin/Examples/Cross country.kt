@@ -22,5 +22,5 @@ fun PrintWriter.execute() {
     }
     val dijkstra = Dijkstra(graph.getAdjacencyList())
     dijkstra.dijkstra(s)
-    println(dijkstra.distance[t].toInt())
+    println(dijkstra.distances[t].toInt())
 }

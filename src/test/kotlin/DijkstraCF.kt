@@ -35,7 +35,7 @@ class DijkstraCF {
         }
         val dijkstra = Dijkstra(g.getAdjacencyList())
         dijkstra.dijkstra(1)
-        val path = dijkstra.getPath(n)
+        val path = getPath(n, dijkstra.parents)
         if(path.size == 1 && path[0] !=1){
             println(-1)
             return
