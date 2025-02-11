@@ -102,7 +102,6 @@ class Grid(val width: Int, val height: Int) {
         path.windowed(2).firstOrNull { (a, b) -> id2Node(b) !in getStraightNeighbours(id2Node(a)) }
 
     fun removeCheatPath(path: List<Int>, weight: Double = 1.0) {
-        //val cheatPath = path.windowed(2).firstOrNull { (_, b) -> id2Node(b)!!.x > width / 2 } ?: return
         val cheatPath = findPortals(path) ?: return
         removeEdge(cheatPath.first(), cheatPath.last(), weight)
     }
