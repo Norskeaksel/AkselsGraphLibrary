@@ -1,4 +1,4 @@
-package Examples
+package examples
 // https://open.kattis.com/problems/crosscountry?tab=metadata
 import graphClasses.Dijkstra
 import graphClasses.IntGraph

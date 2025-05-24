@@ -1,4 +1,4 @@
-package Examples
+package examples
 
 import graphClasses.DFS
 import graphClasses.Graph

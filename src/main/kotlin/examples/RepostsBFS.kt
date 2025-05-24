@@ -1,4 +1,4 @@
-package Examples
+package examples
 // https://codeforces.com/problemset/problem/522/A
 
 import graphClasses.BFS

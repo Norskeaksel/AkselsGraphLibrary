@@ -1,4 +1,4 @@
-import Examples.day10a
+import examples.day10a
 import junit.framework.TestCase
 
 class Day10HoofIt : TestCase() {

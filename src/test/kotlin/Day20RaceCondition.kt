@@ -1,4 +1,4 @@
-import Examples.day20a
+import examples.day20a
 import junit.framework.TestCase
 
 class Day20RaceCondition : TestCase() {

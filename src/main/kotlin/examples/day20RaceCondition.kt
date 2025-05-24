@@ -1,5 +1,8 @@
-package Examples
+package examples
 
+import graphClasses.BFS
+import graphClasses.Grid
+import graphClasses.Tile
 import graphClasses.getPath
 
 fun day20a(input: List<String>, cheatGoal:Int, fairTime:Int): Int {

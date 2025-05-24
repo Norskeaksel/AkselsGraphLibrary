@@ -1,6 +1,6 @@
 // https://adventofcode.com/2023/day/3
 
-package Examples
+package examples
 
 import graphClasses.DFS
 import graphClasses.Grid

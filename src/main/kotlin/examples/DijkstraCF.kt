@@ -1,4 +1,4 @@
-package Examples
+package examples
 //https://codeforces.com/problemset/problem/20/C
 import graphClasses.Dijkstra
 import graphClasses.IntGraph

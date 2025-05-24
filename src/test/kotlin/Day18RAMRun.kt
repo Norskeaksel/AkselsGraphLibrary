@@ -1,5 +1,4 @@
-import Examples.day10a
-import Examples.day18a
+import examples.day18a
 import junit.framework.TestCase
 
 class Day18RAMRun : TestCase() {

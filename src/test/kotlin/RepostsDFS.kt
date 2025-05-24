@@ -1,5 +1,5 @@
 // https://open.kattis.com/problems/crosscountry?tab=metadata
-import Examples.repostsDFS
+import examples.repostsDFS
 import graphClasses.INPUT
 import graphClasses._reader
 import org.assertj.core.api.Assertions.assertThat
