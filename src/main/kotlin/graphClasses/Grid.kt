@@ -118,6 +118,11 @@ class Grid(val width: Int, val height: Int) {
         }
     }
 
+    /** Connects all nodes in the grid with their straight neighbours, i.e. top, down, left, right neighbours */
+    fun connectGridDefault() {
+        connectGrid { getStraightNeighbours(it) }
+    }
+
     fun markCharAsWall(c: Char) {
         nodes.indices.forEach { i ->
             if (nodes[i]?.data == c)

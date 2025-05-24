@@ -1,10 +1,9 @@
 package examples
+//https://codeforces.com/problemset/problem/893/C
 
 import graphClasses.DFS
 import graphClasses.Graph
 import graphClasses.readInts
-
-//https://codeforces.com/problemset/problem/893/C
 
 fun rumor(): Long {
     val g = Graph()

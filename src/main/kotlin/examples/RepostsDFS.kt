@@ -1,5 +1,5 @@
 package examples
-//https://codeforces.com/problemset/problem/522/A
+// https://codeforces.com/problemset/problem/522/A
 
 import graphClasses.DFS
 import graphClasses.Graph

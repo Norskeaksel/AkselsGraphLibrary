@@ -3,6 +3,7 @@ package graphClasses
 import kotlin.math.max
 
 class DFS(val graph: AdjacencyList) {
+    constructor(graph: Graph) : this(graph.getAdjacencyList())
     constructor(grid: Grid) : this(grid.getAdjacencyList())
 
     val size = graph.size
