@@ -3,8 +3,10 @@
 This repository contains classes and algorithms for solving grid related competitive programming problems. The [examples](src/main/kotlin/examples) folder contains code solutions using this graphLibraryPackage to solve various problems. 
 
 ## The graph class
-This is the most generic class, supporting all graph creation of any datatype. Any new node is given an ID upon creation, which is used to build an adjacency list. If your graph already consists of interger nodes, the IntGraph class can be used instead for increased performence.
-Nodes can be connected one directionaly with .addEdge(node1, node2) or bidirectionally with .connect(node1, node2). Once the graph is build, you may use one of the graph traversal classes. [Example usage:](src/main/kotlin/examples/GraphExample.kt)
+This is the most generic class, supporting all graph creation of any datatype. Any new node is given an ID upon creation,
+which is used to build an adjacency list. If your graph already consists of interger nodes, the IntGraph class can be used instead for increased performence.
+Nodes can be connected one directionaly with .addEdge(node1, node2) or bidirectionally with .connect(node1, node2).
+Once the graph is build, you may use one of the graph traversal classes. [Example usage:](src/main/kotlin/examples/GraphExample.kt)
 
 ```kotlin
 import graphClasses.Dijkstra
