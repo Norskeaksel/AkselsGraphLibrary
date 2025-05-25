@@ -9,6 +9,7 @@ Nodes can be connected one directionaly with .addEdge(node1, node2) or bidirecti
 ```kotlin
 import graphClasses.Dijkstra
 import graphClasses.Graph
+import graphClasses.getPath
 
 
 fun main() {
@@ -32,15 +33,17 @@ fun main() {
     println("Shortest paths from source node $startNode:")
     for (goalNodeId in 0 until g.size()) {
         val distValue = distance[goalNodeId]
-        println("To node $goalNodeId: ${distValue.toInt()}")
+        val path = getPath(goalNodeId, dijkstraRunner.parents)
+        println("To node $goalNodeId: ${distValue.toInt()}. Path: ${if (distValue < Int.MAX_VALUE) path else null}")
     }
     /* Output:
-    To node 0: 0
-    To node 1: 7
-    To node 2: 3
-    To node 3: 9
-    To node 4: 5
-    To node 5: 2147483647 (positive infinity, as node 5 is isolated)
+    Shortest paths from source node 0:
+    Distance to node 0: 0. Path: [0]
+    Distance to node 1: 7. Path: [0, 2, 1]
+    Distance to node 2: 3. Path: [0, 2]
+    Distance to node 3: 9. Path: [0, 2, 1, 3]
+    Distance to node 4: 5. Path: [0, 2, 4]
+    Distance to node 5: 2147483647. Path: null
      */
 }
 ```
