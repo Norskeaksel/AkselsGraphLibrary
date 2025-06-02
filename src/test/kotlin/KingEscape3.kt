@@ -1,4 +1,5 @@
 // https://open.kattis.com/problems/crosscountry?tab=metadata
+import examples.kingEscape3
 import graphClasses.INPUT
 import graphClasses._reader
 import org.assertj.core.api.Assertions.assertThat

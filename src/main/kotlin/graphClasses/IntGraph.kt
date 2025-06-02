@@ -8,8 +8,8 @@ class IntGraph(private var size: Int = 0) {
     }
 
     fun addNodes(nr: Int) {
-        if (nr >= graph.size) {
-            for (i in graph.size..nr) {
+        if (nr > graph.size) {
+            for (i in graph.size until nr) {
                 graph.add(mutableListOf())
             }
             size = graph.size
@@ -18,6 +18,9 @@ class IntGraph(private var size: Int = 0) {
 
     fun addEdge(u: Int, v: Int, w: Double = 1.0) {
         graph[u].add(Pair(w, v))
+    }
+    fun addEdge(u: Int, v: Int, w: Int) {
+        addEdge(u,v, w.toDouble())
     }
 
     fun connect(u: Int, v: Int, w: Double = 1.0) {

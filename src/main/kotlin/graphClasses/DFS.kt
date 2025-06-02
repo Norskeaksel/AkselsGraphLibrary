@@ -5,6 +5,7 @@ import kotlin.math.max
 class DFS(val graph: AdjacencyList) {
     constructor(graph: Graph) : this(graph.getAdjacencyList())
     constructor(grid: Grid) : this(grid.getAdjacencyList())
+    constructor(intGraph: IntGraph) : this(intGraph.getAdjacencyList())
 
     val size = graph.size
     var visited = BooleanArray(size)
