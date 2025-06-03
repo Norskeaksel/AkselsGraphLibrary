@@ -21,6 +21,9 @@ class Graph {
         val id2 = node2id[node2] ?: addNode(node2).run { node2id[node2]!! }
         graph[id1].add(Pair(weight, id2))
     }
+    fun addEdge(node1: Any, node2: Any, weight: Int) {
+        addEdge(node1, node2, weight.toDouble())
+    }
 
     fun connect(node1: Any, node2: Any, weight: Double = 1.0) {
         addEdge(node1, node2, weight)
@@ -47,6 +50,8 @@ class Graph {
             }
         }
     }
+
+    fun topologicalSort() = DFS(graph).topologicalSort()
 
     fun printIdConnections() {
         for (i in graph.indices) {

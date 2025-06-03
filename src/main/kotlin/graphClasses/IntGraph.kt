@@ -19,8 +19,9 @@ class IntGraph(private var size: Int = 0) {
     fun addEdge(u: Int, v: Int, w: Double = 1.0) {
         graph[u].add(Pair(w, v))
     }
+
     fun addEdge(u: Int, v: Int, w: Int) {
-        addEdge(u,v, w.toDouble())
+        addEdge(u, v, w.toDouble())
     }
 
     fun connect(u: Int, v: Int, w: Double = 1.0) {
@@ -31,4 +32,9 @@ class IntGraph(private var size: Int = 0) {
     fun getEdges(nr: Int) = graph[nr].map { it.second }
     fun size() = size
     fun getAdjacencyList() = graph
+    fun printConnections() {
+        getAdjacencyList().forEachIndexed { i, it ->
+            System.err.println("$i ---> ${it}")
+        }
+    }
 }

@@ -20,8 +20,5 @@ fun baas(): Long {
             intGraph.addEdge(a, step, stepTime[a])
         }
     }
-    val dfs = DFS(intGraph)
-    val ids = dfs.topologicalSort()
-    println(ids)
     return 0L
 }
