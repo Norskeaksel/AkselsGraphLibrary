@@ -20,5 +20,7 @@ fun baas(): Long {
             intGraph.addEdge(a, step, stepTime[a])
         }
     }
+    val topologicalOrder = intGraph.topologicalOrder()
+    System.err.println(topologicalOrder)
     return 0L
 }
