@@ -72,7 +72,7 @@ class DFS(val graph: AdjacencyList) {
         for (i in 0 until size) {
             dfsRecursive(i)
         }
-        return prossessed.reversed() //Reversed depending on the order
+        return prossessed//.reversed() //Reversed depending on the order
     }
 
     fun getCurrentVisitedIds() = // Deep Copy

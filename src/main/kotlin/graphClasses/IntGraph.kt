@@ -32,6 +32,7 @@ class IntGraph(private var size: Int = 0) {
     fun getEdges(nr: Int) = graph[nr].map { it.second }
     fun size() = size
     fun getAdjacencyList() = graph
+    fun getWeightlessAdjacencyList() = graph.map { edges -> edges.map { it.second } }
     fun topologicalOrder() = DFS(graph).topologicalSort()
     fun printConnections() {
         getAdjacencyList().forEachIndexed { i, it ->
