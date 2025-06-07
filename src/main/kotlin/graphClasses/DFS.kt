@@ -2,24 +2,24 @@ package graphClasses
 
 import kotlin.math.max
 
-class DFS(val graph: AdjacencyList) {
+class DFS(val weightlessAdjacencyList: List<List<Int>>) {
     constructor(graph: Graph) : this(graph.getAdjacencyList())
     constructor(grid: Grid) : this(grid.getAdjacencyList())
-    constructor(intGraph: IntGraph) : this(intGraph.getAdjacencyList())
+    constructor(intGraph: IntGraph) : this(intGraph.getWeightlessAdjacencyList())
 
-    val size = graph.size
+    val size = weightlessAdjacencyList.size
     var visited = BooleanArray(size)
     var prossessed = mutableListOf<Int>()
     var depth = 0
     private var currentVisitedDepts = mutableListOf<Int>()
-    val parent = IntArray(graph.size) { -1 }
+    val parent = IntArray(weightlessAdjacencyList.size) { -1 }
     private var currentVisitedIds = mutableListOf<Int>()
 
     fun dfsSimple(startId: Int) {
         if (startId in currentVisitedIds) // O(n) operation, could be optimized to O(1)
             return
         currentVisitedIds.add(startId)
-        graph[startId].forEach { (_, connectedNodeId) ->
+        weightlessAdjacencyList[startId].forEach { connectedNodeId ->
             dfsSimple(connectedNodeId)
         }
     }
@@ -36,7 +36,7 @@ class DFS(val graph: AdjacencyList) {
 
             visited[currentId] = true
             currentVisitedIds.add(currentId)
-            graph[currentId].forEach { (d, v) ->
+            weightlessAdjacencyList[currentId].forEach { v ->
                 if (!visited[v]) {
                     parent[v] = startId
                     stack.add(v)
@@ -58,7 +58,7 @@ class DFS(val graph: AdjacencyList) {
             currentVisitedDepts.add(currentDepth)
             currentDepth++
             depth = max(depth, currentDepth)
-            graph[id].forEach { (d, v) ->
+            weightlessAdjacencyList[id].forEach {  v ->
                 parent[v] = id
                 this.callRecursive(v)
             }
