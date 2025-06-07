@@ -2,9 +2,9 @@ package graphClasses
 
 import kotlin.math.max
 
-class DFS(val weightlessAdjacencyList: List<List<Int>>) {
-    constructor(graph: Graph) : this(graph.getAdjacencyList())
-    constructor(grid: Grid) : this(grid.getAdjacencyList())
+class DFS(private val weightlessAdjacencyList: List<List<Int>>) {
+    constructor(graph: Graph) : this(graph.getWeightlessAdjacencyList())
+    constructor(grid: Grid) : this(grid.getAdjacencyList().toWeightlessAdjacencyList())
     constructor(intGraph: IntGraph) : this(intGraph.getWeightlessAdjacencyList())
 
     val size = weightlessAdjacencyList.size

@@ -11,7 +11,7 @@ fun numbersConnectedToSymbol(input: List<String>): Int {
     val numbers = grid.getNodes().filter { it.data.toString().toIntOrNull() !in listOf(null, 0) }
     val partNumbers = mutableListOf<Int>()
     numbers.forEach { t ->
-        val searcher = DFS(grid.getAdjacencyList())
+        val searcher = DFS(grid)
         searcher.dfsIterative(grid.node2Id(t))
         if (searcher.depth > t.data.toString().length)
             partNumbers.add(t.data.toString().toInt())
@@ -61,7 +61,7 @@ fun starWith2Numbers(input: List<String>): Long {
     val gears = grid.getNodes().filter { it.data == '*' }
     val partNumbers = mutableListOf<Pair<Long, Long>>()
     gears.forEach { t ->
-        val searcher = DFS(grid.getAdjacencyList())
+        val searcher = DFS(grid)
         searcher.dfsRecursive(grid.node2Id(t))
         val numbers = grid.getAllNeighbours(t).filter { it.data.toString().toIntOrNull() !in (listOf(null, 0)) }.map { it.data }.toSet()
         if (numbers.size == 2)

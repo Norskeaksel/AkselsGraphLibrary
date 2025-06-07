@@ -18,7 +18,7 @@ fun repostsDFS(): Int {
         val (v,_,u) = readStrings(3).map { it.lowercase(Locale.getDefault()) }
         g.addEdge(u,v)
     }
-    val dfs = DFS(g.getAdjacencyList())
+    val dfs = DFS(g)
     var longestChain = 0
     repeat(n){
         dfs.dfsRecursive(it)
