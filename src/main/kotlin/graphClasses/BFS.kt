@@ -8,7 +8,7 @@ class BFS(val graph: AdjacencyList) {
     val size = graph.size
     var visited = BooleanArray(size)
     val distances = DoubleArray(size)
-    var currentVisited = mutableListOf<Int>()
+    private var currentVisited = mutableListOf<Int>()
     var currentVisitedDistances = mutableListOf<Double>()
     val parents = IntArray(graph.size) { -1 }
 
@@ -69,4 +69,7 @@ class BFS(val graph: AdjacencyList) {
     }
 
     fun bfsRecursive(startId: Int) = bfsRecursive(listOf(startId))
+
+    fun getCurrentVisitedIds() = // Deep Copy
+        currentVisited.map { it }
 }
