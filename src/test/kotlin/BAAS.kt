@@ -20,16 +20,16 @@ class BAAS {
     @Test
     fun Baasa() {
         _reader = File("src/test/SampleInput/Baas/input1").inputStream().bufferedReader()
-        assertThat(baas()).isEqualTo(15L)
+        assertThat(baas()).isEqualTo(15)
     }
     @Test
     fun Baasb() {
         _reader = File("src/test/SampleInput/Baas/input2").inputStream().bufferedReader()
-        assertThat(baas()).isEqualTo(60L)
+        assertThat(baas()).isEqualTo(60)
     }
     @Test
     fun Baasv() {
         _reader = File("src/test/SampleInput/Baas/heavyTestInput").inputStream().bufferedReader()
-        baas()
+        assertThat(baas()).isEqualTo(399)
     }
 }
