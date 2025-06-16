@@ -1,6 +1,8 @@
 package examples
 
 import graphClasses.*
+
+// https://open.kattis.com/problems/island
 fun main() {
     val ans = islandBuses(); _writer.flush()
     println(ans)

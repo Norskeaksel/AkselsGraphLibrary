@@ -1,6 +1,7 @@
 package graphClasses
 
 import kotlin.math.abs
+import kotlin.system.measureTimeMillis
 
 data class Tile(val x: Int, val y: Int, var data: Any? = null)
 
@@ -102,17 +103,19 @@ class Grid(val width: Int, val height: Int): GraphContract<Tile> {
     }
 
     fun connectGrid(getNeighbours: (t: Tile) -> List<Tile>) {
-        for (x in 0 until width) {
-            for (y in 0 until height) {
-                val currentTile = xy2Node(x, y) ?: continue
-                val neighbours = getNeighbours(currentTile)
-                neighbours.forEach {
-                    addEdge(xy2Node(x, y)!!, it)
+        val time = measureTimeMillis {
+            for (x in 0 until width) {
+                for (y in 0 until height) {
+                    val currentTile = xy2Node(x, y) ?: continue
+                    val neighbours = getNeighbours(currentTile)
+                    neighbours.forEach {
+                        addEdge(xy2Node(x, y)!!, it)
+                    }
                 }
             }
         }
+        System.err.println("Connected Grid in $time ms")
     }
-
     /** Connects all nodes in the grid with their straight neighbours, i.e. top, down, left, right neighbours */
     fun connectGridDefault() {
         connectGrid { getStraightNeighbours(it) }
