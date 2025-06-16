@@ -4,7 +4,7 @@ import kotlin.math.abs
 
 data class Tile(val x: Int, val y: Int, var data: Any? = null)
 
-class Grid(val width: Int, val height: Int) {
+class Grid(val width: Int, val height: Int): GraphContract<Tile> {
 
     constructor(stringGrid: List<String>) : this(stringGrid[0].length, stringGrid.size) {
         stringGrid.forEachIndexed { y, line ->
@@ -15,9 +15,8 @@ class Grid(val width: Int, val height: Int) {
         }
     }
 
-
     private val size = width * height
-    private val adjacencyList = adjacencyListInit(size)
+    private val adjacencyList = IntGraph().adjacencyListInit(size)
     val nodes = Array<Tile?>(size) { Tile(-1, -1) }
 
     init {
@@ -27,6 +26,19 @@ class Grid(val width: Int, val height: Int) {
                 nodes[id] = Tile(x, y)
             }
         }
+    }
+    override fun getAdjacencyList() = adjacencyList
+    fun trueSize() = nodes.filterNotNull().size
+
+    override fun addNode(node: Tile) {
+        val id = node2Id(node)
+        nodes[id] = node
+    }
+
+    override fun addEdge(node1: Tile, node2: Tile, weight: Double): Boolean {
+        val u = node2Id(node1)
+        val v = node2Id(node2)
+        return adjacencyList[u].add(Edge(weight, v))
     }
 
     fun xyInRange(x: Int, y: Int) = x in 0 until width && y in 0 until height
@@ -43,19 +55,7 @@ class Grid(val width: Int, val height: Int) {
     fun node2Id(t: Tile) = t.x + t.y * width
     fun getNodes(): List<Tile> = nodes.filterNotNull().filter { it.x != -1 }
     fun getEdges(t: Tile): List<Edge> = adjacencyList[node2Id(t)]
-    fun getAdjacencyList() = adjacencyList
-    fun trueSize() = nodes.filterNotNull().size
 
-    fun addNode(t: Tile) {
-        val id = node2Id(t)
-        nodes[id] = t
-    }
-
-    fun addEdge(t1: Tile, t2: Tile, weight: Double = 1.0) {
-        val u = node2Id(t1)
-        val v = node2Id(t2)
-        adjacencyList[u].add(Edge(weight, v))
-    }
 
     fun removeEdge(id1: Int, id2: Int, weight: Double? = null) {
         if (weight == null)
@@ -68,11 +68,6 @@ class Grid(val width: Int, val height: Int) {
         val u = node2Id(t1)
         val v = node2Id(t2)
         removeEdge(u, v, weight)
-    }
-
-    fun connect(t1: Tile, t2: Tile, weight: Double = 1.0) {
-        addEdge(t1, t2, weight)
-        addEdge(t2, t1, weight)
     }
 
     fun getStraightNeighbours(t: Tile?) =

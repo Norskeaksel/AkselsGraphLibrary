@@ -16,7 +16,7 @@ fun rumor(): Long {
         val (x, y) = readInts(2)
         g.connect(x, y)
     }
-    val dfs = DFS(g.getAdjacencyList())
+    val dfs = DFS(g)
     val components = mutableListOf<List<Int>>()
     for (i in 0 until g.size()) {
         if (dfs.visited[i]) continue

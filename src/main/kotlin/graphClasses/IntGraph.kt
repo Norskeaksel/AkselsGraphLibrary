@@ -1,42 +1,17 @@
 package graphClasses
 
-class IntGraph(private var size: Int = 0) {
-    private val graph: AdjacencyList = mutableListOf()
+class IntGraph(initialSize: Int = 0) : GraphContract<Int> {
+    private val adjacencyList = adjacencyListInit(initialSize)
 
-    init {
-        addNodes(size)
-    }
-
-    fun addNodes(nr: Int) {
-        if (nr > graph.size) {
-            for (i in graph.size until nr) {
-                graph.add(mutableListOf())
+    override fun addNode(node: Int) {
+        if (node >= adjacencyList.size) {
+            for (i in adjacencyList.size .. node) {
+                adjacencyList.add(mutableListOf())
             }
-            size = graph.size
         }
     }
 
-    fun addEdge(u: Int, v: Int, w: Double = 1.0) {
-        graph[u].add(Pair(w, v))
-    }
+    override fun addEdge(node1: Int, node2: Int, weight: Double) = adjacencyList[node1].add(Pair(weight, node2))
 
-    fun addEdge(u: Int, v: Int, w: Int) {
-        addEdge(u, v, w.toDouble())
-    }
-
-    fun connect(u: Int, v: Int, w: Double = 1.0) {
-        addEdge(u, v, w)
-        addEdge(v, u, w)
-    }
-
-    fun getEdges(nr: Int) = graph[nr].map { it.second }
-    fun size() = size
-    fun getAdjacencyList() = graph
-    fun getWeightlessAdjacencyList() = graph.map { edges -> edges.map { it.second } }
-    fun topologicalOrder() = DFS(graph).topologicalSort()
-    fun printConnections() {
-        getAdjacencyList().forEachIndexed { i, it ->
-            System.err.println("$i ---> ${it}")
-        }
-    }
+    override fun getAdjacencyList() = adjacencyList
 }

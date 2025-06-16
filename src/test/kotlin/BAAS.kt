@@ -28,7 +28,7 @@ class BAAS {
         assertThat(baas()).isEqualTo(60)
     }
     @Test
-    fun Baasv() {
+    fun Baasc() {
         _reader = File("src/test/SampleInput/Baas/heavyTestInput").inputStream().bufferedReader()
         assertThat(baas()).isEqualTo(399)
     }

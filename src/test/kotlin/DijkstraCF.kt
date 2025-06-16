@@ -1,4 +1,5 @@
 // https://open.kattis.com/problems/crosscountry?tab=metadata
+import examples.dijkstraCF
 import graphClasses.*
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.AfterAll
@@ -23,23 +24,8 @@ class DijkstraCF {
     }
 
     @Test
-    fun dijkstraCF() {
-        val (n,m) = readInts(2)
-        val g = IntGraph()
-        repeat(n+1){
-            g.addNodes(it)
-        }
-        repeat(m){
-            val (u,v, w) = readInts(3)
-            g.connect(u,v, w.toDouble())
-        }
-        val dijkstra = Dijkstra(g.getAdjacencyList())
-        dijkstra.dijkstra(1)
-        val path = getPath(n, dijkstra.parents)
-        if(path.size == 1 && path[0] !=1){
-            println(-1)
-            return
-        }
+    fun testDijkstraCF() {
+        val path = dijkstraCF()
         assertThat(path).isEqualTo(listOf(1,4,3,5))
     }
 }

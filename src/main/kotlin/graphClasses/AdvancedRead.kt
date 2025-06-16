@@ -24,6 +24,7 @@ val OUTPUT: OutputStream = "src/main/kotlin/ProgramOutput.txt".let { path ->
 @JvmField
 var _reader = INPUT.bufferedReader()
 fun readLine(): String? = _reader.readLine()
+fun readLines(): List<String> = generateSequence { readLine() }.toList()
 fun readString() = _reader.readLine()!!
 
 @JvmField
