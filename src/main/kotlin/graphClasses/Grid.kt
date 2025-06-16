@@ -17,7 +17,7 @@ class Grid(val width: Int, val height: Int): GraphContract<Tile> {
     }
 
     private val size = width * height
-    private val adjacencyList = IntGraph().adjacencyListInit(size)
+    private val adjacencyList = adjacencyListInit(size)
     val nodes = Array<Tile?>(size) { Tile(-1, -1) }
 
     init {
