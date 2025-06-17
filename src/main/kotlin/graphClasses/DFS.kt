@@ -7,8 +7,7 @@ class DFS(private val weightlessAdjacencyList: WeightlessAdjacencyList) {
     constructor(grid: Grid) : this(grid.getWeightlessAdjacencyList())
     constructor(intGraph: IntGraph) : this(intGraph.getWeightlessAdjacencyList())
 
-    val size = weightlessAdjacencyList.size
-    var visited = BooleanArray(size)
+    var visited = BooleanArray(weightlessAdjacencyList.size)
     var prossessed = mutableListOf<Int>()
     var depth = 0
     private var currentVisitedDepts = mutableListOf<Int>()
@@ -69,7 +68,7 @@ class DFS(private val weightlessAdjacencyList: WeightlessAdjacencyList) {
     }
 
     fun topologicalSort(): List<Int> {
-        for (i in 0 until size) {
+        for (i in 0 until weightlessAdjacencyList.size) {
             dfsRecursive(i)
         }
         return prossessed//.reversed() //Reversed depending on the order

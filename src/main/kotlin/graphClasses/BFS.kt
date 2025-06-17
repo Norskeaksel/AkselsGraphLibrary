@@ -9,19 +9,19 @@ class BFS(val graph: WeightlessAdjacencyList) {
     val d = 1
     val size = graph.size
     var visited = BooleanArray(size)
-    val distances = DoubleArray(size)
+    val distances = IntArray(size)
     private var currentVisited = mutableListOf<Int>()
-    var currentVisitedDistances = mutableListOf<Double>()
+    var currentVisitedDistances = mutableListOf<Int>()
     val parents = IntArray(graph.size) { -1 }
 
     fun bfsIterative(startIds: List<Int>, targetId: Int = -1) {
         val time = measureTimeMillis {
             currentVisited.clear()
-            distances.fill(Double.MAX_VALUE)
+            distances.fill(Int.MAX_VALUE)
             val queue = java.util.ArrayDeque<Int>()
             startIds.forEach {
                 queue.add(it)
-                distances[it] = 0.0
+                distances[it] = 0
             }
             while (queue.isNotEmpty()) {
                 val currentId = queue.first()
@@ -51,9 +51,9 @@ class BFS(val graph: WeightlessAdjacencyList) {
 
     fun bfsRecursive(startIds: List<Int>) {
         currentVisited.clear()
-        distances.fill(Double.MAX_VALUE)
+        distances.fill(Int.MAX_VALUE)
         startIds.forEach {
-            distances[it] = 0.0
+            distances[it] = 0
         }
         DeepRecursiveFunction<ArrayDeque<Int>, Unit> { queue ->
             if (queue.isEmpty())
