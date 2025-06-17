@@ -4,7 +4,9 @@ interface GraphContract<T> {
     // FUNCTIONS TO OVERWRITE
     fun addNode(node: T)
     fun addEdge(node1: T, node2: T, weight: Double = 1.0): Boolean
+    fun addWeightlessEdge(node1: T, node2: T): Boolean
     fun getAdjacencyList(): AdjacencyList
+    fun getWeightlessAdjacencyList(): WeightlessAdjacencyList
 
     // FUNCTIONS TO INHERIT
     fun addEdge(node1: T, node2: T, weight: Int) = addEdge(node1, node2, weight.toDouble())
@@ -15,8 +17,8 @@ interface GraphContract<T> {
     fun connect(node1: T, node2: T, weight: Int) = connect(node1, node2, weight.toDouble())
 
     fun adjacencyListInit(size: Int): AdjacencyList = MutableList(size) { mutableListOf() }
+    fun weightlessAdjacencyListInit(size: Int): WeightlessAdjacencyList = MutableList(size) { mutableListOf() }
     fun topologicalOrder() = DFS(getWeightlessAdjacencyList()).topologicalSort()
-    fun getWeightlessAdjacencyList() = getAdjacencyList().toWeightlessAdjacencyList()
     fun printConnections() = printAdjacencyList(false)
     fun printWeightlessConnections() = printAdjacencyList(true)
 

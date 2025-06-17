@@ -18,6 +18,7 @@ class Grid(val width: Int, val height: Int): GraphContract<Tile> {
 
     private val size = width * height
     private val adjacencyList = adjacencyListInit(size)
+    private val weightlessAdjacencyList = weightlessAdjacencyListInit(size)
     val nodes = Array<Tile?>(size) { Tile(-1, -1) }
 
     init {
@@ -29,6 +30,7 @@ class Grid(val width: Int, val height: Int): GraphContract<Tile> {
         }
     }
     override fun getAdjacencyList() = adjacencyList
+    override fun getWeightlessAdjacencyList() = weightlessAdjacencyList
     fun trueSize() = nodes.filterNotNull().size
 
     override fun addNode(node: Tile) {
@@ -40,6 +42,12 @@ class Grid(val width: Int, val height: Int): GraphContract<Tile> {
         val u = node2Id(node1)
         val v = node2Id(node2)
         return adjacencyList[u].add(Edge(weight, v))
+    }
+
+    override fun addWeightlessEdge(node1: Tile, node2: Tile): Boolean {
+        val u = node2Id(node1)
+        val v = node2Id(node2)
+        return weightlessAdjacencyList[u].add(v)
     }
 
     fun xyInRange(x: Int, y: Int) = x in 0 until width && y in 0 until height

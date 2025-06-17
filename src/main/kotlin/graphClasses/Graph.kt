@@ -3,6 +3,7 @@ package graphClasses
 class Graph: GraphContract<Any> {
     private var nrOfNodes = 0
     private val adjacencyList: AdjacencyList = mutableListOf()
+    private val weightlessAdjacencyList: WeightlessAdjacencyList = mutableListOf()
     private val node2id = mutableMapOf<Any, Int>()
     private val id2Node = mutableMapOf<Int, Any>()
 
@@ -22,7 +23,13 @@ class Graph: GraphContract<Any> {
         return adjacencyList[id1].add(Pair(weight, id2))
     }
 
+    override fun addWeightlessEdge(node1: Any, node2: Any): Boolean {
+        val id1 = node2id[node1] ?: addNode(node1).run { node2id[node1]!! }
+        val id2 = node2id[node2] ?: addNode(node2).run { node2id[node2]!! }
+        return weightlessAdjacencyList[id1].add(id2)
+    }
     override fun getAdjacencyList() = adjacencyList
+    override fun getWeightlessAdjacencyList() = weightlessAdjacencyList
 
     fun getNodeEdges(node: Any): List<Pair<Double, Int>> {
         val id = node2id[node] ?: return emptyList()
