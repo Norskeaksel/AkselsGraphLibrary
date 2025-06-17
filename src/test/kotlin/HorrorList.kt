@@ -18,12 +18,12 @@ class HorrorList {
 
     @Test
     fun solvea() {
-        _reader = File("src/test/SampleInput/solve/input1").inputStream().bufferedReader()
+        _reader = File("src/test/SampleInput/HorrorList/input1").inputStream().bufferedReader()
         assertThat(horrorList()).isEqualTo(1L)
     }
     @Test
     fun solveb() {
-        _reader = File("src/test/SampleInput/solve/input2").inputStream().bufferedReader()
+        _reader = File("src/test/SampleInput/HorrorList/input2").inputStream().bufferedReader()
         assertThat(horrorList()).isEqualTo(3L)
     }
 }

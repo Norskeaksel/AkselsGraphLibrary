@@ -5,8 +5,7 @@ import kotlin.system.measureTimeMillis
 
 data class Tile(val x: Int, val y: Int, var data: Any? = null)
 
-class Grid(val width: Int, val height: Int): GraphContract<Tile> {
-
+class Grid(val width: Int, val height: Int) : GraphContract<Tile> {
     constructor(stringGrid: List<String>) : this(stringGrid[0].length, stringGrid.size) {
         stringGrid.forEachIndexed { y, line ->
             line.forEachIndexed { x, c ->
@@ -20,6 +19,7 @@ class Grid(val width: Int, val height: Int): GraphContract<Tile> {
     private val adjacencyList = adjacencyListInit(size)
     private val weightlessAdjacencyList = weightlessAdjacencyListInit(size)
     val nodes = Array<Tile?>(size) { Tile(-1, -1) }
+    var gridIsWeightLess = false
 
     init {
         for (y in 0 until height) {
@@ -29,8 +29,11 @@ class Grid(val width: Int, val height: Int): GraphContract<Tile> {
             }
         }
     }
+
     override fun getAdjacencyList() = adjacencyList
-    override fun getWeightlessAdjacencyList() = weightlessAdjacencyList
+    override fun getWeightlessAdjacencyList() =
+        /*if (gridIsWeightLess) weightlessAdjacencyList else*/ super.getWeightlessAdjacencyList()
+
     fun trueSize() = nodes.filterNotNull().size
 
     override fun addNode(node: Tile) {
@@ -110,23 +113,32 @@ class Grid(val width: Int, val height: Int): GraphContract<Tile> {
         removeEdge(cheatPath.first(), cheatPath.last(), weight)
     }
 
-    fun connectGrid(getNeighbours: (t: Tile) -> List<Tile>) {
+    fun connectGrid(weightless: Boolean = false, getNeighbours: (t: Tile) -> List<Tile>) {
         val time = measureTimeMillis {
             for (x in 0 until width) {
                 for (y in 0 until height) {
                     val currentTile = xy2Node(x, y) ?: continue
                     val neighbours = getNeighbours(currentTile)
                     neighbours.forEach {
-                        addEdge(xy2Node(x, y)!!, it)
+                        if (weightless) {
+                            addWeightlessEdge(currentTile, it)
+                        } else {
+                            addEdge(currentTile, it)
+                        }
                     }
                 }
             }
         }
         System.err.println("Connected Grid in $time ms")
     }
+
     /** Connects all nodes in the grid with their straight neighbours, i.e. top, down, left, right neighbours */
     fun connectGridDefault() {
         connectGrid { getStraightNeighbours(it) }
+    }
+    fun connectGridDefaultWeightless() {
+        gridIsWeightLess = true
+        connectGrid(true) { getStraightNeighbours(it) }
     }
 
     fun markCharAsWall(c: Char) {

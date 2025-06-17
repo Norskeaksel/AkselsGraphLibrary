@@ -6,18 +6,18 @@ import graphClasses.Grid
 import graphClasses.Tile
 import graphClasses.getPath
 
-fun day20a(input: List<String>, cheatGoal:Int, fairTime:Int): Int {
+fun day20a(input: List<String>, cheatGoal: Int, fairTime: Int): Int {
     val shadowGrid = input.map { it + it }
     val grid = Grid(shadowGrid)
     grid.print()
 
-    fun getShadowNeighbours(t: Tile) = grid.getStraightNeighbours(t).mapNotNull {
-        if (it.data != '#') it
-        else if (t.x < grid.width / 2) grid.xy2Node(it.x + grid.width / 2, it.y)
-        else null
+    grid.connectGrid { t ->
+        grid.getStraightNeighbours(t).mapNotNull {
+            if (it.data != '#') it
+            else if (t.x < grid.width / 2) grid.xy2Node(it.x + grid.width / 2, it.y)
+            else null
+        }
     }
-
-    grid.connectGrid(::getShadowNeighbours)
     val startId = grid.nodes.indexOfFirst { it?.data == 'S' }
     val endId = grid.nodes.indexOfLast { it?.data == 'E' }
 

@@ -29,7 +29,6 @@ class Graph: GraphContract<Any> {
         return weightlessAdjacencyList[id1].add(id2)
     }
     override fun getAdjacencyList() = adjacencyList
-    override fun getWeightlessAdjacencyList() = weightlessAdjacencyList
 
     fun getNodeEdges(node: Any): List<Pair<Double, Int>> {
         val id = node2id[node] ?: return emptyList()

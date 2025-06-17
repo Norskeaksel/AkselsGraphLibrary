@@ -58,7 +58,7 @@ class DFS(private val weightlessAdjacencyList: WeightlessAdjacencyList) {
             currentVisitedDepts.add(currentDepth)
             currentDepth++
             depth = max(depth, currentDepth)
-            weightlessAdjacencyList[id].forEach {  v ->
+            weightlessAdjacencyList[id].forEach { v ->
                 parent[v] = id
                 this.callRecursive(v)
             }
