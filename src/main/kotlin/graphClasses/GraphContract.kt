@@ -18,7 +18,6 @@ interface GraphContract<T> {
 
     fun adjacencyListInit(size: Int): AdjacencyList = MutableList(size) { mutableListOf() }
     fun weightlessAdjacencyListInit(size: Int): WeightlessAdjacencyList = MutableList(size) { mutableListOf() }
-    fun topologicalOrder() = DFS(getWeightlessAdjacencyList()).topologicalSort()
     fun printConnections() = printAdjacencyList(false)
     fun printWeightlessConnections() = printAdjacencyList(true)
 

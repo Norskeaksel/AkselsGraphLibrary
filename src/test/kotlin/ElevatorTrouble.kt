@@ -20,21 +20,21 @@ class ElevatorTrouble {
     @Test
     fun solvea() {
         val expectedOutput = "6"
-        _reader = File("src/test/SampleInput/elevatorTrouble/input1").inputStream().bufferedReader()
+        _reader = File("src/test/SampleInput/ElevatorTrouble/input1").inputStream().bufferedReader()
         assertThat(elevatorTrouble()).isEqualTo(expectedOutput)
     }
 
     @Test
     fun solveb() {
         val expectedOutput = "use the stairs"
-        _reader = File("src/test/SampleInput/elevatorTrouble/input2").inputStream().bufferedReader()
+        _reader = File("src/test/SampleInput/ElevatorTrouble/input2").inputStream().bufferedReader()
         assertThat(elevatorTrouble()).isEqualTo(expectedOutput)
     }
 
     @Test
     fun solvec() {
         val expectedOutput = "999999"
-        _reader = File("src/test/SampleInput/elevatorTrouble/input3").inputStream().bufferedReader()
+        _reader = File("src/test/SampleInput/ElevatorTrouble/input3").inputStream().bufferedReader()
         val time = measureTimeMillis {
             val ans = elevatorTrouble()
             assertThat(ans).isEqualTo(expectedOutput)

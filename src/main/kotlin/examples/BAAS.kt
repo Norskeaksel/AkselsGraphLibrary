@@ -25,7 +25,7 @@ fun baas(): Int {
     val weightlessAdjacencyList = intGraph.getWeightlessAdjacencyList()
     var optimizedTime = Int.MAX_VALUE
     val time = measureTimeMillis {
-        val topologicalOrder = intGraph.topologicalOrder()
+        val topologicalOrder = DFS(intGraph).topologicalSort()
         val totalStepTime = IntArray(n)
         topologicalOrder.indices.forEach {
             topologicalOrder.forEachIndexed { i, node ->

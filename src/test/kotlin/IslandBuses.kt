@@ -4,6 +4,7 @@ import graphClasses._reader
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.AfterAll
 import java.io.File
+import kotlin.system.measureTimeMillis
 import kotlin.test.Test
 
 class IslandBuses {
@@ -39,5 +40,24 @@ buses needed: 2
 """
         _reader = File("src/test/SampleInput/IslandBuses/input1").inputStream().bufferedReader()
         assertThat(islandBuses()).isEqualTo(expectedOutput)
+    }
+
+    @Test
+    fun speedTest() {
+        val time1 = measureTimeMillis {
+            _reader = File("src/test/SampleInput/IslandBuses/input2").inputStream().bufferedReader()
+            islandBuses()
+        }
+        val time2 = measureTimeMillis {
+            _reader = File("src/test/SampleInput/IslandBuses/input3").inputStream().bufferedReader()
+            islandBuses()
+        }
+        val time3 = measureTimeMillis {
+            _reader = File("src/test/SampleInput/IslandBuses/input4").inputStream().bufferedReader()
+            islandBuses()
+        }
+        println("time1: $time1 ms\n" +
+                "time2: $time2 ms\n" +
+                "time3: $time3 ms")
     }
 }

@@ -30,17 +30,17 @@ fun islandBuses(): String {
         val islandGrid = Grid(mapList).apply {
             markCharAsWall('.')
             markCharAsWall('B')
-            connectGridDefault/*Weightless*/()
+            connectGridDefaultWeightless()
         }
         val bridgesGrid = Grid(mapList).apply {
             markCharAsWall('.')
             markCharAsWall('X')
             markCharAsWall('#')
-            connectGridDefault/*Weightless*/()
+            connectGridDefaultWeightless()
         }
         val busesGrid = Grid(mapList).apply {
             markCharAsWall('.')
-            connectGrid(false) {
+            connectGrid(true) {
                 when (it.data) {
                     '#' -> getStraightNeighbours(it).filter { it.data != 'B' }
                     'B' -> getStraightNeighbours(it).filter { it.data != '#' }

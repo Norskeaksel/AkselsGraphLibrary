@@ -32,7 +32,7 @@ class Grid(val width: Int, val height: Int) : GraphContract<Tile> {
 
     override fun getAdjacencyList() = adjacencyList
     override fun getWeightlessAdjacencyList() =
-        /*if (gridIsWeightLess) weightlessAdjacencyList else*/ super.getWeightlessAdjacencyList()
+        if (gridIsWeightLess) weightlessAdjacencyList else super.getWeightlessAdjacencyList()
 
     fun trueSize() = nodes.filterNotNull().size
 
@@ -121,6 +121,7 @@ class Grid(val width: Int, val height: Int) : GraphContract<Tile> {
                     val neighbours = getNeighbours(currentTile)
                     neighbours.forEach {
                         if (weightless) {
+                            gridIsWeightLess = true
                             addWeightlessEdge(currentTile, it)
                         } else {
                             addEdge(currentTile, it)
