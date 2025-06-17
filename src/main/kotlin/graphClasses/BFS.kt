@@ -1,12 +1,12 @@
 package graphClasses
 
 import kotlin.system.measureTimeMillis
+class BFS(val graph: WeightlessAdjacencyList) {
+    constructor(graph: Graph) : this(graph.getWeightlessAdjacencyList())
+    constructor(intGraph: IntGraph) : this(intGraph.getWeightlessAdjacencyList())
+    constructor(grid: Grid) : this(grid.getWeightlessAdjacencyList())
 
-class BFS(val graph: AdjacencyList) {
-    constructor(graph: Graph) : this(graph.getAdjacencyList())
-    constructor(intGraph: IntGraph) : this(intGraph.getAdjacencyList())
-    constructor(grid: Grid) : this(grid.getAdjacencyList())
-
+    val d = 1
     val size = graph.size
     var visited = BooleanArray(size)
     val distances = DoubleArray(size)
@@ -34,7 +34,7 @@ class BFS(val graph: AdjacencyList) {
                     return@measureTimeMillis
                 val currentDistance = distances[currentId]
                 currentVisitedDistances.add(currentDistance)
-                graph[currentId].forEach { (d, v) ->
+                graph[currentId].forEach { v ->
                     val newDistance = currentDistance + d
                     if (!visited[v] && newDistance < distances[v]) { // Do distance check to avoid re queueing startIds
                         queue.add(v)
@@ -62,7 +62,7 @@ class BFS(val graph: AdjacencyList) {
             queue.removeFirst()
             visited[id] = true
             currentVisited.add(id)
-            graph[id].forEach { (d, v) ->
+            graph[id].forEach { v ->
                 val newDistance = distances[id] + d
                 if (!visited[v] && newDistance < distances[v]) { // Do distance check to avoid re queueing startIds
                     queue.add(v)

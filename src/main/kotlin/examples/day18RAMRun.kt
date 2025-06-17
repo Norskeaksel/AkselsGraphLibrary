@@ -13,7 +13,7 @@ fun day18a(input: List<String>, gridSize: Int, lineCount: Int): Int {
         grid.nodes[corruptId] = null
     }
     grid.connectGridDefault()
-    val bfs = BFS(grid.getAdjacencyList())
+    val bfs = BFS(grid)
     bfs.bfsIterative(listOf(0))
     val ans = bfs.distances[grid.xy2Id(gridSize - 1, gridSize - 1)!!].toInt()
     return ans

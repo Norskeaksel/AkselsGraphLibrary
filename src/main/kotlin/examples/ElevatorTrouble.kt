@@ -2,7 +2,7 @@ package examples
 
 import graphClasses.*
 
-// https://open.kattis.com/problems/island
+// https://open.kattis.com/problems/elevatortrouble
 fun main() {
     val ans = elevatorTrouble(); _writer.flush()
     println(ans)
@@ -12,7 +12,7 @@ fun main() {
 fun elevatorTrouble(): String {
     val (f,s,g,u,d) = readInts(5)
     val grid = Grid(1, f+1)
-    grid.connectGrid{
+    grid.connectGrid(true){
         val upNode = grid.id2Node(it.y + u)
         val downNode = grid.id2Node(it.y - d)
         listOfNotNull(upNode, downNode)

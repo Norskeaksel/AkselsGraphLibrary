@@ -130,13 +130,15 @@ class Grid(val width: Int, val height: Int) : GraphContract<Tile> {
                 }
             }
         }
-        System.err.println("Connected Grid in $time ms")
+        if (time > 100)
+            System.err.println("Connected Grid in $time ms")
     }
 
     /** Connects all nodes in the grid with their straight neighbours, i.e. top, down, left, right neighbours */
     fun connectGridDefault() {
         connectGrid { getStraightNeighbours(it) }
     }
+
     fun connectGridDefaultWeightless() {
         gridIsWeightLess = true
         connectGrid(true) { getStraightNeighbours(it) }

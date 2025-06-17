@@ -18,7 +18,7 @@ fun RepostsBFS(): Int {
         val (v,_,u) = readStrings(3).map { it.lowercase(Locale.getDefault()) }
         g.addEdge(u,v)
     }
-    val bfs = BFS(g.getAdjacencyList())
+    val bfs = BFS(g)
     var longestChain = 0
     repeat(n){
         bfs.bfsRecursive(listOf(it))
