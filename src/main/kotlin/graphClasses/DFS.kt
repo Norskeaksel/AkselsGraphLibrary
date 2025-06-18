@@ -13,12 +13,6 @@ class DFS(private val weightlessAdjacencyList: WeightlessAdjacencyList) {
     var prossessed = mutableListOf<Int>()
     var depth = 0
 
-    private var currentPaint = 0
-    private val paint = IntArray(size)
-    private val lowLinkedValues = IntArray(size) { Int.MAX_VALUE }
-    private val onStack = BooleanArray(size)
-    private val stack = ArrayDeque<Int>()
-
     private var currentVisitedDepts = mutableListOf<Int>()
     val parent = IntArray(size) { -1 }
     private var currentVisitedIds = BooleanArray(size)
@@ -44,39 +38,14 @@ class DFS(private val weightlessAdjacencyList: WeightlessAdjacencyList) {
             currentDepth++
             depth = currentDepth.coerceAtLeast(depth)
 
-            stack.add(id)
-            onStack[id] = true
-            paint[id] = currentPaint
-            lowLinkedValues[id] = currentPaint++
-
             weightlessAdjacencyList[id].forEach { v ->
                 parent[v] = id
                 this.callRecursive(v)
-                if(onStack[v]){
-                    lowLinkedValues[id] = lowLinkedValues[v].coerceAtMost(lowLinkedValues[id])
-                }
             }
             //Done with this node. Backtracking to previous one.
             currentDepth--
             prossessed.add(id)
-            val atStartOfSCC = paint[id] == lowLinkedValues[id]
-            if(atStartOfSCC){
-                while (stack.isNotEmpty()){
-                    val node = stack.removeLast()
-                    onStack[node] = false
-                    lowLinkedValues[node] = paint[id]
-                    if(node == id) break
-                }
-            }
         }.invoke(start)
-    }
-
-    fun tarjan(): IntArray {
-        repeat(size) {
-            if(!visited[it])
-                dfsRecursive(it)
-        }
-        return lowLinkedValues
     }
 
     fun kosaraju(): List<List<Int>> {
