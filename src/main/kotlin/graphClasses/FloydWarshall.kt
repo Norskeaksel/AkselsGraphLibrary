@@ -24,9 +24,13 @@ class FloydWarshall(val graph: AdjacencyList) {
             repeat(n) { i ->
                 repeat(n) { j ->
                     distances[i][j] = min(distances[i][j], distances[i][k] + distances[k][j])
-
                 }
             }
+        }
+    }
+    fun printDistances() {
+        distances.forEachIndexed { i, row ->
+            System.err.println("$i: ${row.joinToString(", ")}")
         }
     }
 }

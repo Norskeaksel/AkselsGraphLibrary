@@ -21,7 +21,7 @@ fun RepostsBFS(): Int {
     val bfs = BFS(g)
     var longestChain = 0
     repeat(n){
-        bfs.bfsRecursive(listOf(it))
+        bfs.bfsIterative(listOf(it))
         longestChain = max(longestChain, bfs.distances.maxOrNull()!!.toInt()+1)
     }
     return longestChain

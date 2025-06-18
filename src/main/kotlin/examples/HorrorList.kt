@@ -16,7 +16,7 @@ fun horrorList(): Int {
         intGraph.connect(u, v)
     }
     val bfs = BFS(intGraph)
-    bfs.bfsRecursive(startIds)
+    bfs.bfsIterative(startIds)
     val maxDist = bfs.distances.let { d -> d.indices.maxBy { d[it] } }
     return maxDist
 }

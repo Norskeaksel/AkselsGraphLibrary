@@ -12,7 +12,7 @@ fun numbersConnectedToSymbol(input: List<String>): Int {
     val partNumbers = mutableListOf<Int>()
     numbers.forEach { t ->
         val searcher = DFS(grid)
-        searcher.dfsIterative(grid.node2Id(t))
+        searcher.dfsRecursive(grid.node2Id(t))
         if (searcher.depth > t.data.toString().length)
             partNumbers.add(t.data.toString().toInt())
     }
