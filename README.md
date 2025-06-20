@@ -80,7 +80,7 @@ The grid can be traversed using the same algorithms as the graph class,
 but it also has some additional methods for connecting the grid without explicitly adding
 edges. `.connectGridDefault()` connects each node to nodes up, down, left and right of it, if they exist.
 If some customization is needed, `.connectGrid(::yourCustomFunction)` can be used,
-where yourCustomFunction takes a tile and returns a list of tiles to connect
+where yourCustomFunction takes a `Tile` and returns a `List<Tile>` to connect
 to. [Example usage:](src/main/kotlin/examples/GridExample.kt)
 
 ```kotlin
@@ -89,29 +89,32 @@ import graphClasses.Grid
 
 fun main() {
     // --- Example Grid Definition ---
-    val width = 3
-    val height = 3
-    val grid = Grid(width, height)
+    val stringList = listOf(
+        "S12",
+        "123",
+        "23E"
+    )
+    val grid = Grid(stringList)
     grid.connectGridDefault()
 
     val bfs = BFS(grid)
     bfs.bfs(0)
     val distance = bfs.distances
-    repeat(width * height) { id ->
+    repeat(grid.trueSize()) { id ->
         val distValue = distance[id]
         val node = grid.id2Node(id)
         println("To node $node: $distValue")
     }
     /* Output:
-    To node Tile(x=0, y=0, data=null): 0 (no specific node data was set)
-    To node Tile(x=1, y=0, data=null): 1
-    To node Tile(x=2, y=0, data=null): 2
-    To node Tile(x=0, y=1, data=null): 1
-    To node Tile(x=1, y=1, data=null): 2
-    To node Tile(x=2, y=1, data=null): 3
-    To node Tile(x=0, y=2, data=null): 2
-    To node Tile(x=1, y=2, data=null): 3
-    To node Tile(x=2, y=2, data=null): 4
+        To node Tile(x=0, y=0, data=S): 0
+        To node Tile(x=1, y=0, data=1): 1
+        To node Tile(x=2, y=0, data=2): 2
+        To node Tile(x=0, y=1, data=1): 1
+        To node Tile(x=1, y=1, data=2): 2
+        To node Tile(x=2, y=1, data=3): 3
+        To node Tile(x=0, y=2, data=2): 2
+        To node Tile(x=1, y=2, data=3): 3
+        To node Tile(x=2, y=2, data=E): 4
      */
 }
 ```
