@@ -1,7 +1,8 @@
 import examples.day20a
-import junit.framework.TestCase
+import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.Test
 
-class Day20RaceCondition : TestCase() {
+class Day20RaceCondition{
     val input = """
         ###############
         #...#...#.....#
@@ -20,8 +21,9 @@ class Day20RaceCondition : TestCase() {
         ###############
     """.trimIndent().lines()
 
+    @Test
     fun test1() {
         val ans = day20a(input,40, 84)
-        assertEquals(2, ans)
+        assertThat(ans).isEqualTo(2)
     }
 }

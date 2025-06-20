@@ -1,7 +1,8 @@
 import examples.day10a
-import junit.framework.TestCase
+import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.Test
 
-class Day10HoofIt : TestCase() {
+class Day10HoofIt{
     val input = """
         89010123
         78121874
@@ -32,17 +33,19 @@ class Day10HoofIt : TestCase() {
         987....
     """.trimIndent().lines()
 
+    @Test
     fun test1a(){
         val ans = day10a(exa)
-        assertEquals(2, ans)
+        assertThat(ans).isEqualTo(2)
     }
+    @Test
     fun test1b(){
         val ans = day10a(exb)
-        assertEquals(4, ans)
+        assertThat(ans).isEqualTo(4)
     }
-
+    @Test
     fun test1() {
         val ans = day10a(input)
-        assertEquals(36, ans)
+        assertThat(ans).isEqualTo(36)
     }
 }

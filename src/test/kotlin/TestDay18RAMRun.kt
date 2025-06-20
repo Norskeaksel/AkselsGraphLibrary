@@ -1,7 +1,8 @@
 import examples.day18a
-import junit.framework.TestCase
+import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.Test
 
-class Day18RAMRun : TestCase() {
+class Day18RAMRunTest{
     val input = """
         5,4
         4,2
@@ -29,9 +30,9 @@ class Day18RAMRun : TestCase() {
         1,6
         2,0
     """.trimIndent().lines()
-
+    @Test
     fun test1a(){
         val ans = day18a(input, 7, 12)
-        assertEquals(22, ans)
+        assertThat(ans).isEqualTo(22)
     }
 }
