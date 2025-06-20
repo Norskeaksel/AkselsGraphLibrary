@@ -20,7 +20,7 @@ fun rumor(): Long {
     val components = mutableListOf<List<Int>>()
     for (i in 0 until g.size()) {
         if (dfs.visited[i]) continue
-        dfs.dfsRecursive(i)
+        dfs.dfs(i)
         val component = dfs.getCurrentVisitedIds()
         if (component.isNotEmpty())
             components.add(component)

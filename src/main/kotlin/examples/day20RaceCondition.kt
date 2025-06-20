@@ -3,7 +3,6 @@ package examples
 
 import graphClasses.BFS
 import graphClasses.Grid
-import graphClasses.Tile
 import graphClasses.getPath
 
 fun day20a(input: List<String>, cheatGoal: Int, fairTime: Int): Int {
@@ -26,7 +25,7 @@ fun day20a(input: List<String>, cheatGoal: Int, fairTime: Int): Int {
     while (timeSaved >= cheatGoal) {
         val bfs = BFS(grid)
         c++
-        bfs.bfsIterative(listOf(startId))
+        bfs.bfs(listOf(startId))
         val cheatDist = bfs.distances[endId]
         timeSaved = (fairTime - cheatDist).toInt()
         println("timeSaved: $timeSaved")

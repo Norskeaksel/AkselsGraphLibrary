@@ -7,7 +7,7 @@ interface GraphContract<T> {
     fun addWeightlessEdge(node1: T, node2: T): Boolean
     fun getAdjacencyList(): AdjacencyList
 
-    // FUNCTIONS TO INHERIT
+    // FUNCTIONS TO INHERIT OR POTENTIALLY OVERRIDE
     fun getWeightlessAdjacencyList() = getAdjacencyList().toWeightlessAdjacencyList()
     fun addEdge(node1: T, node2: T, weight: Int) = addEdge(node1, node2, weight.toDouble())
     fun connect(node1: T, node2: T, weight: Double = 1.0){

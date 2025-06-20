@@ -13,7 +13,7 @@ class BFS(val graph: WeightlessAdjacencyList) {
     var currentVisitedDistances = mutableListOf<Int>()
     val parents = IntArray(graph.size) { -1 }
 
-    fun bfsIterative(startIds: List<Int>, targetId: Int = -1) {
+    fun bfs(startIds: List<Int>, targetId: Int = -1) {
         currentVisited.clear()
         distances.fill(Int.MAX_VALUE)
         val queue = java.util.ArrayDeque<Int>()
@@ -42,7 +42,7 @@ class BFS(val graph: WeightlessAdjacencyList) {
             }
         }
     }
-    fun bfsIterative(startId: Int, targetId: Int = -1) = bfsIterative(listOf(startId), targetId)
+    fun bfs(startId: Int, targetId: Int = -1) = bfs(listOf(startId), targetId)
 
     fun getCurrentVisitedIds() = // Deep Copy
         currentVisited.map { it }

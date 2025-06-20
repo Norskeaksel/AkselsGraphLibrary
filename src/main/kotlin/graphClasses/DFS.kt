@@ -26,7 +26,7 @@ class DFS(private val weightlessAdjacencyList: WeightlessAdjacencyList) {
         }
     }
 
-    fun dfsRecursive(start: Int) {
+    fun dfs(start: Int) {
         var currentDepth = 0
         clearCurrentVisitedIds()
         DeepRecursiveFunction<Int, Unit> { id ->
@@ -57,19 +57,19 @@ class DFS(private val weightlessAdjacencyList: WeightlessAdjacencyList) {
             }
         }
         val topologicalOrder = DFS(reversedGraph).topologicalSort().reversed()
-        val groups = mutableListOf<List<Int>>()
+        val stronglyConnectedComponents = mutableListOf<List<Int>>()
         topologicalOrder.forEach { id ->
             if(visited[id])
                 return@forEach
-            dfsRecursive(id)
-            groups.add(getCurrentVisitedIds())
+            dfs(id)
+            stronglyConnectedComponents.add(getCurrentVisitedIds())
         }
-        return groups
+        return stronglyConnectedComponents
     }
 
     fun topologicalSort(): List<Int> {
         for (i in 0 until size) {
-            dfsRecursive(i)
+            dfs(i)
         }
         return prossessed//.reversed() //Reversed depending on the order
     }

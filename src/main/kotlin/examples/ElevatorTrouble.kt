@@ -18,7 +18,7 @@ fun elevatorTrouble(): String {
         listOfNotNull(upNode, downNode)
     }
     val bfs = BFS(grid)
-    bfs.bfsIterative(s,g)
+    bfs.bfs(s,g)
     val dist = bfs.distances[g].toInt()
     return if(dist == Int.MAX_VALUE){
         "use the stairs"

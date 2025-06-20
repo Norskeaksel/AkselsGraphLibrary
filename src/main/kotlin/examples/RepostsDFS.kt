@@ -21,7 +21,7 @@ fun repostsDFS(): Int {
     val dfs = DFS(g)
     var longestChain = 0
     repeat(n){
-        dfs.dfsRecursive(it)
+        dfs.dfs(it)
         longestChain = max(longestChain, dfs.depth)
     }
     return longestChain

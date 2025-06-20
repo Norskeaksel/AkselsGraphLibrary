@@ -1,12 +1,24 @@
-# GraphLibrary
+# AkselsGraphLibrary
 
-This repository contains classes and algorithms for solving grid related competitive programming problems. The [examples](src/main/kotlin/examples) folder contains code solutions using this graphLibraryPackage to solve various problems. 
+This repository contains classes and algorithms for making graphs, and traversing them in various ways.
+This can for example be used to solve competitive programming problems.
+The [examples](src/main/kotlin/examples) folder contains example code solutions using this graphLibraryPackage to solve
+various problems.
+The library contains the general `Graph` class, which can be used to create graphs of any datatype,
+the `IntGraph` class, which is performance optimized for integer nodes,
+and the `Grid` class, where each node has x and y coordinates in addition to containing any data type.
+All the classes inherit from the [GraphContract.kt](src%2Fmain%2Fkotlin%2FgraphClasses%2FGraphContract.kt) interface,
+which defines the basic functionality of a graph.
 
-## The graph class
-This is the most generic class, supporting all graph creation of any datatype. Any new node is given an ID upon creation,
-which is used to build an adjacency list. If your graph already consists of interger nodes, the IntGraph class can be used instead for increased performence.
-Nodes can be connected one directionaly with .addEdge(node1, node2) or bidirectionally with .connect(node1, node2).
-Once the graph is build, you may use one of the graph traversal classes. [Example usage:](src/main/kotlin/examples/GraphExample.kt)
+## The Graph class
+
+This is the most generic class, supporting all graph creation of any datatype. Any new node is given an ID upon
+creation,
+which is used to build an adjacency list. The class maintains maps between ID's and nodes and vice versa.
+The ID's can be retrieved with `.node2id(node)` and nodes can be retrieved with `.id2node(id)`.
+Nodes can be connected unidirectional with `.addEdge(node1, node2)` or bidirectional with `.connect(node1, node2)`.
+Once the graph is built, you may use one of the graph traversal classes.
+[Example usage:](src/main/kotlin/examples/GraphExample.kt)
 
 ```kotlin
 import graphClasses.Dijkstra
@@ -50,18 +62,30 @@ fun main() {
 }
 ```
 
+## The IntGraph class
+
+The IntGraph class behaves a lot like the Graph class when used with integers like the example above. However,
+it's more performant when creating the graph, because it does not need to maintain a mapping between the IDs and nodes.
+[Example usage.](src/main/kotlin/examples/GraphExample.kt)
+
 ## The Grid class
-The Grid class is a specialized graph class. It uses the data class ```Tile(val x: Int, val y: Int, var data: Any? = null)```
+
+The Grid class is a specialized graph class. It uses the data
+class ```Tile(val x: Int, val y: Int, var data: Any? = null)```
 to represent nodes of any datatype, but each node also have x and y coordinates.
 The grid can be created with a width and height, or by passing a list of strings.
 The grid can be traversed using the same algorithms as the graph class,
-but it also has some additional methods for connecting the grid without explicitly adding edges. [Example usage:](src/main/kotlin/examples/GridExample.kt)
+but it also has some additional methods for connecting the grid without explicitly adding
+edges. `.connectGridDefault()` connects each node to nodes up, down, left and right of it, if they exist.
+If some customization is needed, `.connectGrid(::yourCustomFunction)` can be used,
+where yourCustomFunction takes a tile and returns a list of tiles to connect
+to. [Example usage:](src/main/kotlin/examples/GridExample.kt)
 
 ```kotlin
 import graphClasses.BFS
 import graphClasses.Grid
 
-fun main(){
+fun main() {
     // --- Example Grid Definition ---
     val width = 3
     val height = 3
@@ -69,12 +93,12 @@ fun main(){
     grid.connectGridDefault()
 
     val bfs = BFS(grid)
-    bfs.bfsIterative(0)
+    bfs.bfs(0)
     val distance = bfs.distances
-    for (goalNodeId in 0 until width * height) {
-        val distValue = distance[goalNodeId]
-        val node = grid.id2Node(goalNodeId)
-        println("To node $node: ${distValue.toInt()}")
+    repeat(width * height) { id ->
+        val distValue = distance[id]
+        val node = grid.id2Node(id)
+        println("To node $node: $distValue")
     }
     /* Output:
     To node Tile(x=0, y=0, data=null): 0 (no specific node data was set)
@@ -91,4 +115,6 @@ fun main(){
 ```
 
 ## Graphics
-This library has also been used to make grid visualizations, which can be checked out [here](https://github.com/Norskeaksel/GridGraphics/).
+
+This library has also been used to make grid visualizations, which can be checked
+out [here](https://github.com/Norskeaksel/GridGraphics/).

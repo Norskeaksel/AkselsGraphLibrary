@@ -3,7 +3,7 @@ package examples
 import graphClasses.BFS
 import graphClasses.Grid
 
-fun main(){
+fun main() {
     // --- Example Grid Definition ---
     val width = 3
     val height = 3
@@ -11,12 +11,12 @@ fun main(){
     grid.connectGridDefault()
 
     val bfs = BFS(grid)
-    bfs.bfsIterative(0)
+    bfs.bfs(0)
     val distance = bfs.distances
-    for (goalNodeId in 0 until width * height) {
-        val distValue = distance[goalNodeId]
-        val node = grid.id2Node(goalNodeId)
-        println("To node $node: ${distValue.toInt()}")
+    repeat(width * height) { id ->
+        val distValue = distance[id]
+        val node = grid.id2Node(id)
+        println("To node $node: $distValue")
     }
     /* Output:
     To node Tile(x=0, y=0, data=null): 0 (no specific node data was set)
