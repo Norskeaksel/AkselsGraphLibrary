@@ -10,7 +10,7 @@ class DFS(private val weightlessAdjacencyList: WeightlessAdjacencyList) {
         size = weightlessAdjacencyList.size
     }
     var visited = BooleanArray(size)
-    var prossessed = mutableListOf<Int>()
+    var processedOrder = mutableListOf<Int>()
     var depth = 0
 
     private var currentVisitedDepts = mutableListOf<Int>()
@@ -42,9 +42,9 @@ class DFS(private val weightlessAdjacencyList: WeightlessAdjacencyList) {
                 parent[v] = id
                 this.callRecursive(v)
             }
+            processedOrder.add(id)
             //Done with this node. Backtracking to previous one.
             currentDepth--
-            prossessed.add(id)
         }.invoke(start)
     }
 
@@ -71,7 +71,7 @@ class DFS(private val weightlessAdjacencyList: WeightlessAdjacencyList) {
         for (i in 0 until size) {
             dfs(i)
         }
-        return prossessed//.reversed() //Reversed depending on the order
+        return processedOrder//.reversed() //Reversed depending on the order
     }
 
     fun getCurrentVisitedIds() = currentVisitedIds.indices.filter { currentVisitedIds[it] }
