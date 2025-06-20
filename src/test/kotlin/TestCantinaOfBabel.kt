@@ -6,7 +6,7 @@ import org.junit.jupiter.api.AfterAll
 import java.io.File
 import org.junit.jupiter.api.Test
 
-class CantinaOfBabel {
+class CantinaOfBabelTest {
     companion object {
         @JvmStatic
         @AfterAll

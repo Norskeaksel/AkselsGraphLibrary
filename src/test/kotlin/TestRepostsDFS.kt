@@ -8,7 +8,7 @@ import java.io.File
 import org.junit.jupiter.api.Test
 
 
-class RepostsDFS {
+class RepostsDFSTest {
     companion object {
         @JvmStatic
         @AfterAll

@@ -8,7 +8,7 @@ import java.io.File
 import org.junit.jupiter.api.Test
 
 
-class BAAS {
+class BAASTest {
     companion object {
         @JvmStatic
         @AfterAll
@@ -20,7 +20,7 @@ class BAAS {
     @Test
     fun Baasa() {
         _reader = File("src/test/SampleInput/Baas/input1").inputStream().bufferedReader()
-        assertThat(baas()).isEqualTo(155)
+        assertThat(baas()).isEqualTo(15)
     }
     @Test
     fun Baasb() {

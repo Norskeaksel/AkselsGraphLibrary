@@ -7,7 +7,7 @@ import java.io.File
 import org.junit.jupiter.api.Test
 
 
-class CrossCountry {
+class CrossCountryTest {
     companion object {
         @JvmStatic
         @BeforeAll

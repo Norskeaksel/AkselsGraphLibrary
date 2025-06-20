@@ -2,7 +2,7 @@ import examples.day10a
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
-class Day10HoofIt{
+class Day10HoofItTest{
     val input = """
         89010123
         78121874

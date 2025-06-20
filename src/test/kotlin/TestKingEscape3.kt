@@ -8,7 +8,7 @@ import java.io.File
 import org.junit.jupiter.api.Test
 
 
-class KingEscape3 {
+class KingEscape3Test {
     companion object {
         @JvmStatic
         @AfterAll

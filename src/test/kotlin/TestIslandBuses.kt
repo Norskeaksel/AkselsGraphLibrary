@@ -7,7 +7,7 @@ import java.io.File
 import kotlin.system.measureTimeMillis
 import org.junit.jupiter.api.Test
 
-class IslandBuses {
+class IslandBusesTest {
     companion object {
         @JvmStatic
         @AfterAll

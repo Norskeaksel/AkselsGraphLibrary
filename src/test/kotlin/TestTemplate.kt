@@ -6,7 +6,7 @@ import org.junit.jupiter.api.AfterAll
 import java.io.File
 import org.junit.jupiter.api.Test
 
-class Template {
+class TemplateTest {
     companion object {
         @JvmStatic
         @AfterAll

@@ -7,7 +7,7 @@ import java.io.File
 import org.junit.jupiter.api.Test
 
 
-class HorrorList {
+class HorrorListTest {
     companion object {
         @JvmStatic
         @AfterAll
