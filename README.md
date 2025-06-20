@@ -1,5 +1,7 @@
 # AkselsGraphLibrary
 
+![My Workflow Status](https://github.com/Norskeaksel/AkselsGraphLibrary/actions/workflows/ci.yml/badge.svg)
+
 This repository contains classes and algorithms for making graphs, and traversing them in various ways.
 This can for example be used to solve competitive programming problems.
 The [examples](src/main/kotlin/examples) folder contains example code solutions using this graphLibraryPackage to solve
