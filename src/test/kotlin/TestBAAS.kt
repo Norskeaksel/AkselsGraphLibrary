@@ -16,7 +16,6 @@ class BAASTest {
             _reader = INPUT.bufferedReader()
         }
     }
-
     @Test
     fun Baasa() {
         _reader = File("src/test/SampleInput/Baas/input1").inputStream().bufferedReader()
