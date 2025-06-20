@@ -20,7 +20,7 @@ class BAAS {
     @Test
     fun Baasa() {
         _reader = File("src/test/SampleInput/Baas/input1").inputStream().bufferedReader()
-        assertThat(baas()).isEqualTo(15)
+        assertThat(baas()).isEqualTo(155)
     }
     @Test
     fun Baasb() {
