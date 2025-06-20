@@ -4,7 +4,7 @@ import graphClasses._reader
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.AfterAll
 import java.io.File
-import kotlin.test.Test
+import org.junit.jupiter.api.Test
 
 class CantinaOfBabel {
     companion object {

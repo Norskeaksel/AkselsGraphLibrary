@@ -6,7 +6,7 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.AfterAll
 import java.io.File
 import kotlin.system.measureTimeMillis
-import kotlin.test.Test
+import org.junit.jupiter.api.Test
 
 class ElevatorTrouble {
     companion object {

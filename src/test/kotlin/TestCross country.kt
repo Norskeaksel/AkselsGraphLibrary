@@ -4,7 +4,7 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.AfterAll
 import org.junit.jupiter.api.BeforeAll
 import java.io.File
-import kotlin.test.Test
+import org.junit.jupiter.api.Test
 
 
 class CrossCountry {
