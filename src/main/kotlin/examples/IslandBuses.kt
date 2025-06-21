@@ -13,7 +13,7 @@ fun getNrOfGroups(grid: Grid):Int{
     val dfs = DFS(grid)
     grid.getNodes().forEach { node ->
         dfs.dfs(grid.node2Id(node))
-        dfs.getCurrentVisitedIds().let {
+        dfs.getAndClearCurrentVisitedIds().let {
             if(it.isNotEmpty())
                 groups.add(it)
         }

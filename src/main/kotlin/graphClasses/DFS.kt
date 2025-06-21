@@ -5,22 +5,25 @@ class DFS(private val weightlessAdjacencyList: WeightlessAdjacencyList) {
     constructor(graph: Graph) : this(graph.getWeightlessAdjacencyList())
     constructor(grid: Grid) : this(grid.getWeightlessAdjacencyList())
     constructor(intGraph: IntGraph) : this(intGraph.getWeightlessAdjacencyList())
+
     var size = 0
+
     init {
         size = weightlessAdjacencyList.size
     }
+
     var visited = BooleanArray(size)
     var processedOrder = mutableListOf<Int>()
     var depth = 0
 
     private var currentVisitedDepts = mutableListOf<Int>()
+    private var currentVisitedIds = mutableListOf<Int>()
     val parent = IntArray(size) { -1 }
-    private var currentVisitedIds = BooleanArray(size)
 
     fun dfsSimple(currentId: Int) {
-        if (currentVisitedIds[currentId])
+        if (currentId in currentVisitedIds) // Slow but simple. Preserves order in visited Ids
             return
-        currentVisitedIds[currentId] = true
+        currentVisitedIds.add(currentId)
         weightlessAdjacencyList[currentId].forEach { connectedNodeId ->
             dfsSimple(connectedNodeId)
         }
@@ -33,7 +36,7 @@ class DFS(private val weightlessAdjacencyList: WeightlessAdjacencyList) {
             if (visited[id])
                 return@DeepRecursiveFunction
             visited[id] = true
-            currentVisitedIds[id] = true
+            currentVisitedIds.add(id)
             currentVisitedDepts.add(currentDepth)
             currentDepth++
             depth = currentDepth.coerceAtLeast(depth)
@@ -49,7 +52,7 @@ class DFS(private val weightlessAdjacencyList: WeightlessAdjacencyList) {
     }
 
     fun kosaraju(): List<List<Int>> {
-        val reversedGraph:WeightlessAdjacencyList = MutableList<MutableList<Int>>(size){ mutableListOf() }.apply {
+        val reversedGraph: WeightlessAdjacencyList = MutableList<MutableList<Int>>(size) { mutableListOf() }.apply {
             weightlessAdjacencyList.forEachIndexed { u, neighbors ->
                 neighbors.forEach { v ->
                     this[v].add(u)
@@ -59,10 +62,10 @@ class DFS(private val weightlessAdjacencyList: WeightlessAdjacencyList) {
         val topologicalOrder = DFS(reversedGraph).topologicalSort().reversed()
         val stronglyConnectedComponents = mutableListOf<List<Int>>()
         topologicalOrder.forEach { id ->
-            if(visited[id])
+            if (visited[id])
                 return@forEach
             dfs(id)
-            stronglyConnectedComponents.add(getCurrentVisitedIds())
+            stronglyConnectedComponents.add(getAndClearCurrentVisitedIds())
         }
         return stronglyConnectedComponents
     }
@@ -74,10 +77,11 @@ class DFS(private val weightlessAdjacencyList: WeightlessAdjacencyList) {
         return processedOrder//.reversed() //Reversed depending on the order
     }
 
-    fun getCurrentVisitedIds() = currentVisitedIds.indices.filter { currentVisitedIds[it] }
+    fun getAndClearCurrentVisitedIds() =
+        currentVisitedIds.map { it }.also { currentVisitedIds.clear() } // Deep copy not clear return
 
     fun clearCurrentVisitedIds() {
-        currentVisitedIds.fill(false)
+        currentVisitedIds.clear()
     }
 
     fun getVisitedDepths() = currentVisitedDepts.map { it }

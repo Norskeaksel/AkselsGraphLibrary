@@ -1,4 +1,3 @@
-package examples
 //https://open.kattis.com/problems/shortestpath1
 
 import graphClasses.Dijkstra

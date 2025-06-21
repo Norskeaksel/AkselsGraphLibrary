@@ -18,7 +18,7 @@ fun day10a(input: List<String>): Long {
         if (it.data != '0')
             return@forEach
         dfs.dfsSimple(grid.node2Id(it))
-        val visitedNines = dfs.getCurrentVisitedIds().count { grid.id2Node(it)?.data == '9' }
+        val visitedNines = dfs.getAndClearCurrentVisitedIds().count { grid.id2Node(it)?.data == '9' }
         ans += visitedNines
     }
     return ans

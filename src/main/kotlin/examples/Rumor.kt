@@ -21,7 +21,7 @@ fun rumor(): Long {
     for (i in 0 until g.size()) {
         if (dfs.visited[i]) continue
         dfs.dfs(i)
-        val component = dfs.getCurrentVisitedIds()
+        val component = dfs.getAndClearCurrentVisitedIds()
         if (component.isNotEmpty())
             components.add(component)
     }
