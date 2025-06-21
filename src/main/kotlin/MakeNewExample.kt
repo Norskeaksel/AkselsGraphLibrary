@@ -1,5 +1,7 @@
 import graphClasses.readString
 import java.io.File
+import java.nio.file.Files.createDirectories
+import kotlin.io.path.Path
 
 fun createExample(name:String) = """package examples
 
@@ -10,8 +12,12 @@ fun main() {
     val ans = $name(); _writer.flush()
     println(ans)
 }
+
 fun $name(): String {
     val n = readInt()
+    repeat(n){
+    
+    }
     return ""
 }
 """
@@ -22,7 +28,7 @@ import org.junit.jupiter.api.AfterAll
 import java.io.File
 import org.junit.jupiter.api.Test
 
-class UnitsTest {
+class ${name.capitalize()}Test {
     companion object {
         @JvmStatic
         @AfterAll
@@ -33,6 +39,7 @@ class UnitsTest {
 
     @Test
     fun ${name}a() {
+        
         val expectedOutput = ""${'"'}${'"'}${'"'}${'"'}
         _reader = File("src/test/SampleInput/${name.capitalize()}/input1").inputStream().bufferedReader()
         assertThat($name()).isEqualTo(expectedOutput)
@@ -47,10 +54,12 @@ fun main(){
 
     val exampleFile = File("src/main/kotlin/examples/${name.capitalize()}.kt")
     val exampleTestFile = File("src/test/kotlin/Test${name.capitalize()}.kt")
-    val testInputFile = File("src/test/SampleInput/${name.capitalize()}/input1")
+    val testInputDirectoryPath = "src/test/SampleInput/${name.capitalize()}"
+    val testInputFile = File("${testInputDirectoryPath}/input1")
 
     exampleFile.writeText(example)
     exampleTestFile.writeText(exampleTest)
+    createDirectories(Path(testInputDirectoryPath))
     testInputFile.writeText("")
     println("Created example file: ${exampleFile.absolutePath} and\n" +
             "test file: ${exampleTestFile.absolutePath} and\n" +

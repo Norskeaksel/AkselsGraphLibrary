@@ -1,7 +1,5 @@
 package graphClasses
 
-import kotlin.math.abs
-
 data class Tile(val x: Int, val y: Int, var data: Any? = null)
 
 class Grid(val width: Int, val height: Int) : GraphContract<Tile> {
@@ -40,16 +38,16 @@ class Grid(val width: Int, val height: Int) : GraphContract<Tile> {
         nodes[id] = node
     }
 
-    override fun addEdge(node1: Tile, node2: Tile, weight: Double): Boolean {
+    override fun addEdge(node1: Tile, node2: Tile, weight: Double) {
         val u = node2Id(node1)
         val v = node2Id(node2)
-        return adjacencyList[u].add(Edge(weight, v))
+        adjacencyList[u].add(Edge(weight, v))
     }
 
-    override fun addWeightlessEdge(node1: Tile, node2: Tile): Boolean {
+    override fun addWeightlessEdge(node1: Tile, node2: Tile) {
         val u = node2Id(node1)
         val v = node2Id(node2)
-        return weightlessAdjacencyList[u].add(v)
+        weightlessAdjacencyList[u].add(v)
     }
 
     fun xyInRange(x: Int, y: Int) = x in 0 until width && y in 0 until height
@@ -145,8 +143,6 @@ class Grid(val width: Int, val height: Int) : GraphContract<Tile> {
                 nodes[i] = null
         }
     }
-
-    fun manhattenDistance(t1: Tile, t2: Tile) = abs(t1.x - t2.x) + abs(t1.y - t2.y)
 
     fun print() {
         nodes.forEachIndexed { id, t ->

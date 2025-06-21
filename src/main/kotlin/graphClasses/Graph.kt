@@ -17,16 +17,16 @@ class Graph: GraphContract<Any> {
         adjacencyList.add(mutableListOf())
     }
 
-    override fun addEdge(node1: Any, node2: Any, weight: Double): Boolean {
+    override fun addEdge(node1: Any, node2: Any, weight: Double) {
         val id1 = node2id[node1] ?: addNode(node1).run { node2id[node1]!! }
         val id2 = node2id[node2] ?: addNode(node2).run { node2id[node2]!! }
-        return adjacencyList[id1].add(Pair(weight, id2))
+        adjacencyList[id1].add(Pair(weight, id2))
     }
 
-    override fun addWeightlessEdge(node1: Any, node2: Any): Boolean {
+    override fun addWeightlessEdge(node1: Any, node2: Any) {
         val id1 = node2id[node1] ?: addNode(node1).run { node2id[node1]!! }
         val id2 = node2id[node2] ?: addNode(node2).run { node2id[node2]!! }
-        return weightlessAdjacencyList[id1].add(id2)
+        weightlessAdjacencyList[id1].add(id2)
     }
     override fun getAdjacencyList() = adjacencyList
 
