@@ -1,62 +1,66 @@
 package examples
 
 import graphClasses.*
-import java.math.BigDecimal
 
 // https://open.kattis.com/problems/units
 
 
-val nodes = MutableList<Unit?>(10) { null }
 fun main() {
     val ans = units(); _writer.flush()
     println(ans)
 }
 
+fun floydWarshallMultiplication(conversionMatrix: MutableList<MutableList<Double?>>) {
+    val n = conversionMatrix.size
+    repeat(n) { i ->
+        conversionMatrix[i][i] = 1.0
+    }
+    repeat(n) { k ->
+        repeat(n) { i ->
+            repeat(n) { j ->
+                conversionMatrix[i][k]?.let { i2k ->
+                    conversionMatrix[k][j]?.let { k2j ->
+                        val newConversion = i2k * k2j
+                        if (conversionMatrix[i][j] == null)
+                            conversionMatrix[i][j] = newConversion
+                    }
+                }
+            }
+        }
+    }
+}
 
 fun units(): String {
     var ans = ""
     while (true) {
-        val unitMap = mutableMapOf<String, MutableSet<Pair<BigDecimal, String>>>()
         val n = readInt()
+        val unit2Index = mutableMapOf<String, Int>()
+        val conversionMatrix = MutableList<MutableList<Double?>>(n) { MutableList(n) { null } }
         if (n == 0) break
         val units = readString().split(" ")
-        val graph = Graph()
-        units.forEach {
-            graph.addNode(it)
-            unitMap[it] = mutableSetOf()
+        System.err.println(units)
+        units.forEachIndexed { index, unit ->
+            unit2Index[unit] = index
         }
         repeat(n - 1) {
             val (u1, _, c, u2) = readString().split(" ")
-            val conversion = BigDecimal(c.toDouble())
-            unitMap[u1]!!.add(conversion to u2)
-            unitMap[u2]!!.add(BigDecimal(1.0).divide(conversion) to u1)
-            graph.connect(u1, u2)
+            val conversion = c.toDouble()
+            conversionMatrix[unit2Index[u1]!!][unit2Index[u2]!!] = conversion
+            conversionMatrix[unit2Index[u2]!!][unit2Index[u1]!!] = 1.0 / conversion
         }
-        val dfs = DFS(graph)
-        repeat(n) {
-            val order = dfs.topologicalSort()
-            val analysingUnit = graph.id2Node(order[0]) as String
-            var currentUnit = analysingUnit
-            var conversion = BigDecimal(1.0)
-            order.forEachIndexed{ i, id ->
-                if (i==0) return@forEachIndexed
-                val nextUnit = graph.id2Node(id) as String
-                //System.err.print("Convertion from $currentUnit to $nextUnit: ")
-                val newConversion = convertionBetweenUnits(unitMap, currentUnit, nextUnit) ?: return@forEachIndexed
-                //System.err.println(newConversion)
-                conversion = conversion.multiply(newConversion)
-                unitMap[analysingUnit]!!.add(conversion to nextUnit)
-                currentUnit = nextUnit
-            }
+        floydWarshallMultiplication(conversionMatrix)
+        val rowWithBiggestUnit = conversionMatrix.maxBy { row ->
+            row.count { it!! >= 1.0 }
         }
-        System.err.println(unitMap)
+        val rowWithIndexes = rowWithBiggestUnit.mapIndexed { i, it -> it to i }.sortedBy { it.first }
+        val sortedUnits = rowWithIndexes.map { it.second }.map { units[it] }
+        val sortedConversions = rowWithIndexes.map { it.first }
+        ans += "1${sortedUnits[0]} = "
+        for (i in 1 until n) {
+            ans += "${sortedConversions[i]!!.toInt()}${sortedUnits[i]} = "
+        }
+        ans = ans.removeRange(ans.length - 3, ans.length)
+        ans += "\n"
     }
     return ans
 }
-
-private fun convertionBetweenUnits(
-    unitMap: MutableMap<String, MutableSet<Pair<BigDecimal, String>>>,
-    currentUnit: String,
-    nextUnit: String
-) = unitMap[currentUnit]?.firstOrNull{ it.second == nextUnit }?.first
-
