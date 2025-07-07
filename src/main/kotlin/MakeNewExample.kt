@@ -59,8 +59,8 @@ class ${name.capitalize()}Test {
 fun main() {
     print("Name of the kattis problem: ")
     val name = readString()
-    print("\nHow many sample inputs? ")
-    var nrOfSampleInputs = readInt()
+    print("How many sample inputs? ")
+    val nrOfSampleInputs = readInt()
     val example = createExample(name)
     val exampleTest = createExampleTest(name, nrOfSampleInputs)
 
