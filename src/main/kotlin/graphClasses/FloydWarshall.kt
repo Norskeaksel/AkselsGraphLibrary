@@ -30,7 +30,8 @@ class FloydWarshall(val graph: AdjacencyList) {
     }
     fun printDistances() {
         distances.forEachIndexed { i, row ->
-            System.err.println("$i: ${row.joinToString(", ")}")
+            val modifiedRow = row.map { if(it == Int.MAX_VALUE.toDouble()) -1.0 else it }
+            System.err.println("$i: ${modifiedRow.joinToString(", ")}")
         }
     }
 }
