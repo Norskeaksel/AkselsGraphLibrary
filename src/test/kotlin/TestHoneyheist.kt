@@ -16,7 +16,7 @@ class HoneyheistTest {
 
     @Test
     fun honeyheista() {
-        val expectedOutput = """"""
+        val expectedOutput = """6"""
         _reader = File("src/test/SampleInput/Honeyheist/input1").inputStream().bufferedReader()
         assertThat(honeyheist()).isEqualTo(expectedOutput)
     }
@@ -24,7 +24,7 @@ class HoneyheistTest {
 
     @Test
     fun honeyheistb() {
-        val expectedOutput = """"""
+        val expectedOutput = """No"""
         _reader = File("src/test/SampleInput/Honeyheist/input2").inputStream().bufferedReader()
         assertThat(honeyheist()).isEqualTo(expectedOutput)
     }

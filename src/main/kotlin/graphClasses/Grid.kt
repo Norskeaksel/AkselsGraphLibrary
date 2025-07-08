@@ -15,7 +15,7 @@ class Grid(val width: Int, val height: Int) : GraphContract<Tile> {
     private val size = width * height
     private val adjacencyList = adjacencyListInit(size)
     private val weightlessAdjacencyList = weightlessAdjacencyListInit(size)
-    val nodes = Array<Tile?>(size) { Tile(-1, -1) }
+    private val nodes = Array<Tile?>(size) { Tile(-1, -1) }
     var gridIsWeightLess = false
 
     init {
@@ -64,6 +64,16 @@ class Grid(val width: Int, val height: Int) : GraphContract<Tile> {
     fun node2Id(t: Tile) = t.x + t.y * width
     fun getNodes(): List<Tile> = nodes.filterNotNull().filter { it.x != -1 }
     fun getEdges(t: Tile): List<Edge> = adjacencyList[node2Id(t)]
+    fun deleteNodeId(id: Int) {
+        nodes[id] = null
+    }
+    fun deleteNodeWithData(data: Any?){
+        nodes.indices.forEach { i ->
+            if (nodes[i]?.data == data) {
+                deleteNodeId(i)
+            }
+        }
+    }
 
 
     fun removeEdge(id1: Int, id2: Int, weight: Double? = null) {
@@ -145,10 +155,11 @@ class Grid(val width: Int, val height: Int) : GraphContract<Tile> {
     }
 
     fun print() {
+        val padding = getNodes().maxOf { it.data.toString().length }
         nodes.forEachIndexed { id, t ->
             if (id > 0 && id % width == 0)
                 println()
-            print(t?.data)
+            print(String.format("%-${padding}s", t?.data ?: " "))
         }
         println()
     }

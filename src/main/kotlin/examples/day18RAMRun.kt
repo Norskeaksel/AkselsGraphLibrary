@@ -10,7 +10,7 @@ fun day18a(input: List<String>, gridSize: Int, lineCount: Int): Int {
             break
         val (x, y) = line.split(",").map { it.toInt() }
         val corruptId = grid.xy2Id(x, y)!!
-        grid.nodes[corruptId] = null
+        grid.deleteNodeId(corruptId)
     }
     grid.connectGridDefault()
     val bfs = BFS(grid)
