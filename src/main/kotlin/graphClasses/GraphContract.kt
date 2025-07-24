@@ -1,7 +1,7 @@
 package graphClasses
 
 interface GraphContract<T> {
-    // FUNCTIONS TO OVERWRITE
+    // FUNCTIONS TO OVERRIDE
     fun addNode(node: T)
     fun addEdge(node1: T, node2: T, weight: Double = 1.0)
     fun addWeightlessEdge(node1: T, node2: T)
