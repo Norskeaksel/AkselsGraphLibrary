@@ -29,7 +29,7 @@ import graphClasses.getPath
 
 
 fun main() {
-    // --- Example Graph Definition ---
+    // Example Graph Definition
     val g = Graph()
     g.addEdge(0, 1, 10.0)
     g.addEdge(0, 2, 3.0)
@@ -41,6 +41,7 @@ fun main() {
 
     g.addNode(5) // Adding an isolated node is also possible
 
+    // Find shortest paths with the Dijkstra class, initialized with the graph
     val dijkstraRunner = Dijkstra(g)
     val startNode = 0
     dijkstraRunner.dijkstra(startNode)
