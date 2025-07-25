@@ -147,7 +147,7 @@ class Grid(val width: Int, val height: Int) : GraphContract<Tile> {
         connectGrid(true) { getStraightNeighbours(it) }
     }
 
-    fun markCharAsWall(c: Char) {
+    fun markCharAsWall(c: Char) { // TODO: make general, not just for chars
         nodes.indices.forEach { i ->
             if (nodes[i]?.data == c)
                 nodes[i] = null
