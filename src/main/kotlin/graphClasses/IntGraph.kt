@@ -1,9 +1,6 @@
 package graphClasses
 
-class IntGraph(initialSize: Int = 0) : GraphContract<Int> {
-    private val adjacencyList = adjacencyListInit(initialSize)
-    private val weightlessAdjacencyList = weightlessAdjacencyListInit(initialSize)
-
+class IntGraph(initialSize: Int = 0) : GraphContract<Int>(initialSize) {
     override fun addNode(node: Int) {
         if (node >= adjacencyList.size) {
             for (i in adjacencyList.size..node) {

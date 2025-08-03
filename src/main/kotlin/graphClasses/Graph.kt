@@ -2,10 +2,8 @@ package graphClasses
 
 import pathfindingAlgorithms.DFS
 
-class Graph: GraphContract<Any> {
+class Graph: GraphContract<Any>(0) {
     private var nrOfNodes = 0
-    private val adjacencyList: AdjacencyList = mutableListOf()
-    private val weightlessAdjacencyList: WeightlessAdjacencyList = mutableListOf()
     private val node2id = mutableMapOf<Any, Int>()
     private val id2Node = mutableMapOf<Int, Any>()
 

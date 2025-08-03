@@ -1,7 +1,6 @@
 package examples
 // https://adventofcode.com/2024/day/20
 
-import pathfindingAlgorithms.BFS
 import graphClasses.Grid
 import pathfindingAlgorithms.getPath
 
@@ -17,19 +16,18 @@ fun day20a(input: List<String>, cheatGoal: Int, fairTime: Int): Int {
             else null
         }
     }
-    val startId = grid.getNodes().indexOfFirst { it.data == 'S' }
-    val endId = grid.getNodes().indexOfLast { it.data == 'E' }
+    val startNode = grid.getNodes().first { it.data == 'S' }
+    val endNode = grid.getNodes().first { it.data == 'E' }
 
     var timeSaved = fairTime
     var c = -1
     while (timeSaved >= cheatGoal) {
-        val bfs = BFS(grid)
+        grid.bfs(startNode)
         c++
-        bfs.bfs(listOf(startId))
-        val cheatDist = bfs.distances[endId]
-        timeSaved = (fairTime - cheatDist).toInt()
+        val cheatDist = grid.distanceTo(endNode)
+        timeSaved = (fairTime - cheatDist)
         println("timeSaved: $timeSaved")
-        grid.removeCheatPath(getPath(endId, bfs.parents))
+        grid.removeCheatPath(grid.getPath(endNode))
     }
     return c
 }
