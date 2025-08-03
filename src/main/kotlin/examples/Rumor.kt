@@ -1,7 +1,7 @@
 package examples
 //https://codeforces.com/problemset/problem/893/C
 
-import graphClasses.DFS
+import pathfindingAlgorithms.DFS
 import graphClasses.Graph
 import graphClasses.readInts
 

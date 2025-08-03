@@ -1,16 +1,21 @@
-package graphClasses
+package pathfindingAlgorithms
+
+import graphClasses.Graph
+import graphClasses.Grid
+import graphClasses.IntGraph
+import graphClasses.WeightlessAdjacencyList
 
 class BFS(val graph: WeightlessAdjacencyList) {
     constructor(graph: Graph) : this(graph.getWeightlessAdjacencyList())
     constructor(intGraph: IntGraph) : this(intGraph.getWeightlessAdjacencyList())
     constructor(grid: Grid) : this(grid.getWeightlessAdjacencyList())
 
-    val d = 1
-    val size = graph.size
+    private val d = 1
+    private val size = graph.size
     var visited = BooleanArray(size)
     val distances = IntArray(size)
     private var currentVisited = mutableListOf<Int>()
-    var currentVisitedDistances = mutableListOf<Int>()
+    private var currentVisitedDistances = mutableListOf<Int>()
     val parents = IntArray(graph.size) { -1 }
 
     fun bfs(startIds: List<Int>, targetId: Int = -1) {

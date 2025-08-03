@@ -1,6 +1,6 @@
 package examples
 // https://open.kattis.com/problems/crosscountry?tab=metadata
-import graphClasses.Dijkstra
+import pathfindingAlgorithms.Dijkstra
 import graphClasses.IntGraph
 import graphClasses._writer
 import graphClasses.readDoubles

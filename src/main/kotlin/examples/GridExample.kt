@@ -1,6 +1,6 @@
 package examples
 
-import graphClasses.BFS
+import pathfindingAlgorithms.BFS
 import graphClasses.Grid
 
 fun main() {

@@ -1,7 +1,7 @@
 package examples
 // https://codeforces.com/problemset/problem/522/A
 
-import graphClasses.BFS
+import pathfindingAlgorithms.BFS
 import graphClasses.Graph
 import graphClasses._writer
 import graphClasses.readInt

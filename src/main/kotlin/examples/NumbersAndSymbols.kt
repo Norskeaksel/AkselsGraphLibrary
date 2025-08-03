@@ -1,7 +1,7 @@
 package examples
 // https://adventofcode.com/2023/day/3
 
-import graphClasses.DFS
+import pathfindingAlgorithms.DFS
 import graphClasses.Grid
 import graphClasses.Tile
 

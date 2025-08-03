@@ -1,5 +1,9 @@
-package graphClasses
+package pathfindingAlgorithms
 
+import graphClasses.AdjacencyList
+import graphClasses.Graph
+import graphClasses.Grid
+import graphClasses.IntGraph
 import kotlin.math.min
 
 class FloydWarshall(val graph: AdjacencyList) {

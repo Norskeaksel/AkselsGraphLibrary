@@ -1,6 +1,7 @@
 package examples
 
 import graphClasses.*
+import pathfindingAlgorithms.Dijkstra
 import kotlin.math.ceil
 import kotlin.math.roundToInt
 

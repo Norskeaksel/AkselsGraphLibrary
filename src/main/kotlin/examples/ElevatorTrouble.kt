@@ -1,6 +1,7 @@
 package examples
 
 import graphClasses.*
+import pathfindingAlgorithms.BFS
 
 // https://open.kattis.com/problems/elevatortrouble
 fun main() {

@@ -1,9 +1,9 @@
 package examples
 // https://adventofcode.com/2024/day/20
 
-import graphClasses.BFS
+import pathfindingAlgorithms.BFS
 import graphClasses.Grid
-import graphClasses.getPath
+import pathfindingAlgorithms.getPath
 
 fun day20a(input: List<String>, cheatGoal: Int, fairTime: Int): Int {
     val shadowGrid = input.map { it + it }

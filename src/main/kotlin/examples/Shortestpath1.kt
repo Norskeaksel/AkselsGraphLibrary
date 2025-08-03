@@ -1,6 +1,6 @@
 //https://open.kattis.com/problems/shortestpath1
 
-import graphClasses.Dijkstra
+import pathfindingAlgorithms.Dijkstra
 import graphClasses.Graph
 import graphClasses.readInt
 import graphClasses.readInts

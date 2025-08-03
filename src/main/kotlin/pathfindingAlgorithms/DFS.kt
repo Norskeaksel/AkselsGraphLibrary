@@ -1,4 +1,9 @@
-package graphClasses
+package pathfindingAlgorithms
+
+import graphClasses.Graph
+import graphClasses.Grid
+import graphClasses.IntGraph
+import graphClasses.WeightlessAdjacencyList
 
 
 class DFS(private val weightlessAdjacencyList: WeightlessAdjacencyList) {

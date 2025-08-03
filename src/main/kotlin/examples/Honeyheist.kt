@@ -1,6 +1,8 @@
 package examples
 
 import graphClasses.*
+import pathfindingAlgorithms.BFS
+import pathfindingAlgorithms.getPath
 import java.lang.Math.pow
 
 // https://open.kattis.com/problems/honeyheist

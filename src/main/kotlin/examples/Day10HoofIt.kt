@@ -1,6 +1,6 @@
 package examples
 // https://adventofcode.com/2024/day/10
-import graphClasses.DFS
+import pathfindingAlgorithms.DFS
 import graphClasses.Grid
 
 fun day10a(input: List<String>): Long {

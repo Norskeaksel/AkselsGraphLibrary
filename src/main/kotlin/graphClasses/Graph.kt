@@ -1,5 +1,7 @@
 package graphClasses
 
+import pathfindingAlgorithms.DFS
+
 class Graph: GraphContract<Any> {
     private var nrOfNodes = 0
     private val adjacencyList: AdjacencyList = mutableListOf()
@@ -29,14 +31,8 @@ class Graph: GraphContract<Any> {
         weightlessAdjacencyList[id1].add(id2)
     }
     override fun getAdjacencyList() = adjacencyList
-
-    fun getNodeEdges(node: Any): List<Pair<Double, Int>> {
-        val id = node2id[node] ?: return emptyList()
-        return adjacencyList[id]
-    }
-
-    fun node2id(node: Any): Int? = node2id[node]
-    fun id2Node(id: Int): Any? = id2Node[id]
+    override fun node2Id(node: Any): Int? = node2id[node]
+    override fun id2Node(id: Int): Any? = id2Node[id]
 
 
     fun nodes() = id2Node.values

@@ -1,4 +1,4 @@
-package graphClasses
+package pathfindingAlgorithms
 
 fun getPath(destination: Int?, parents: IntArray): List<Int> {
     val path = mutableListOf<Int>()

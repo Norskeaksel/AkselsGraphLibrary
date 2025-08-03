@@ -1,6 +1,8 @@
 package examples
 //https://codeforces.com/problemset/problem/20/C
 import graphClasses.*
+import pathfindingAlgorithms.Dijkstra
+import pathfindingAlgorithms.getPath
 
 
 fun main() {

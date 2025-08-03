@@ -1,6 +1,8 @@
 package examples
 
 import graphClasses.*
+import pathfindingAlgorithms.BFS
+import pathfindingAlgorithms.getPath
 
 // https://open.kattis.com/problems/torn2pieces
 fun main() {
@@ -19,13 +21,13 @@ fun torn2pieces(): String {
         }
     }
     val (start, end) = readString().split(" ")
-    val startId = graph.node2id(start) ?: run {
+    val startId = graph.node2Id(start) ?: run {
         graph.addNode(start)
-        graph.node2id(start)!!
+        graph.node2Id(start)!!
     }
-    val endId = graph.node2id(end) ?: run {
+    val endId = graph.node2Id(end) ?: run {
         graph.addNode(end)
-        graph.node2id(end)!!
+        graph.node2Id(end)!!
     }
     val bfs = BFS(graph)
     bfs.bfs(startId, endId)

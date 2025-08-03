@@ -1,6 +1,6 @@
 package examples
 // https://adventofcode.com/2024/day/18
-import graphClasses.BFS
+import pathfindingAlgorithms.BFS
 import graphClasses.Grid
 
 fun day18a(input: List<String>, gridSize: Int, lineCount: Int): Int {

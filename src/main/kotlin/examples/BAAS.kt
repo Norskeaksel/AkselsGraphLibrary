@@ -1,6 +1,7 @@
 package examples
 
 import graphClasses.*
+import pathfindingAlgorithms.DFS
 import kotlin.math.min
 import kotlin.system.measureTimeMillis
 

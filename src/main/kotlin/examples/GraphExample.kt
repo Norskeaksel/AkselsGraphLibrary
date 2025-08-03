@@ -1,9 +1,9 @@
 package examples
 
-import graphClasses.Dijkstra
+import pathfindingAlgorithms.Dijkstra
 import graphClasses.Graph
 import graphClasses.IntGraph
-import graphClasses.getPath
+import pathfindingAlgorithms.getPath
 
 
 fun main() {
