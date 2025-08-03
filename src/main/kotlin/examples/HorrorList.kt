@@ -15,10 +15,9 @@ fun horrorList(): Int {
     val startIds = readInts(h).sorted()
     repeat(l) {
         val (u, v) = readInts(2)
-        intGraph.connect(u, v)
+        intGraph.connectWeightless(u, v)
     }
-    val bfs = BFS(intGraph)
-    bfs.bfs(startIds)
-    val maxDist = bfs.distances.let { d -> d.indices.maxBy { d[it] } }
+    intGraph.bfs(startIds)
+    val maxDist = intGraph.distances.let { d -> d.indices.maxBy { d[it] } }
     return maxDist
 }

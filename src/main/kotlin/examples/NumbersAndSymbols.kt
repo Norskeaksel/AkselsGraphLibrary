@@ -1,7 +1,6 @@
 package examples
 // https://adventofcode.com/2023/day/3
 
-import pathfindingAlgorithms.DFS
 import graphClasses.Grid
 import graphClasses.Tile
 
@@ -11,9 +10,8 @@ fun numbersConnectedToSymbol(input: List<String>): Int {
     val numbers = grid.getNodes().filter { it.data.toString().toIntOrNull() !in listOf(null, 0) }
     val partNumbers = mutableListOf<Int>()
     numbers.forEach { t ->
-        val searcher = DFS(grid)
-        searcher.dfs(grid.node2Id(t))
-        if (searcher.depth > t.data.toString().length)
+        grid.dfs(t)
+        if (grid.depth > t.data.toString().length)
             partNumbers.add(t.data.toString().toInt())
     }
     println(partNumbers)
@@ -40,7 +38,7 @@ private fun initializeGrid(input: List<String>, grid: Grid, padWithDuplicates:Bo
                         val neighbours =
                             grid.getAllNeighbours(t)
                                 .filter { it.data != '.' && it.data.toString().toIntOrNull() in listOf(null, 0) }
-                        neighbours.forEach { grid.addEdge(t, it) }
+                        neighbours.forEach { grid.addWeightlessEdge(t, it) }
                     }
                 }
             }
@@ -61,8 +59,7 @@ fun starWith2Numbers(input: List<String>): Long {
     val gears = grid.getNodes().filter { it.data == '*' }
     val partNumbers = mutableListOf<Pair<Long, Long>>()
     gears.forEach { t ->
-        val searcher = DFS(grid)
-        searcher.dfs(grid.node2Id(t))
+        grid.dfs(t)
         val numbers = grid.getAllNeighbours(t).filter { it.data.toString().toIntOrNull() !in (listOf(null, 0)) }.map { it.data }.toSet()
         if (numbers.size == 2)
             partNumbers.add(Pair(numbers.first().toString().toLong(), (numbers.last().toString().toLong())))

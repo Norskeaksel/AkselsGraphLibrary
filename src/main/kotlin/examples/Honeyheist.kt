@@ -40,13 +40,12 @@ fun honeyheist(): String {
         grid.getAllNeighbours(t).filter { it != downLeft && it != upRight && it.data!=null }
     }
     // println("14 edges: ${grid.getEdges(grid.getNodes().first { it.data == 14 }).map { grid.id2Node(it.second)!!.data }}")
-    val bfs = BFS(grid)
-    val startId = grid.node2Id(grid.getNodes().first{ it.data == a })
-    val endId = grid.node2Id(grid.getNodes().first{ it.data == b })
-    bfs.bfs(startId)
-    val distance = bfs.distances[endId]
-    val path = getPath(endId, bfs.parents)
-    println(path.map { grid.id2Node(it)!!.data })
+    val start = grid.getNodes().first{ it.data == a }
+    val end = grid.getNodes().first{ it.data == b }
+    grid.bfs(start)
+    val distance = grid.distanceTo(end)
+    val path = grid.getPath(end)
+    println(path.map { it.data })
     return if (distance <= n) {
         distance.toString()
     } else {

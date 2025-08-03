@@ -23,7 +23,7 @@ fun baas(): Int {
             intGraph.addEdge(step_i, a_j)
         }
     }
-    val weightlessAdjacencyList = intGraph.getWeightlessAdjacencyList()
+    val weightlessAdjacencyList = intGraph.weightlessAdjacencyList
     var optimizedTime = Int.MAX_VALUE
     val time = measureTimeMillis {
         val topologicalOrder = DFS(intGraph).topologicalSort()

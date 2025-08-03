@@ -41,8 +41,6 @@ class BFS(val graph: WeightlessAdjacencyList) {
             }
         }
     }
-    fun bfs(startId: Int, targetId: Int = -1) = bfs(listOf(startId), targetId)
-
     fun getCurrentVisitedIds() = // Deep Copy
         currentVisited.map { it }
 }

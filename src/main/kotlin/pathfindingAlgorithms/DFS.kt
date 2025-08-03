@@ -1,16 +1,9 @@
 package pathfindingAlgorithms
 
-import graphClasses.Graph
-import graphClasses.Grid
-import graphClasses.IntGraph
 import graphClasses.WeightlessAdjacencyList
 
 
 class DFS(private val weightlessAdjacencyList: WeightlessAdjacencyList) {
-    constructor(graph: Graph) : this(graph.getWeightlessAdjacencyList())
-    constructor(grid: Grid) : this(grid.getWeightlessAdjacencyList())
-    constructor(intGraph: IntGraph) : this(intGraph.getWeightlessAdjacencyList())
-
     var size = 0
 
     init {

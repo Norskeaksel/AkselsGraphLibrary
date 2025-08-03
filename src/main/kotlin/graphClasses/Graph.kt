@@ -15,6 +15,7 @@ class Graph: GraphContract<Any>(0) {
         node2id[node] = nrOfNodes
         id2Node[nrOfNodes++] = node
         adjacencyList.add(mutableListOf())
+        weightlessAdjacencyList.add(mutableListOf())
     }
 
     override fun addEdge(node1: Any, node2: Any, weight: Double) {
@@ -28,7 +29,6 @@ class Graph: GraphContract<Any>(0) {
         val id2 = node2id[node2] ?: addNode(node2).run { node2id[node2]!! }
         weightlessAdjacencyList[id1].add(id2)
     }
-    override fun getAdjacencyList() = adjacencyList
     override fun node2Id(node: Any): Int? = node2id[node]
     override fun id2Node(id: Int): Any? = id2Node[id]
 
@@ -44,5 +44,5 @@ class Graph: GraphContract<Any>(0) {
         }
     }
 
-    fun topologicalSort() = DFS(getWeightlessAdjacencyList()).topologicalSort()
+    fun topologicalSort() = DFS(weightlessAdjacencyList).topologicalSort()
 }

@@ -1,7 +1,7 @@
 package examples
 
-import pathfindingAlgorithms.BFS
 import graphClasses.Grid
+import graphClasses.Tile
 
 fun main() {
     // --- Example Grid Definition ---
@@ -13,12 +13,14 @@ fun main() {
     val grid = Grid(stringList)
     grid.connectGridDefault()
 
-    val bfs = BFS(grid)
-    bfs.bfs(0)
-    val distance = bfs.distances
-    repeat(grid.trueSize()) { id ->
-        val distValue = distance[id]
-        val node = grid.id2Node(id)
+    // Nodes in a grid consists of Tile objects with x, y coordinates and data
+    val startNode = Tile(0,0, 'S')
+    grid.bfs(startNode)
+    val distance = grid.distances
+    val size = grid.trueSize() // Total number of nodes in the grid
+    repeat(size) {
+        val distValue = distance[it]
+        val node = grid.getNodes()[it]
         println("To node $node: $distValue")
     }
     /* Output:

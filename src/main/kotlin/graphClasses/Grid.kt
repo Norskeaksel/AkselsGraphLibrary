@@ -1,5 +1,4 @@
 package graphClasses
-import pathfindingAlgorithms.getPath
 
 data class Tile(val x: Int, val y: Int, var data: Any? = null)
 
@@ -24,11 +23,6 @@ class Grid(val width: Int, val height: Int) : GraphContract<Tile>(width * height
             }
         }
     }
-
-    override fun getAdjacencyList() = adjacencyList
-    override fun getWeightlessAdjacencyList() =
-        if (gridIsWeightLess) weightlessAdjacencyList else super.getWeightlessAdjacencyList()
-
 
     override fun addNode(node: Tile) {
         val id = node2Id(node)
@@ -125,7 +119,7 @@ class Grid(val width: Int, val height: Int) : GraphContract<Tile>(width * height
                         gridIsWeightLess = true
                         addWeightlessEdge(currentTile, it)
                     } else {
-                        addEdge(currentTile, it)
+                        addEdge(currentTile, it, 1.0)
                     }
                 }
             }

@@ -1,7 +1,6 @@
 package examples
 
 import graphClasses.*
-import pathfindingAlgorithms.DFS
 
 // https://open.kattis.com/problems/island
 fun main() {
@@ -11,10 +10,9 @@ fun main() {
 
 fun getNrOfGroups(grid: Grid):Int{
     val groups = mutableListOf<List<Int>>()
-    val dfs = DFS(grid)
     grid.getNodes().forEach { node ->
-        dfs.dfs(grid.node2Id(node))
-        dfs.getAndClearCurrentVisitedIds().let {
+        grid.dfs(node)
+        grid.dfs.getAndClearCurrentVisitedIds().let {
             if(it.isNotEmpty())
                 groups.add(it)
         }

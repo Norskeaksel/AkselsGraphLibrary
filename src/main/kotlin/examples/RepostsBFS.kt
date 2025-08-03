@@ -16,13 +16,12 @@ fun RepostsBFS(): Int {
     val g = Graph()
     repeat(n){
         val (v,_,u) = readStrings(3).map { it.lowercase(Locale.getDefault()) }
-        g.addEdge(u,v)
+        g.addWeightlessEdge(u,v)
     }
-    val bfs = BFS(g)
     var longestChain = 0
     repeat(n){
-        bfs.bfs(listOf(it))
-        longestChain = max(longestChain, bfs.distances.maxOrNull()!!.toInt()+1)
+        g.bfs(it)
+        longestChain = max(longestChain, g.distances.maxOrNull()!!.toInt()+1)
     }
     return longestChain
 }

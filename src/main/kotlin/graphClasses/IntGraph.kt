@@ -16,7 +16,6 @@ class IntGraph(initialSize: Int = 0) : GraphContract<Int>(initialSize) {
     override fun addWeightlessEdge(node1: Int, node2: Int){
         weightlessAdjacencyList[node1].add(node2)
     }
-    override fun getAdjacencyList() = adjacencyList
     override fun id2Node(id: Int) = id
     override fun node2Id(node: Int) = node
 }

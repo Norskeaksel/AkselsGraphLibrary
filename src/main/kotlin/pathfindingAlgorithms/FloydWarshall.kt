@@ -1,16 +1,9 @@
 package pathfindingAlgorithms
 
 import graphClasses.AdjacencyList
-import graphClasses.Graph
-import graphClasses.Grid
-import graphClasses.IntGraph
 import kotlin.math.min
 
 class FloydWarshall(val graph: AdjacencyList) {
-    constructor(graph: Graph) : this(graph.getAdjacencyList())
-    constructor(intGraph: IntGraph) : this(intGraph.getAdjacencyList())
-    constructor(grid: Grid) : this(grid.getAdjacencyList())
-
     val n = graph.size
     val distances = Array(n) { DoubleArray(n) { Int.MAX_VALUE.toDouble() } }
 

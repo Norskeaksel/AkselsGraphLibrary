@@ -18,7 +18,7 @@ fun main(){
             val (u,v,w) = readInts(3)
             g.addEdge(u,v,w.toDouble())
         }
-        val distance = Dijkstra(g.getAdjacencyList()).run {
+        val distance = Dijkstra(g.adjacencyList).run {
             this.dijkstra(s)
             this.distances
         }
