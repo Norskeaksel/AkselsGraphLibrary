@@ -12,12 +12,13 @@ abstract class GraphContract<T>(size: Int) {
     protected var nodes = MutableList<T?>(size){ null}
     var distances = IntArray(size) { Int.MAX_VALUE }
         private set
+    var currentVisited
     var depth = 0
         private set
     protected open var parents = IntArray(size) { -1 }
-    protected open lateinit var bfs: BFS
-    open lateinit var dfs: DFS
-    open var dikjstraRunner: Dijkstra? = null
+    protected open lateinit var bfsResult: BFS
+    protected open lateinit var dfsResult: DFS
+    protected open lateinit var dikjstraRunner: Dijkstra
     
     // FUNCTIONS TO OVERRIDE
     protected abstract fun id2Node(id: Int): T?
@@ -50,19 +51,19 @@ abstract class GraphContract<T>(size: Int) {
     fun bfs(startNodes: List<T>, target: T? = null) {
         val nodeIds = startNodes.map { node -> node2Id(node) ?: error("Node $node not found in graph") }
         val targetId = target?.let { node2Id(it) } ?: -1
-        bfs = BFS(weightlessAdjacencyList)
-        bfs.bfs(nodeIds, targetId)
-        distances = bfs.distances
-        parents = bfs.parents
+        bfsResult = BFS(weightlessAdjacencyList)
+        bfsResult.bfs(nodeIds, targetId)
+        distances = bfsResult.distances
+        parents = bfsResult.parents
     }
 
     fun bfs(startNode: T, target: T? = null) = bfs(listOf(startNode), target)
 
     fun dfs(startNode: T) {
         val startId = node2Id(startNode) ?: error("Node $startNode not found in graph")
-        dfs = DFS(weightlessAdjacencyList)
-        dfs.dfs(startId)
-        depth = dfs.depth
+        dfsResult = DFS(weightlessAdjacencyList)
+        dfsResult.dfs(startId)
+        depth = dfsResult.depth
     }
 
     fun getPath(target: T): List<T> {

@@ -12,7 +12,7 @@ fun getNrOfGroups(grid: Grid):Int{
     val groups = mutableListOf<List<Int>>()
     grid.getNodes().forEach { node ->
         grid.dfs(node)
-        grid.dfs.getAndClearCurrentVisitedIds().let {
+        grid.dfsResult.getAndClearCurrentVisitedIds().let {
             if(it.isNotEmpty())
                 groups.add(it)
         }
