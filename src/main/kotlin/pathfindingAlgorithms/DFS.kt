@@ -15,13 +15,13 @@ class DFS(private val weightlessAdjacencyList: WeightlessAdjacencyList) {
     var depth = 0
 
     private var currentVisitedDepts = mutableListOf<Int>()
-    private var currentVisitedIds = mutableListOf<Int>()
+    private var currentVisited = mutableListOf<Int>()
     val parent = IntArray(size) { -1 }
 
     fun dfsSimple(currentId: Int) {
-        if (currentId in currentVisitedIds) // Slow but simple. Preserves order in visited Ids
+        if (currentId in currentVisited) // Slow but simple. Preserves order in visited Ids
             return
-        currentVisitedIds.add(currentId)
+        currentVisited.add(currentId)
         weightlessAdjacencyList[currentId].forEach { connectedNodeId ->
             dfsSimple(connectedNodeId)
         }
@@ -34,7 +34,7 @@ class DFS(private val weightlessAdjacencyList: WeightlessAdjacencyList) {
             if (visited[id])
                 return@DeepRecursiveFunction
             visited[id] = true
-            currentVisitedIds.add(id)
+            currentVisited.add(id)
             currentVisitedDepts.add(currentDepth)
             currentDepth++
             depth = currentDepth.coerceAtLeast(depth)
@@ -63,7 +63,7 @@ class DFS(private val weightlessAdjacencyList: WeightlessAdjacencyList) {
             if (visited[id])
                 return@forEach
             dfs(id)
-            stronglyConnectedComponents.add(getAndClearCurrentVisitedIds())
+            stronglyConnectedComponents.add(getAndClearCurrentVisited())
         }
         return stronglyConnectedComponents
     }
@@ -75,10 +75,10 @@ class DFS(private val weightlessAdjacencyList: WeightlessAdjacencyList) {
         return processedOrder//.reversed() //Reversed depending on the order
     }
 
-    fun getAndClearCurrentVisitedIds() =
-        currentVisitedIds.map { it }.also { currentVisitedIds.clear() } // Deep copy not clear return
+    fun getAndClearCurrentVisited() =
+        currentVisited.map { it }.also { currentVisited.clear() } // Deep copy not clear return
 
     fun clearCurrentVisitedIds() {
-        currentVisitedIds.clear()
+        currentVisited.clear()
     }
 }
