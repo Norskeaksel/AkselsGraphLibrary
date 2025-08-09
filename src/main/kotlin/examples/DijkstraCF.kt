@@ -1,9 +1,6 @@
 package examples
 //https://codeforces.com/problemset/problem/20/C
 import graphClasses.*
-import pathfindingAlgorithms.Dijkstra
-import pathfindingAlgorithms.getPath
-
 
 fun main() {
     val path = dijkstraCF(); _writer.flush()
@@ -22,9 +19,8 @@ fun dijkstraCF(): List<Int> {
         val (u, v, w) = readInts(3)
         g.connect(u, v, w.toDouble())
     }
-    val dijkstra = Dijkstra(g.getAdjacencyList())
-    dijkstra.dijkstra(1)
-    val path = getPath(n, dijkstra.parents)
+    g.dijkstra(1)
+    val path = g.getPath(n)
     if (path.size == 1 && path[0] != 1) {
         return listOf(-1)
     }

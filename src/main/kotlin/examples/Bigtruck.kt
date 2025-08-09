@@ -22,9 +22,8 @@ fun bigtruck(): String {
         graph.addEdge(a, b, d - ITEM_BOOST * items[b])
         graph.addEdge(b, a, d - ITEM_BOOST * items[a])
     }
-    val dijkstra = Dijkstra(graph)
-    dijkstra.dijkstra(1)
-    val distances = dijkstra.distances
+    graph.dijkstra(1)
+    val distances = graph.distances
     if (distances[n] == Double.POSITIVE_INFINITY) {
         return "impossible"
     }

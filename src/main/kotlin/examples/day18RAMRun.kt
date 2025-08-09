@@ -1,7 +1,7 @@
 package examples
 // https://adventofcode.com/2024/day/18
-import pathfindingAlgorithms.BFS
 import graphClasses.Grid
+import graphClasses.Tile
 
 fun day18a(input: List<String>, gridSize: Int, lineCount: Int): Int {
     val grid = Grid(gridSize, gridSize)
@@ -10,11 +10,10 @@ fun day18a(input: List<String>, gridSize: Int, lineCount: Int): Int {
             break
         val (x, y) = line.split(",").map { it.toInt() }
         val corruptId = grid.xy2Id(x, y)!!
-        grid.deleteNodeId(corruptId)
+        grid.deleteNodeAtIndex(corruptId)
     }
     grid.connectGridDefault()
-    val bfs = BFS(grid)
-    bfs.bfs(listOf(0))
-    val ans = bfs.distances[grid.xy2Id(gridSize - 1, gridSize - 1)!!].toInt()
+    grid.bfs(listOf(Tile(0,0)))
+    val ans = grid.distances[grid.xy2Id(gridSize - 1, gridSize - 1)!!].toInt()
     return ans
 }

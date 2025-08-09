@@ -20,13 +20,13 @@ fun baas(): Int {
         val c_i = readInt()
         repeat(c_i) {
             val a_j = readInt() - 1
-            intGraph.addEdge(step_i, a_j)
+            intGraph.addWeightlessEdge(step_i, a_j)
         }
     }
     val weightlessAdjacencyList = intGraph.weightlessAdjacencyList
     var optimizedTime = Int.MAX_VALUE
     val time = measureTimeMillis {
-        val topologicalOrder = DFS(intGraph).topologicalSort()
+        val topologicalOrder = intGraph.topologicalSort()
         val totalStepTime = IntArray(n)
         topologicalOrder.indices.forEach {
             topologicalOrder.forEachIndexed { i, node ->

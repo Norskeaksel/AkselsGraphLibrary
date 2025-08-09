@@ -2,7 +2,7 @@ package examples
 // https://adventofcode.com/2024/day/20
 
 import graphClasses.Grid
-import pathfindingAlgorithms.getPath
+
 
 fun day20a(input: List<String>, cheatGoal: Int, fairTime: Int): Int {
     val shadowGrid = input.map { it + it }
@@ -16,8 +16,8 @@ fun day20a(input: List<String>, cheatGoal: Int, fairTime: Int): Int {
             else null
         }
     }
-    val startNode = grid.getNodes().first { it.data == 'S' }
-    val endNode = grid.getNodes().first { it.data == 'E' }
+    val startNode = grid.nodes().first { it.data == 'S' }
+    val endNode = grid.nodes().first { it.data == 'E' }
 
     var timeSaved = fairTime
     var c = -1
@@ -25,7 +25,7 @@ fun day20a(input: List<String>, cheatGoal: Int, fairTime: Int): Int {
         grid.bfs(startNode)
         c++
         val cheatDist = grid.distanceTo(endNode)
-        timeSaved = (fairTime - cheatDist)
+        timeSaved = (fairTime - cheatDist).toInt()
         println("timeSaved: $timeSaved")
         grid.removeCheatPath(grid.getPath(endNode))
     }

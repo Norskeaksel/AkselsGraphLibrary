@@ -20,7 +20,7 @@ fun main() {
     val size = grid.trueSize() // Total number of nodes in the grid
     repeat(size) {
         val distValue = distance[it]
-        val node = grid.getNodes()[it]
+        val node = grid.nodes()[it]
         println("To node $node: $distValue")
     }
     /* Output:

@@ -49,7 +49,7 @@ class DFS(private val weightlessAdjacencyList: WeightlessAdjacencyList) {
         }.invoke(start)
     }
 
-    fun kosaraju(): List<List<Int>> {
+    fun stronglyConnectedComponents(): List<List<Int>> {
         val reversedGraph: WeightlessAdjacencyList = MutableList<MutableList<Int>>(size) { mutableListOf() }.apply {
             weightlessAdjacencyList.forEachIndexed { u, neighbors ->
                 neighbors.forEach { v ->
@@ -81,6 +81,4 @@ class DFS(private val weightlessAdjacencyList: WeightlessAdjacencyList) {
     fun clearCurrentVisitedIds() {
         currentVisitedIds.clear()
     }
-
-    fun getVisitedDepths() = currentVisitedDepts.map { it }
 }

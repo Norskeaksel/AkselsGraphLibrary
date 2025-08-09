@@ -20,7 +20,6 @@ fun PrintWriter.execute() {
             graph.addEdge(i,j,d)
         }
     }
-    val dijkstra = Dijkstra(graph.getAdjacencyList())
-    dijkstra.dijkstra(s)
-    println(dijkstra.distances[t].toInt())
+    graph.dijkstra(s)
+    println(graph.distances[t].toInt())
 }

@@ -9,10 +9,10 @@ fun main() {
 }
 
 fun getNrOfGroups(grid: Grid):Int{
-    val groups = mutableListOf<List<Int>>()
-    grid.getNodes().forEach { node ->
+    val groups = mutableListOf<List<Tile>>()
+    grid.nodes().forEach { node ->
         grid.dfs(node)
-        grid.dfsResult.getAndClearCurrentVisitedIds().let {
+        grid.getAndClearCurrentVisitedIds().let {
             if(it.isNotEmpty())
                 groups.add(it)
         }

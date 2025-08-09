@@ -44,5 +44,4 @@ class Graph: GraphContract<Any>(0) {
         }
     }
 
-    fun topologicalSort() = DFS(weightlessAdjacencyList).topologicalSort()
 }

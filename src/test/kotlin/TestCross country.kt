@@ -33,7 +33,7 @@ class CrossCountryTest {
                 graph.addEdge(i, j, d)
             }
         }
-        val dijkstra = Dijkstra(graph.getAdjacencyList())
+        val dijkstra = Dijkstra(graph.adjacencyList)
         dijkstra.dijkstra(s)
         assertThat(dijkstra.distances[t].toInt()).isEqualTo(11)
     }

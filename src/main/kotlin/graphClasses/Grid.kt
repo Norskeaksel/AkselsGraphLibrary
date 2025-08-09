@@ -53,16 +53,16 @@ class Grid(val width: Int, val height: Int) : GraphContract<Tile>(width * height
 
     fun ids2Nodes(ids: List<Int>) = ids.mapNotNull { id2Node(it) }
     fun xy2Node(x: Int, y: Int) = if (xyInRange(x, y)) id2Node(xy2Id(x, y)!!) else null
-    fun getNodes(): List<Tile> = nodes.filterNotNull().filter { it.x != -1 }
+    fun nodes(): List<Tile> = nodes.filterNotNull().filter { it.x != -1 }
     fun getEdges(t: Tile): List<Edge> = adjacencyList[node2Id(t)]
-    fun deleteNodeId(id: Int) {
-        nodes[id] = null
+    fun deleteNodeAtIndex(index: Int) {
+        nodes[index] = null
     }
 
     fun deleteNodeWithData(data: Any?) {
         nodes.indices.forEach { i ->
             if (nodes[i]?.data == data) {
-                deleteNodeId(i)
+                deleteNodeAtIndex(i)
             }
         }
     }
@@ -146,7 +146,7 @@ class Grid(val width: Int, val height: Int) : GraphContract<Tile>(width * height
     fun trueSize() = nodes.filterNotNull().size
 
     fun print() {
-        val padding = getNodes().maxOf { it.data.toString().length }
+        val padding = nodes().maxOf { it.data.toString().length }
         nodes.forEachIndexed { id, t ->
             if (id > 0 && id % width == 0)
                 println()
