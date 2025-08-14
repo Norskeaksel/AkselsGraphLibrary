@@ -11,7 +11,7 @@ fun main() {
 fun getNrOfGroups(grid: Grid):Int{
     val groups = mutableListOf<List<Tile>>()
     grid.nodes().forEach { node ->
-        grid.dfs(node)
+        grid.dfs(node, reset = false)
         grid.getAndClearCurrentVisitedIds().let {
             if(it.isNotEmpty())
                 groups.add(it)
@@ -47,6 +47,7 @@ fun islandBuses(): String {
                 }
             }
         }
+        // busesGrid.print()
         val islands = getNrOfGroups(islandGrid)
         val bridges = getNrOfGroups(bridgesGrid)
         val buses = getNrOfGroups(busesGrid)

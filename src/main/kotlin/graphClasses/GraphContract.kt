@@ -12,17 +12,18 @@ abstract class GraphContract<T>(size: Int) {
     protected var nodes = MutableList<T?>(size) { null }
     var distances = DoubleArray(size) { Double.MAX_VALUE }
         private set
-    lateinit var currentVisited: List<T>
-        private set
-    lateinit var visited: List<T>
-        private set
+    private var currentVisited = listOf<T>()
+    private var visited = BooleanArray(size)
+    fun getVisited(): List<T> =
+        visited.mapIndexed { id, visited -> if (visited) id2Node(id)!! else null }.filterNotNull()
+
     lateinit var parents: List<T>
         private set
 
     var depth = 0
         private set
-    protected open lateinit var bfsResult: BFS
-    protected open lateinit var dfsResult: DFS
+    protected open lateinit var bfsRunner: BFS
+    protected open lateinit var dfsRunner: DFS
     protected open lateinit var dikjstraRunner: Dijkstra
 
     // FUNCTIONS TO OVERRIDE
@@ -60,36 +61,35 @@ abstract class GraphContract<T>(size: Int) {
         }
         val nodeIds = startNodes.map { node -> node2Id(node) ?: error("Node $node not found in graph") }
         val targetId = target?.let { node2Id(it) } ?: -1
-        bfsResult = BFS(weightlessAdjacencyList)
-        bfsResult.bfs(nodeIds, targetId)
-        distances = bfsResult.distances.map { it.toDouble() }.toDoubleArray()
-        parents = bfsResult.parents.map { id2Node(it)}.filterNotNull()
-        visited =
-            bfsResult.visited.mapIndexed { index, visited -> if (visited) id2Node(index) else null }.filterNotNull()
-        currentVisited = bfsResult.getCurrentVisitedIds().mapNotNull { id2Node(it) }
+        bfsRunner = BFS(weightlessAdjacencyList)
+        bfsRunner.bfs(nodeIds, targetId)
+        distances = bfsRunner.distances.map { it.toDouble() }.toDoubleArray()
+        parents = bfsRunner.parents.map { id2Node(it) }.filterNotNull()
+        currentVisited = bfsRunner.getCurrentVisitedIds().mapNotNull { id2Node(it) }
     }
 
     fun bfs(startNode: T, target: T? = null) = bfs(listOf(startNode), target)
 
-    fun dfs(startNode: T) {
+    fun dfs(startNode: T, reset:Boolean = true) {
         require(weightlessAdjacencyList.sumOf { it.size } >= 0) {
-            "weightlessAdjacencyList is empty. Cannon perform DFS."
+            "weightlessAdjacencyList is empty. Cannot perform DFS."
         }
         val startId = node2Id(startNode) ?: error("Node $startNode not found in graph")
-        dfsResult = DFS(weightlessAdjacencyList)
-        dfsResult.dfs(startId)
-        currentVisited = dfsResult.getAndClearCurrentVisited().mapNotNull { id2Node(it) }
-        visited =
-            dfsResult.visited.mapIndexed { index, visited -> if (visited) id2Node(index) else null }.filterNotNull()
-        depth = dfsResult.depth
+        dfsRunner = if(reset) DFS(weightlessAdjacencyList) else DFS(weightlessAdjacencyList, visited)
+        dfsRunner.dfs(startId)
+        currentVisited = dfsRunner.getAndClearCurrentVisited().mapNotNull { id2Node(it) }
+        visited = dfsRunner.visited
+        depth = dfsRunner.depth
     }
 
     fun dijkstra(startNode: T, target: T? = null) {
         require(adjacencyList.sumOf { it.size } >= 0) {
-            "adjacencyList is empty. Cannon perform Dijkstara."
+            "adjacencyList is empty. Cannot perform Dijkstra."
         }
         val startId = node2Id(startNode) ?: error("Node $startNode not found in graph")
-        dikjstraRunner.dijkstra(startId)
+        val targetId = target?.let { node2Id(it) } ?: -1
+        dikjstraRunner = Dijkstra(adjacencyList)
+        dikjstraRunner.dijkstra(startId, targetId)
         distances = dikjstraRunner.distances
         parents = dikjstraRunner.parents.map { id2Node(it)!! }
     }

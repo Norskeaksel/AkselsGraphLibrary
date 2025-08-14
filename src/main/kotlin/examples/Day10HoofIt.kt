@@ -16,7 +16,7 @@ fun day10a(input: List<String>): Long {
         if (it.data != '0')
             return@forEach
         grid.dfs(it)
-        val visitedNines = grid.visited.count { it.data == '9' }
+        val visitedNines = grid.getVisited().count { it.data == '9' }
         ans += visitedNines
     }
     return ans

@@ -3,14 +3,16 @@ package pathfindingAlgorithms
 import graphClasses.WeightlessAdjacencyList
 
 
-class DFS(private val weightlessAdjacencyList: WeightlessAdjacencyList) {
+class DFS(
+    private val weightlessAdjacencyList: WeightlessAdjacencyList,
+    var visited: BooleanArray = BooleanArray(weightlessAdjacencyList.size)
+) {
     var size = 0
 
     init {
         size = weightlessAdjacencyList.size
     }
 
-    var visited = BooleanArray(size)
     var processedOrder = mutableListOf<Int>()
     var depth = 0
 
