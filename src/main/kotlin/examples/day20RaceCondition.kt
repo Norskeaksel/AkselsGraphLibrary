@@ -2,6 +2,7 @@ package examples
 // https://adventofcode.com/2024/day/20
 
 import graphClasses.Grid
+import graphClasses.debug
 
 
 fun day20a(input: List<String>, cheatGoal: Int, fairTime: Int): Int {
@@ -9,7 +10,7 @@ fun day20a(input: List<String>, cheatGoal: Int, fairTime: Int): Int {
     val grid = Grid(shadowGrid)
     grid.print()
 
-    grid.connectGrid { t ->
+    grid.connectGridWeightless { t ->
         grid.getStraightNeighbours(t).mapNotNull {
             if (it.data != '#') it
             else if (t.x < grid.width / 2) grid.xy2Node(it.x + grid.width / 2, it.y)

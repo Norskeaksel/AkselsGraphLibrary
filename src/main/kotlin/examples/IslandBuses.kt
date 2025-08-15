@@ -11,8 +11,8 @@ fun main() {
 fun getNrOfGroups(grid: Grid):Int{
     val groups = mutableListOf<List<Tile>>()
     grid.nodes().forEach { node ->
-        grid.dfs(node, reset = false)
-        grid.getAndClearCurrentVisitedIds().let {
+        grid.dfs(node, reset = false) // TODO figrure out how this affeccts the adjacency list
+        grid.currentVisited.let {
             if(it.isNotEmpty())
                 groups.add(it)
         }
@@ -29,17 +29,17 @@ fun islandBuses(): String {
         val islandGrid = Grid(mapList).apply {
             markCharAsWall('.')
             markCharAsWall('B')
-            connectGridDefaultWeightless()
+            connectGridWeightlessDefault()
         }
         val bridgesGrid = Grid(mapList).apply {
             markCharAsWall('.')
             markCharAsWall('X')
             markCharAsWall('#')
-            connectGridDefaultWeightless()
+            connectGridWeightlessDefault()
         }
         val busesGrid = Grid(mapList).apply {
             markCharAsWall('.')
-            connectGrid(true) {
+            connectGridWeightless {
                 when (it.data) {
                     '#' -> getStraightNeighbours(it).filter { it.data != 'B' }
                     'B' -> getStraightNeighbours(it).filter { it.data != '#' }
@@ -48,12 +48,12 @@ fun islandBuses(): String {
             }
         }
         // busesGrid.print()
-        val islands = getNrOfGroups(islandGrid)
+        //val islands = getNrOfGroups(islandGrid)
         val bridges = getNrOfGroups(bridgesGrid)
         val buses = getNrOfGroups(busesGrid)
         ans.add("""
             Map ${i+1}
-            islands: $islands
+            islands: islands
             bridges: $bridges
             buses needed: $buses
             

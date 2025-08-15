@@ -109,18 +109,26 @@ class Grid(val width: Int, val height: Int) : GraphContract<Tile>(width * height
         removeEdge(cheatPath.first(), cheatPath.last(), weight)
     }
 
-    fun connectGrid(weightless: Boolean = false, getNeighbours: (t: Tile) -> List<Tile>) {
+    fun connectGrid(getNeighbours: (t: Tile) -> List<Tile>) {
         for (x in 0 until width) {
             for (y in 0 until height) {
                 val currentTile = xy2Node(x, y) ?: continue
                 val neighbours = getNeighbours(currentTile)
                 neighbours.forEach {
-                    if (weightless) {
-                        gridIsWeightLess = true
-                        addWeightlessEdge(currentTile, it)
-                    } else {
-                        addEdge(currentTile, it, 1.0)
-                    }
+                    addEdge(currentTile, it, 1.0)
+                }
+            }
+        }
+    }
+
+    fun connectGridWeightless(getNeighbours: (t: Tile) -> List<Tile>) {
+        gridIsWeightLess = true
+        for (x in 0 until width) {
+            for (y in 0 until height) {
+                val currentTile = xy2Node(x, y) ?: continue
+                val neighbours = getNeighbours(currentTile)
+                neighbours.forEach {
+                    addWeightlessEdge(currentTile, it)
                 }
             }
         }
@@ -131,9 +139,8 @@ class Grid(val width: Int, val height: Int) : GraphContract<Tile>(width * height
         connectGrid { getStraightNeighbours(it) }
     }
 
-    fun connectGridDefaultWeightless() {
-        gridIsWeightLess = true
-        connectGrid(true) { getStraightNeighbours(it) }
+    fun connectGridWeightlessDefault() {
+        connectGridWeightless { getStraightNeighbours(it) }
     }
 
     fun markCharAsWall(c: Char) { // TODO: make general, not just for chars

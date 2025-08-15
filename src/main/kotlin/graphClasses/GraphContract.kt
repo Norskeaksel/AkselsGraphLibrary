@@ -11,7 +11,8 @@ abstract class GraphContract<T>(size: Int) {
     val weightlessAdjacencyList = weightlessAdjacencyListInit(size)
     protected var nodes = MutableList<T?>(size) { null }
     private var distances = DoubleArray(size) { Double.MAX_VALUE }
-    private var currentVisited = listOf<T>()
+    var currentVisited = listOf<T>()
+        private set
     private var visited = BooleanArray(size)
     fun getVisited(): List<T> =
         visited.mapIndexed { id, visited -> if (visited) id2Node(id)!! else null }.filterNotNull()
@@ -54,10 +55,12 @@ abstract class GraphContract<T>(size: Int) {
         val id = node2Id(node) ?: error("Node $node not found in graph")
         return distances[id]
     }
+
     fun maxDistance() = distances.maxOrNull() ?: Double.MAX_VALUE
+    fun furthestNode() = id2Node(distances.let { d -> d.indices.maxBy { d[it] } })!!
 
     fun bfs(startNodes: List<T>, target: T? = null) {
-        require(weightlessAdjacencyList.sumOf { it.size } >= 0) {
+        require(weightlessAdjacencyList.sumOf { it.size } > 0) {
             "weightlessAdjacencyList is empty. Cannon perform BFS."
         }
         val nodeIds = startNodes.map { node -> node2Id(node) ?: error("Node $node not found in graph") }
@@ -71,12 +74,13 @@ abstract class GraphContract<T>(size: Int) {
 
     fun bfs(startNode: T, target: T? = null) = bfs(listOf(startNode), target)
 
-    fun dfs(startNode: T, reset:Boolean = true) {
-        require(weightlessAdjacencyList.sumOf { it.size } >= 0) {
+    fun dfs(startNode: T, reset: Boolean = true) {
+        println(weightlessAdjacencyList.sumOf { it.size })
+        require(weightlessAdjacencyList.sumOf { it.size } > 0) {
             "weightlessAdjacencyList is empty. Cannot perform DFS."
         }
         val startId = node2Id(startNode) ?: error("Node $startNode not found in graph")
-        dfsRunner = if(reset) DFS(weightlessAdjacencyList) else DFS(weightlessAdjacencyList, visited)
+        dfsRunner = if (reset) DFS(weightlessAdjacencyList) else DFS(weightlessAdjacencyList, visited)
         dfsRunner.dfs(startId)
         currentVisited = dfsRunner.getAndClearCurrentVisited().mapNotNull { id2Node(it) }
         visited = dfsRunner.visited
@@ -97,9 +101,6 @@ abstract class GraphContract<T>(size: Int) {
 
     fun topologicalSort() = DFS(weightlessAdjacencyList).topologicalSort()
     fun stronglyConnectedComponents() = DFS(weightlessAdjacencyList).stronglyConnectedComponents()
-    fun getAndClearCurrentVisitedIds() =
-        currentVisited.map { it }.also { currentVisited = listOf() } // Deep copy not clear return
-
     fun getPath(target: T): List<T> {
         val targetId = node2Id(target)
         val pathIds = getPath(targetId, parents)

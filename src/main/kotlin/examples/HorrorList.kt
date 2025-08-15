@@ -17,5 +17,5 @@ fun horrorList(): Int {
         intGraph.connectWeightless(u, v)
     }
     intGraph.bfs(startIds)
-    return intGraph.maxDistance().toInt()
+    return intGraph.furthestNode()
 }
