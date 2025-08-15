@@ -18,4 +18,5 @@ class IntGraph(initialSize: Int = 0) : GraphContract<Int>(initialSize) {
     }
     override fun id2Node(id: Int) = id
     override fun node2Id(node: Int) = node
+    override fun nodes(): List<Int> = adjacencyList.indices.toList()
 }

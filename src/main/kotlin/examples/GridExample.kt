@@ -16,11 +16,10 @@ fun main() {
     // Nodes in a grid consists of Tile objects with x, y coordinates and data
     val startNode = Tile(0,0, 'S')
     grid.bfs(startNode)
-    val distance = grid.distances
+    val nodes = grid.nodes()
     val size = grid.trueSize() // Total number of nodes in the grid
-    repeat(size) {
-        val distValue = distance[it]
-        val node = grid.nodes()[it]
+    nodes.forEach {node ->
+        val distValue = grid.distanceTo(node)
         println("To node $node: $distValue")
     }
     /* Output:

@@ -1,7 +1,6 @@
 package examples
 
 import graphClasses.*
-import pathfindingAlgorithms.BFS
 
 // https://open.kattis.com/problems/horror?editresubmit=17527573
 fun main() {
@@ -18,6 +17,5 @@ fun horrorList(): Int {
         intGraph.connectWeightless(u, v)
     }
     intGraph.bfs(startIds)
-    val maxDist = intGraph.distances.let { d -> d.indices.maxBy { d[it] } }
-    return maxDist
+    return intGraph.maxDistance().toInt()
 }

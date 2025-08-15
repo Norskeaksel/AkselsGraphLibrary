@@ -10,23 +10,23 @@ abstract class GraphContract<T>(size: Int) {
     val adjacencyList = adjacencyListInit(size)
     val weightlessAdjacencyList = weightlessAdjacencyListInit(size)
     protected var nodes = MutableList<T?>(size) { null }
-    var distances = DoubleArray(size) { Double.MAX_VALUE }
-        private set
+    private var distances = DoubleArray(size) { Double.MAX_VALUE }
     private var currentVisited = listOf<T>()
     private var visited = BooleanArray(size)
     fun getVisited(): List<T> =
         visited.mapIndexed { id, visited -> if (visited) id2Node(id)!! else null }.filterNotNull()
 
-    lateinit var parents: List<T>
-        private set
+    private var parents = IntArray(size) { -1 } // -1 means no parent
 
     var depth = 0
         private set
-    protected open lateinit var bfsRunner: BFS
-    protected open lateinit var dfsRunner: DFS
-    protected open lateinit var dikjstraRunner: Dijkstra
+    private lateinit var bfsRunner: BFS
+    private lateinit var dfsRunner: DFS
+    private lateinit var dikjstraRunner: Dijkstra
 
     // FUNCTIONS TO OVERRIDE
+
+    abstract fun nodes(): List<T>
     protected abstract fun id2Node(id: Int): T?
     protected abstract fun node2Id(node: T): Int?
     abstract fun addNode(node: T)
@@ -54,6 +54,7 @@ abstract class GraphContract<T>(size: Int) {
         val id = node2Id(node) ?: error("Node $node not found in graph")
         return distances[id]
     }
+    fun maxDistance() = distances.maxOrNull() ?: Double.MAX_VALUE
 
     fun bfs(startNodes: List<T>, target: T? = null) {
         require(weightlessAdjacencyList.sumOf { it.size } >= 0) {
@@ -63,8 +64,8 @@ abstract class GraphContract<T>(size: Int) {
         val targetId = target?.let { node2Id(it) } ?: -1
         bfsRunner = BFS(weightlessAdjacencyList)
         bfsRunner.bfs(nodeIds, targetId)
-        distances = bfsRunner.distances.map { it.toDouble() }.toDoubleArray()
-        parents = bfsRunner.parents.map { id2Node(it) }.filterNotNull()
+        distances = bfsRunner.distances
+        parents = bfsRunner.parents
         currentVisited = bfsRunner.getCurrentVisitedIds().mapNotNull { id2Node(it) }
     }
 
@@ -91,7 +92,7 @@ abstract class GraphContract<T>(size: Int) {
         dikjstraRunner = Dijkstra(adjacencyList)
         dikjstraRunner.dijkstra(startId, targetId)
         distances = dikjstraRunner.distances
-        parents = dikjstraRunner.parents.map { id2Node(it)!! }
+        parents = dikjstraRunner.parents
     }
 
     fun topologicalSort() = DFS(weightlessAdjacencyList).topologicalSort()
@@ -101,7 +102,7 @@ abstract class GraphContract<T>(size: Int) {
 
     fun getPath(target: T): List<T> {
         val targetId = node2Id(target)
-        val pathIds = getPath(targetId, parents.map { node2Id(it)!! }.toIntArray())
+        val pathIds = getPath(targetId, parents)
         return pathIds.mapNotNull { id2Node(it) }
     }
 

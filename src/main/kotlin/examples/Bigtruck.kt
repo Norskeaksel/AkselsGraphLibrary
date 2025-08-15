@@ -1,7 +1,6 @@
 package examples
 
 import graphClasses.*
-import pathfindingAlgorithms.Dijkstra
 import kotlin.math.ceil
 import kotlin.math.roundToInt
 
@@ -14,19 +13,18 @@ fun main() {
 
 fun bigtruck(): String {
     val n = readInt()
-    val graph = IntGraph(n + 1)
+    val ig = IntGraph(n + 1)
     val items = listOf(0) + readString().split(" ").map { it.toInt() }
     val m = readInt()
     repeat(m) {
         val (a, b, d) = readInts(3)
-        graph.addEdge(a, b, d - ITEM_BOOST * items[b])
-        graph.addEdge(b, a, d - ITEM_BOOST * items[a])
+        ig.addEdge(a, b, d - ITEM_BOOST * items[b])
+        ig.addEdge(b, a, d - ITEM_BOOST * items[a])
     }
-    graph.dijkstra(1)
-    val distances = graph.distances
-    if (distances[n] == Double.POSITIVE_INFINITY) {
+    ig.dijkstra(1)
+    if (ig.distanceTo(n) == Double.POSITIVE_INFINITY) {
         return "impossible"
     }
-    val nrOfItems = ((ceil(distances[n]) - distances[n]) / ITEM_BOOST).roundToInt() + items[1]
-    return "${distances[n].roundToInt()} $nrOfItems"
+    val nrOfItems = (ceil(ig.distanceTo(n) - ig.distanceTo(n)) / ITEM_BOOST).roundToInt() + items[1]
+    return "${ig.distanceTo(n).roundToInt()} $nrOfItems"
 }

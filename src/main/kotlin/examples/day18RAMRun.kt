@@ -14,6 +14,6 @@ fun day18a(input: List<String>, gridSize: Int, lineCount: Int): Int {
     }
     grid.connectGridDefaultWeightless()
     grid.bfs(listOf(Tile(0,0)))
-    val ans = grid.distances[grid.xy2Id(gridSize - 1, gridSize - 1)!!].toInt()
+    val ans = grid.distanceTo(grid.xy2Node(gridSize - 1, gridSize - 1)!!).toInt()
     return ans
 }

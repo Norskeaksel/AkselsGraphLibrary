@@ -21,5 +21,5 @@ fun PrintWriter.execute() {
         }
     }
     graph.dijkstra(s)
-    println(graph.distances[t].toInt())
+    println(graph.distanceTo(t).toInt())
 }

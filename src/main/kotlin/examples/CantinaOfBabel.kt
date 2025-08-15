@@ -1,7 +1,6 @@
 package examples
 
 import graphClasses.*
-import pathfindingAlgorithms.DFS
 
 // https://open.kattis.com/problems/cantinaofbabel
 

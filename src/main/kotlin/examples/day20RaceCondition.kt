@@ -17,12 +17,12 @@ fun day20a(input: List<String>, cheatGoal: Int, fairTime: Int): Int {
         }
     }
     val startNode = grid.nodes().first { it.data == 'S' }
-    val endNode = grid.nodes().first { it.data == 'E' }
+    val endNode = grid.nodes().last { it.data == 'E' }
 
     var timeSaved = fairTime
     var c = -1
     while (timeSaved >= cheatGoal) {
-        grid.bfs(startNode)
+        grid.bfs(startNode, endNode)
         c++
         val cheatDist = grid.distanceTo(endNode)
         timeSaved = (fairTime - cheatDist).toInt()

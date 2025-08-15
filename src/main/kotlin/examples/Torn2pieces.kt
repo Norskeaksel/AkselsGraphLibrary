@@ -19,6 +19,8 @@ fun torn2pieces(): String {
         }
     }
     val (start, end) = readString().split(" ")
+    graph.addNode(start)
+    graph.addNode(end)
     graph.bfs(start, end)
     val path = graph.getPath(end)
     return if (path.size == 1){

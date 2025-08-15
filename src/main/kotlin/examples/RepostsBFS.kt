@@ -1,7 +1,6 @@
 package examples
 // https://codeforces.com/problemset/problem/522/A
 
-import pathfindingAlgorithms.BFS
 import graphClasses.Graph
 import graphClasses._writer
 import graphClasses.readInt
@@ -22,7 +21,7 @@ fun RepostsBFS(): Int {
     val nodes = g.nodes().map { it as String }
     repeat(n){
         g.bfs(nodes[it])
-        longestChain = max(longestChain, g.distances.maxOrNull()!!.toInt()+1)
+        longestChain = max(longestChain, g.maxDistance().toInt()+1)
     }
     return longestChain
 }

@@ -4,21 +4,21 @@ import graphClasses.WeightlessAdjacencyList
 
 class BFS(val graph: WeightlessAdjacencyList) {
 
-    private val d = 1
+    private val d = 1.0
     private val size = graph.size
     var visited = BooleanArray(size)
-    val distances = IntArray(size)
+    val distances = DoubleArray(size)
     private var currentVisited = mutableListOf<Int>()
-    private var currentVisitedDistances = mutableListOf<Int>()
+    private var currentVisitedDistances = mutableListOf<Double>()
     val parents = IntArray(graph.size) { -1 }
 
     fun bfs(startIds: List<Int>, targetId: Int = -1) {
         currentVisited.clear()
-        distances.fill(Int.MAX_VALUE)
+        distances.fill(Double.MAX_VALUE)
         val queue = java.util.ArrayDeque<Int>()
         startIds.forEach {
             queue.add(it)
-            distances[it] = 0
+            distances[it] = 0.0
         }
         while (queue.isNotEmpty()) {
             val currentId = queue.first()

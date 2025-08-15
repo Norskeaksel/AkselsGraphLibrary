@@ -1,7 +1,5 @@
 package graphClasses
 
-import pathfindingAlgorithms.DFS
-
 class Graph: GraphContract<Any>(0) {
     private var nrOfNodes = 0
     private val node2id = mutableMapOf<Any, Int>()
@@ -33,7 +31,8 @@ class Graph: GraphContract<Any>(0) {
     override fun id2Node(id: Int): Any? = id2Node[id]
 
 
-    fun nodes() = id2Node.values
+    override fun nodes(): List<Any> = id2Node.values.toList()
+    fun <T> getCastedNodes(): List<T> = id2Node.values.map { it as T }
     fun size() = nrOfNodes
     override fun toString(): String {
         return buildString {

@@ -1,6 +1,5 @@
 package examples
 
-import pathfindingAlgorithms.Dijkstra
 import graphClasses.Graph
 import graphClasses.IntGraph
 
@@ -21,11 +20,10 @@ fun main() {
 
     val startNode = 0
     graph.dijkstra(startNode)
-    val graphDistances = graph.distances
-
+    val nodes:List<Int> = graph.getCastedNodes()
     println("Shortest paths from source node $startNode:")
     repeat(graph.size()) { id ->
-        val distValue = graphDistances[id]
+        val distValue = graph.distanceTo(nodes[id])
         val path = graph.getPath(id)
         println("To node $id: Distance ${distValue.toInt()}. Path: ${if (distValue < Int.MAX_VALUE) path else null}")
     }
@@ -51,10 +49,10 @@ fun main() {
         }
     }
     intGraph.dijkstra(startNode)
-    val intGraphDistances = intGraph.distances
+    val intNodes: List<Int> = intGraph.nodes()
     println("Shortest paths from source node $startNode:")
     repeat(n) { id ->
-        val distValue = intGraphDistances[id]
+        val distValue = intGraph.distanceTo(id)
         val path = intGraph.getPath(id)
         println("To node $id: Distance ${distValue.toInt()}. Path: ${if (distValue < Int.MAX_VALUE) path else null}")
     }
