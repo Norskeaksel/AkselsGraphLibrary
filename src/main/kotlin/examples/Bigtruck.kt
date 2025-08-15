@@ -1,5 +1,5 @@
 package examples
-
+// https://open.kattis.com/problems/bigtruck
 import graphClasses.*
 import kotlin.math.ceil
 import kotlin.math.roundToInt
@@ -25,6 +25,6 @@ fun bigtruck(): String {
     if (ig.distanceTo(n) == Double.POSITIVE_INFINITY) {
         return "impossible"
     }
-    val nrOfItems = (ceil(ig.distanceTo(n) - ig.distanceTo(n)) / ITEM_BOOST).roundToInt() + items[1]
+    val nrOfItems = ((ceil(ig.distanceTo(n)) - ig.distanceTo(n)) / ITEM_BOOST).roundToInt() + items[1]
     return "${ig.distanceTo(n).roundToInt()} $nrOfItems"
 }
