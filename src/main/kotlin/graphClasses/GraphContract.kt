@@ -60,9 +60,7 @@ abstract class GraphContract<T>(size: Int) {
     fun furthestNode() = id2Node(distances.let { d -> d.indices.maxBy { d[it] } })!!
 
     fun bfs(startNodes: List<T>, target: T? = null) {
-        require(weightlessAdjacencyList.sumOf { it.size } > 0) {
-            "weightlessAdjacencyList is empty. Cannon perform BFS."
-        }
+        requireWeightlessAdjacencyList()
         val nodeIds = startNodes.map { node -> node2Id(node) ?: error("Node $node not found in graph") }
         val targetId = target?.let { node2Id(it) } ?: -1
         bfsRunner = BFS(weightlessAdjacencyList)
@@ -74,11 +72,20 @@ abstract class GraphContract<T>(size: Int) {
 
     fun bfs(startNode: T, target: T? = null) = bfs(listOf(startNode), target)
 
-    fun dfs(startNode: T, reset: Boolean = true) {
-        println(weightlessAdjacencyList.sumOf { it.size })
-        require(weightlessAdjacencyList.sumOf { it.size } > 0) {
-            "weightlessAdjacencyList is empty. Cannot perform DFS."
+    private fun requireWeightlessAdjacencyList() {
+        val weightlessConnections = weightlessAdjacencyList.sumOf { it.size }
+        val weightedConnections = adjacencyList.sumOf { it.size }
+        require(weightlessConnections > 0 || weightedConnections == 0) {
+            "weightlessAdjacencyList is not properly configured because the number of weightless connections = " +
+                    "weightlessAdjacencyList.sumOf { it.size } = $weightlessConnections, while the number of weighted " +
+                    "connections = adjacencyList.sumOf { it.size } = $weightedConnections. The number of weightless " +
+                    "connections must be greater than 0 or the number of weighted connections must also be 0."
         }
+    }
+
+
+    fun dfs(startNode: T, reset: Boolean = true) {
+        requireWeightlessAdjacencyList()
         val startId = node2Id(startNode) ?: error("Node $startNode not found in graph")
         dfsRunner = if (reset) DFS(weightlessAdjacencyList) else DFS(weightlessAdjacencyList, visited)
         dfsRunner.dfs(startId)

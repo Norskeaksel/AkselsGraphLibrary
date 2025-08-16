@@ -47,13 +47,12 @@ fun islandBuses(): String {
                 }
             }
         }
-        // busesGrid.print()
-        //val islands = getNrOfGroups(islandGrid)
+        val islands = getNrOfGroups(islandGrid)
         val bridges = getNrOfGroups(bridgesGrid)
         val buses = getNrOfGroups(busesGrid)
         ans.add("""
             Map ${i+1}
-            islands: islands
+            islands: $islands
             bridges: $bridges
             buses needed: $buses
             

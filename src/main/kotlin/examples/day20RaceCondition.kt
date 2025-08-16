@@ -2,12 +2,12 @@ package examples
 // https://adventofcode.com/2024/day/20
 
 import graphClasses.Grid
-import graphClasses.debug
+import graphClasses.Tile
 
 
 fun day20a(input: List<String>, cheatGoal: Int, fairTime: Int): Int {
     val shadowGrid = input.map { it + it }
-    val grid = Grid(shadowGrid)
+    var grid = Grid(shadowGrid)
     grid.print()
 
     grid.connectGridWeightless { t ->
@@ -28,7 +28,17 @@ fun day20a(input: List<String>, cheatGoal: Int, fairTime: Int): Int {
         val cheatDist = grid.distanceTo(endNode)
         timeSaved = (fairTime - cheatDist).toInt()
         println("timeSaved: $timeSaved")
-        grid.removeCheatPath(grid.getPath(endNode))
+        val path = grid.getPath(endNode)
+        grid = gridWithoutCheatPath(path, grid)
     }
     return c
+}
+
+fun findPortals(path: List<Tile>, grid: Grid) =
+    path.windowed(2).firstOrNull { (a, b) -> b !in grid.getStraightNeighbours(a) }
+
+fun gridWithoutCheatPath(path: List<Tile>, grid: Grid): Grid {
+    val cheatPath = findPortals(path, grid) ?: return grid
+    grid.removeWeightlessEdge(cheatPath.first(), cheatPath.last())
+    return grid
 }
