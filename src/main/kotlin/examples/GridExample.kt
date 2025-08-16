@@ -11,14 +11,15 @@ fun main() {
         "23E"
     )
     val grid = Grid(stringList)
-    grid.connectGridDefault()
+    // We could use `grid.connectGridDefault()` to connect all nodes, but let's define a custom connection instead.
+    fun connectDownOrRight(t: Tile): List<Tile> = grid.getStraightNeighbours(t).filter { it.x >= t.x || it.y > t.y }
+    grid.connectGrid(::connectDownOrRight)
 
     // Nodes in a grid consists of Tile objects with x, y coordinates and data
-    val startNode = Tile(0,0, 'S')
+    val startNode = Tile(0, 0, 'S')
     grid.bfs(startNode)
     val nodes = grid.nodes()
-    val size = grid.trueSize() // Total number of nodes in the grid
-    nodes.forEach {node ->
+    nodes.forEach { node ->
         val distValue = grid.distanceTo(node)
         println("To node $node: $distValue")
     }

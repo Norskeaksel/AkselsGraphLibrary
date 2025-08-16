@@ -4,7 +4,6 @@ import graphClasses.Graph
 import graphClasses.IntGraph
 
 
-
 fun main() {
     // --- Example Graph Definition ---
     val graph = Graph()
@@ -20,7 +19,7 @@ fun main() {
 
     val startNode = 0
     graph.dijkstra(startNode)
-    val nodes:List<Int> = graph.getCastedNodes()
+    val nodes: List<Int> = graph.getCastedNodes()
     println("Shortest paths from source node $startNode:")
     repeat(graph.size()) { id ->
         val distValue = graph.distanceTo(nodes[id])

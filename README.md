@@ -23,35 +23,33 @@ Once the graph is built, you may use one of the graph traversal classes.
 [Example usage:](src/main/kotlin/examples/GraphExample.kt)
 
 ```kotlin
-import graphClasses.Dijkstra
+package examples
+
 import graphClasses.Graph
-import graphClasses.getPath
+import graphClasses.IntGraph
 
 
 fun main() {
-    // Example Graph Definition
-    val g = Graph()
-    g.addEdge(0, 1, 10.0)
-    g.addEdge(0, 2, 3.0)
-    g.addEdge(1, 3, 2.0)
-    g.addEdge(2, 1, 4.0)
-    g.addEdge(2, 3, 8.0)
-    g.addEdge(2, 4, 2.0)
-    g.addEdge(3, 4, 5.0)
+    // --- Example Graph Definition ---
+    val graph = Graph()
+    graph.addEdge(0, 1, 10.0)
+    graph.addEdge(0, 2, 3.0)
+    graph.addEdge(1, 3, 2.0)
+    graph.addEdge(2, 1, 4.0)
+    graph.addEdge(2, 3, 8.0)
+    graph.addEdge(2, 4, 2.0)
+    graph.addEdge(3, 4, 5.0)
 
-    g.addNode(5) // Adding an isolated node is also possible
+    graph.addNode(5) // Adding an isolated node is also possible
 
-    // Find shortest paths with the Dijkstra class, initialized with the graph
-    val dijkstraRunner = Dijkstra(g)
     val startNode = 0
-    dijkstraRunner.dijkstra(startNode)
-    val distance = dijkstraRunner.distances
-
+    graph.dijkstra(startNode)
+    val nodes: List<Int> = graph.getCastedNodes()
     println("Shortest paths from source node $startNode:")
-    for (goalNodeId in 0 until g.size()) {
-        val distValue = distance[goalNodeId]
-        val path = getPath(goalNodeId, dijkstraRunner.parents)
-        println("To node $goalNodeId: ${distValue.toInt()}. Path: ${if (distValue < Int.MAX_VALUE) path else null}")
+    repeat(graph.size()) { id ->
+        val distValue = graph.distanceTo(nodes[id])
+        val path = graph.getPath(id)
+        println("To node $id: Distance ${distValue.toInt()}. Path: ${if (distValue < Int.MAX_VALUE) path else null}")
     }
     /* Output:
     Shortest paths from source node 0:
@@ -62,26 +60,48 @@ fun main() {
     Distance to node 4: 5. Path: [0, 2, 4]
     Distance to node 5: 2147483647. Path: null
      */
+
+    /* --- Example IntGraph Definition ---
+     * An IntGraph can be defined similar to the Graph same way as above, but it can also be initialized with a size,
+     * because the nodes are integers values from 0 to n-1.
+     */
+    val n = graph.size()
+    val intGraph = IntGraph(n)
+    graph.adjacencyList.forEachIndexed { nodeId, edges ->
+        edges.forEach { edge -> // Pair(weight, destination node)
+            intGraph.addEdge(nodeId, edge.second, edge.first)
+        }
+    }
+    intGraph.dijkstra(startNode)
+    val intNodes: List<Int> = intGraph.nodes()
+    println("Shortest paths from source node $startNode:")
+    repeat(n) { id ->
+        val distValue = intGraph.distanceTo(id)
+        val path = intGraph.getPath(id)
+        println("To node $id: Distance ${distValue.toInt()}. Path: ${if (distValue < Int.MAX_VALUE) path else null}")
+    }
+    // Outputs the same as the code above
 }
 ```
 
 ## The IntGraph class
 
 The IntGraph class behaves a lot like the Graph class when used with integers like the example above. However,
-it's more performant when creating the graph, because it does not need to maintain a mapping between the IDs and nodes.
+it's more performant, because it does not need to maintain an internal mapping between the nodes and their indexes in
+the adjacency list.
 [Example usage.](src/main/kotlin/examples/GraphExample.kt)
 
 ## The Grid class
 
-The Grid class is a specialized graph class. It uses the data
-class ```Tile(val x: Int, val y: Int, var data: Any? = null)```
-to represent nodes of any datatype, but each node also have x and y coordinates.
+The Grid class is a specialized graph class. It uses the data class:
+```Tile(val x: Int, val y: Int, var data: Any? = null)```
+to represent nodes of any datatype, where each node also have x and y coordinates.
 The grid can be created with a width and height, or by passing a list of strings.
 The grid can be traversed using the same algorithms as the graph class,
 but it also has some additional methods for connecting the grid without explicitly adding
 edges. `.connectGridDefault()` connects each node to nodes up, down, left and right of it, if they exist.
-If some customization is needed, `.connectGrid(::yourCustomFunction)` can be used,
-where yourCustomFunction takes a `Tile` and returns a `List<Tile>` to connect
+If some customization is needed, `.connectGrid(::yourCustomFunction)` (also written like `.connectGrid{ yourLambda}`)
+can be used, where yourCustomFunction takes a `Tile` and returns a `List<Tile>` to connect
 to. [Example usage:](src/main/kotlin/examples/GridExample.kt)
 
 ```kotlin
