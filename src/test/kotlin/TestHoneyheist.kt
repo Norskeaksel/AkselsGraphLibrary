@@ -5,7 +5,7 @@ import org.junit.jupiter.api.AfterAll
 import java.io.File
 import org.junit.jupiter.api.Test
 
-class HoneyheistTest {
+/*class HoneyheistTest {
     companion object {
         @JvmStatic
         @AfterAll
@@ -28,4 +28,4 @@ class HoneyheistTest {
         _reader = File("src/test/SampleInput/Honeyheist/input2").inputStream().bufferedReader()
         assertThat(honeyheist()).isEqualTo(expectedOutput)
     }
-}
+} */

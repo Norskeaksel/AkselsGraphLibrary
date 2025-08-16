@@ -1,7 +1,6 @@
 package examples
 // https://codeforces.com/problemset/problem/522/A
 
-import graphClasses.BFS
 import graphClasses.Graph
 import graphClasses._writer
 import graphClasses.readInt
@@ -18,11 +17,11 @@ fun RepostsBFS(): Int {
         val (v,_,u) = readStrings(3).map { it.lowercase(Locale.getDefault()) }
         g.addEdge(u,v)
     }
-    val bfs = BFS(g)
     var longestChain = 0
+    val nodes = g.nodes().map { it as String }
     repeat(n){
-        bfs.bfs(listOf(it))
-        longestChain = max(longestChain, bfs.distances.maxOrNull()!!.toInt()+1)
+        g.bfs(nodes[it])
+        longestChain = max(longestChain, g.maxDistance().toInt()+1)
     }
     return longestChain
 }

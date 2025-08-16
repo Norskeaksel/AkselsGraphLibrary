@@ -1,9 +1,7 @@
 package graphClasses
 
-class Graph: GraphContract<Any> {
+class Graph: BaseGraph<Any>(0) {
     private var nrOfNodes = 0
-    private val adjacencyList: AdjacencyList = mutableListOf()
-    private val weightlessAdjacencyList: WeightlessAdjacencyList = mutableListOf()
     private val node2id = mutableMapOf<Any, Int>()
     private val id2Node = mutableMapOf<Int, Any>()
 
@@ -22,24 +20,12 @@ class Graph: GraphContract<Any> {
         val id2 = node2id[node2] ?: addNode(node2).run { node2id[node2]!! }
         adjacencyList[id1].add(Pair(weight, id2))
     }
-
-    override fun addWeightlessEdge(node1: Any, node2: Any) {
-        val id1 = node2id[node1] ?: addNode(node1).run { node2id[node1]!! }
-        val id2 = node2id[node2] ?: addNode(node2).run { node2id[node2]!! }
-        weightlessAdjacencyList[id1].add(id2)
-    }
-    override fun getAdjacencyList() = adjacencyList
-
-    fun getNodeEdges(node: Any): List<Pair<Double, Int>> {
-        val id = node2id[node] ?: return emptyList()
-        return adjacencyList[id]
-    }
-
-    fun node2id(node: Any): Int? = node2id[node]
-    fun id2Node(id: Int): Any? = id2Node[id]
+    override fun node2Id(node: Any): Int? = node2id[node]
+    override fun id2Node(id: Int): Any? = id2Node[id]
 
 
-    fun nodes() = id2Node.values
+    override fun nodes(): List<Any> = id2Node.values.toList()
+    fun <T> getCastedNodes(): List<T> = id2Node.values.map { it as T }
     fun size() = nrOfNodes
     override fun toString(): String {
         return buildString {
@@ -50,5 +36,4 @@ class Graph: GraphContract<Any> {
         }
     }
 
-    fun topologicalSort() = DFS(getWeightlessAdjacencyList()).topologicalSort()
 }

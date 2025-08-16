@@ -1,6 +1,7 @@
 package examples
 
 import graphClasses.*
+
 // https://open.kattis.com/problems/horror?editresubmit=17527573
 fun main() {
     val ans = horrorList(); _writer.flush()
@@ -15,8 +16,6 @@ fun horrorList(): Int {
         val (u, v) = readInts(2)
         intGraph.connect(u, v)
     }
-    val bfs = BFS(intGraph)
-    bfs.bfs(startIds)
-    val maxDist = bfs.distances.let { d -> d.indices.maxBy { d[it] } }
-    return maxDist
+    intGraph.bfs(startIds)
+    return intGraph.furthestNode()
 }

@@ -1,7 +1,7 @@
 package examples
 //https://codeforces.com/problemset/problem/893/C
 
-import graphClasses.DFS
+import pathfindingAlgorithms.DFS
 import graphClasses.Graph
 import graphClasses.readInts
 
@@ -16,12 +16,12 @@ fun rumor(): Long {
         val (x, y) = readInts(2)
         g.connect(x, y)
     }
-    val dfs = DFS(g)
+    val dfs = DFS(g.unweightedAdjacencyList)
     val components = mutableListOf<List<Int>>()
     for (i in 0 until g.size()) {
         if (dfs.visited[i]) continue
         dfs.dfs(i)
-        val component = dfs.getAndClearCurrentVisitedIds()
+        val component = dfs.getAndClearCurrentVisited()
         if (component.isNotEmpty())
             components.add(component)
     }

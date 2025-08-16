@@ -26,8 +26,7 @@ fun cantinaOfBabel(): Int {
             graph.addEdge(it, recipient)
         }
     }
-    val dfs = DFS(graph)
-    val stronglyConnectedComponents = dfs.kosaraju()
+    val stronglyConnectedComponents = graph.stronglyConnectedComponents()
     val biggestComponent = stronglyConnectedComponents.maxBy { it.size }.size
     return n - biggestComponent
 }

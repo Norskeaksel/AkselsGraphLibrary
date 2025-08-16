@@ -19,17 +19,10 @@ fun torn2pieces(): String {
         }
     }
     val (start, end) = readString().split(" ")
-    val startId = graph.node2id(start) ?: run {
-        graph.addNode(start)
-        graph.node2id(start)!!
-    }
-    val endId = graph.node2id(end) ?: run {
-        graph.addNode(end)
-        graph.node2id(end)!!
-    }
-    val bfs = BFS(graph)
-    bfs.bfs(startId, endId)
-    val path = getPath(endId, bfs.parents).map { graph.id2Node(it) }
+    graph.addNode(start)
+    graph.addNode(end)
+    graph.bfs(start, end)
+    val path = graph.getPath(end)
     return if (path.size == 1){
         "no route found"
     }

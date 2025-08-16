@@ -1,9 +1,7 @@
 package examples
 
-import graphClasses.Dijkstra
 import graphClasses.Graph
 import graphClasses.IntGraph
-import graphClasses.getPath
 
 
 fun main() {
@@ -19,15 +17,13 @@ fun main() {
 
     graph.addNode(5) // Adding an isolated node is also possible
 
-    val graphDijkstra = Dijkstra(graph)
     val startNode = 0
-    graphDijkstra.dijkstra(startNode)
-    val graphDistances = graphDijkstra.distances
-
+    graph.dijkstra(startNode)
+    val nodes: List<Int> = graph.getCastedNodes()
     println("Shortest paths from source node $startNode:")
     repeat(graph.size()) { id ->
-        val distValue = graphDistances[id]
-        val path = getPath(id, graphDijkstra.parents)
+        val distValue = graph.distanceTo(nodes[id])
+        val path = graph.getPath(id)
         println("To node $id: Distance ${distValue.toInt()}. Path: ${if (distValue < Int.MAX_VALUE) path else null}")
     }
     /* Output:
@@ -46,18 +42,17 @@ fun main() {
      */
     val n = graph.size()
     val intGraph = IntGraph(n)
-    graph.getAdjacencyList().forEachIndexed { nodeId, edges ->
+    graph.adjacencyList.forEachIndexed { nodeId, edges ->
         edges.forEach { edge -> // Pair(weight, destination node ID)
             intGraph.addEdge(nodeId, edge.second, edge.first)
         }
     }
-    val intGraphDijkstra = Dijkstra(intGraph)
-    intGraphDijkstra.dijkstra(startNode)
-    val intGraphDistances = intGraphDijkstra.distances
+    intGraph.dijkstra(startNode)
+    val intNodes: List<Int> = intGraph.nodes()
     println("Shortest paths from source node $startNode:")
     repeat(n) { id ->
-        val distValue = intGraphDistances[id]
-        val path = getPath(id, intGraphDijkstra.parents)
+        val distValue = intGraph.distanceTo(id)
+        val path = intGraph.getPath(id)
         println("To node $id: Distance ${distValue.toInt()}. Path: ${if (distValue < Int.MAX_VALUE) path else null}")
     }
     // Outputs the same as the code above

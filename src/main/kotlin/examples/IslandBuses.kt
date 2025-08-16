@@ -8,13 +8,12 @@ fun main() {
     println(ans)
 }
 
-fun getNrOfGroups(grid: Grid):Int{
-    val groups = mutableListOf<List<Int>>()
-    val dfs = DFS(grid)
-    grid.getNodes().forEach { node ->
-        dfs.dfs(grid.node2Id(node))
-        dfs.getAndClearCurrentVisitedIds().let {
-            if(it.isNotEmpty())
+fun getNrOfGroups(grid: Grid): Int {
+    val groups = mutableListOf<List<Tile>>()
+    grid.nodes().forEach { node ->
+        grid.dfs(node, reset = false) // TODO figrure out how this affeccts the adjacency list
+        grid.currentVisited.let {
+            if (it.isNotEmpty())
                 groups.add(it)
         }
     }
@@ -25,22 +24,22 @@ fun islandBuses(): String {
     val input = readLines()
     val maps = input.joinToString("\n").split("\n\n")
     val ans = mutableListOf<String>()
-    maps.forEachIndexed {i, mapString ->
+    maps.forEachIndexed { i, mapString ->
         val mapList = mapString.split("\n")
         val islandGrid = Grid(mapList).apply {
             markCharAsWall('.')
             markCharAsWall('B')
-            connectGridDefaultWeightless()
+            connectGridDefault()
         }
         val bridgesGrid = Grid(mapList).apply {
             markCharAsWall('.')
             markCharAsWall('X')
             markCharAsWall('#')
-            connectGridDefaultWeightless()
+            connectGridDefault()
         }
         val busesGrid = Grid(mapList).apply {
             markCharAsWall('.')
-            connectGrid(true) {
+            connectGrid {
                 when (it.data) {
                     '#' -> getStraightNeighbours(it).filter { it.data != 'B' }
                     'B' -> getStraightNeighbours(it).filter { it.data != '#' }
@@ -51,13 +50,15 @@ fun islandBuses(): String {
         val islands = getNrOfGroups(islandGrid)
         val bridges = getNrOfGroups(bridgesGrid)
         val buses = getNrOfGroups(busesGrid)
-        ans.add("""
-            Map ${i+1}
+        ans.add(
+            """
+            Map ${i + 1}
             islands: $islands
             bridges: $bridges
             buses needed: $buses
             
-        """.trimIndent())
+        """.trimIndent()
+        )
     }
     return ans.joinToString("\n")
 }

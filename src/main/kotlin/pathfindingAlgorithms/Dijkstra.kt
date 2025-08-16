@@ -1,11 +1,10 @@
-package graphClasses
+package pathfindingAlgorithms
 
+import AdjacencyList
+import Edge
 import java.util.*
 
 class Dijkstra(private val graph: AdjacencyList) {
-    constructor(graph: Graph) : this(graph.getAdjacencyList())
-    constructor(intGraph: IntGraph) : this(intGraph.getAdjacencyList())
-    constructor(grid: Grid) : this(grid.getAdjacencyList())
     val distances = DoubleArray(graph.size) { Double.POSITIVE_INFINITY }
     val parents = IntArray(graph.size) { -1 }
     private val visited = BooleanArray(graph.size)
