@@ -15,7 +15,7 @@ fun torn2pieces(): String {
         val stations = readString().split(" ").toMutableList()
         val fromStation = stations.removeFirst()
         stations.forEach { toStation ->
-            graph.connectWeightless(fromStation, toStation)
+            graph.connect(fromStation, toStation)
         }
     }
     val (start, end) = readString().split(" ")

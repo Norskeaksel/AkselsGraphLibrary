@@ -14,7 +14,7 @@ fun horrorList(): Int {
     val startIds = readInts(h).sorted()
     repeat(l) {
         val (u, v) = readInts(2)
-        intGraph.connectWeightless(u, v)
+        intGraph.connect(u, v)
     }
     intGraph.bfs(startIds)
     return intGraph.furthestNode()

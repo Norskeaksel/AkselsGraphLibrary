@@ -23,7 +23,7 @@ fun cantinaOfBabel(): Int {
         val node = it as Man
         val recipients = graph.nodes().map { it as Man }.filter { node.languages.first() in it.languages }
         recipients.forEach { recipient ->
-            graph.addWeightlessEdge(it, recipient)
+            graph.addEdge(it, recipient)
         }
     }
     val stronglyConnectedComponents = graph.stronglyConnectedComponents()

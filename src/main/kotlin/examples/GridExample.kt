@@ -24,14 +24,14 @@ fun main() {
         println("To node $node: $distValue")
     }
     /* Output:
-        To node Tile(x=0, y=0, data=S): 0
-        To node Tile(x=1, y=0, data=1): 1
-        To node Tile(x=2, y=0, data=2): 2
-        To node Tile(x=0, y=1, data=1): 1
-        To node Tile(x=1, y=1, data=2): 2
-        To node Tile(x=2, y=1, data=3): 3
-        To node Tile(x=0, y=2, data=2): 2
-        To node Tile(x=1, y=2, data=3): 3
-        To node Tile(x=2, y=2, data=E): 4
+        To node Tile(x=0, y=0, data=S): 0.0
+        To node Tile(x=1, y=0, data=1): 1.0
+        To node Tile(x=2, y=0, data=2): 2.0
+        To node Tile(x=0, y=1, data=1): 1.0
+        To node Tile(x=1, y=1, data=2): 2.0
+        To node Tile(x=2, y=1, data=3): 3.0
+        To node Tile(x=0, y=2, data=2): 2.0
+        To node Tile(x=1, y=2, data=3): 3.0
+        To node Tile(x=2, y=2, data=E): 4.0
      */
 }

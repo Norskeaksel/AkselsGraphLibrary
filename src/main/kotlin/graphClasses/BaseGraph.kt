@@ -1,15 +1,28 @@
 package graphClasses
 
-import com.sun.org.apache.xml.internal.security.algorithms.Algorithm
+import AdjacencyList
+import Edge
+import WeightlessAdjacencyList
 import pathfindingAlgorithms.BFS
 import pathfindingAlgorithms.DFS
 import pathfindingAlgorithms.Dijkstra
+import toWeightlessAdjacencyList
 
 
-abstract class GraphContract<T>(size: Int) {
+abstract class BaseGraph<T>(size: Int) {
     // PROPERTIES
     val adjacencyList = adjacencyListInit(size)
-    val weightlessAdjacencyList = weightlessAdjacencyListInit(size)
+
+    /** A cached, weightless representation of the graph's adjacency list, that is updated whenever it's needed. */
+    var unweightedAdjacencyList: WeightlessAdjacencyList = MutableList(size) { mutableListOf() }
+        get() {
+            if (nrOfConnections(field) < nrOfConnections(adjacencyList)) {
+                System.err.println("Optimizing adjacency list by converting to weightless representation.")
+                field = adjacencyList.toWeightlessAdjacencyList()
+            }
+            return field
+        }
+
     protected var nodes = MutableList<T?>(size) { null }
     private var distances = DoubleArray(size) { Double.MAX_VALUE }
     var currentVisited = listOf<T>()
@@ -32,25 +45,39 @@ abstract class GraphContract<T>(size: Int) {
     protected abstract fun id2Node(id: Int): T?
     protected abstract fun node2Id(node: T): Int?
     abstract fun addNode(node: T)
-    abstract fun addEdge(node1: T, node2: T, weight: Double)
-    abstract fun addWeightlessEdge(node1: T, node2: T)
+    abstract fun addEdge(node1: T, node2: T, weight: Double = 1.0)
 
     // FUNCTIONS TO INHERIT
-    fun connect(node1: T, node2: T, weight: Double) {
-        addEdge(node1, node2, weight)
-        addEdge(node2, node1, weight)
+    fun <N : Number> connect(node1: T, node2: T, weight: N) {
+        val weightDouble = weight.toDouble()
+        addEdge(node1, node2, weightDouble)
+        addEdge(node2, node1, weightDouble)
     }
 
-    fun connect(node1: T, node2: T, weight: Int) = connect(node1, node2, weight.toDouble())
+    fun connect(node1: T, node2: T) = connect(node1, node2, 1.0)
+    private fun removeEdge(id1: Int, id2: Int, weight: Double? = null) {
+        if (weight == null)
+            adjacencyList[id1].removeAll { it.second == id2 }
+        else
+            adjacencyList[id1].remove(Edge(weight, id2))
+        if (nrOfConnections(unweightedAdjacencyList) > nrOfConnections(adjacencyList)) {
+            unweightedAdjacencyList[id1].remove(id2)
+        }
+    }
 
-    fun connectWeightless(node1: T, node2: T) {
-        addWeightlessEdge(node1, node2)
-        addWeightlessEdge(node2, node1)
+    fun removeEdge(node1: T, node2: T, weight: Double? = null) {
+        val u = node2Id(node1) ?: run {
+            System.err.println("Node $node1 not found in graph")
+            return
+        }
+        val v = node2Id(node2) ?: run {
+            System.err.println("Node $node2 not found in graph")
+            return
+        }
+        removeEdge(u, v, weight)
     }
 
     fun adjacencyListInit(size: Int): AdjacencyList = MutableList(size) { mutableListOf() }
-    fun weightlessAdjacencyListInit(size: Int): WeightlessAdjacencyList = MutableList(size) { mutableListOf() }
-
 
     fun distanceTo(node: T): Double {
         val id = node2Id(node) ?: error("Node $node not found in graph")
@@ -61,21 +88,22 @@ abstract class GraphContract<T>(size: Int) {
     fun furthestNode() = id2Node(distances.let { d -> d.indices.maxBy { d[it] } })!!
 
     fun bfs(startNodes: List<T>, target: T? = null) {
+        useWeightedConnectionsIfNeeded()
         val nodeIds = startNodes.map { node -> node2Id(node) ?: error("Node $node not found in graph") }
         val targetId = target?.let { node2Id(it) } ?: -1
-        bfsRunner = BFS(weightlessAdjacencyList)
+        bfsRunner = BFS(unweightedAdjacencyList)
         bfsRunner.bfs(nodeIds, targetId)
         distances = bfsRunner.distances
         parents = bfsRunner.parents
         currentVisited = bfsRunner.getCurrentVisitedIds().mapNotNull { id2Node(it) }
     }
 
-    private fun useWeightedConnectionsIfNeededFor(algorithmName: String) {
-        // TODO: make weightlessAdjacencyList from normal one if needed, and warn if weight information is lost.
-        val weightlessConnections = nrOfConnections(weightlessAdjacencyList)
-        val weightedConnections = nrOfConnections(adjacencyList)
-        if(weightlessConnections == 0 && weightedConnections > 0){
-            System.err.println("Warning, $algorithmName doesen't work with weighted graphs, ")
+    private fun useWeightedConnectionsIfNeeded() {
+        if (nrOfConnections(unweightedAdjacencyList) == 0) {
+            unweightedAdjacencyList = adjacencyList.toWeightlessAdjacencyList()
+            if (nrOfConnections(unweightedAdjacencyList) == 0) {
+                System.err.println("Warning, the graph has no connections, making pathfinding infeasible.")
+            }
         }
     }
 
@@ -85,7 +113,7 @@ abstract class GraphContract<T>(size: Int) {
 
     fun dfs(startNode: T, reset: Boolean = true) {
         val startId = node2Id(startNode) ?: error("Node $startNode not found in graph")
-        dfsRunner = if (reset) DFS(weightlessAdjacencyList) else DFS(weightlessAdjacencyList, visited)
+        dfsRunner = if (reset) DFS(unweightedAdjacencyList) else DFS(unweightedAdjacencyList, visited)
         dfsRunner.dfs(startId)
         currentVisited = dfsRunner.getAndClearCurrentVisited().mapNotNull { id2Node(it) }
         visited = dfsRunner.visited
@@ -93,8 +121,8 @@ abstract class GraphContract<T>(size: Int) {
     }
 
     fun dijkstra(startNode: T, target: T? = null) {
-        require(adjacencyList.sumOf { it.size } >= 0) {
-            "adjacencyList is empty. Cannot perform Dijkstra."
+        if (nrOfConnections(adjacencyList) < nrOfConnections(unweightedAdjacencyList)) {
+            System.err.println("Warning: adjacencyList has fewer connections than the unweightedAdjacencyList, indicating an error in the graph construction.")
         }
         val startId = node2Id(startNode) ?: error("Node $startNode not found in graph")
         val targetId = target?.let { node2Id(it) } ?: -1
@@ -104,8 +132,8 @@ abstract class GraphContract<T>(size: Int) {
         parents = dikjstraRunner.parents
     }
 
-    fun topologicalSort() = DFS(weightlessAdjacencyList).topologicalSort()
-    fun stronglyConnectedComponents() = DFS(weightlessAdjacencyList).stronglyConnectedComponents()
+    fun topologicalSort() = DFS(unweightedAdjacencyList).topologicalSort()
+    fun stronglyConnectedComponents() = DFS(unweightedAdjacencyList).stronglyConnectedComponents()
     fun getPath(target: T): List<T> {
         val targetId = node2Id(target)
         val pathIds = getPath(targetId, parents)
@@ -133,7 +161,7 @@ abstract class GraphContract<T>(size: Int) {
     fun printWeightlessConnections() = printAdjacencyList(true)
 
     private fun printAdjacencyList(weightless: Boolean) =
-        (if (weightless) weightlessAdjacencyList else adjacencyList).forEachIndexed { node, connections ->
+        (if (weightless) unweightedAdjacencyList else adjacencyList).forEachIndexed { node, connections ->
             System.err.println("$node ---> $connections")
         }
 }

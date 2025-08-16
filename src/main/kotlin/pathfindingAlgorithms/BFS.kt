@@ -1,6 +1,6 @@
 package pathfindingAlgorithms
 
-import graphClasses.WeightlessAdjacencyList
+import WeightlessAdjacencyList
 
 class BFS(val graph: WeightlessAdjacencyList) {
 

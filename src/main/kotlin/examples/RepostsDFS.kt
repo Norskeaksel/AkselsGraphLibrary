@@ -16,9 +16,9 @@ fun repostsDFS(): Int {
     val g = Graph()
     repeat(n){
         val (v,_,u) = readStrings(3).map { it.lowercase(Locale.getDefault()) }
-        g.addWeightlessEdge(u,v)
+        g.addEdge(u,v)
     }
-    val dfs = DFS(g.weightlessAdjacencyList)
+    val dfs = DFS(g.unweightedAdjacencyList)
     var longestChain = 0
     repeat(n){
         dfs.dfs(it)

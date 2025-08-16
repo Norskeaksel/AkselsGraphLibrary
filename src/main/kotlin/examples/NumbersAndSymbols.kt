@@ -38,7 +38,7 @@ private fun initializeGrid(input: List<String>, grid: Grid, padWithDuplicates:Bo
                         val neighbours =
                             grid.getAllNeighbours(t)
                                 .filter { it.data != '.' && it.data.toString().toIntOrNull() in listOf(null, 0) }
-                        neighbours.forEach { grid.addWeightlessEdge(t, it) }
+                        neighbours.forEach { grid.addEdge(t, it) }
                     }
                 }
             }

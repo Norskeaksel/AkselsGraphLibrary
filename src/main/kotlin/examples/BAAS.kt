@@ -1,17 +1,17 @@
 package examples
 
 import graphClasses.*
-import pathfindingAlgorithms.DFS
 import kotlin.math.min
 import kotlin.system.measureTimeMillis
 
 // https://open.kattis.com/problems/baas
+/* Note, this solution is close to the time limit. To make it pass, the submitted solution must cut away all library
+   functions that's not needed. */
 
 fun main() {
     val ans = baas(); _writer.flush()
     println(ans)
 }
-
 fun baas(): Int {
     val n = readInt()
     val intGraph = IntGraph(n)
@@ -20,10 +20,10 @@ fun baas(): Int {
         val c_i = readInt()
         repeat(c_i) {
             val a_j = readInt() - 1
-            intGraph.addWeightlessEdge(step_i, a_j)
+            intGraph.addUnweightedEdge(step_i, a_j)
         }
     }
-    val weightlessAdjacencyList = intGraph.weightlessAdjacencyList
+    val weightlessAdjacencyList = intGraph.unweightedAdjacencyList
     var optimizedTime = Int.MAX_VALUE
     val time = measureTimeMillis {
         val topologicalOrder = intGraph.topologicalSort()

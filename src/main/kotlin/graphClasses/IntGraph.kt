@@ -1,6 +1,6 @@
 package graphClasses
 
-class IntGraph(initialSize: Int = 0) : GraphContract<Int>(initialSize) {
+class IntGraph(initialSize: Int = 0) : BaseGraph<Int>(initialSize) {
     override fun addNode(node: Int) {
         if (node >= adjacencyList.size) {
             for (i in adjacencyList.size..node) {
@@ -8,15 +8,15 @@ class IntGraph(initialSize: Int = 0) : GraphContract<Int>(initialSize) {
             }
         }
     }
-
     override fun addEdge(node1: Int, node2: Int, weight: Double) {
         adjacencyList[node1].add(Pair(weight, node2))
-    }
-
-    override fun addWeightlessEdge(node1: Int, node2: Int){
-        weightlessAdjacencyList[node1].add(node2)
     }
     override fun id2Node(id: Int) = id
     override fun node2Id(node: Int) = node
     override fun nodes(): List<Int> = adjacencyList.indices.toList()
+
+    /** When performance is critical and the graph is unweighted, adding unweighted edges can reduce program overhead */
+    fun addUnweightedEdge(from: Int, to: Int) {
+        unweightedAdjacencyList[from].add(to)
+    }
 }

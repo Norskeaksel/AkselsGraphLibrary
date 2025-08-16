@@ -1,6 +1,7 @@
 package pathfindingAlgorithms
 
-import graphClasses.*
+import AdjacencyList
+import Edge
 import java.util.*
 
 class Dijkstra(private val graph: AdjacencyList) {

@@ -14,9 +14,9 @@ fun rumor(): Long {
     }
     repeat(m) {
         val (x, y) = readInts(2)
-        g.connectWeightless(x, y)
+        g.connect(x, y)
     }
-    val dfs = DFS(g.weightlessAdjacencyList)
+    val dfs = DFS(g.unweightedAdjacencyList)
     val components = mutableListOf<List<Int>>()
     for (i in 0 until g.size()) {
         if (dfs.visited[i]) continue

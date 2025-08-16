@@ -10,7 +10,7 @@ fun day20a(input: List<String>, cheatGoal: Int, fairTime: Int): Int {
     var grid = Grid(shadowGrid)
     grid.print()
 
-    grid.connectGridWeightless { t ->
+    grid.connectGrid { t ->
         grid.getStraightNeighbours(t).mapNotNull {
             if (it.data != '#') it
             else if (t.x < grid.width / 2) grid.xy2Node(it.x + grid.width / 2, it.y)
@@ -39,6 +39,6 @@ fun findPortals(path: List<Tile>, grid: Grid) =
 
 fun gridWithoutCheatPath(path: List<Tile>, grid: Grid): Grid {
     val cheatPath = findPortals(path, grid) ?: return grid
-    grid.removeWeightlessEdge(cheatPath.first(), cheatPath.last())
+    grid.removeEdge(cheatPath.first(), cheatPath.last())
     return grid
 }

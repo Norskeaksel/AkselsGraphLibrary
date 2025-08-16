@@ -9,7 +9,7 @@ various problems.
 The library contains the general `Graph` class, which can be used to create graphs of any datatype,
 the `IntGraph` class, which is performance optimized for integer nodes,
 and the `Grid` class, where each node has x and y coordinates in addition to containing any data type.
-All the classes inherit from the [GraphContract.kt](src%2Fmain%2Fkotlin%2FgraphClasses%2FGraphContract.kt) interface,
+All the classes inherit from the [BaseGraph.kt](src%2Fmain%2Fkotlin%2FgraphClasses%2FBaseGraph.kt) interface,
 which defines the basic functionality of a graph.
 
 ## The Graph class
@@ -105,8 +105,8 @@ can be used, where yourCustomFunction takes a `Tile` and returns a `List<Tile>` 
 to. [Example usage:](src/main/kotlin/examples/GridExample.kt)
 
 ```kotlin
-import graphClasses.BFS
 import graphClasses.Grid
+import graphClasses.Tile
 
 fun main() {
     // --- Example Grid Definition ---
@@ -116,14 +116,16 @@ fun main() {
         "23E"
     )
     val grid = Grid(stringList)
-    grid.connectGridDefault()
+    // We could use `grid.connectGridDefault()` to connect all nodes, but let's define a custom connection instead.
+    fun connectDownOrRight(t: Tile): List<Tile> = grid.getStraightNeighbours(t).filter { it.x >= t.x || it.y > t.y }
+    grid.connectGrid(::connectDownOrRight)
 
-    val bfs = BFS(grid)
-    bfs.bfs(0)
-    val distance = bfs.distances
-    repeat(grid.trueSize()) { id ->
-        val distValue = distance[id]
-        val node = grid.id2Node(id)
+    // Nodes in a grid consists of Tile objects with x, y coordinates and data
+    val startNode = Tile(0, 0, 'S')
+    grid.bfs(startNode)
+    val nodes = grid.nodes()
+    nodes.forEach { node ->
+        val distValue = grid.distanceTo(node)
         println("To node $node: $distValue")
     }
     /* Output:

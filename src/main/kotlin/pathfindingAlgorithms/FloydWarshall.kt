@@ -1,6 +1,6 @@
 package pathfindingAlgorithms
 
-import graphClasses.AdjacencyList
+import AdjacencyList
 import kotlin.math.min
 
 class FloydWarshall(val graph: AdjacencyList) {

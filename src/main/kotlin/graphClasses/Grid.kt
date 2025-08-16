@@ -1,8 +1,10 @@
 package graphClasses
 
+import Edge
+
 data class Tile(val x: Int, val y: Int, var data: Any? = null)
 
-class Grid(val width: Int, val height: Int) : GraphContract<Tile>(width * height) {
+class Grid(val width: Int, val height: Int) : BaseGraph<Tile>(width * height) {
     constructor(stringGrid: List<String>) : this(stringGrid[0].length, stringGrid.size) {
         stringGrid.forEachIndexed { y, line ->
             line.forEachIndexed { x, c ->
@@ -11,9 +13,6 @@ class Grid(val width: Int, val height: Int) : GraphContract<Tile>(width * height
             }
         }
     }
-
-
-    var gridIsWeightLess = false
 
     init {
         for (y in 0 until height) {
@@ -35,12 +34,6 @@ class Grid(val width: Int, val height: Int) : GraphContract<Tile>(width * height
         adjacencyList[u].add(Edge(weight, v))
     }
 
-    override fun addWeightlessEdge(node1: Tile, node2: Tile) {
-        val u = node2Id(node1)
-        val v = node2Id(node2)
-        weightlessAdjacencyList[u].add(v)
-    }
-
     override fun id2Node(id: Int) = if (id in 0 until width * height) nodes[id] else null
     override fun node2Id(node: Tile) = node.x + node.y * width
     override fun nodes(): List<Tile> = nodes.filterNotNull().filter { it.x != -1 }
@@ -58,30 +51,6 @@ class Grid(val width: Int, val height: Int) : GraphContract<Tile>(width * height
                 deleteNodeAtIndex(i)
             }
         }
-    }
-
-
-    private fun removeEdge(id1: Int, id2: Int, weight: Double? = null) {
-        if (weight == null)
-            adjacencyList[id1].removeAll { it.second == id2 }
-        else
-            adjacencyList[id1].remove(Edge(weight, id2))
-    }
-
-    private fun removeWeightlessEdge(id1: Int, id2: Int) {
-        weightlessAdjacencyList[id1].removeAll { it == id2 }
-    }
-
-    fun removeEdge(t1: Tile, t2: Tile, weight: Double? = null) {
-        val u = node2Id(t1)
-        val v = node2Id(t2)
-        removeEdge(u, v, weight)
-    }
-
-    fun removeWeightlessEdge(t1: Tile, t2: Tile) {
-        val u = node2Id(t1)
-        val v = node2Id(t2)
-        removeWeightlessEdge(u, v)
     }
 
     fun getStraightNeighbours(t: Tile?) =
@@ -116,26 +85,9 @@ class Grid(val width: Int, val height: Int) : GraphContract<Tile>(width * height
         }
     }
 
-    fun connectGridWeightless(getNeighbours: (t: Tile) -> List<Tile>) {
-        gridIsWeightLess = true
-        for (x in 0 until width) {
-            for (y in 0 until height) {
-                val currentTile = xy2Node(x, y) ?: continue
-                val neighbours = getNeighbours(currentTile)
-                neighbours.forEach {
-                    addWeightlessEdge(currentTile, it)
-                }
-            }
-        }
-    }
-
     /** Connects all nodes in the grid with their straight neighbours, i.e. top, down, left, right neighbours */
     fun connectGridDefault() {
         connectGrid { getStraightNeighbours(it) }
-    }
-
-    fun connectGridWeightlessDefault() {
-        connectGridWeightless { getStraightNeighbours(it) }
     }
 
     fun markCharAsWall(c: Char) { // TODO: make general, not just for chars
@@ -144,8 +96,6 @@ class Grid(val width: Int, val height: Int) : GraphContract<Tile>(width * height
                 nodes[i] = null
         }
     }
-
-    fun trueSize() = nodes.filterNotNull().size
 
     fun print() {
         val padding = nodes().maxOf { it.data.toString().length }

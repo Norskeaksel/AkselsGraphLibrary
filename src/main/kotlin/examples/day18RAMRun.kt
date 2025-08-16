@@ -12,7 +12,7 @@ fun day18a(input: List<String>, gridSize: Int, lineCount: Int): Int {
         val corruptId = grid.xy2Id(x, y)!!
         grid.deleteNodeAtIndex(corruptId)
     }
-    grid.connectGridWeightlessDefault()
+    grid.connectGridDefault()
     grid.bfs(listOf(Tile(0,0)))
     val ans = grid.distanceTo(grid.xy2Node(gridSize - 1, gridSize - 1)!!).toInt()
     return ans

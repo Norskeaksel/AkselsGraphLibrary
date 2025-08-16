@@ -15,7 +15,7 @@ fun RepostsBFS(): Int {
     val g = Graph()
     repeat(n){
         val (v,_,u) = readStrings(3).map { it.lowercase(Locale.getDefault()) }
-        g.addWeightlessEdge(u,v)
+        g.addEdge(u,v)
     }
     var longestChain = 0
     val nodes = g.nodes().map { it as String }
