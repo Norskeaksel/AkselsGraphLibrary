@@ -24,7 +24,7 @@ class Graph: BaseGraph<Any>(0) {
     override fun id2Node(id: Int): Any? = id2Node[id]
 
 
-    override fun nodes(): List<Any> = id2Node.values.toList()
+    override fun getAllNodes(): List<Any> = id2Node.values.toList()
     fun <T> getCastedNodes(): List<T> = id2Node.values.map { it as T }
     fun size() = nrOfNodes
     override fun toString(): String {

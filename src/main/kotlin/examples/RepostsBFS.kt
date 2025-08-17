@@ -18,7 +18,7 @@ fun RepostsBFS(): Int {
         g.addEdge(u,v)
     }
     var longestChain = 0
-    val nodes = g.nodes().map { it as String }
+    val nodes = g.getAllNodes().map { it as String }
     repeat(n){
         g.bfs(nodes[it])
         longestChain = max(longestChain, g.maxDistance().toInt()+1)

@@ -18,7 +18,7 @@ fun main() {
     // Nodes in a grid consists of Tile objects with x, y coordinates and data
     val startNode = Tile(0, 0, 'S')
     grid.bfs(startNode)
-    val nodes = grid.nodes()
+    val nodes = grid.getAllNodes()
     nodes.forEach { node ->
         val distValue = grid.distanceTo(node)
         println("To node $node: $distValue")

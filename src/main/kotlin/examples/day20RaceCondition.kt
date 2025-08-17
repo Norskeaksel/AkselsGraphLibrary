@@ -17,8 +17,8 @@ fun day20a(input: List<String>, cheatGoal: Int, fairTime: Int): Int {
             else null
         }
     }
-    val startNode = grid.nodes().first { it.data == 'S' }
-    val endNode = grid.nodes().last { it.data == 'E' }
+    val startNode = grid.getAllNodes().first { it.data == 'S' }
+    val endNode = grid.getAllNodes().last { it.data == 'E' }
 
     var timeSaved = fairTime
     var c = -1

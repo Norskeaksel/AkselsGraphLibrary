@@ -41,7 +41,7 @@ abstract class BaseGraph<T>(size: Int) {
 
     // FUNCTIONS TO OVERRIDE
 
-    abstract fun nodes(): List<T>
+    abstract fun getAllNodes(): List<T>
     protected abstract fun id2Node(id: Int): T?
     protected abstract fun node2Id(node: T): Int?
     abstract fun addNode(node: T)

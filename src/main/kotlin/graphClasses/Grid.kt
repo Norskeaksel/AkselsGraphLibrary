@@ -36,7 +36,7 @@ class Grid(val width: Int, val height: Int) : BaseGraph<Tile>(width * height) {
 
     override fun id2Node(id: Int) = if (id in 0 until width * height) nodes[id] else null
     override fun node2Id(node: Tile) = node.x + node.y * width
-    override fun nodes(): List<Tile> = nodes.filterNotNull().filter { it.x != -1 }
+    override fun getAllNodes(): List<Tile> = nodes.filterNotNull().filter { it.x != -1 }
     fun xyInRange(x: Int, y: Int) = x in 0 until width && y in 0 until height
     fun xy2Id(x: Int, y: Int) = if (xyInRange(x, y)) x + y * width else null
     fun xy2Node(x: Int, y: Int) = if (xyInRange(x, y)) id2Node(xy2Id(x, y)!!) else null
@@ -98,7 +98,7 @@ class Grid(val width: Int, val height: Int) : BaseGraph<Tile>(width * height) {
     }
 
     fun print() {
-        val padding = nodes().maxOf { it.data.toString().length }
+        val padding = getAllNodes().maxOf { it.data.toString().length }
         nodes.forEachIndexed { id, t ->
             if (id > 0 && id % width == 0)
                 println()

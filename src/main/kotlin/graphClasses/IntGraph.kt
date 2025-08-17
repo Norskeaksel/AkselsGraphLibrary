@@ -13,7 +13,7 @@ class IntGraph(initialSize: Int = 0) : BaseGraph<Int>(initialSize) {
     }
     override fun id2Node(id: Int) = id
     override fun node2Id(node: Int) = node
-    override fun nodes(): List<Int> = adjacencyList.indices.toList()
+    override fun getAllNodes(): List<Int> = adjacencyList.indices.toList()
 
     /** When performance is critical and the graph is unweighted, adding unweighted edges can reduce program overhead */
     fun addUnweightedEdge(from: Int, to: Int) {

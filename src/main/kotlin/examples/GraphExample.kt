@@ -48,7 +48,7 @@ fun main() {
         }
     }
     intGraph.dijkstra(startNode)
-    val intNodes: List<Int> = intGraph.nodes()
+    val intNodes: List<Int> = intGraph.getAllNodes()
     println("Shortest paths from source node $startNode:")
     intNodes.forEach{ node ->
         val distValue = intGraph.distanceTo(node)

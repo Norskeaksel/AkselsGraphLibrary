@@ -10,7 +10,7 @@ fun main() {
 
 fun getNrOfGroups(grid: Grid): Int {
     val groups = mutableListOf<List<Tile>>()
-    grid.nodes().forEach { node ->
+    grid.getAllNodes().forEach { node ->
         grid.dfs(node, reset = false) // TODO figrure out how this affeccts the adjacency list
         grid.currentVisited.let {
             if (it.isNotEmpty())

@@ -6,13 +6,13 @@ fun day10a(input: List<String>): Long {
     var ans = 0L
     val grid = Grid(input)
     grid.print()
-    grid.nodes().forEach { t ->
+    grid.getAllNodes().forEach { t ->
         grid.getStraightNeighbours(t).forEach { n ->
             if (n.data == t.data as Char + 1)
                 grid.addEdge(t, n)
         }
     }
-    grid.nodes().forEach {
+    grid.getAllNodes().forEach {
         if (it.data != '0')
             return@forEach
         grid.dfs(it)
