@@ -90,13 +90,6 @@ class Grid(val width: Int, val height: Int) : BaseGraph<Tile>(width * height) {
         connectGrid { getStraightNeighbours(it) }
     }
 
-    fun markCharAsWall(c: Char) { // TODO: make general, not just for chars
-        nodes.indices.forEach { i ->
-            if (nodes[i]?.data == c)
-                nodes[i] = null
-        }
-    }
-
     fun print() {
         val padding = getAllNodes().maxOf { it.data.toString().length }
         nodes.forEachIndexed { id, t ->
