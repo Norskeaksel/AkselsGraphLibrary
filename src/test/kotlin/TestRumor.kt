@@ -18,13 +18,19 @@ class RumorTest {
     }
 
     @Test
-    fun KingEscape3a() {
+    fun Rumora() {
         _reader = File("src/test/SampleInput/Rumor/input1").inputStream().bufferedReader()
         assertThat(rumor()).isEqualTo(10)
     }
     @Test
-    fun KingEscape3b() {
+    fun Rumorb() {
         _reader = File("src/test/SampleInput/Rumor/input2").inputStream().bufferedReader()
+        assertThat(rumor()).isEqualTo(55)
+    }
+
+    @Test
+    fun Rumorc() {
+        _reader = File("src/test/SampleInput/Rumor/input3").inputStream().bufferedReader()
         assertThat(rumor()).isEqualTo(15)
     }
 }
