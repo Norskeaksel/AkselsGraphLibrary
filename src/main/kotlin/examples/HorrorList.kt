@@ -2,7 +2,7 @@ package examples
 
 import graphClasses.*
 
-// https://open.kattis.com/problems/horror?editresubmit=17527573
+// https://open.kattis.com/problems/horror
 fun main() {
     val ans = horrorList(); _writer.flush()
     println(ans)
