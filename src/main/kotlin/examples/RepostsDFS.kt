@@ -18,11 +18,10 @@ fun repostsDFS(): Int {
         val (v,_,u) = readStrings(3).map { it.lowercase(Locale.getDefault()) }
         g.addEdge(u,v)
     }
-    val dfs = DFS(g.unweightedAdjacencyList)
     var longestChain = 0
-    repeat(n){
-        dfs.dfs(it)
-        longestChain = max(longestChain, dfs.depth)
+    g.getAllNodes().forEach { node ->
+        g.dfs(node)
+        longestChain = max(longestChain, g.depth)
     }
     return longestChain
 }

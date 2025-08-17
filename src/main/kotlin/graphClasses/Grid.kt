@@ -45,7 +45,7 @@ class Grid(val width: Int, val height: Int) : BaseGraph<Tile>(width * height) {
         nodes[index] = null
     }
 
-    fun deleteNodeWithData(data: Any?) {
+    fun deleteNodesWithData(data: Any?) {
         nodes.indices.forEach { i ->
             if (nodes[i]?.data == data) {
                 deleteNodeAtIndex(i)

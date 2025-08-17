@@ -29,7 +29,7 @@ fun honeyheist(): String {
     grid.print()
     repeat(w) {
         val wallId = readInt()
-        grid.deleteNodeWithData(wallId)
+        grid.deleteNodesWithData(wallId)
     }
 
     grid.print()

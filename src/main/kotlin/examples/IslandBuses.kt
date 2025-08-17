@@ -27,18 +27,18 @@ fun islandBuses(): String {
     maps.forEachIndexed { i, mapString ->
         val mapList = mapString.split("\n")
         val islandGrid = Grid(mapList).apply {
-            deleteNodeWithData('.')
-            deleteNodeWithData('B')
+            deleteNodesWithData('.')
+            deleteNodesWithData('B')
             connectGridDefault()
         }
         val bridgesGrid = Grid(mapList).apply {
-            deleteNodeWithData('.')
-            deleteNodeWithData('X')
-            deleteNodeWithData('#')
+            deleteNodesWithData('.')
+            deleteNodesWithData('X')
+            deleteNodesWithData('#')
             connectGridDefault()
         }
         val busesGrid = Grid(mapList).apply {
-            deleteNodeWithData('.')
+            deleteNodesWithData('.')
             connectGrid {
                 when (it.data) {
                     '#' -> getStraightNeighbours(it).filter { it.data != 'B' }
