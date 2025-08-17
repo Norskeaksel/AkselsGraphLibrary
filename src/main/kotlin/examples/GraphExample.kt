@@ -19,10 +19,10 @@ fun main() {
 
     val startNode = 0
     graph.dijkstra(startNode)
-    val nodes: List<Int> = graph.getCastedNodes()
+    val nodes: List<Int> = graph.getCastedNodes() // Nodes are of type Any and must therefor be casted to Int
     println("Shortest paths from source node $startNode:")
-    repeat(graph.size()) { node ->
-        val distValue = graph.distanceTo(nodes[node])
+    nodes.forEach { node ->
+        val distValue = graph.distanceTo(node)
         val path = graph.getPath(node)
         println("To node $node: Distance $distValue Path: ${if (distValue < Int.MAX_VALUE) path else null}")
     }
