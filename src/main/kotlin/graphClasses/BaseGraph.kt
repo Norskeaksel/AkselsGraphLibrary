@@ -16,7 +16,7 @@ abstract class BaseGraph<T>(size: Int) {
     /** A cached, weightless representation of the graph's adjacency list, that is updated whenever it's needed. */
     var unweightedAdjacencyList: WeightlessAdjacencyList = MutableList(size) { mutableListOf() }
         get() {
-            if (nrOfConnections(field) < nrOfConnections(adjacencyList)) {
+            if (field.isEmpty() || nrOfConnections(field) < nrOfConnections(adjacencyList)) {
                 System.err.println("Optimizing adjacency list by converting to weightless representation.")
                 field = adjacencyList.toWeightlessAdjacencyList()
             }
