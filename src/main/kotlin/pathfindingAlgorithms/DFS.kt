@@ -1,16 +1,17 @@
 package pathfindingAlgorithms
 
-import WeightlessAdjacencyList
+import UnweightedAdjacencyList
 
 
 class DFS(
-    private val weightlessAdjacencyList: WeightlessAdjacencyList,
-    var visited: BooleanArray = BooleanArray(weightlessAdjacencyList.size)
+    private val unweightedAdjacencyList: UnweightedAdjacencyList,
+    var visited: BooleanArray = BooleanArray(unweightedAdjacencyList.size),
+    val nodesAreDeleted: List<Boolean> = MutableList(unweightedAdjacencyList.size) { false }
 ) {
     var size = 0
 
     init {
-        size = weightlessAdjacencyList.size
+        size = unweightedAdjacencyList.size
     }
 
     var processedOrder = mutableListOf<Int>()
@@ -24,7 +25,7 @@ class DFS(
         if (currentId in currentVisited) // Slow but simple. Preserves order in visited Ids
             return
         currentVisited.add(currentId)
-        weightlessAdjacencyList[currentId].forEach { connectedNodeId ->
+        unweightedAdjacencyList[currentId].forEach { connectedNodeId ->
             dfsSimple(connectedNodeId)
         }
     }
@@ -41,7 +42,7 @@ class DFS(
             currentDepth++
             depth = currentDepth.coerceAtLeast(depth)
 
-            weightlessAdjacencyList[id].forEach { v ->
+            unweightedAdjacencyList[id].forEach { v ->
                 parent[v] = id
                 this.callRecursive(v)
             }
@@ -52,14 +53,14 @@ class DFS(
     }
 
     fun stronglyConnectedComponents(): List<List<Int>> {
-        val reversedGraph: WeightlessAdjacencyList = MutableList<MutableList<Int>>(size) { mutableListOf() }.apply {
-            weightlessAdjacencyList.forEachIndexed { u, neighbors ->
+        val reversedGraph: UnweightedAdjacencyList = MutableList<MutableList<Int>>(size) { mutableListOf() }.apply {
+            unweightedAdjacencyList.forEachIndexed { u, neighbors ->
                 neighbors.forEach { v ->
                     this[v].add(u)
                 }
             }
         }
-        val topologicalOrder = DFS(reversedGraph).topologicalSort().reversed()
+        val topologicalOrder = DFS(reversedGraph, nodesAreDeleted = nodesAreDeleted).topologicalSort().reversed()
         val stronglyConnectedComponents = mutableListOf<List<Int>>()
         topologicalOrder.forEach { id ->
             if (visited[id])
@@ -72,6 +73,7 @@ class DFS(
 
     fun topologicalSort(): List<Int> {
         for (i in 0 until size) {
+            if (nodesAreDeleted[i]) continue
             dfs(i)
         }
         return processedOrder//.reversed() //Reversed depending on the order

@@ -20,6 +20,11 @@ class Graph: BaseGraph<Any>(0) {
         val id2 = node2id[node2] ?: addNode(node2).run { node2id[node2]!! }
         adjacencyList[id1].add(Pair(weight, id2))
     }
+    override fun addUnweightedEdge(node1: Any, node2: Any) {
+        val id1 = node2id[node1] ?: addNode(node1).run { node2id[node1]!! }
+        val id2 = node2id[node2] ?: addNode(node2).run { node2id[node2]!! }
+        unweightedAdjacencyList[id1].add(id2)
+    }
     override fun node2Id(node: Any): Int? = node2id[node]
     override fun id2Node(id: Int): Any? = id2Node[id]
 

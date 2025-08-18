@@ -1,8 +1,8 @@
 package pathfindingAlgorithms
 
-import WeightlessAdjacencyList
+import UnweightedAdjacencyList
 
-class BFS(val graph: WeightlessAdjacencyList) {
+class BFS(val graph: UnweightedAdjacencyList) {
 
     private val d = 1.0
     private val size = graph.size

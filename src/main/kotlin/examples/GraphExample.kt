@@ -1,3 +1,4 @@
+/*
 package examples
 
 import graphClasses.Graph
@@ -26,7 +27,8 @@ fun main() {
         val path = graph.getPath(node)
         println("To node $node: Distance $distValue Path: ${if (distValue < Int.MAX_VALUE) path else null}")
     }
-    /* Output:
+    */
+/* Output:
     Shortest paths from source node 0:
     Distance to node 0: 0.0 Path: [0]
     Distance to node 1: 7.0 Path: [0, 2, 1]
@@ -34,12 +36,15 @@ fun main() {
     Distance to node 3: 9.0 Path: [0, 2, 1, 3]
     Distance to node 4: 5.0 Path: [0, 2, 4]
     Distance to node 5: Infinity Path: null
-    */
+    *//*
 
-    /* --- Example IntGraph Definition ---
+
+    */
+/* --- Example IntGraph Definition ---
      * An IntGraph can be defined the same way as the Graph same way as above,
      * but it can also be initialized with a size, because the nodes are integers values from 0 to n-1.
-     */
+     *//*
+
     val n = graph.size()
     val intGraph = IntGraph(n)
     graph.adjacencyList.forEachIndexed { node, edges -> // Add the same edges as the above Graph
@@ -56,4 +61,4 @@ fun main() {
         println("To node $node: Distance $distValue Path: ${if (distValue < Int.MAX_VALUE) path else null}")
     }
     // Outputs the same as the code above
-}
+}*/

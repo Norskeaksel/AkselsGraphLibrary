@@ -8,18 +8,6 @@ fun main() {
     println(ans)
 }
 
-fun getNrOfGroups(grid: Grid): Int {
-    val groups = mutableListOf<List<Tile>>()
-    grid.getAllNodes().forEach { node ->
-        grid.dfs(node, reset = false)
-        grid.currentVisited.let {
-            if (it.isNotEmpty())
-                groups.add(it)
-        }
-    }
-    return groups.size
-}
-
 fun islandBuses(): String {
     val input = readLines()
     val maps = input.joinToString("\n").split("\n\n")
@@ -47,9 +35,9 @@ fun islandBuses(): String {
                 }
             }
         }
-        val islands = getNrOfGroups(islandGrid)
-        val bridges = getNrOfGroups(bridgesGrid)
-        val buses = getNrOfGroups(busesGrid)
+        val islands = islandGrid.stronglyConnectedComponents().size
+        val bridges = bridgesGrid.stronglyConnectedComponents().size
+        val buses = busesGrid.stronglyConnectedComponents().size
         ans.add(
             """
             Map ${i + 1}

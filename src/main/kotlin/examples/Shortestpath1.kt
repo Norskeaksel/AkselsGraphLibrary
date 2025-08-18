@@ -18,16 +18,13 @@ fun main(){
             val (u,v,w) = readInts(3)
             g.addEdge(u,v,w.toDouble())
         }
-        val distance = Dijkstra(g.adjacencyList).run {
-            this.dijkstra(s)
-            this.distances
-        }
+        g.dijkstra(s)
         repeat(q){
             val goal = readInt()
-            if(distance[goal] == Double.POSITIVE_INFINITY)
+            if(g.distanceTo(goal) == Double.POSITIVE_INFINITY)
                 println("Impossible")
             else
-                println(distance[goal].toInt())
+                println(g.distanceTo(goal).toInt())
         }
     }
 }

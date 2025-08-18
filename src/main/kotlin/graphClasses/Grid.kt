@@ -34,21 +34,42 @@ class Grid(val width: Int, val height: Int) : BaseGraph<Tile>(width * height) {
         adjacencyList[u].add(Edge(weight, v))
     }
 
+    override fun addUnweightedEdge(node1: Tile, node2: Tile) {
+        val u = node2Id(node1)
+        val v = node2Id(node2)
+        unweightedAdjacencyList[u].add(v)
+    }
+
     override fun id2Node(id: Int) = if (id in 0 until width * height) nodes[id] else null
     override fun node2Id(node: Tile) = node.x + node.y * width
     override fun getAllNodes(): List<Tile> = nodes.filterNotNull().filter { it.x != -1 }
+
     fun xyInRange(x: Int, y: Int) = x in 0 until width && y in 0 until height
-    fun xy2Id(x: Int, y: Int) = if (xyInRange(x, y)) x + y * width else null
+    private fun xy2Id(x: Int, y: Int) = if (xyInRange(x, y)) x + y * width else null
     fun xy2Node(x: Int, y: Int) = if (xyInRange(x, y)) id2Node(xy2Id(x, y)!!) else null
-    fun getEdges(t: Tile): List<Edge> = adjacencyList[node2Id(t)]
-    fun deleteNodeAtIndex(index: Int) {
-        nodes[index] = null
+    private fun deleteNodeId(id: Int) {
+        if (adjacencyList[id].isNotEmpty() || unweightedAdjacencyList[id].isNotEmpty()) {
+            System.err.println(
+                "Warning: node ${nodes[id]} is already connected in the grid. Future connections to it" +
+                        " will not be possible after it's deletion, but it's existing connections will not be overwritten" +
+                        ". it's recommened to connect your grid after all node deletions are complete."
+            )
+        }
+        nodes[id] = null
+    }
+
+    fun deleteNodeAtXY(x: Int, y: Int) {
+        val id = xy2Id(x, y) ?: run {
+            System.err.println("Warning, coordinates ($x, $y) are outside the grid")
+            return
+        }
+        deleteNodeId(id)
     }
 
     fun deleteNodesWithData(data: Any?) {
         nodes.indices.forEach { i ->
             if (nodes[i]?.data == data) {
-                deleteNodeAtIndex(i)
+                deleteNodeId(i)
             }
         }
     }
@@ -74,12 +95,17 @@ class Grid(val width: Int, val height: Int) : BaseGraph<Tile>(width * height) {
     fun getAllNeighbours(t: Tile) = getStraightNeighbours(t) + getDiagonalNeighbours(t)
 
     fun connectGrid(getNeighbours: (t: Tile) -> List<Tile>) {
+        if (nrOfConnections(unweightedAdjacencyList) > 0) {
+            System.err.println("Warning: overwriting existing connections in the grid")
+            adjacencyList.forEach { it.clear() }
+            unweightedAdjacencyList.forEach { it.clear() }
+        }
         for (x in 0 until width) {
             for (y in 0 until height) {
                 val currentTile = xy2Node(x, y) ?: continue
                 val neighbours = getNeighbours(currentTile)
                 neighbours.forEach {
-                    addEdge(currentTile, it, 1.0)
+                    addUnweightedEdge(currentTile, it)
                 }
             }
         }

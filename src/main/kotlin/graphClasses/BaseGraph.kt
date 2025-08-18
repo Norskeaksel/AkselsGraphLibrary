@@ -2,27 +2,29 @@ package graphClasses
 
 import AdjacencyList
 import Edge
-import WeightlessAdjacencyList
+import UnweightedAdjacencyList
 import pathfindingAlgorithms.BFS
 import pathfindingAlgorithms.DFS
 import pathfindingAlgorithms.Dijkstra
-import toWeightlessAdjacencyList
+import toUnweightedAdjacencyList
 
 
 abstract class BaseGraph<T>(size: Int) {
+    private fun adjacencyListInit(size: Int): AdjacencyList = MutableList(size) { mutableListOf() }
+
     // PROPERTIES
-    val adjacencyList = adjacencyListInit(size)
+    protected val adjacencyList = adjacencyListInit(size)
 
     /** A cached, weightless representation of the graph's adjacency list, that is updated whenever it's needed. */
-    var unweightedAdjacencyList: WeightlessAdjacencyList = MutableList(size) { mutableListOf() }
+    protected var unweightedAdjacencyList: UnweightedAdjacencyList = mutableListOf()
         get() {
-            if (field.isEmpty() || nrOfConnections(field) < nrOfConnections(adjacencyList)) {
-                System.err.println("Optimizing adjacency list by converting to weightless representation.")
-                field = adjacencyList.toWeightlessAdjacencyList()
+            if (field.isEmpty() || field.size < adjacencyList.size ||
+                nrOfConnections(field) < nrOfConnections(adjacencyList)
+            ) {
+                field = adjacencyList.toUnweightedAdjacencyList()
             }
             return field
         }
-
     protected var nodes = MutableList<T?>(size) { null }
     private var distances = DoubleArray(size) { Double.MAX_VALUE }
     var currentVisited = listOf<T>()
@@ -47,6 +49,9 @@ abstract class BaseGraph<T>(size: Int) {
     abstract fun addNode(node: T)
     abstract fun addEdge(node1: T, node2: T, weight: Double = 1.0)
 
+    /** When performance is critical and the graph is unweighted, adding unweighted edges can reduce program overhead */
+    abstract fun addUnweightedEdge(node1: T, node2: T)
+
     // FUNCTIONS TO INHERIT
     fun <N : Number> connect(node1: T, node2: T, weight: N) {
         val weightDouble = weight.toDouble()
@@ -55,6 +60,11 @@ abstract class BaseGraph<T>(size: Int) {
     }
 
     fun connect(node1: T, node2: T) = connect(node1, node2, 1.0)
+    fun connectUnweighted(node1: T, node2: T) {
+        addUnweightedEdge(node1, node2)
+        addUnweightedEdge(node2, node1)
+    }
+
     private fun removeEdge(id1: Int, id2: Int, weight: Double? = null) {
         if (weight == null)
             adjacencyList[id1].removeAll { it.second == id2 }
@@ -77,8 +87,6 @@ abstract class BaseGraph<T>(size: Int) {
         removeEdge(u, v, weight)
     }
 
-    fun adjacencyListInit(size: Int): AdjacencyList = MutableList(size) { mutableListOf() }
-
     fun distanceTo(node: T): Double {
         val id = node2Id(node) ?: error("Node $node not found in graph")
         return distances[id]
@@ -100,14 +108,19 @@ abstract class BaseGraph<T>(size: Int) {
 
     private fun useWeightedConnectionsIfNeeded() {
         if (nrOfConnections(unweightedAdjacencyList) == 0) {
-            unweightedAdjacencyList = adjacencyList.toWeightlessAdjacencyList()
+            unweightedAdjacencyList = adjacencyList.toUnweightedAdjacencyList()
             if (nrOfConnections(unweightedAdjacencyList) == 0) {
-                System.err.println("Warning, the graph has no connections, making pathfinding infeasible.")
+                System.err.println("Warning: The graph has no connections, making pathfinding infeasible.")
+            } else {
+                System.err.println(
+                    "Warning: An unweighted adjacency list is required. " +
+                            "Building one from the adjacencyList."
+                )
             }
         }
     }
 
-    private fun <T> nrOfConnections(twoDList: List<List<T>>) = twoDList.sumOf { it.size }
+    protected fun <T> nrOfConnections(twoDList: List<List<T>>) = twoDList.sumOf { it.size }
 
     fun bfs(startNode: T, target: T? = null) = bfs(listOf(startNode), target)
 
@@ -121,8 +134,13 @@ abstract class BaseGraph<T>(size: Int) {
     }
 
     fun dijkstra(startNode: T, target: T? = null) {
-        if (nrOfConnections(adjacencyList) < nrOfConnections(unweightedAdjacencyList)) {
-            System.err.println("Warning: adjacencyList has fewer connections than the unweightedAdjacencyList, indicating an error in the graph construction.")
+        if (nrOfConnections(adjacencyList) == 0) {
+            System.err.println("Warning: The adjacently list has no connections, making pathfinding infeasible.")
+            if (nrOfConnections(unweightedAdjacencyList) != 0) {
+                System.err.println("The graph does have unweighted connections. Executing BFS instead.")
+                bfs(startNode, target)
+                return
+            }
         }
         val startId = node2Id(startNode) ?: error("Node $startNode not found in graph")
         val targetId = target?.let { node2Id(it) } ?: -1
@@ -133,7 +151,9 @@ abstract class BaseGraph<T>(size: Int) {
     }
 
     fun topologicalSort() = DFS(unweightedAdjacencyList).topologicalSort()
-    fun stronglyConnectedComponents() = DFS(unweightedAdjacencyList).stronglyConnectedComponents()
+    fun stronglyConnectedComponents() = DFS(unweightedAdjacencyList, nodesAreDeleted =
+    nodes.map { it==null }).stronglyConnectedComponents()
+
     fun getPath(target: T): List<T> {
         val targetId = node2Id(target)
         val pathIds = getPath(targetId, parents)
@@ -157,6 +177,7 @@ abstract class BaseGraph<T>(size: Int) {
         addEdge(node1, node2, weight.toDouble())
     }
 
+    fun getNeighbours(t: T) = unweightedAdjacencyList[node2Id(t)!!]
     fun printConnections() = printAdjacencyList(false)
     fun printWeightlessConnections() = printAdjacencyList(true)
 

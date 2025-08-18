@@ -13,7 +13,7 @@ fun rumor(): Long {
     }
     repeat(m) {
         val (x, y) = readInts(2)
-        g.connect(x, y)
+        g.connectUnweighted(x, y)
     }
     val components = g.stronglyConnectedComponents()
     System.err.println(components)

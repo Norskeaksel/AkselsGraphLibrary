@@ -23,14 +23,13 @@ fun baas(): Int {
             intGraph.addUnweightedEdge(step_i, a_j)
         }
     }
-    val weightlessAdjacencyList = intGraph.unweightedAdjacencyList
     var optimizedTime = Int.MAX_VALUE
     val time = measureTimeMillis {
         val topologicalOrder = intGraph.topologicalSort()
         val totalStepTime = IntArray(n)
         topologicalOrder.indices.forEach {
             topologicalOrder.forEachIndexed { i, node ->
-                totalStepTime[node] = stepTime[node] + (weightlessAdjacencyList[node].maxOfOrNull { totalStepTime[it] } ?: 0)
+                totalStepTime[node] = stepTime[node] + (intGraph.getNeighbours(node).maxOfOrNull { totalStepTime[it] } ?: 0)
                 if (i == it)
                     totalStepTime[node] -= stepTime[node]
             }

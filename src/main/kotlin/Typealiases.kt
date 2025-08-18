@@ -2,6 +2,6 @@
 typealias Edge = Pair<Double, Int>
 typealias Edges = MutableList<Edge>
 typealias AdjacencyList = MutableList<Edges>
-typealias WeightlessAdjacencyList = MutableList<MutableList<Int>>
+typealias UnweightedAdjacencyList = MutableList<MutableList<Int>>
 
-fun AdjacencyList.toWeightlessAdjacencyList() = map { edges -> edges.map { it.second }.toMutableList() }.toMutableList()
+fun AdjacencyList.toUnweightedAdjacencyList() = map { edges -> edges.map { it.second }.toMutableList() }.toMutableList()
