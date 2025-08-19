@@ -4,14 +4,14 @@ import UnweightedAdjacencyList
 
 
 class DFS(
-    private val unweightedAdjacencyList: UnweightedAdjacencyList,
-    var visited: BooleanArray = BooleanArray(unweightedAdjacencyList.size),
-    val nodesAreDeleted: List<Boolean> = MutableList(unweightedAdjacencyList.size) { false }
+    private val graph: UnweightedAdjacencyList,
+    val visited: BooleanArray = BooleanArray(graph.size),
+    val nodesAreDeleted: List<Boolean> = MutableList(graph.size) { false }
 ) {
     var size = 0
 
     init {
-        size = unweightedAdjacencyList.size
+        size = graph.size
     }
 
     var processedOrder = mutableListOf<Int>()
@@ -25,24 +25,27 @@ class DFS(
         if (currentId in currentVisited) // Slow but simple. Preserves order in visited Ids
             return
         currentVisited.add(currentId)
-        unweightedAdjacencyList[currentId].forEach { connectedNodeId ->
+        graph[currentId].forEach { connectedNodeId ->
             dfsSimple(connectedNodeId)
         }
     }
 
     fun dfs(start: Int) {
+        if(nodesAreDeleted?.get(start) == true){
+            System.err.println("Warning: Starting node is deleted, cannot perform DFS.")
+            return
+        }
         var currentDepth = 0
         clearCurrentVisitedIds()
         DeepRecursiveFunction<Int, Unit> { id ->
-            if (visited[id])
-                return@DeepRecursiveFunction
+            if (visited[id] || (nodesAreDeleted?.get(id) == true)) return@DeepRecursiveFunction
             visited[id] = true
             currentVisited.add(id)
             currentVisitedDepts.add(currentDepth)
             currentDepth++
             depth = currentDepth.coerceAtLeast(depth)
 
-            unweightedAdjacencyList[id].forEach { v ->
+            graph[id].forEach { v ->
                 parent[v] = id
                 this.callRecursive(v)
             }
@@ -54,7 +57,7 @@ class DFS(
 
     fun stronglyConnectedComponents(): List<List<Int>> {
         val reversedGraph: UnweightedAdjacencyList = MutableList<MutableList<Int>>(size) { mutableListOf() }.apply {
-            unweightedAdjacencyList.forEachIndexed { u, neighbors ->
+            graph.forEachIndexed { u, neighbors ->
                 neighbors.forEach { v ->
                     this[v].add(u)
                 }
@@ -73,7 +76,7 @@ class DFS(
 
     fun topologicalSort(): List<Int> {
         for (i in 0 until size) {
-            if (nodesAreDeleted[i]) continue
+            if (nodesAreDeleted?.get(i) == true) continue
             dfs(i)
         }
         return processedOrder//.reversed() //Reversed depending on the order

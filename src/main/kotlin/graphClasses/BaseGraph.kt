@@ -120,6 +120,17 @@ abstract class BaseGraph<T>(size: Int) {
         }
     }
 
+    protected fun deleteNodeId(id:Int){
+        nodes[id] = null
+    }
+    fun deleteNode(node: T){
+        val id = node2Id(node) ?: run {
+            System.err.println("Warning, node $node not found in graph")
+            return
+        }
+        deleteNodeId(id)
+    }
+
     protected fun <T> nrOfConnections(twoDList: List<List<T>>) = twoDList.sumOf { it.size }
 
     fun bfs(startNode: T, target: T? = null) = bfs(listOf(startNode), target)

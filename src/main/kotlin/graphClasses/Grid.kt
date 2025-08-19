@@ -47,16 +47,6 @@ class Grid(val width: Int, val height: Int) : BaseGraph<Tile>(width * height) {
     fun xyInRange(x: Int, y: Int) = x in 0 until width && y in 0 until height
     private fun xy2Id(x: Int, y: Int) = if (xyInRange(x, y)) x + y * width else null
     fun xy2Node(x: Int, y: Int) = if (xyInRange(x, y)) id2Node(xy2Id(x, y)!!) else null
-    private fun deleteNodeId(id: Int) {
-        if (adjacencyList[id].isNotEmpty() || unweightedAdjacencyList[id].isNotEmpty()) {
-            System.err.println(
-                "Warning: node ${nodes[id]} is already connected in the grid. Future connections to it" +
-                        " will not be possible after it's deletion, but it's existing connections will not be overwritten" +
-                        ". it's recommened to connect your grid after all node deletions are complete."
-            )
-        }
-        nodes[id] = null
-    }
 
     fun deleteNodeAtXY(x: Int, y: Int) {
         val id = xy2Id(x, y) ?: run {
