@@ -4,6 +4,7 @@ import AdjacencyList
 import Edge
 import UnweightedAdjacencyList
 import pathfindingAlgorithms.BFS
+import pathfindingAlgorithms.BaseGraphTraverser
 import pathfindingAlgorithms.DFS
 import pathfindingAlgorithms.Dijkstra
 import toUnweightedAdjacencyList
@@ -37,9 +38,7 @@ abstract class BaseGraph<T>(size: Int) {
 
     var depth = 0
         private set
-    private lateinit var bfsRunner: BFS
-    private lateinit var dfsRunner: DFS
-    private lateinit var dikjstraRunner: Dijkstra
+    private lateinit var graphTraverselResults: BaseGraphTraverser
 
     // FUNCTIONS TO OVERRIDE
 
@@ -99,11 +98,11 @@ abstract class BaseGraph<T>(size: Int) {
         useWeightedConnectionsIfNeeded()
         val nodeIds = startNodes.map { node -> node2Id(node) ?: error("Node $node not found in graph") }
         val targetId = target?.let { node2Id(it) } ?: -1
-        bfsRunner = BFS(unweightedAdjacencyList)
-        bfsRunner.bfs(nodeIds, targetId)
-        distances = bfsRunner.distances
-        parents = bfsRunner.parents
-        currentVisited = bfsRunner.getCurrentVisitedIds().mapNotNull { id2Node(it) }
+        graphTraverselResults = BFS(unweightedAdjacencyList)
+        graphTraverselResults.traverseGraphFrom(nodeIds, targetId)
+        distances = graphTraverselResults.distances
+        parents = graphTraverselResults.parents
+        currentVisited = graphTraverselResults.getCurrentVisitedIds().mapNotNull { id2Node(it) }
     }
 
     private fun useWeightedConnectionsIfNeeded() {

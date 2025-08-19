@@ -1,22 +1,20 @@
 package pathfindingAlgorithms
 
-import UnweightedAdjacencyList
+import GraphType
 
-class BFS(val graph: UnweightedAdjacencyList) {
+class BFS(override val graph: GraphType.Unweighted): BaseGraphTraverser(graph) {
 
-    private val d = 1.0
-    private val size = graph.size
-    var visited = BooleanArray(size)
-    val distances = DoubleArray(size)
-    private var currentVisited = mutableListOf<Int>()
-    private var currentVisitedDistances = mutableListOf<Double>()
     val parents = IntArray(graph.size) { -1 }
 
-    fun bfs(startIds: List<Int>, targetId: Int = -1) {
+    override fun traverseGraphFrom(startIds: List<Int>, targetId: Int, nodesAreDeleted: BooleanArray?) {
         currentVisited.clear()
         distances.fill(Double.MAX_VALUE)
         val queue = java.util.ArrayDeque<Int>()
         startIds.forEach {
+            if (nodesAreDeleted?.get(it) == true) {
+                System.err.println("Warning: Starting node $it is deleted, cannot perform BFS from it.")
+                return@forEach
+            }
             queue.add(it)
             distances[it] = 0.0
         }
@@ -30,9 +28,9 @@ class BFS(val graph: UnweightedAdjacencyList) {
             if (currentId == targetId)
                 return
             val currentDistance = distances[currentId]
-            currentVisitedDistances.add(currentDistance)
             graph[currentId].forEach { v ->
-                val newDistance = currentDistance + d
+                if(nodesAreDeleted?.get(v) == true) return@forEach
+                val newDistance = currentDistance + 1
                 if (!visited[v] && newDistance < distances[v]) { // Do distance check to avoid re queueing startIds
                     queue.add(v)
                     parents[v] = currentId
