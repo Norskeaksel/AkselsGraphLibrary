@@ -4,7 +4,7 @@ import AdjacencyList
 import Edge
 import UnweightedAdjacencyList
 import pathfindingAlgorithms.BFS
-import pathfindingAlgorithms.BaseGraphTraverser
+import pathfindingAlgorithms.SearchData
 import pathfindingAlgorithms.DFS
 import pathfindingAlgorithms.Dijkstra
 import toUnweightedAdjacencyList
@@ -38,7 +38,7 @@ abstract class BaseGraph<T>(size: Int) {
 
     var depth = 0
         private set
-    private lateinit var graphTraverselResults: BaseGraphTraverser
+    private lateinit var graphTraverselResults: SearchData
 
     // FUNCTIONS TO OVERRIDE
 

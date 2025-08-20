@@ -1,12 +1,13 @@
 package pathfindingAlgorithms
 
-import GraphType
+import UnweightedAdjacencyList
 
-class BFS(override val graph: GraphType.Unweighted): BaseGraphTraverser(graph) {
+
+class BFS(val graph: UnweightedAdjacencyList){
 
     val parents = IntArray(graph.size) { -1 }
 
-    override fun traverseGraphFrom(startIds: List<Int>, targetId: Int, nodesAreDeleted: BooleanArray?) {
+    fun bfs(startIds: List<Int>, targetId: Int, nodesAreDeleted: BooleanArray?) {
         currentVisited.clear()
         distances.fill(Double.MAX_VALUE)
         val queue = java.util.ArrayDeque<Int>()
