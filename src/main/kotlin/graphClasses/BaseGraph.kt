@@ -3,9 +3,7 @@ package graphClasses
 import AdjacencyList
 import Edge
 import UnweightedAdjacencyList
-import pathfindingAlgorithms.GraphSearchResults
-import pathfindingAlgorithms.DFS
-import pathfindingAlgorithms.Dijkstra
+import pathfindingAlgorithms.*
 import toUnweightedAdjacencyList
 
 
@@ -26,8 +24,9 @@ abstract class BaseGraph<T>(val size: Int) {
             return field
         }
     protected var nodes = MutableList<T?>(size) { null }
-    private fun deletedNodes():BooleanArray =
+    private fun deletedNodes(): BooleanArray =
         BooleanArray(size) { nodes[it] == null }
+
     private var distances = DoubleArray(size) { Double.MAX_VALUE }
     var currentVisited = listOf<T>()
         private set
@@ -95,12 +94,15 @@ abstract class BaseGraph<T>(val size: Int) {
     fun maxDistance() = distances.maxOrNull() ?: Double.MAX_VALUE
     fun furthestNode() = id2Node(distances.let { d -> d.indices.maxBy { d[it] } })!!
 
-    fun bfs(startNodes: List<T>, target: T? = null) {
+    fun bfs(startNodes: List<T>, target: T? = null, reset: Boolean = true) {
         useWeightedConnectionsIfNeeded()
-        val nodeIds = startNodes.map { node -> node2Id(node) ?: error("Node $node not found in graph") }
+        val startNodeIds = startNodes.map { node -> node2Id(node) ?: error("Node $node not found in graph") }
         val targetId = target?.let { node2Id(it) } ?: -1
-        graphTraverselResults = bfs(unweightedAdjacencyList, nodeIds, targetId, deletedNodes())
+        val initialVisited = if (reset) BooleanArray(size) { false } else visited
+        graphTraverselResults = BFS(unweightedAdjacencyList, initialVisited, deletedNodes()).bfs(startNodeIds, targetId)
     }
+
+    fun bfs(startNode: T, target: T? = null) = bfs(listOf(startNode), target)
 
     private fun useWeightedConnectionsIfNeeded() {
         if (nrOfConnections(unweightedAdjacencyList) == 0) {
@@ -116,10 +118,11 @@ abstract class BaseGraph<T>(val size: Int) {
         }
     }
 
-    protected fun deleteNodeId(id:Int){
+    protected fun deleteNodeId(id: Int) {
         nodes[id] = null
     }
-    fun deleteNode(node: T){
+
+    fun deleteNode(node: T) {
         val id = node2Id(node) ?: run {
             System.err.println("Warning, node $node not found in graph")
             return
@@ -129,15 +132,11 @@ abstract class BaseGraph<T>(val size: Int) {
 
     protected fun <T> nrOfConnections(twoDList: List<List<T>>) = twoDList.sumOf { it.size }
 
-    fun bfs(startNode: T, target: T? = null) = bfs(listOf(startNode), target)
 
     fun dfs(startNode: T, reset: Boolean = true) {
         val startId = node2Id(startNode) ?: error("Node $startNode not found in graph")
-        dfsRunner = if (reset) DFS(unweightedAdjacencyList) else DFS(unweightedAdjacencyList, visited)
-        dfsRunner.dfs(startId)
-        currentVisited = dfsRunner.getAndClearCurrentVisited().mapNotNull { id2Node(it) }
-        visited = dfsRunner.visited
-        depth = dfsRunner.depth
+        val initialVisted = if (reset) BooleanArray(size) { false } else visited
+        graphTraverselResults = DFS(unweightedAdjacencyList, initialVisted, deletedNodes()).dfs(startId)
     }
 
     fun dijkstra(startNode: T, target: T? = null) {
@@ -158,8 +157,8 @@ abstract class BaseGraph<T>(val size: Int) {
     }
 
     fun topologicalSort() = DFS(unweightedAdjacencyList).topologicalSort()
-    fun stronglyConnectedComponents() = DFS(unweightedAdjacencyList, nodesAreDeleted =
-    nodes.map { it==null }).stronglyConnectedComponents()
+    fun stronglyConnectedComponents() = DFS(unweightedAdjacencyList, deleted =
+    nodes.map { it == null }).stronglyConnectedComponents()
 
     fun getPath(target: T): List<T> {
         val targetId = node2Id(target)

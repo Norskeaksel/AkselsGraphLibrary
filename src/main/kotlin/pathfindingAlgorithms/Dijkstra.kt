@@ -5,12 +5,6 @@ import Edge
 import java.util.*
 
 class Dijkstra(private val graph: AdjacencyList) {
-    val distances = DoubleArray(graph.size) { Double.POSITIVE_INFINITY }
-    val parents = IntArray(graph.size) { -1 }
-    private val visited = BooleanArray(graph.size)
-    // var currentVisited = mutableListOf<Int>()
-    // var currentVisitedDistances = mutableListOf<Double>()
-
     private fun resetDistances() = distances.fill(Double.POSITIVE_INFINITY)
     private fun resetParents() = parents.fill(-1)
     private fun clearCurrents() {
