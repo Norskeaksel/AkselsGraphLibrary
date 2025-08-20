@@ -9,12 +9,11 @@ class DFS(
     val deleted: BooleanArray = BooleanArray(graph.size),
 ) {
     private var processedOrder = mutableListOf<Int>()
-    private var r = GraphSearchResults(graph.size)
 
     fun dfs(start: Int): GraphSearchResults {
+        val r = GraphSearchResults(graph.size).apply { this.visited = visited }
         if (deleted[start]) error("Starting node is deleted, cannot perform DFS.")
         var currentDepth = 0
-        clearCurrentVisitedIds()
         DeepRecursiveFunction<Int, Unit> { id ->
             if (r.visited[id] || deleted[id]) return@DeepRecursiveFunction
             r.visited[id] = true
@@ -44,8 +43,8 @@ class DFS(
         topologicalOrder.forEach { id ->
             if (visited[id])
                 return@forEach
-            dfs(id)
-            stronglyConnectedComponents.add(getAndClearCurrentVisited())
+            val searchResults = dfs(id)
+            stronglyConnectedComponents.add(searchResults.currentVisited)
         }
         return stronglyConnectedComponents
     }
