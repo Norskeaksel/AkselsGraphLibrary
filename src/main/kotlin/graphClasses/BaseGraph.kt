@@ -3,14 +3,13 @@ package graphClasses
 import AdjacencyList
 import Edge
 import UnweightedAdjacencyList
-import pathfindingAlgorithms.BFS
-import pathfindingAlgorithms.SearchData
+import pathfindingAlgorithms.GraphSearchResults
 import pathfindingAlgorithms.DFS
 import pathfindingAlgorithms.Dijkstra
 import toUnweightedAdjacencyList
 
 
-abstract class BaseGraph<T>(size: Int) {
+abstract class BaseGraph<T>(val size: Int) {
     private fun adjacencyListInit(size: Int): AdjacencyList = MutableList(size) { mutableListOf() }
 
     // PROPERTIES
@@ -27,6 +26,8 @@ abstract class BaseGraph<T>(size: Int) {
             return field
         }
     protected var nodes = MutableList<T?>(size) { null }
+    private fun deletedNodes():BooleanArray =
+        BooleanArray(size) { nodes[it] == null }
     private var distances = DoubleArray(size) { Double.MAX_VALUE }
     var currentVisited = listOf<T>()
         private set
@@ -38,7 +39,7 @@ abstract class BaseGraph<T>(size: Int) {
 
     var depth = 0
         private set
-    private lateinit var graphTraverselResults: SearchData
+    private lateinit var graphTraverselResults: GraphSearchResults
 
     // FUNCTIONS TO OVERRIDE
 
@@ -98,11 +99,7 @@ abstract class BaseGraph<T>(size: Int) {
         useWeightedConnectionsIfNeeded()
         val nodeIds = startNodes.map { node -> node2Id(node) ?: error("Node $node not found in graph") }
         val targetId = target?.let { node2Id(it) } ?: -1
-        graphTraverselResults = BFS(unweightedAdjacencyList)
-        graphTraverselResults.traverseGraphFrom(nodeIds, targetId)
-        distances = graphTraverselResults.distances
-        parents = graphTraverselResults.parents
-        currentVisited = graphTraverselResults.getCurrentVisitedIds().mapNotNull { id2Node(it) }
+        graphTraverselResults = bfs(unweightedAdjacencyList, nodeIds, targetId, deletedNodes())
     }
 
     private fun useWeightedConnectionsIfNeeded() {
