@@ -3,16 +3,17 @@ package pathfindingAlgorithms
 import UnweightedAdjacencyList
 
 
-class DFS(
-    private val graph: UnweightedAdjacencyList,
-    val visited: BooleanArray = BooleanArray(graph.size),
-    val deleted: BooleanArray = BooleanArray(graph.size),
-) {
+class DFS(private val graph: UnweightedAdjacencyList, private val deleted: BooleanArray = BooleanArray(graph.size)) {
     private var processedOrder = mutableListOf<Int>()
+    private var r = GraphSearchResults(graph.size)
 
-    fun dfs(start: Int): GraphSearchResults {
-        val r = GraphSearchResults(graph.size).apply { this.visited = visited }
+    fun dfs(
+        start: Int,
+        previousSearchResult: GraphSearchResults? = null,
+    ): GraphSearchResults {
         if (deleted[start]) error("Starting node is deleted, cannot perform DFS.")
+        r = previousSearchResult ?: GraphSearchResults(graph.size)
+        processedOrder.clear()
         var currentDepth = 0
         DeepRecursiveFunction<Int, Unit> { id ->
             if (r.visited[id] || deleted[id]) return@DeepRecursiveFunction
@@ -41,7 +42,7 @@ class DFS(
         val topologicalOrder = DFS(reversedGraph, deleted).topologicalSort().reversed()
         val stronglyConnectedComponents = mutableListOf<List<Int>>()
         topologicalOrder.forEach { id ->
-            if (visited[id])
+            if (r.visited[id] || deleted[id])
                 return@forEach
             val searchResults = dfs(id)
             stronglyConnectedComponents.add(searchResults.currentVisited)

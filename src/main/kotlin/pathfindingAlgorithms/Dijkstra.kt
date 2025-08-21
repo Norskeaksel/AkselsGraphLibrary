@@ -4,43 +4,31 @@ import AdjacencyList
 import Edge
 import java.util.*
 
-class Dijkstra(private val graph: AdjacencyList) {
-    private fun resetDistances() = distances.fill(Double.POSITIVE_INFINITY)
-    private fun resetParents() = parents.fill(-1)
-    private fun clearCurrents() {
-        // currentVisited = mutableListOf()
-        // currentVisitedDistances = mutableListOf()
-        visited.fill(false)
-    }
-
-    fun dijkstra(start: Int, target:Int = -1) {
-        resetDistances()
-        resetParents()
-        clearCurrents()
-        distances[start] = 0.0
+class Dijkstra(private val graph: AdjacencyList, private val deleted: BooleanArray = BooleanArray(graph.size)) {
+    private var r = GraphSearchResults(graph.size)
+    fun dijkstra(start: Int, target: Int = -1, previousSearchResults: GraphSearchResults? = null): GraphSearchResults {
+        r = previousSearchResults ?: GraphSearchResults(graph.size)
+        r.doubleDistances[start] = 0.0
         val pq = PriorityQueue<Edge> { a, b -> a.first.compareTo(b.first) }
         pq.add(Edge(0.0, start))
         while (pq.isNotEmpty()) {
             val u = pq.poll().second
-            if (visited[u]) continue
-            visited[u] = true
-            if(u == target)
-                return
-            // currentVisited.add(u)
-            // currentVisitedDistances.add(distances[u])
-            graph[u].forEach { e ->
-                updateDistAndQueueIfUnvisited(u, e, pq)
+            if (r.visited[u]) continue
+            r.visited[u] = true
+            r.currentVisited.add(u)
+            if (u == target)
+                return r
+            graph[u].forEach { (d, v) ->
+                val newDistance = r.doubleDistances[u] + d
+                if (newDistance < r.doubleDistances[v]) {
+                    r.doubleDistances[v] = newDistance
+                    r.parents[v] = u
+                    if (!r.visited[v] && !deleted[v]) {
+                        pq.add(Edge(newDistance, v))
+                    }
+                }
             }
         }
-    }
-    private fun updateDistAndQueueIfUnvisited(u: Int, e: Edge, pq: PriorityQueue<Edge>) {
-        val newDist = distances[u] + e.first
-        val oldDist = distances[e.second]
-        if (newDist < oldDist) {
-            distances[e.second] = newDist
-            parents[e.second] = u
-            if (!visited[e.second])
-                pq.add(Edge(newDist, e.second))
-        }
+        return r
     }
 }

@@ -4,7 +4,7 @@ import Edge
 
 data class Tile(val x: Int, val y: Int, var data: Any? = null)
 
-class Grid(val width: Int, val height: Int) : BaseGraph<Tile>(width * height) {
+class Grid(val width: Int, val height: Int) : BaseGraph<Tile>() {
     constructor(stringGrid: List<String>) : this(stringGrid[0].length, stringGrid.size) {
         stringGrid.forEachIndexed { y, line ->
             line.forEachIndexed { x, c ->
@@ -18,14 +18,14 @@ class Grid(val width: Int, val height: Int) : BaseGraph<Tile>(width * height) {
         for (y in 0 until height) {
             for (x in 0 until width) {
                 val id = x + y * width
-                nodes[id] = Tile(x, y)
+                _nodes[id] = Tile(x, y)
             }
         }
     }
 
     override fun addNode(node: Tile) {
         val id = node2Id(node)
-        nodes[id] = node
+        _nodes[id] = node
     }
 
     override fun addEdge(node1: Tile, node2: Tile, weight: Double) {
@@ -40,9 +40,9 @@ class Grid(val width: Int, val height: Int) : BaseGraph<Tile>(width * height) {
         unweightedAdjacencyList[u].add(v)
     }
 
-    override fun id2Node(id: Int) = if (id in 0 until width * height) nodes[id] else null
+    override fun id2Node(id: Int) = if (id in 0 until width * height) _nodes[id] else null
     override fun node2Id(node: Tile) = node.x + node.y * width
-    override fun getAllNodes(): List<Tile> = nodes.filterNotNull().filter { it.x != -1 }
+    override fun getAllNodes(): List<Tile> = _nodes.filterNotNull().filter { it.x != -1 }
 
     fun xyInRange(x: Int, y: Int) = x in 0 until width && y in 0 until height
     private fun xy2Id(x: Int, y: Int) = if (xyInRange(x, y)) x + y * width else null
@@ -57,8 +57,8 @@ class Grid(val width: Int, val height: Int) : BaseGraph<Tile>(width * height) {
     }
 
     fun deleteNodesWithData(data: Any?) {
-        nodes.indices.forEach { i ->
-            if (nodes[i]?.data == data) {
+        _nodes.indices.forEach { i ->
+            if (_nodes[i]?.data == data) {
                 deleteNodeId(i)
             }
         }
@@ -108,7 +108,7 @@ class Grid(val width: Int, val height: Int) : BaseGraph<Tile>(width * height) {
 
     fun print() {
         val padding = getAllNodes().maxOf { it.data.toString().length }
-        nodes.forEachIndexed { id, t ->
+        _nodes.forEachIndexed { id, t ->
             if (id > 0 && id % width == 0)
                 println()
             print(String.format("%-${padding}s", t?.data ?: " "))
