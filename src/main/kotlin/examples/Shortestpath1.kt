@@ -2,6 +2,7 @@
 
 import pathfindingAlgorithms.Dijkstra
 import graphClasses.Graph
+import graphClasses.IntGraph
 import graphClasses.readInt
 import graphClasses.readInts
 
@@ -10,10 +11,7 @@ fun main(){
         val (n,m,q,s) = readInts(4)
         if(n+m+q+s == 0)
             break
-        val g = Graph()
-        repeat(n){
-            g.addNode(it)
-        }
+        val g = IntGraph(n)
         repeat(m){
             val (u,v,w) = readInts(3)
             g.addEdge(u,v,w.toDouble())

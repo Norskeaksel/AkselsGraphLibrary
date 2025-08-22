@@ -13,7 +13,7 @@ import kotlin.math.max
 fun main() { print(repostsDFS()); _writer.flush() }
 fun repostsDFS(): Int {
     val n = readInt()
-    val g = Graph()
+    val g = Graph(n)
     repeat(n){
         val (v,_,u) = readStrings(3).map { it.lowercase(Locale.getDefault()) }
         g.addEdge(u,v)

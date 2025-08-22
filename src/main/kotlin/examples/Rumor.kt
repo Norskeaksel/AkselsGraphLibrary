@@ -5,8 +5,8 @@ import graphClasses.Graph
 import graphClasses.readInts
 
 fun rumor(): Long {
-    val g = Graph()
     val (n, m) = readInts(2)
+    val g = Graph(n)
     val c = readInts(n)
     repeat(n) {
         g.addNode(it + 1)

@@ -15,7 +15,7 @@ fun main() {
 
 fun RepostsBFS(): Int {
     val n = readInt()
-    val g = Graph()
+    val g = Graph(n)
     repeat(n) {
         val (v, _, u) = readStrings(3).map { it.lowercase(Locale.getDefault()) }
         g.addEdge(u, v)

@@ -1,6 +1,6 @@
 package graphClasses
 
-class Graph(graphSize:Int = 1000): BaseGraph<Any>(graphSize) {
+class Graph(graphSize: Int) : BaseGraph<Any>(graphSize) {
     private var nrOfNodes = 0
     private val node2id = mutableMapOf<Any, Int>()
     private val id2Node = mutableMapOf<Int, Any>()
@@ -21,11 +21,13 @@ class Graph(graphSize:Int = 1000): BaseGraph<Any>(graphSize) {
         val id2 = node2id[node2] ?: addNode(node2).run { node2id[node2]!! }
         adjacencyList[id1].add(Pair(weight, id2))
     }
+
     override fun addUnweightedEdge(node1: Any, node2: Any) {
         val id1 = node2id[node1] ?: addNode(node1).run { node2id[node1]!! }
         val id2 = node2id[node2] ?: addNode(node2).run { node2id[node2]!! }
         unweightedAdjacencyList[id1].add(id2)
     }
+
     override fun node2Id(node: Any): Int? = node2id[node]
     override fun id2Node(id: Int): Any? = id2Node[id]
 

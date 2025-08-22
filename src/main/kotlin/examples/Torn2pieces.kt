@@ -10,7 +10,7 @@ fun main() {
 
 fun torn2pieces(): String {
     val n = readInt()
-    val graph = Graph()
+    val graph = Graph(n + 3)
     repeat(n) {
         val stations = readString().split(" ").toMutableList()
         val fromStation = stations.removeFirst()
@@ -23,10 +23,9 @@ fun torn2pieces(): String {
     graph.addNode(end)
     graph.bfs(start, end)
     val path = graph.getPath(end)
-    return if (path.size == 1){
+    return if (path.size == 1) {
         "no route found"
-    }
-    else{
+    } else {
         path.joinToString(" ")
     }
 }
