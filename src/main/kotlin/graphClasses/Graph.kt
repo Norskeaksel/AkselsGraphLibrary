@@ -1,6 +1,6 @@
 package graphClasses
 
-class Graph: BaseGraph<Any>() {
+class Graph(graphSize:Int = 1000): BaseGraph<Any>(graphSize) {
     private var nrOfNodes = 0
     private val node2id = mutableMapOf<Any, Int>()
     private val id2Node = mutableMapOf<Int, Any>()
@@ -10,6 +10,7 @@ class Graph: BaseGraph<Any>() {
             System.err.println("Node already exists")
             return
         }
+        _nodes[nrOfNodes] = node
         node2id[node] = nrOfNodes
         id2Node[nrOfNodes++] = node
         adjacencyList.add(mutableListOf())

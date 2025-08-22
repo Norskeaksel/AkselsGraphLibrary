@@ -2,7 +2,7 @@ package pathfindingAlgorithms
 
 import UnweightedAdjacencyList
 
-class BFS(private val graph: UnweightedAdjacencyList, private val deleted: BooleanArray? = null) {
+class BFS(private val graph: UnweightedAdjacencyList, private val deleted: BooleanArray = BooleanArray(graph.size)) {
     fun bfs(
         startIds: List<Int>,
         targetId: Int = -1,
@@ -11,7 +11,7 @@ class BFS(private val graph: UnweightedAdjacencyList, private val deleted: Boole
         val r = previousSearchResult ?: GraphSearchResults(graph.size)
         val queue = java.util.ArrayDeque<Int>()
         startIds.forEach {
-            if (deleted?.get(it) == true) error("Starting node $it is deleted, cannot perform BFS.")
+            if (deleted[it]) error("Starting node $it is deleted, cannot perform BFS.")
             queue.add(it)
             r.intDistances[it] = 0
         }
@@ -26,7 +26,7 @@ class BFS(private val graph: UnweightedAdjacencyList, private val deleted: Boole
                 return r
             val currentDistance = r.intDistances[currentId]
             graph[currentId].forEach { v ->
-                if (deleted?.get(v) == true) return@forEach
+                if (deleted[v]) return@forEach
                 val newDistance = currentDistance + 1
                 if (!r.visited[v] && newDistance < r.intDistances[v]) { // Do distance check to avoid re queueing startIds
                     queue.add(v)

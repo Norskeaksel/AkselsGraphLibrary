@@ -12,11 +12,11 @@ fun day10a(input: List<String>): Long {
                 grid.addEdge(t, n)
         }
     }
-    grid.getAllNodes().forEach {
+    grid.getAllNodes().forEach { it ->
         if (it.data != '0')
             return@forEach
         grid.dfs(it)
-        val visitedNines = grid.getVisited().count { it.data == '9' }
+        val visitedNines = grid.currentVisitedNodes().count { it.data == '9' }
         ans += visitedNines
     }
     return ans

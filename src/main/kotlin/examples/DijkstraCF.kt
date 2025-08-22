@@ -11,10 +11,7 @@ fun main() {
 
 fun dijkstraCF(): List<Int> {
     val (n, m) = readInts(2)
-    val g = IntGraph()
-    repeat(n + 1) {
-        g.addNode(it)
-    }
+    val g = IntGraph(n+1)
     repeat(m) {
         val (u, v, w) = readInts(3)
         g.connect(u, v, w.toDouble())

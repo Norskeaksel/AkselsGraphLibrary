@@ -1,4 +1,3 @@
-// https://open.kattis.com/problems/crosscountry?tab=metadata
 import examples.dijkstraCF
 import graphClasses.*
 import org.assertj.core.api.Assertions.assertThat

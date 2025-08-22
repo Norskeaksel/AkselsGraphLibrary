@@ -7,34 +7,39 @@ import pathfindingAlgorithms.*
 import toUnweightedAdjacencyList
 
 
-abstract class BaseGraph<T> {
+abstract class BaseGraph<T>(val size: Int) {
     // PROPERTIES
-    protected val adjacencyList:AdjacencyList = mutableListOf()
+    protected val adjacencyList: AdjacencyList = MutableList(size) { mutableListOf() }
 
     /** A cached, weightless representation of the graph's adjacency list, that is updated whenever it's needed. */
-    protected var unweightedAdjacencyList: UnweightedAdjacencyList = mutableListOf()
+    protected var unweightedAdjacencyList: UnweightedAdjacencyList = MutableList(size) { mutableListOf() }
         get() {
-            if (field.isEmpty() || field.size < adjacencyList.size ||
-                nrOfConnections(field) < nrOfConnections(adjacencyList)
-            ) {
+            if (nrOfConnections(field) < nrOfConnections(adjacencyList)) {
                 field = adjacencyList.toUnweightedAdjacencyList()
             }
             return field
         }
-    protected var _nodes:MutableList<T?> = mutableListOf()
-    private val graphSize:Int
-        get() = _nodes.size
+    protected var _nodes: MutableList<T?> = MutableList(size) { null }
+
+    // TODO: find a smart way to give my arrays the correct sizes
     val nodes: List<T>
         get() = _nodes.filterNotNull()
     private val deleted: BooleanArray
-        get() = BooleanArray(graphSize) { _nodes[it] == null }
+        get() = BooleanArray(_nodes.size) { _nodes[it] == null }
 
     var depth = 0
         private set
-    private var searchResults = GraphSearchResults(graphSize)
+    private var searchResults: GraphSearchResults? = null
     fun resetSearchResults() {
-        searchResults = GraphSearchResults(graphSize)
+        searchResults = GraphSearchResults(_nodes.size)
     }
+
+    fun visitedNodes() = searchResults?.run { visited.indices.mapNotNull { if (visited[it]) id2Node(it) else null } }
+        ?: error("Can't retrieve visitedNodes because no search has been run yet")
+
+    fun currentVisitedNodes(): List<T> =
+        searchResults?.currentVisited?.map { id2Node(it)!! }
+            ?: error("Can't retrieve currentVisitedNodes because no search has been run yet")
 
     // FUNCTIONS TO OVERRIDE
 
@@ -84,17 +89,22 @@ abstract class BaseGraph<T> {
 
     fun distanceTo(node: T): Double {
         val id = node2Id(node) ?: error("Node $node not found in graph")
-        return searchResults.distances[id]
+        searchResults?.let {
+            return it.distances[id]
+        }
+        error("Haven't computed distance to $node because no search algorithm (dfs, bfs, dijkstra) has been run yet.")
     }
 
-    fun furthestNode() = searchResults.run { id2Node(distances.indices.first { distances[it] == maxDistance() }) }
+    fun maxDistance() = searchResults?.distances?.maxOrNull() ?: Double.MAX_VALUE
+    fun furthestNode(): T =
+        searchResults?.let { r -> id2Node(r.distances.indices.first { r.distances[it] == maxDistance() })!! }
+            ?: error("Haven't computed furthest node because no search algorithm (dfs, bfs, dijkstra) has been run yet.")
 
-    fun bfs(startNodes: List<T>, target: T? = null): GraphSearchResults {
+    fun bfs(startNodes: List<T>, target: T? = null) {
         useWeightedConnectionsIfNeeded()
         val startNodeIds = startNodes.map { node -> node2Id(node) ?: error("Node $node not found in graph") }
         val targetId = target?.let { node2Id(it) } ?: -1
         searchResults = BFS(unweightedAdjacencyList, deleted).bfs(startNodeIds, targetId, searchResults)
-        return searchResults
     }
 
     fun bfs(startNode: T, target: T? = null) = bfs(listOf(startNode), target)
@@ -152,7 +162,8 @@ abstract class BaseGraph<T> {
 
     fun getPath(target: T): List<T> {
         val targetId = node2Id(target)
-        val pathIds = getPath(targetId, searchResults.parents)
+        val pathIds = searchResults?.let { getPath(targetId, it.parents) }
+            ?: error("Can't getPath because no search has been run yet")
         return pathIds.mapNotNull { id2Node(it) }
     }
 
@@ -173,7 +184,10 @@ abstract class BaseGraph<T> {
         addEdge(node1, node2, weight.toDouble())
     }
 
-    fun getNeighbours(t: T):List<T> = node2Id(t)?.let { unweightedAdjacencyList[it] }?.map { id2Node(it)!! } ?: error("Node $t not found in graph")
+    fun getNeighbours(t: T): List<T> =
+        node2Id(t)?.let { unweightedAdjacencyList[it] }?.map { id2Node(it)!! }
+            ?: error("Node $t not found in graph")
+
     fun printConnections() = printAdjacencyList(false)
     fun printWeightlessConnections() = printAdjacencyList(true)
 

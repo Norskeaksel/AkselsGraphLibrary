@@ -9,10 +9,10 @@ class DFS(private val graph: UnweightedAdjacencyList, private val deleted: Boole
 
     fun dfs(
         start: Int,
-        previousSearchResult: GraphSearchResults? = null,
+        initialSearchResults: GraphSearchResults? = null,
     ): GraphSearchResults {
         if (deleted[start]) error("Starting node is deleted, cannot perform DFS.")
-        r = previousSearchResult ?: GraphSearchResults(graph.size)
+        r = initialSearchResults ?: GraphSearchResults(graph.size)
         processedOrder.clear()
         var currentDepth = 0
         DeepRecursiveFunction<Int, Unit> { id ->

@@ -14,7 +14,6 @@ data class GraphSearchResults(private val graphSize: Int) {
         intDistances.map(Int::toDouble).toDoubleArray()
     }
 
-    fun maxDistance() = distances.maxOrNull() ?: Double.MAX_VALUE
     /* TODO: Delete
     fun getCurrentVisitedIds(): List<Int> = // Deep Copy
         currentVisited.map { it } */

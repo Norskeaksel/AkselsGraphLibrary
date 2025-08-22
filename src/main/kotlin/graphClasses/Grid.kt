@@ -4,12 +4,13 @@ import Edge
 
 data class Tile(val x: Int, val y: Int, var data: Any? = null)
 
-class Grid(val width: Int, val height: Int) : BaseGraph<Tile>() {
+class Grid(val width: Int, val height: Int) : BaseGraph<Tile>(width * height) {
     constructor(stringGrid: List<String>) : this(stringGrid[0].length, stringGrid.size) {
         stringGrid.forEachIndexed { y, line ->
             line.forEachIndexed { x, c ->
                 val t = Tile(x, y, c)
-                addNode(t)
+                val id = node2Id(t)
+                _nodes[id] = t
             }
         }
     }

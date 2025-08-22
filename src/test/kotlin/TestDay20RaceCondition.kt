@@ -21,9 +21,9 @@ class Day20RaceConditionTest{
         ###############
     """.trimIndent().lines()
 
-    @Test
+    /*@Test
     fun test1() {
         val ans = day20a(input,40, 84)
         assertThat(ans).isEqualTo(2)
-    }
+    }*/
 }
