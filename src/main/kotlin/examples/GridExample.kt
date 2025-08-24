@@ -11,6 +11,7 @@ fun main() {
         "23E"
     )
     val grid = Grid(stringList)
+
     // We could use `grid.connectGridDefault()` to connect all nodes, but let's define a custom connection instead.
     fun connectDownOrRight(t: Tile): List<Tile> = grid.getStraightNeighbours(t).filter { it.x >= t.x || it.y > t.y }
     grid.connectGrid(::connectDownOrRight)
@@ -34,4 +35,13 @@ fun main() {
         To node Tile(x=1, y=2, data=3): 3.0
         To node Tile(x=2, y=2, data=E): 4.0
      */
+
+    // Visualizing the grid and the BFS
+    grid.visualizeSearch(
+        target = grid.xy2Node(2, 2),
+        screenTitle = "Grid example visualizeing",
+        animationTimeOverride = 500.0,
+        startPaused = false,
+        closeOnEnd = false
+    )
 }

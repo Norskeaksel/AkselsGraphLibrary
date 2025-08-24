@@ -1,6 +1,7 @@
 package org.gridgraphics
 
 import graphClasses.Grid
+import graphClasses.Tile
 import javafx.animation.KeyFrame
 import javafx.animation.PauseTransition
 import javafx.animation.Timeline
@@ -18,18 +19,18 @@ import javafx.util.Duration
 class FXGraphics : Application() {
     companion object {
         var grid = Grid(0, 0)
-        var visitedNodes = listOf<Int>()
+        var visitedNodes = listOf<Tile>()
         var nodeDistances = listOf<Double>()
-        var finalPath = listOf<Int>()
+        var finalPath = listOf<Tile>()
+        var screenTitle = "Grid visualizer (Click or space to pause and resume)"
         var animationTimeOverride: Double? = null
-        var closeOnEnd = false
-        var sceneWithOverride: Double? = null
-        var windowTitle = "Grid visualizer (Click or space to pause and resume)"
         var startPaused = false
+        var closeOnEnd = false
+        var screenWidthOverride: Double? = null
     }
 
     var animationKeyFrameTime = Duration.millis(animationTimeOverride ?: (10_000.0 / visitedNodes.size))
-    val sceneWith = sceneWithOverride ?: 1000.0
+    val sceneWith = screenWidthOverride ?: 1000.0
     val sceneHeight = 1000.0
     val canvas = Canvas(sceneWith, sceneHeight)
     val gc = canvas.graphicsContext2D
@@ -38,10 +39,10 @@ class FXGraphics : Application() {
     val minEdgeLength = xNodes.coerceAtMost(yNodes)
 
     override fun start(primaryStage: Stage) {
-        primaryStage.title = windowTitle
+        primaryStage.title = screenTitle
         val root = Group()
         gc.fill = Color.BLACK
-        grid.getNodes().forEach { node ->
+        grid.nodes.forEach { node ->
             drawSquare(node.x, node.y, Color.BLACK)
         }
         root.children.add(canvas)
@@ -61,19 +62,19 @@ class FXGraphics : Application() {
         val timeline = Timeline()
         println("animationKeyFrameTime: $animationKeyFrameTime")
         val maxDepth = nodeDistances.maxOrNull() ?: 1.0
-        visitedNodes.forEachIndexed { i, nodeId ->
+        visitedNodes.forEachIndexed { i, node ->
             val color = getInterpolatedColor((nodeDistances.getOrNull(i) ?: 0).toDouble(), maxDepth)
             val keyFrame = KeyFrame(
                 animationKeyFrameTime.multiply(i.toDouble()), squareDrawer(
-                    nodeId, color
+                    node, color
                 )
             )
             timeline.keyFrames.add(keyFrame)
         }
-        finalPath.forEachIndexed { i, nodeId ->
+        finalPath.forEachIndexed { i, node ->
             val keyFrame = KeyFrame(
                 animationKeyFrameTime.multiply(1.05 * (i.toDouble() + visitedNodes.size)), squareDrawer(
-                    nodeId, Color.GREEN
+                    node, Color.GREEN
                 )
             )
             timeline.keyFrames.add(keyFrame)
@@ -109,8 +110,7 @@ class FXGraphics : Application() {
         }
     }
 
-    private fun squareDrawer(nodeId: Int, color: Color): (ActionEvent) -> Unit {
-        val node = grid.id2Node(nodeId)!!
+    private fun squareDrawer(node: Tile, color: Color): (ActionEvent) -> Unit {
         return { drawSquare(node.x, node.y, color) }
     }
 
@@ -131,5 +131,4 @@ class FXGraphics : Application() {
         val index = (normalized * (colors.size - 1)).toInt()
         return colors[index].interpolate(colors[index + 1], (normalized * (colors.size - 1)) % 1)
     }
-
 }

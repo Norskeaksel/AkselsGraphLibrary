@@ -1,8 +1,7 @@
 package org.gridgraphics
 
-import graphClasses.BFS
 import graphClasses.Grid
-import graphClasses.getPath
+import graphClasses.Tile
 import javafx.application.Application
 
 fun main() {
@@ -10,20 +9,20 @@ fun main() {
     val gridHeight = 5
     val grid = Grid(gridWidth, gridHeight)
     grid.connectGridDefault()
-    val bfs = BFS(grid)
-    val bfsStartIds = listOf(
-        0,
-        gridWidth - 1,
-        grid.xy2Id(0, gridHeight - 1)!!,
-        gridWidth * gridHeight - 1
+    val bfsStartNodes = listOf(
+        Tile(0, 0),
+        Tile(gridWidth - 1, 0),
+        Tile(0, gridHeight - 1),
+        Tile(gridWidth - 1, gridHeight - 1)
     )
-    val goalId = gridWidth * gridHeight / 2
-    bfs.bfsIterative(bfsStartIds)
-    val path = getPath(goalId, bfs.parents)
+    val goal = grid.xy2Node(gridWidth / 2, gridHeight / 2)!!
+    grid.bfs(bfsStartNodes)
+    val path = grid.getPath(goal)
+    val visitedNodes = grid.currentVisitedNodes()
     FXGraphics.grid = grid
-    FXGraphics.visitedNodes = bfs.currentVisited
-    FXGraphics.nodeDistances = bfs.currentVisitedDistances
+    FXGraphics.visitedNodes = visitedNodes
+    FXGraphics.nodeDistances = visitedNodes.map { grid.distanceTo(it) }
     FXGraphics.finalPath = path
-    FXGraphics.startPaused = true
+    FXGraphics.startPaused = false
     Application.launch(FXGraphics()::class.java)
 }

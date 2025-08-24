@@ -29,7 +29,7 @@ abstract class BaseGraph<T>(val size: Int) {
 
     var depth = 0
         private set
-    private var searchResults: GraphSearchResults? = null
+    protected var searchResults: GraphSearchResults? = null
     fun resetSearchResults() {
         searchResults = GraphSearchResults(_nodes.size)
     }

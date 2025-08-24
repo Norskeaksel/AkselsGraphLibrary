@@ -1,6 +1,8 @@
 package graphClasses
 
 import Edge
+import javafx.application.Application
+import org.gridgraphics.FXGraphics
 
 data class Tile(val x: Int, val y: Int, var data: Any? = null)
 
@@ -115,5 +117,31 @@ class Grid(val width: Int, val height: Int) : BaseGraph<Tile>(width * height) {
             print(String.format("%-${padding}s", t?.data ?: " "))
         }
         println()
+    }
+
+    fun visualize() {
+        FXGraphics.grid = this
+        Application.launch(FXGraphics()::class.java)
+    }
+
+    fun visualizeSearch(
+        target: Tile? = null,
+        screenTitle: String = "Grid visualizer (Click or space to pause and resume)",
+        animationTimeOverride: Double? = null,
+        closeOnEnd: Boolean = false,
+        startPaused: Boolean = false,
+        screenWidthOverride: Double? = null,
+    ) {
+        FXGraphics.grid = this
+        val visitedNodes = visitedNodes()
+        FXGraphics.visitedNodes = visitedNodes
+        FXGraphics.nodeDistances = visitedNodes.map { distanceTo(it) }
+        FXGraphics.finalPath = target?.let { getPath(it) } ?: emptyList()
+        FXGraphics.screenTitle = screenTitle
+        FXGraphics.animationTimeOverride = animationTimeOverride
+        FXGraphics.startPaused = startPaused
+        FXGraphics.closeOnEnd = closeOnEnd
+        FXGraphics.screenWidthOverride = screenWidthOverride
+        Application.launch(FXGraphics()::class.java)
     }
 }
