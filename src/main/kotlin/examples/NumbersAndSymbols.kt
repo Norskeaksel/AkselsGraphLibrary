@@ -11,7 +11,7 @@ fun numbersConnectedToSymbol(input: List<String>): Int {
     val partNumbers = mutableListOf<Int>()
     numbers.forEach { t ->
         grid.dfs(t)
-        if (grid.depth > t.data.toString().length)
+        if (grid.depth() > t.data.toString().length)
             partNumbers.add(t.data.toString().toInt())
     }
     println(partNumbers)

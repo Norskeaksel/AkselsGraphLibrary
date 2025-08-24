@@ -15,15 +15,15 @@ fun main() {
 
 fun RepostsBFS(): Int {
     val n = readInt()
-    val g = Graph(n)
+    val g = Graph()
     repeat(n) {
         val (v, _, u) = readStrings(3).map { it.lowercase(Locale.getDefault()) }
         g.addEdge(u, v)
     }
     var longestChain = 0
-    g.getAllNodes().forEach { node ->
+    g.getAllNodes().forEach{ node ->
         g.bfs(node)
-        longestChain = max(longestChain, g.maxDistance().toInt() + 1)
+        longestChain = max(longestChain, g.depth() + 1)
     }
     return longestChain
 }

@@ -21,14 +21,10 @@ abstract class BaseGraph<T>(val size: Int) {
         }
     protected var _nodes: MutableList<T?> = MutableList(size) { null }
 
-    // TODO: find a smart way to give my arrays the correct sizes
     val nodes: List<T>
         get() = _nodes.filterNotNull()
-    private val deleted: BooleanArray
-        get() = BooleanArray(_nodes.size) { _nodes[it] == null }
 
-    var depth = 0
-        private set
+    fun depth() = searchResults?.depth ?: error("Can't retrieve depth because no search has been run yet")
     protected var searchResults: GraphSearchResults? = null
     fun resetSearchResults() {
         searchResults = GraphSearchResults(_nodes.size)
@@ -86,6 +82,7 @@ abstract class BaseGraph<T>(val size: Int) {
         }
         removeEdge(u, v, weight)
     }
+    protected fun <T> nrOfConnections(twoDList: List<List<T>>) = twoDList.sumOf { it.size }
 
     fun distanceTo(node: T): Double {
         val id = node2Id(node) ?: error("Node $node not found in graph")
@@ -99,15 +96,6 @@ abstract class BaseGraph<T>(val size: Int) {
     fun furthestNode(): T =
         searchResults?.let { r -> id2Node(r.distances.indices.first { r.distances[it] == maxDistance() })!! }
             ?: error("Haven't computed furthest node because no search algorithm (dfs, bfs, dijkstra) has been run yet.")
-
-    fun bfs(startNodes: List<T>, target: T? = null) {
-        useWeightedConnectionsIfNeeded()
-        val startNodeIds = startNodes.map { node -> node2Id(node) ?: error("Node $node not found in graph") }
-        val targetId = target?.let { node2Id(it) } ?: -1
-        searchResults = BFS(unweightedAdjacencyList, deleted).bfs(startNodeIds, targetId, searchResults)
-    }
-
-    fun bfs(startNode: T, target: T? = null) = bfs(listOf(startNode), target)
 
     private fun useWeightedConnectionsIfNeeded() {
         if (nrOfConnections(unweightedAdjacencyList) == 0) {
@@ -123,24 +111,21 @@ abstract class BaseGraph<T>(val size: Int) {
         }
     }
 
-    protected fun deleteNodeId(id: Int) {
-        _nodes[id] = null
+    fun bfs(startNodes: List<T>, target: T? = null, reset: Boolean = true) {
+        useWeightedConnectionsIfNeeded()
+        val startNodeIds = startNodes.map { node -> node2Id(node) ?: error("Node $node not found in graph") }
+        val targetId = target?.let { node2Id(it) } ?: -1
+        if (reset) searchResults = null
+        searchResults = BFS(unweightedAdjacencyList).bfs(startNodeIds, targetId, searchResults)
     }
 
-    fun deleteNode(node: T) {
-        val id = node2Id(node) ?: run {
-            System.err.println("Warning, node $node not found in graph")
-            return
-        }
-        deleteNodeId(id)
-    }
-
-    protected fun <T> nrOfConnections(twoDList: List<List<T>>) = twoDList.sumOf { it.size }
+    fun bfs(startNode: T, target: T? = null) = bfs(listOf(startNode), target)
 
 
     fun dfs(startNode: T, reset: Boolean = true) {
         val startId = node2Id(startNode) ?: error("Node $startNode not found in graph")
-        searchResults = DFS(unweightedAdjacencyList, deleted).dfs(startId, searchResults)
+        if (reset) searchResults = null
+        searchResults = DFS(unweightedAdjacencyList).dfs(startId, searchResults)
     }
 
     fun dijkstra(startNode: T, target: T? = null) {
@@ -154,11 +139,11 @@ abstract class BaseGraph<T>(val size: Int) {
         }
         val startId = node2Id(startNode) ?: error("Node $startNode not found in graph")
         val targetId = target?.let { node2Id(it) } ?: -1
-        searchResults = Dijkstra(adjacencyList, deleted).dijkstra(startId, targetId, searchResults)
+        searchResults = Dijkstra(adjacencyList).dijkstra(startId, targetId, searchResults)
     }
 
     fun topologicalSort() = DFS(unweightedAdjacencyList).topologicalSort()
-    fun stronglyConnectedComponents() = DFS(unweightedAdjacencyList, deleted).stronglyConnectedComponents()
+    fun stronglyConnectedComponents() = DFS(unweightedAdjacencyList).stronglyConnectedComponents()
 
     fun getPath(target: T): List<T> {
         val targetId = node2Id(target)

@@ -19,7 +19,7 @@ import javafx.util.Duration
 class FXGraphics : Application() {
     companion object {
         var grid = Grid(0, 0)
-        var visitedNodes = listOf<Tile>()
+        var currentVisitedNodes = listOf<Tile>()
         var nodeDistances = listOf<Double>()
         var finalPath = listOf<Tile>()
         var screenTitle = "Grid visualizer (Click or space to pause and resume)"
@@ -29,7 +29,7 @@ class FXGraphics : Application() {
         var screenWidthOverride: Double? = null
     }
 
-    var animationKeyFrameTime = Duration.millis(animationTimeOverride ?: (10_000.0 / visitedNodes.size))
+    var animationKeyFrameTime = Duration.millis(animationTimeOverride ?: (10_000.0 / currentVisitedNodes.size))
     val sceneWith = screenWidthOverride ?: 1000.0
     val sceneHeight = 1000.0
     val canvas = Canvas(sceneWith, sceneHeight)
@@ -62,7 +62,7 @@ class FXGraphics : Application() {
         val timeline = Timeline()
         println("animationKeyFrameTime: $animationKeyFrameTime")
         val maxDepth = nodeDistances.maxOrNull() ?: 1.0
-        visitedNodes.forEachIndexed { i, node ->
+        currentVisitedNodes.forEachIndexed { i, node ->
             val color = getInterpolatedColor((nodeDistances.getOrNull(i) ?: 0).toDouble(), maxDepth)
             val keyFrame = KeyFrame(
                 animationKeyFrameTime.multiply(i.toDouble()), squareDrawer(
@@ -73,7 +73,7 @@ class FXGraphics : Application() {
         }
         finalPath.forEachIndexed { i, node ->
             val keyFrame = KeyFrame(
-                animationKeyFrameTime.multiply(1.05 * (i.toDouble() + visitedNodes.size)), squareDrawer(
+                animationKeyFrameTime.multiply(1.05 * (i.toDouble() + currentVisitedNodes.size)), squareDrawer(
                     node, Color.GREEN
                 )
             )

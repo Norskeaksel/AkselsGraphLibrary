@@ -20,7 +20,7 @@ fun main() {
     val path = grid.getPath(goal)
     val visitedNodes = grid.currentVisitedNodes()
     FXGraphics.grid = grid
-    FXGraphics.visitedNodes = visitedNodes
+    FXGraphics.currentVisitedNodes = visitedNodes
     FXGraphics.nodeDistances = visitedNodes.map { grid.distanceTo(it) }
     FXGraphics.finalPath = path
     FXGraphics.startPaused = false

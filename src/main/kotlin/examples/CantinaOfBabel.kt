@@ -13,7 +13,7 @@ fun main() {
 
 fun cantinaOfBabel(): Int {
     val n = readInt()
-    val graph = Graph(n)
+    val graph = Graph()
     repeat(n) {
         val languages = readString().split(" ").toMutableList()
         val name = languages.removeFirst()

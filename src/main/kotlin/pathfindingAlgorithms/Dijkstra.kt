@@ -4,7 +4,7 @@ import AdjacencyList
 import Edge
 import java.util.*
 
-class Dijkstra(private val graph: AdjacencyList, private val deleted: BooleanArray = BooleanArray(graph.size)) {
+class Dijkstra(private val graph: AdjacencyList) {
     private var r = GraphSearchResults(graph.size)
     fun dijkstra(start: Int, target: Int = -1, previousSearchResults: GraphSearchResults? = null): GraphSearchResults {
         r = previousSearchResults ?: GraphSearchResults(graph.size)
@@ -23,7 +23,7 @@ class Dijkstra(private val graph: AdjacencyList, private val deleted: BooleanArr
                 if (newDistance < r.doubleDistances[v]) {
                     r.doubleDistances[v] = newDistance
                     r.parents[v] = u
-                    if (!r.visited[v] && !deleted[v]) {
+                    if (!r.visited[v]) {
                         pq.add(Edge(newDistance, v))
                     }
                 }

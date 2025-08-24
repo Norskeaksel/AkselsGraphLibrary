@@ -51,6 +51,10 @@ class Grid(val width: Int, val height: Int) : BaseGraph<Tile>(width * height) {
     private fun xy2Id(x: Int, y: Int) = if (xyInRange(x, y)) x + y * width else null
     fun xy2Node(x: Int, y: Int) = if (xyInRange(x, y)) id2Node(xy2Id(x, y)!!) else null
 
+    protected fun deleteNodeId(id: Int) {
+        _nodes[id] = null
+    }
+
     fun deleteNodeAtXY(x: Int, y: Int) {
         val id = xy2Id(x, y) ?: run {
             System.err.println("Warning, coordinates ($x, $y) are outside the grid")
@@ -133,9 +137,9 @@ class Grid(val width: Int, val height: Int) : BaseGraph<Tile>(width * height) {
         screenWidthOverride: Double? = null,
     ) {
         FXGraphics.grid = this
-        val visitedNodes = visitedNodes()
-        FXGraphics.visitedNodes = visitedNodes
-        FXGraphics.nodeDistances = visitedNodes.map { distanceTo(it) }
+        val currentVisitedNodes = currentVisitedNodes()
+        FXGraphics.currentVisitedNodes = currentVisitedNodes
+        FXGraphics.nodeDistances = currentVisitedNodes.map { distanceTo(it) }
         FXGraphics.finalPath = target?.let { getPath(it) } ?: emptyList()
         FXGraphics.screenTitle = screenTitle
         FXGraphics.animationTimeOverride = animationTimeOverride

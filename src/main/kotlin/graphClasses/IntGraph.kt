@@ -1,6 +1,11 @@
 package graphClasses
 
 class IntGraph(size: Int) : BaseGraph<Int>(size) {
+    init {
+        repeat(size){
+            _nodes[it] = it
+        }
+    }
     override fun addNode(node: Int) =
         error("IntGraph doesn't support addNode(), because nodes are defined by the IntGraph size")
 

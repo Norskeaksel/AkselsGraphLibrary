@@ -10,7 +10,7 @@ fun main() {
 
 fun torn2pieces(): String {
     val n = readInt()
-    val graph = Graph(n + 3)
+    val graph = Graph()
     repeat(n) {
         val stations = readString().split(" ").toMutableList()
         val fromStation = stations.removeFirst()

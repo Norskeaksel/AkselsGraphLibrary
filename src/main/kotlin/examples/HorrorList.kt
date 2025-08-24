@@ -11,10 +11,10 @@ fun main() {
 fun horrorList(): Int {
     val (n, h, l) = readInts(3)
     val intGraph = IntGraph(n)
-    val startIds = readInts(h).sorted()
+    val startIds = readInts(h)
     repeat(l) {
         val (u, v) = readInts(2)
-        intGraph.connect(u, v)
+        intGraph.connectUnweighted(u, v)
     }
     intGraph.bfs(startIds)
     return intGraph.furthestNode()
