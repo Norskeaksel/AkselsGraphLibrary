@@ -9,6 +9,7 @@ class BFS(private val graph: UnweightedAdjacencyList) {
         previousSearchResult: GraphSearchResults? = null,
     ): GraphSearchResults {
         val r = previousSearchResult ?: GraphSearchResults(graph.size)
+        r.currentVisited.clear()
         val queue = java.util.ArrayDeque<Int>()
         startIds.forEach {
             queue.add(it)
@@ -34,6 +35,7 @@ class BFS(private val graph: UnweightedAdjacencyList) {
                 }
             }
         }
+        r.processedOrder = r.currentVisited
         return r
     }
 }

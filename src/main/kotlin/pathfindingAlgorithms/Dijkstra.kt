@@ -29,6 +29,7 @@ class Dijkstra(private val graph: AdjacencyList) {
                 }
             }
         }
+        r.processedOrder = r.currentVisited
         return r
     }
 }

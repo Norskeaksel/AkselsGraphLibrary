@@ -3,6 +3,7 @@ package graphClasses
 import Edge
 import javafx.application.Application
 import org.gridgraphics.FXGraphics
+import pathfindingAlgorithms.DFS
 
 data class Tile(val x: Int, val y: Int, var data: Any? = null)
 
@@ -46,6 +47,9 @@ class Grid(val width: Int, val height: Int) : BaseGraph<Tile>(width * height) {
     override fun id2Node(id: Int) = if (id in 0 until width * height) _nodes[id] else null
     override fun node2Id(node: Tile) = node.x + node.y * width
     override fun getAllNodes(): List<Tile> = _nodes.filterNotNull().filter { it.x != -1 }
+    override fun topologicalSort() = DFS(unweightedAdjacencyList).topologicalSort(deleted())
+    override fun stronglyConnectedComponents() = DFS(unweightedAdjacencyList).stronglyConnectedComponents(deleted())
+    private fun deleted() = BooleanArray(_nodes.size) { _nodes[it] == null }
 
     fun xyInRange(x: Int, y: Int) = x in 0 until width && y in 0 until height
     private fun xy2Id(x: Int, y: Int) = if (xyInRange(x, y)) x + y * width else null

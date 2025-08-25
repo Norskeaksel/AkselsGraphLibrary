@@ -142,8 +142,8 @@ abstract class BaseGraph<T>(val size: Int) {
         searchResults = Dijkstra(adjacencyList).dijkstra(startId, targetId, searchResults)
     }
 
-    fun topologicalSort() = DFS(unweightedAdjacencyList).topologicalSort()
-    fun stronglyConnectedComponents() = DFS(unweightedAdjacencyList).stronglyConnectedComponents()
+    open fun topologicalSort() = DFS(unweightedAdjacencyList).topologicalSort()
+    open fun stronglyConnectedComponents() = DFS(unweightedAdjacencyList).stronglyConnectedComponents()
 
     fun getPath(target: T): List<T> {
         val targetId = node2Id(target)

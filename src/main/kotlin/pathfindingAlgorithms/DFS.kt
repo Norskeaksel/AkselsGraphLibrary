@@ -4,7 +4,6 @@ import UnweightedAdjacencyList
 
 
 class DFS(private val graph: UnweightedAdjacencyList) {
-    private var processedOrder = mutableListOf<Int>()
     private var r = GraphSearchResults(graph.size)
 
     fun dfs(
@@ -12,7 +11,7 @@ class DFS(private val graph: UnweightedAdjacencyList) {
         initialSearchResults: GraphSearchResults? = null,
     ): GraphSearchResults {
         r = initialSearchResults ?: GraphSearchResults(graph.size)
-        processedOrder.clear()
+        r.currentVisited = mutableListOf()
         var currentDepth = 0
         DeepRecursiveFunction<Int, Unit> { id ->
             if (r.visited[id]) return@DeepRecursiveFunction
@@ -23,13 +22,13 @@ class DFS(private val graph: UnweightedAdjacencyList) {
                 r.parents[v] = id
                 this.callRecursive(v)
             }
-            processedOrder.add(id)
+            r.processedOrder.add(id)
             currentDepth-- //Done with this node. Backtracking to previous one.
         }.invoke(start)
         return r
     }
 
-    fun stronglyConnectedComponents(): List<List<Int>> {
+    fun stronglyConnectedComponents(deleted:BooleanArray = BooleanArray(graph.size)): List<List<Int>> {
         val reversedGraph: UnweightedAdjacencyList =
             MutableList<MutableList<Int>>(graph.size) { mutableListOf() }.apply {
                 graph.forEachIndexed { u, neighbors ->
@@ -38,29 +37,22 @@ class DFS(private val graph: UnweightedAdjacencyList) {
                     }
                 }
             }
-        val topologicalOrder = DFS(reversedGraph).topologicalSort().reversed()
+        val topologicalOrder = DFS(reversedGraph).topologicalSort(deleted).reversed()
         val stronglyConnectedComponents = mutableListOf<List<Int>>()
         topologicalOrder.forEach { id ->
             if (r.visited[id])
                 return@forEach
-            val searchResults = dfs(id)
-            stronglyConnectedComponents.add(searchResults.currentVisited)
+            dfs(id, r)
+            stronglyConnectedComponents.add(r.currentVisited)
         }
         return stronglyConnectedComponents
     }
 
-    fun topologicalSort(): List<Int> {
+    fun topologicalSort(deleted:BooleanArray = BooleanArray(graph.size)): List<Int> {
         for (i in 0 until graph.size) {
-            dfs(i)
+            if(deleted[i]) continue
+            dfs(i, r)
         }
-        return processedOrder//.reversed() //Reversed depending on the order
+        return r.processedOrder//.reversed() //Reversed depending on the order
     }
-
-    /* TODO: Delete
-    fun getAndClearCurrentVisited() =
-        currentVisited.map { it }.also { currentVisited.clear() } // Deep copy not clear return
-
-    fun clearCurrentVisitedIds() {
-        currentVisited.clear()
-    }*/
 }
