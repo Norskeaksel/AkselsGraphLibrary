@@ -19,15 +19,12 @@ abstract class BaseGraph<T>(val size: Int) {
             }
             return field
         }
-    protected var _nodes: MutableList<T?> = MutableList(size) { null }
-
-    val nodes: List<T>
-        get() = _nodes.filterNotNull()
+    protected var nodes: MutableList<T?> = MutableList(size) { null }
 
     fun depth() = searchResults?.depth ?: error("Can't retrieve depth because no search has been run yet")
     protected var searchResults: GraphSearchResults? = null
     fun resetSearchResults() {
-        searchResults = GraphSearchResults(_nodes.size)
+        searchResults = GraphSearchResults(nodes.size)
     }
 
     fun visitedNodes() = searchResults?.run { visited.indices.mapNotNull { if (visited[it]) id2Node(it) else null } }
@@ -171,6 +168,9 @@ abstract class BaseGraph<T>(val size: Int) {
 
     fun getNeighbours(t: T): List<T> =
         node2Id(t)?.let { unweightedAdjacencyList[it] }?.map { id2Node(it)!! }
+            ?: error("Node $t not found in graph")
+    fun getEdges (t: T): List<Pair<Double, T>> =
+        node2Id(t)?.let { adjacencyList[it] }?.map { Pair(it.first, id2Node(it.second)!!) }
             ?: error("Node $t not found in graph")
 
     fun printConnections() = printAdjacencyList(false)

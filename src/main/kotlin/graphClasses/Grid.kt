@@ -13,7 +13,7 @@ class Grid(val width: Int, val height: Int) : BaseGraph<Tile>(width * height) {
             line.forEachIndexed { x, c ->
                 val t = Tile(x, y, c)
                 val id = node2Id(t)
-                _nodes[id] = t
+                nodes[id] = t
             }
         }
     }
@@ -22,14 +22,14 @@ class Grid(val width: Int, val height: Int) : BaseGraph<Tile>(width * height) {
         for (y in 0 until height) {
             for (x in 0 until width) {
                 val id = x + y * width
-                _nodes[id] = Tile(x, y)
+                nodes[id] = Tile(x, y)
             }
         }
     }
 
     override fun addNode(node: Tile) {
         val id = node2Id(node)
-        _nodes[id] = node
+        nodes[id] = node
     }
 
     override fun addEdge(node1: Tile, node2: Tile, weight: Double) {
@@ -44,12 +44,12 @@ class Grid(val width: Int, val height: Int) : BaseGraph<Tile>(width * height) {
         unweightedAdjacencyList[u].add(v)
     }
 
-    override fun id2Node(id: Int) = if (id in 0 until width * height) _nodes[id] else null
+    override fun id2Node(id: Int) = if (id in 0 until width * height) nodes[id] else null
     override fun node2Id(node: Tile) = node.x + node.y * width
-    override fun getAllNodes(): List<Tile> = _nodes.filterNotNull().filter { it.x != -1 }
+    override fun getAllNodes(): List<Tile> = nodes.filterNotNull().filter { it.x != -1 }
     override fun topologicalSort() = DFS(unweightedAdjacencyList).topologicalSort(deleted())
     override fun stronglyConnectedComponents() = DFS(unweightedAdjacencyList).stronglyConnectedComponents(deleted())
-    private fun deleted() = BooleanArray(_nodes.size) { _nodes[it] == null }
+    private fun deleted() = BooleanArray(nodes.size) { nodes[it] == null }
 
     fun xyInRange(x: Int, y: Int) = x in 0 until width && y in 0 until height
     private fun xy2Id(x: Int, y: Int) = if (xyInRange(x, y)) x + y * width else null
@@ -57,7 +57,7 @@ class Grid(val width: Int, val height: Int) : BaseGraph<Tile>(width * height) {
 
     protected fun deleteNodeId(id: Int) {
         if(nrOfConnections(unweightedAdjacencyList) > 0) error("Cannot delete nodes after the grid has gotten connections")
-        _nodes[id] = null
+        nodes[id] = null
     }
 
     fun deleteNodeAtXY(x: Int, y: Int) {
@@ -69,8 +69,8 @@ class Grid(val width: Int, val height: Int) : BaseGraph<Tile>(width * height) {
     }
 
     fun deleteNodesWithData(data: Any?) {
-        _nodes.indices.forEach { i ->
-            if (_nodes[i]?.data == data) {
+        nodes.indices.forEach { i ->
+            if (nodes[i]?.data == data) {
                 deleteNodeId(i)
             }
         }
@@ -120,7 +120,7 @@ class Grid(val width: Int, val height: Int) : BaseGraph<Tile>(width * height) {
 
     fun print() {
         val padding = getAllNodes().maxOf { it.data.toString().length }
-        _nodes.forEachIndexed { id, t ->
+        nodes.forEachIndexed { id, t ->
             if (id > 0 && id % width == 0)
                 println()
             print(String.format("%-${padding}s", t?.data ?: " "))

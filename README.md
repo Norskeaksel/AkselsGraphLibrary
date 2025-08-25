@@ -30,7 +30,7 @@ import graphClasses.IntGraph
 
 
 fun main() {
-    // --- Example Graph Definition ---
+    // Example Graph Definition
     val graph = Graph()
     graph.addEdge(0, 1, 10.0)
     graph.addEdge(0, 2, 3.0)
@@ -44,36 +44,40 @@ fun main() {
 
     val startNode = 0
     graph.dijkstra(startNode)
-    val nodes: List<Int> = graph.getCastedNodes()
+    val nodes: List<Int> = graph.getCastedNodes() // Nodes are of type Any and must therefore be casted to Int
     println("Shortest paths from source node $startNode:")
-    repeat(graph.size()) { node ->
-        val distValue = graph.distanceTo(nodes[node])
+    nodes.forEach { node ->
+        val distValue = graph.distanceTo(node)
         val path = graph.getPath(node)
         println("To node $node: Distance $distValue Path: ${if (distValue < Int.MAX_VALUE) path else null}")
     }
+
     /* Output:
-    Shortest paths from source node 0:
-    Distance to node 0: 0.0 Path: [0]
-    Distance to node 1: 7.0 Path: [0, 2, 1]
-    Distance to node 2: 3.0 Path: [0, 2]
-    Distance to node 3: 9.0 Path: [0, 2, 1, 3]
-    Distance to node 4: 5.0 Path: [0, 2, 4]
-    Distance to node 5: Infinity Path: null
+        Shortest paths from source node 0:
+        Distance to node 0: 0.0 Path: [0]
+        Distance to node 1: 7.0 Path: [0, 2, 1]
+        Distance to node 2: 3.0 Path: [0, 2]
+        Distance to node 3: 9.0 Path: [0, 2, 1, 3]
+        Distance to node 4: 5.0 Path: [0, 2, 4]
+        Distance to node 5: Infinity Path: null
     */
 
-    /* --- Example IntGraph Definition ---
-     * An IntGraph can be defined the same way as the Graph same way as above,
-     * but it can also be initialized with a size, because the nodes are integers values from 0 to n-1.
-     */
+
+    /* Example IntGraph Definition:
+         * An IntGraph can be defined the same way as the Graph same way as above,
+         * but it can also be initialized with a size, because the nodes are integers values from 0 to n-1.
+    */
+
     val n = graph.size()
     val intGraph = IntGraph(n)
-    graph.adjacencyList.forEachIndexed { node, edges -> // Add the same edges as the above Graph
+    graph.getAllNodes().map { it as Int }.forEach { node -> // Add the same edges as the above Graph
+        val edges = graph.getEdges(node) // List of Pair(weight, destination node)
         edges.forEach { edge -> // Pair(weight, destination node)
-            intGraph.addEdge(node, edge.second, edge.first)
+            intGraph.addEdge(node, edge.second as Int, edge.first) // edge.first is the weight, edge.second is the destination node
         }
     }
     intGraph.dijkstra(startNode)
-    val intNodes: List<Int> = intGraph.nodes()
+    val intNodes: List<Int> = intGraph.getAllNodes()
     println("Shortest paths from source node $startNode:")
     intNodes.forEach{ node ->
         val distValue = intGraph.distanceTo(node)
@@ -109,40 +113,51 @@ import graphClasses.Grid
 import graphClasses.Tile
 
 fun main() {
-    // --- Example Grid Definition ---
+    // Example Grid Definition. We can also initialize it with a with and a height, e.g. `Grid(3, 3)`,
     val stringList = listOf(
-        "S12",
-        "123",
+        "S1X",
+        "1#O",
         "23E"
     )
     val grid = Grid(stringList)
+
     // We could use `grid.connectGridDefault()` to connect all nodes, but let's define a custom connection instead.
     fun connectDownOrRight(t: Tile): List<Tile> = grid.getStraightNeighbours(t).filter { it.x >= t.x || it.y > t.y }
     grid.connectGrid(::connectDownOrRight)
 
     // Nodes in a grid consists of Tile objects with x, y coordinates and data
     val startNode = Tile(0, 0, 'S')
+
+    // We can delete nodes, by specifying them, their coordinates or their data
+    grid.deleteNodeAtXY(1, 1) // Deleting a node at specific coordinate
+    grid.deleteNodesWithData('O') // Deleting all nodes with data 'O'
+
+    // We can run a seach algorithm like BFS (Breadth-First Search) from a start node
     grid.bfs(startNode)
-    val nodes = grid.nodes()
+
+    // Printing distances to all nodes
+    val nodes = grid.getAllNodes()
     nodes.forEach { node ->
-        val distValue = grid.distanceTo(node)
-        println("To node $node: $distValue")
+        val distance = grid.distanceTo(node)
+        println("To node $node: $distance")
     }
     /* Output:
-        To node Tile(x=0, y=0, data=S): 0
-        To node Tile(x=1, y=0, data=1): 1
-        To node Tile(x=2, y=0, data=2): 2
-        To node Tile(x=0, y=1, data=1): 1
-        To node Tile(x=1, y=1, data=2): 2
-        To node Tile(x=2, y=1, data=3): 3
-        To node Tile(x=0, y=2, data=2): 2
-        To node Tile(x=1, y=2, data=3): 3
-        To node Tile(x=2, y=2, data=E): 4
+        To node Tile(x=0, y=0, data=S): 0.0
+        To node Tile(x=1, y=0, data=1): 1.0
+        To node Tile(x=2, y=0, data=2): 2.0
+        To node Tile(x=0, y=1, data=1): 1.0
+        To node Tile(x=0, y=2, data=2): 2.0
+        To node Tile(x=1, y=2, data=3): 3.0
+        To node Tile(x=2, y=2, data=E): 4.0
      */
+
+    // Visualizing the grid, the BFS and the final fastest path to the target
+    grid.visualizeSearch(
+        target = grid.xy2Node(2, 2),
+        screenTitle = "Grid example visualizeing",
+        animationTimeOverride = 500.0,
+        startPaused = false,
+        closeOnEnd = false
+    )
 }
 ```
-
-## Graphics
-
-This library has also been used to make grid visualizations, which can be checked
-out [here](https://github.com/Norskeaksel/GridGraphics/).

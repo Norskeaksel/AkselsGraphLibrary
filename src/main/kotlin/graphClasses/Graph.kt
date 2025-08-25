@@ -10,7 +10,7 @@ class Graph : BaseGraph<Any>(0) {
             System.err.println("Node already exists")
             return
         }
-        _nodes.add(node)
+        nodes.add(node)
         node2id[node] = nrOfNodes
         id2Node[nrOfNodes++] = node
         adjacencyList.add(mutableListOf())

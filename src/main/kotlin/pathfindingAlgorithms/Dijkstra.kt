@@ -8,6 +8,7 @@ class Dijkstra(private val graph: AdjacencyList) {
     private var r = GraphSearchResults(graph.size)
     fun dijkstra(start: Int, target: Int = -1, previousSearchResults: GraphSearchResults? = null): GraphSearchResults {
         r = previousSearchResults ?: GraphSearchResults(graph.size)
+        r.currentVisited = mutableListOf()
         r.doubleDistances[start] = 0.0
         val pq = PriorityQueue<Edge> { a, b -> a.first.compareTo(b.first) }
         pq.add(Edge(0.0, start))

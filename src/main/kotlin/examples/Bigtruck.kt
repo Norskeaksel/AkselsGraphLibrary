@@ -25,6 +25,7 @@ fun bigtruck(): String {
     if (ig.distanceTo(n) == 1e9) {
         return "impossible"
     }
-    val nrOfItems = ((ceil(ig.distanceTo(n)) - ig.distanceTo(n)) / ITEM_BOOST).roundToInt() + items[1]
-    return "${ig.distanceTo(n).roundToInt()} $nrOfItems"
+    val distance = ig.distanceTo(n)
+    val nrOfItems = ((ceil(distance) - distance) / ITEM_BOOST).roundToInt() + items[1]
+    return "${distance.roundToInt()} $nrOfItems"
 }

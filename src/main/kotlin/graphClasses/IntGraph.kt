@@ -3,7 +3,7 @@ package graphClasses
 class IntGraph(size: Int) : BaseGraph<Int>(size) {
     init {
         repeat(size){
-            _nodes[it] = it
+            nodes[it] = it
         }
     }
     override fun addNode(node: Int) =
