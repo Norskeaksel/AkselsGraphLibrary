@@ -8,39 +8,26 @@ fun main() {
     println(ans)
 }
 
-fun getNrOfGroups(grid: Grid):Int{
-    val groups = mutableListOf<List<Int>>()
-    val dfs = DFS(grid)
-    grid.getNodes().forEach { node ->
-        dfs.dfs(grid.node2Id(node))
-        dfs.getAndClearCurrentVisitedIds().let {
-            if(it.isNotEmpty())
-                groups.add(it)
-        }
-    }
-    return groups.size
-}
-
 fun islandBuses(): String {
     val input = readLines()
     val maps = input.joinToString("\n").split("\n\n")
     val ans = mutableListOf<String>()
-    maps.forEachIndexed {i, mapString ->
+    maps.forEachIndexed { i, mapString ->
         val mapList = mapString.split("\n")
         val islandGrid = Grid(mapList).apply {
-            markCharAsWall('.')
-            markCharAsWall('B')
-            connectGridDefaultWeightless()
+            deleteNodesWithData('.')
+            deleteNodesWithData('B')
+            connectGridDefault()
         }
         val bridgesGrid = Grid(mapList).apply {
-            markCharAsWall('.')
-            markCharAsWall('X')
-            markCharAsWall('#')
-            connectGridDefaultWeightless()
+            deleteNodesWithData('.')
+            deleteNodesWithData('X')
+            deleteNodesWithData('#')
+            connectGridDefault()
         }
         val busesGrid = Grid(mapList).apply {
-            markCharAsWall('.')
-            connectGrid(true) {
+            deleteNodesWithData('.')
+            connectGrid {
                 when (it.data) {
                     '#' -> getStraightNeighbours(it).filter { it.data != 'B' }
                     'B' -> getStraightNeighbours(it).filter { it.data != '#' }
@@ -48,16 +35,18 @@ fun islandBuses(): String {
                 }
             }
         }
-        val islands = getNrOfGroups(islandGrid)
-        val bridges = getNrOfGroups(bridgesGrid)
-        val buses = getNrOfGroups(busesGrid)
-        ans.add("""
-            Map ${i+1}
+        val islands = islandGrid.stronglyConnectedComponents().size
+        val bridges = bridgesGrid.stronglyConnectedComponents().size
+        val buses = busesGrid.stronglyConnectedComponents().size
+        ans.add(
+            """
+            Map ${i + 1}
             islands: $islands
             bridges: $bridges
             buses needed: $buses
             
-        """.trimIndent())
+        """.trimIndent()
+        )
     }
     return ans.joinToString("\n")
 }

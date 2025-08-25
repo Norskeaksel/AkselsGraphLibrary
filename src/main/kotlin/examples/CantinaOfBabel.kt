@@ -19,15 +19,14 @@ fun cantinaOfBabel(): Int {
         val name = languages.removeFirst()
         graph.addNode(Man(name, languages))
     }
-    graph.nodes().forEach {
+    graph.getAllNodes().forEach {
         val node = it as Man
-        val recipients = graph.nodes().map { it as Man }.filter { node.languages.first() in it.languages }
+        val recipients = graph.getAllNodes().map { it as Man }.filter { node.languages.first() in it.languages }
         recipients.forEach { recipient ->
             graph.addEdge(it, recipient)
         }
     }
-    val dfs = DFS(graph)
-    val stronglyConnectedComponents = dfs.kosaraju()
+    val stronglyConnectedComponents = graph.stronglyConnectedComponents()
     val biggestComponent = stronglyConnectedComponents.maxBy { it.size }.size
     return n - biggestComponent
 }

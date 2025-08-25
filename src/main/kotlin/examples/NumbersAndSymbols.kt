@@ -1,19 +1,17 @@
 package examples
 // https://adventofcode.com/2023/day/3
 
-import graphClasses.DFS
 import graphClasses.Grid
 import graphClasses.Tile
 
 fun numbersConnectedToSymbol(input: List<String>): Int {
     val grid = Grid(input[0].length, input.size)
     initializeGrid(input, grid)
-    val numbers = grid.getNodes().filter { it.data.toString().toIntOrNull() !in listOf(null, 0) }
+    val numbers = grid.getAllNodes().filter { it.data.toString().toIntOrNull() !in listOf(null, 0) }
     val partNumbers = mutableListOf<Int>()
     numbers.forEach { t ->
-        val searcher = DFS(grid)
-        searcher.dfs(grid.node2Id(t))
-        if (searcher.depth > t.data.toString().length)
+        grid.dfs(t)
+        if (grid.depth() > t.data.toString().length)
             partNumbers.add(t.data.toString().toInt())
     }
     println(partNumbers)
@@ -58,11 +56,10 @@ fun starWith2Numbers(input: List<String>): Long {
     }
     val grid = Grid(input[0].length, input.size)
     initializeGrid(cleanedInput, grid, true)
-    val gears = grid.getNodes().filter { it.data == '*' }
+    val gears = grid.getAllNodes().filter { it.data == '*' }
     val partNumbers = mutableListOf<Pair<Long, Long>>()
     gears.forEach { t ->
-        val searcher = DFS(grid)
-        searcher.dfs(grid.node2Id(t))
+        grid.dfs(t)
         val numbers = grid.getAllNeighbours(t).filter { it.data.toString().toIntOrNull() !in (listOf(null, 0)) }.map { it.data }.toSet()
         if (numbers.size == 2)
             partNumbers.add(Pair(numbers.first().toString().toLong(), (numbers.last().toString().toLong())))

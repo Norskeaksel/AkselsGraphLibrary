@@ -1,31 +1,21 @@
 package examples
 //https://codeforces.com/problemset/problem/893/C
 
-import graphClasses.DFS
 import graphClasses.Graph
 import graphClasses.readInts
 
 fun rumor(): Long {
-    val g = Graph()
     val (n, m) = readInts(2)
+    val g = Graph()
     val c = readInts(n)
     repeat(n) {
         g.addNode(it + 1)
     }
     repeat(m) {
         val (x, y) = readInts(2)
-        g.connect(x, y)
+        g.connectUnweighted(x, y)
     }
-    val dfs = DFS(g)
-    val components = mutableListOf<List<Int>>()
-    for (i in 0 until g.size()) {
-        if (dfs.visited[i]) continue
-        dfs.dfs(i)
-        val component = dfs.getAndClearCurrentVisitedIds()
-        if (component.isNotEmpty())
-            components.add(component)
-    }
-
+    val components = g.stronglyConnectedComponents()
     System.err.println(components)
     var sum = 0L
     components.forEach { component ->
@@ -33,7 +23,6 @@ fun rumor(): Long {
         sum += min
     }
     return sum
-
 }
 
 fun main() {

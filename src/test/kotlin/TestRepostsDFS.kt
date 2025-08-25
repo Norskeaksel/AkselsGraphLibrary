@@ -18,17 +18,17 @@ class RepostsDFSTest {
     }
 
     @Test
-    fun RepostsBFSa() {
+    fun RepostsDFSa() {
         _reader = File("src/test/SampleInput/Reposts/input1").inputStream().bufferedReader()
         assertThat(repostsDFS()).isEqualTo(6)
     }
     @Test
-    fun RepostsBFSb() {
+    fun RepostsDFSb() {
         _reader = File("src/test/SampleInput/Reposts/input2").inputStream().bufferedReader()
         assertThat(repostsDFS()).isEqualTo(2)
     }
     @Test
-    fun RepostsBFSc() {
+    fun RepostsDFSc() {
         _reader = File("src/test/SampleInput/Reposts/input3").inputStream().bufferedReader()
         assertThat(repostsDFS()).isEqualTo(2)
     }

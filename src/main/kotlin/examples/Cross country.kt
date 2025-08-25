@@ -1,6 +1,6 @@
 package examples
 // https://open.kattis.com/problems/crosscountry?tab=metadata
-import graphClasses.Dijkstra
+import pathfindingAlgorithms.Dijkstra
 import graphClasses.IntGraph
 import graphClasses._writer
 import graphClasses.readDoubles
@@ -20,7 +20,6 @@ fun PrintWriter.execute() {
             graph.addEdge(i,j,d)
         }
     }
-    val dijkstra = Dijkstra(graph.getAdjacencyList())
-    dijkstra.dijkstra(s)
-    println(dijkstra.distances[t].toInt())
+    graph.dijkstra(s)
+    println(graph.distanceTo(t).toInt())
 }

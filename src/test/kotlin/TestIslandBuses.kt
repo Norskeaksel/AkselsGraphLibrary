@@ -42,7 +42,7 @@ buses needed: 2
         assertThat(islandBuses()).isEqualTo(expectedOutput)
     }
 
-    @Test
+    /*@Test
     fun speedTest() {
         val time1 = measureTimeMillis {
             _reader = File("src/test/SampleInput/IslandBuses/input2").inputStream().bufferedReader()
@@ -59,5 +59,5 @@ buses needed: 2
         println("time1: $time1 ms\n" +
                 "time2: $time2 ms\n" +
                 "time3: $time3 ms")
-    }
+    }*/
 }

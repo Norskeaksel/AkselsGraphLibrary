@@ -9,7 +9,7 @@ various problems.
 The library contains the general `Graph` class, which can be used to create graphs of any datatype,
 the `IntGraph` class, which is performance optimized for integer nodes,
 and the `Grid` class, where each node has x and y coordinates in addition to containing any data type.
-All the classes inherit from the [GraphContract.kt](src%2Fmain%2Fkotlin%2FgraphClasses%2FGraphContract.kt) interface,
+All the classes inherit from the [BaseGraph.kt](src%2Fmain%2Fkotlin%2FgraphClasses%2FBaseGraph.kt) interface,
 which defines the basic functionality of a graph.
 
 ## The Graph class
@@ -23,70 +23,90 @@ Once the graph is built, you may use one of the graph traversal classes.
 [Example usage:](src/main/kotlin/examples/GraphExample.kt)
 
 ```kotlin
-import graphClasses.Dijkstra
+package examples
+
 import graphClasses.Graph
-import graphClasses.getPath
+import graphClasses.IntGraph
 
 
 fun main() {
-    // Example Graph Definition
-    val g = Graph()
-    g.addEdge(0, 1, 10.0)
-    g.addEdge(0, 2, 3.0)
-    g.addEdge(1, 3, 2.0)
-    g.addEdge(2, 1, 4.0)
-    g.addEdge(2, 3, 8.0)
-    g.addEdge(2, 4, 2.0)
-    g.addEdge(3, 4, 5.0)
+    // --- Example Graph Definition ---
+    val graph = Graph()
+    graph.addEdge(0, 1, 10.0)
+    graph.addEdge(0, 2, 3.0)
+    graph.addEdge(1, 3, 2.0)
+    graph.addEdge(2, 1, 4.0)
+    graph.addEdge(2, 3, 8.0)
+    graph.addEdge(2, 4, 2.0)
+    graph.addEdge(3, 4, 5.0)
 
-    g.addNode(5) // Adding an isolated node is also possible
+    graph.addNode(5) // Adding an isolated node is also possible
 
-    // Find shortest paths with the Dijkstra class, initialized with the graph
-    val dijkstraRunner = Dijkstra(g)
     val startNode = 0
-    dijkstraRunner.dijkstra(startNode)
-    val distance = dijkstraRunner.distances
-
+    graph.dijkstra(startNode)
+    val nodes: List<Int> = graph.getCastedNodes()
     println("Shortest paths from source node $startNode:")
-    for (goalNodeId in 0 until g.size()) {
-        val distValue = distance[goalNodeId]
-        val path = getPath(goalNodeId, dijkstraRunner.parents)
-        println("To node $goalNodeId: ${distValue.toInt()}. Path: ${if (distValue < Int.MAX_VALUE) path else null}")
+    repeat(graph.size()) { node ->
+        val distValue = graph.distanceTo(nodes[node])
+        val path = graph.getPath(node)
+        println("To node $node: Distance $distValue Path: ${if (distValue < Int.MAX_VALUE) path else null}")
     }
     /* Output:
     Shortest paths from source node 0:
-    Distance to node 0: 0. Path: [0]
-    Distance to node 1: 7. Path: [0, 2, 1]
-    Distance to node 2: 3. Path: [0, 2]
-    Distance to node 3: 9. Path: [0, 2, 1, 3]
-    Distance to node 4: 5. Path: [0, 2, 4]
-    Distance to node 5: 2147483647. Path: null
+    Distance to node 0: 0.0 Path: [0]
+    Distance to node 1: 7.0 Path: [0, 2, 1]
+    Distance to node 2: 3.0 Path: [0, 2]
+    Distance to node 3: 9.0 Path: [0, 2, 1, 3]
+    Distance to node 4: 5.0 Path: [0, 2, 4]
+    Distance to node 5: Infinity Path: null
+    */
+
+    /* --- Example IntGraph Definition ---
+     * An IntGraph can be defined the same way as the Graph same way as above,
+     * but it can also be initialized with a size, because the nodes are integers values from 0 to n-1.
      */
+    val n = graph.size()
+    val intGraph = IntGraph(n)
+    graph.adjacencyList.forEachIndexed { node, edges -> // Add the same edges as the above Graph
+        edges.forEach { edge -> // Pair(weight, destination node)
+            intGraph.addEdge(node, edge.second, edge.first)
+        }
+    }
+    intGraph.dijkstra(startNode)
+    val intNodes: List<Int> = intGraph.nodes()
+    println("Shortest paths from source node $startNode:")
+    intNodes.forEach{ node ->
+        val distValue = intGraph.distanceTo(node)
+        val path = intGraph.getPath(node)
+        println("To node $node: Distance $distValue Path: ${if (distValue < Int.MAX_VALUE) path else null}")
+    }
+    // Outputs the same as the code above
 }
 ```
 
 ## The IntGraph class
 
 The IntGraph class behaves a lot like the Graph class when used with integers like the example above. However,
-it's more performant when creating the graph, because it does not need to maintain a mapping between the IDs and nodes.
+it's more performant, because it does not need to maintain an internal mapping between the nodes and their indexes in
+the adjacency list.
 [Example usage.](src/main/kotlin/examples/GraphExample.kt)
 
 ## The Grid class
 
-The Grid class is a specialized graph class. It uses the data
-class ```Tile(val x: Int, val y: Int, var data: Any? = null)```
-to represent nodes of any datatype, but each node also have x and y coordinates.
+The Grid class is a specialized graph class. It uses the data class:
+```Tile(val x: Int, val y: Int, var data: Any? = null)```
+to represent nodes of any datatype, where each node also have x and y coordinates.
 The grid can be created with a width and height, or by passing a list of strings.
 The grid can be traversed using the same algorithms as the graph class,
 but it also has some additional methods for connecting the grid without explicitly adding
 edges. `.connectGridDefault()` connects each node to nodes up, down, left and right of it, if they exist.
-If some customization is needed, `.connectGrid(::yourCustomFunction)` can be used,
-where yourCustomFunction takes a `Tile` and returns a `List<Tile>` to connect
+If some customization is needed, `.connectGrid(::yourCustomFunction)` (also written like `.connectGrid{ yourLambda}`)
+can be used, where yourCustomFunction takes a `Tile` and returns a `List<Tile>` to connect
 to. [Example usage:](src/main/kotlin/examples/GridExample.kt)
 
 ```kotlin
-import graphClasses.BFS
 import graphClasses.Grid
+import graphClasses.Tile
 
 fun main() {
     // --- Example Grid Definition ---
@@ -96,14 +116,16 @@ fun main() {
         "23E"
     )
     val grid = Grid(stringList)
-    grid.connectGridDefault()
+    // We could use `grid.connectGridDefault()` to connect all nodes, but let's define a custom connection instead.
+    fun connectDownOrRight(t: Tile): List<Tile> = grid.getStraightNeighbours(t).filter { it.x >= t.x || it.y > t.y }
+    grid.connectGrid(::connectDownOrRight)
 
-    val bfs = BFS(grid)
-    bfs.bfs(0)
-    val distance = bfs.distances
-    repeat(grid.trueSize()) { id ->
-        val distValue = distance[id]
-        val node = grid.id2Node(id)
+    // Nodes in a grid consists of Tile objects with x, y coordinates and data
+    val startNode = Tile(0, 0, 'S')
+    grid.bfs(startNode)
+    val nodes = grid.nodes()
+    nodes.forEach { node ->
+        val distValue = grid.distanceTo(node)
         println("To node $node: $distValue")
     }
     /* Output:

@@ -1,7 +1,7 @@
 package examples
 // https://codeforces.com/problemset/problem/522/A
 
-import graphClasses.DFS
+import pathfindingAlgorithms.DFS
 import graphClasses.Graph
 import graphClasses._writer
 import graphClasses.readInt
@@ -18,11 +18,10 @@ fun repostsDFS(): Int {
         val (v,_,u) = readStrings(3).map { it.lowercase(Locale.getDefault()) }
         g.addEdge(u,v)
     }
-    val dfs = DFS(g)
     var longestChain = 0
-    repeat(n){
-        dfs.dfs(it)
-        longestChain = max(longestChain, dfs.depth)
+    g.getAllNodes().forEach { node ->
+        g.dfs(node)
+        longestChain = max(longestChain, g.depth())
     }
     return longestChain
 }
