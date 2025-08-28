@@ -74,14 +74,8 @@ abstract class BaseGraph<T>(size: Int) {
     }
 
     fun removeEdge(node1: T, node2: T, weight: Double? = null) {
-        val u = node2Id(node1) ?: run {
-            System.err.println("Node $node1 not found in graph")
-            return
-        }
-        val v = node2Id(node2) ?: run {
-            System.err.println("Node $node2 not found in graph")
-            return
-        }
+        val u = node2Id(node1) ?: error("Node $node1 not found in graph")
+        val v = node2Id(node2) ?: error("Node $node2 not found in graph")
         removeEdge(u, v, weight)
     }
 
