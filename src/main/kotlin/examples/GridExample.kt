@@ -2,6 +2,7 @@ package examples
 
 import graphClasses.Grid
 import graphClasses.Tile
+import gridGraphics.visualizeSearch
 
 fun main() {
     // Example Grid Definition. We can also initialize it with a with and a height, e.g. `Grid(3, 3)`,

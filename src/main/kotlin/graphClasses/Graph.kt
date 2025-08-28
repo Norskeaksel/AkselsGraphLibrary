@@ -7,7 +7,7 @@ class Graph : BaseGraph<Any>(0) {
 
     override fun addNode(node: Any) {
         if (node2id.containsKey(node)) {
-            System.err.println("Node already exists")
+            System.err.println("The node already exists, it can't be added again")
             return
         }
         _nodes.add(node)
@@ -34,8 +34,6 @@ class Graph : BaseGraph<Any>(0) {
 
 
     override fun getAllNodes(): List<Any> = id2Node.values.toList()
-    fun <T> getCastedNodes(): List<T> = id2Node.values.map { it as T }
-    fun size() = nrOfNodes
     override fun toString(): String {
         return buildString {
             adjacencyList.forEachIndexed { id, edges ->

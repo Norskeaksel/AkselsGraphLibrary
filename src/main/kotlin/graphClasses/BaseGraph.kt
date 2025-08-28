@@ -7,7 +7,9 @@ import pathfindingAlgorithms.*
 import toUnweightedAdjacencyList
 
 
-abstract class BaseGraph<T>(val size: Int) {
+abstract class BaseGraph<T>(size: Int) {
+    fun size() = nodes.size
+
     // PROPERTIES
     protected val adjacencyList: AdjacencyList = MutableList(size) { mutableListOf() }
 
@@ -82,6 +84,7 @@ abstract class BaseGraph<T>(val size: Int) {
         }
         removeEdge(u, v, weight)
     }
+
     protected fun <T> nrOfConnections(twoDList: List<List<T>>) = twoDList.sumOf { it.size }
 
     fun distanceTo(node: T): Double {
@@ -142,6 +145,18 @@ abstract class BaseGraph<T>(val size: Int) {
         searchResults = Dijkstra(adjacencyList).dijkstra(startId, targetId, searchResults)
     }
 
+    fun minimumSpanningTree(): Pair<Double, Graph> = minimumSpanningTree(adjacencyList).run {
+        first to second.let { adjacencyList ->
+            val mstGraph = Graph()
+            adjacencyList.forEachIndexed { id, edges ->
+                edges.forEach { (w,v) ->
+                    mstGraph.connect(id2Node(id)!!, id2Node(v)!!, w)
+                }
+            }
+            mstGraph
+        }
+    }
+
     open fun topologicalSort() = DFS(unweightedAdjacencyList).topologicalSort()
     open fun stronglyConnectedComponents() = DFS(unweightedAdjacencyList).stronglyConnectedComponents()
 
@@ -173,11 +188,17 @@ abstract class BaseGraph<T>(val size: Int) {
         node2Id(t)?.let { unweightedAdjacencyList[it] }?.map { id2Node(it)!! }
             ?: error("Node $t not found in graph")
 
-    fun printConnections() = printAdjacencyList(false)
-    fun printWeightlessConnections() = printAdjacencyList(true)
+    fun printConnections() = printGraph(false)
+    fun printWeightlessConnections() = printGraph(true)
 
-    private fun printAdjacencyList(weightless: Boolean) =
-        (if (weightless) unweightedAdjacencyList else adjacencyList).forEachIndexed { node, connections ->
-            System.err.println("$node ---> $connections")
+    private fun printGraph(weightless: Boolean) =
+        if (weightless) {
+            unweightedAdjacencyList.forEachIndexed { nodeId, connections ->
+                System.err.println("${id2Node(nodeId)} ---> ${connections.map { id2Node(it) }}")
+            }
+        } else {
+            adjacencyList.forEachIndexed { nodeId, connections ->
+                System.err.println("${id2Node(nodeId)} ---> ${connections.map { "(${it.first}, ${id2Node(it.second)})" }}")
+            }
         }
 }
