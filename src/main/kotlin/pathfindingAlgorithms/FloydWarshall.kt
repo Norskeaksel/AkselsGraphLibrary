@@ -5,7 +5,7 @@ import kotlin.math.min
 
 class FloydWarshall(val graph: AdjacencyList) {
     val n = graph.size
-    val distances = Array(n) { DoubleArray(n) { Int.MAX_VALUE.toDouble() } }
+    val distances = Array(n) { DoubleArray(n) { 1e9 } }
 
     init {
         graph.forEachIndexed { u, edges ->
@@ -27,8 +27,7 @@ class FloydWarshall(val graph: AdjacencyList) {
     }
     fun printDistances() {
         distances.forEachIndexed { i, row ->
-            val modifiedRow = row.map { if(it == Int.MAX_VALUE.toDouble()) -1.0 else it }
-            System.err.println("$i: ${modifiedRow.joinToString(", ")}")
+            System.err.println("$i: ${row.joinToString(", ")}")
         }
     }
 }

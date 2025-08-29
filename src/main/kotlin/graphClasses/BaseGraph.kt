@@ -45,7 +45,7 @@ abstract class BaseGraph<T>(size: Int) {
     protected abstract fun id2Node(id: Int): T?
     protected abstract fun node2Id(node: T): Int?
     abstract fun addNode(node: T)
-    abstract fun addEdge(node1: T, node2: T, weight: Double = 1.0)
+    abstract fun addEdge(node1: T, node2: T, weight: Double)
 
     /** When performance is critical and the graph is unweighted, adding unweighted edges can reduce program overhead */
     abstract fun addUnweightedEdge(node1: T, node2: T)
@@ -143,13 +143,15 @@ abstract class BaseGraph<T>(size: Int) {
         first to second.let { adjacencyList ->
             val mstGraph = Graph()
             adjacencyList.forEachIndexed { id, edges ->
-                edges.forEach { (w,v) ->
+                edges.forEach { (w, v) ->
                     mstGraph.connect(id2Node(id)!!, id2Node(v)!!, w)
                 }
             }
             mstGraph
         }
     }
+
+    fun floydWarshall() = FloydWarshall(adjacencyList).apply { floydWarshall() }
 
     open fun topologicalSort() = DFS(unweightedAdjacencyList).topologicalSort()
     open fun stronglyConnectedComponents() = DFS(unweightedAdjacencyList).stronglyConnectedComponents()

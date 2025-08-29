@@ -9,7 +9,7 @@ fun day10a(input: List<String>): Long {
     grid.getAllNodes().forEach { t ->
         grid.getStraightNeighbours(t).forEach { n ->
             if (n.data == t.data as Char + 1)
-                grid.addEdge(t, n)
+                grid.addUnweightedEdge(t, n)
         }
     }
     grid.getAllNodes().forEach { it ->
