@@ -19,10 +19,10 @@ fun main() {
     grid.bfs(bfsStartNodes)
     val path = grid.getPath(goal)
     val visitedNodes = grid.currentVisitedNodes()
-    FXGraphics.grid = grid
-    FXGraphics.currentVisitedNodes = visitedNodes
-    FXGraphics.nodeDistances = visitedNodes.map { grid.distanceTo(it) }
-    FXGraphics.finalPath = path
-    FXGraphics.startPaused = false
-    Application.launch(FXGraphics()::class.java)
+    GridGraphics.grid = grid
+    GridGraphics.currentVisitedNodes = visitedNodes
+    GridGraphics.nodeDistances = visitedNodes.map { grid.distanceTo(it) }
+    GridGraphics.finalPath = path
+    GridGraphics.startPaused = false
+    Application.launch(GridGraphics()::class.java)
 }

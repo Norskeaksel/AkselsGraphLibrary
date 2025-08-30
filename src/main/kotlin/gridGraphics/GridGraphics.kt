@@ -16,7 +16,7 @@ import javafx.stage.Stage
 import javafx.util.Duration
 
 
-class FXGraphics : Application() {
+class GridGraphics : Application() {
     companion object {
         var grid = Grid(0, 0)
         var currentVisitedNodes = listOf<Tile>()

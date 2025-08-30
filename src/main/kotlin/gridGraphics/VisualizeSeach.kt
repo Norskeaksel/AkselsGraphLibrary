@@ -3,7 +3,7 @@ package gridGraphics
 import graphClasses.Grid
 import graphClasses.Tile
 import javafx.application.Application
-import org.gridgraphics.FXGraphics
+import org.gridgraphics.GridGraphics
 
 fun Grid.visualizeSearch(
     target: Tile? = null,
@@ -13,15 +13,15 @@ fun Grid.visualizeSearch(
     startPaused: Boolean = false,
     screenWidthOverride: Double? = null,
 ) {
-    FXGraphics.grid = this
+    GridGraphics.grid = this
     val currentVisitedNodes = currentVisitedNodes()
-    FXGraphics.currentVisitedNodes = currentVisitedNodes
-    FXGraphics.nodeDistances = currentVisitedNodes.map { distanceTo(it) }
-    FXGraphics.finalPath = target?.let { getPath(it) } ?: emptyList()
-    FXGraphics.screenTitle = screenTitle
-    FXGraphics.animationTimeOverride = animationTimeOverride
-    FXGraphics.startPaused = startPaused
-    FXGraphics.closeOnEnd = closeOnEnd
-    FXGraphics.screenWidthOverride = screenWidthOverride
-    Application.launch(FXGraphics()::class.java)
+    GridGraphics.currentVisitedNodes = currentVisitedNodes
+    GridGraphics.nodeDistances = currentVisitedNodes.map { distanceTo(it) }
+    GridGraphics.finalPath = target?.let { getPath(it) } ?: emptyList()
+    GridGraphics.screenTitle = screenTitle
+    GridGraphics.animationTimeOverride = animationTimeOverride
+    GridGraphics.startPaused = startPaused
+    GridGraphics.closeOnEnd = closeOnEnd
+    GridGraphics.screenWidthOverride = screenWidthOverride
+    Application.launch(GridGraphics()::class.java)
 }
