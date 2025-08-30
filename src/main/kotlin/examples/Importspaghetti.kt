@@ -19,11 +19,20 @@ fun importspaghetti(): String {
         val (file, importLines) = readString().split(" ")
         repeat(importLines.toInt()) {
             val imports = readString().replace("import ", "").split(", ")
-            imports.forEach { g.addEdge(file, it, 1.0) }
+            imports.forEach { g.addUnweightedEdge(file, it) }
         }
     }
-    val r = g.floydWarshall()
-    r.printDistances()
-    return ""
+    var shortestCycleLength = Int.MAX_VALUE
+    var shortestCyclePath = listOf<Any>()
+
+    g.getAllNodes().reversed().forEach { node ->
+        g.bfs(node, node)
+        if(g.foundTarget() && g.depth() < shortestCycleLength) {
+            shortestCycleLength = g.depth()
+            shortestCyclePath = g.getPath(node)
+        }
+    }
+    if(shortestCycleLength == Int.MAX_VALUE) return "SHIP IT"
+    return shortestCyclePath.joinToString().replace(", ", " ")
 }
 

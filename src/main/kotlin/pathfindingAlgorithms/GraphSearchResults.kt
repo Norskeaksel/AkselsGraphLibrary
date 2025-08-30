@@ -8,6 +8,7 @@ data class GraphSearchResults(private val graphSize: Int) {
     var depth: Int = 0
     var currentVisited = mutableListOf<Int>()
     var processedOrder = mutableListOf<Int>()
+    var foundTarget = false
     val distances:DoubleArray
     get() = if (doubleDistances.any { it != 1e9 }) {
         doubleDistances

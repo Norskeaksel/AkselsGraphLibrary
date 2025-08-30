@@ -16,11 +16,13 @@ class Dijkstra(private val graph: AdjacencyList) {
             if (r.visited[u]) continue
             r.visited[u] = true
             r.currentVisited.add(u)
-            if (u == target)
+            if (u == target){
+                r.foundTarget = true
                 return r
+            }
             graph[u].forEach { (d, v) ->
                 val newDistance = r.doubleDistances[u] + d
-                if (newDistance < r.doubleDistances[v]) {
+                if (newDistance < r.doubleDistances[v] || v == target) {
                     r.doubleDistances[v] = newDistance
                     r.parents[v] = u
                     if (!r.visited[v]) {

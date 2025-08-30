@@ -16,22 +16,24 @@ class BFS(private val graph: UnweightedAdjacencyList) {
             r.intDistances[it] = 0
         }
         while (queue.isNotEmpty()) {
-            val currentId = queue.first()
-            queue.removeFirst()
+            val currentId = queue.removeFirst()
             if (r.visited[currentId])
                 continue
             r.visited[currentId] = true
             r.currentVisited.add(currentId)
-            if (currentId == targetId)
-                return r
+
             val currentDistance = r.intDistances[currentId]
             graph[currentId].forEach { v ->
                 val newDistance = currentDistance + 1
-                if (!r.visited[v] && newDistance < r.intDistances[v]) { // Do distance check to avoid re queueing startIds
-                    queue.add(v)
+                if ((!r.visited[v] && newDistance < r.intDistances[v]) || v == targetId) {
                     r.parents[v] = currentId
-                    r.intDistances[v] = newDistance
                     r.depth = newDistance.coerceAtLeast(r.depth)
+                    r.intDistances[v] = newDistance
+                    if (v == targetId){
+                        r.foundTarget = true
+                        return r
+                    }
+                    queue.add(v)
                 }
             }
         }
