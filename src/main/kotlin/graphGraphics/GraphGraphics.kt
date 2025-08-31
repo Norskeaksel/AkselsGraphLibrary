@@ -49,7 +49,7 @@ private fun Graph.convertToVisualizationGraph(): DigraphEdgeList<Any, Any> {
         g.insertVertex(node)
     }
     getNodes().forEach { node ->
-        getEdges(node).forEachIndexed { i, edge ->
+        getEdges(node).forEach {edge ->
             g.insertEdge(node, edge.second, edge)
         }
     }
