@@ -85,6 +85,9 @@ abstract class BaseGraph<T>(size: Int) {
     fun getNeighbours(t: T): List<T> =
         node2Id(t)?.let { unweightedAdjacencyList[it] }?.map { id2Node(it)!! }
             ?: error("Node $t not found in graph")
+    fun getEdges(t: T): List<Pair<Double, T>> =
+        node2Id(t)?.let { adjacencyList[it] }?.map { Pair(it.first, id2Node(it.second)!!) }
+            ?: error("Node $t not found in graph")
 
     // SEARCH ALGORITHMS
     fun bfs(startNodes: List<T>, target: T? = null, reset: Boolean = true) {

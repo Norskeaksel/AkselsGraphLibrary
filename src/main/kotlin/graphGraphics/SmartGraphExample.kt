@@ -1,5 +1,6 @@
 package graphGraphics
 
+import com.brunomnsilva.smartgraph.containers.SmartGraphDemoContainer
 import com.brunomnsilva.smartgraph.graph.Graph
 import com.brunomnsilva.smartgraph.graph.GraphEdgeList
 import com.brunomnsilva.smartgraph.graphview.SmartCircularSortedPlacementStrategy
@@ -20,7 +21,8 @@ class SmartGraphExample : Application() {
         val initialPlacement: SmartPlacementStrategy = SmartCircularSortedPlacementStrategy()
         val graphView: SmartGraphPanel<Any, Any> = SmartGraphPanel(g, initialPlacement)
         graphView.setAutomaticLayout(true)
-        val scene = Scene(graphView, 1024.0, 768.0)
+        val container = SmartGraphDemoContainer(graphView)
+        val scene = Scene(container, 1024.0, 768.0)
 
         stage.title = "JavaFXGraph Visualization"
         stage.scene = scene
@@ -61,9 +63,8 @@ class SmartGraphExample : Application() {
         g.insertEdge("A", "H", "0")
         graphView.update()
 
-        // Pause then stop the automatic layout
-        val pauseTime = Duration.seconds(2.5)
-        val pause = PauseTransition(pauseTime)
+        val transitionTime = Duration.seconds(2.5)
+        val pause = PauseTransition(transitionTime)
         pause.setOnFinished {
             graphView.setAutomaticLayout(false)
         }
@@ -71,7 +72,7 @@ class SmartGraphExample : Application() {
 
         val timeline = Timeline()
         g.vertices().forEachIndexed { index, vertex ->
-            val keyFrame = KeyFrame(Duration.millis(250.0 * index).add(pauseTime), {
+            val keyFrame = KeyFrame(Duration.millis(300.0 * index).add(transitionTime), {
                 val stylableVertex = graphView.getStylableVertex(vertex)
                 stylableVertex?.setStyleClass("myVertex")
             })
