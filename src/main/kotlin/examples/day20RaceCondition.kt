@@ -3,7 +3,6 @@ package examples
 
 import graphClasses.Grid
 import graphClasses.Tile
-import gridGraphics.visualizeSearch
 
 
 fun day20a(input: List<String>, cheatGoal: Int, fairTime: Int): Int {
@@ -18,8 +17,8 @@ fun day20a(input: List<String>, cheatGoal: Int, fairTime: Int): Int {
             else null
         }
     }
-    val startNode = grid.getAllNodes().first { it.data == 'S' }
-    val endNode = grid.getAllNodes().last { it.data == 'E' }
+    val startNode = grid.getNodes().first { it.data == 'S' }
+    val endNode = grid.getNodes().last { it.data == 'E' }
 
     var timeSaved = fairTime
     var c = -1

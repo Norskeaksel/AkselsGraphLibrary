@@ -16,9 +16,9 @@ import javafx.util.Duration
 // On linux, set -Dsun.java2d.opengl=True in intellij VM options for better performance
 class SmartGraphExample : Application() {
     override fun start(stage: Stage) {
-        val g: Graph<String, String> = GraphEdgeList()
+        val g: Graph<Any, Any> = GraphEdgeList()
         val initialPlacement: SmartPlacementStrategy = SmartCircularSortedPlacementStrategy()
-        val graphView: SmartGraphPanel<String, String> = SmartGraphPanel(g, initialPlacement)
+        val graphView: SmartGraphPanel<Any, Any> = SmartGraphPanel(g, initialPlacement)
         graphView.setAutomaticLayout(true)
         val scene = Scene(graphView, 1024.0, 768.0)
 

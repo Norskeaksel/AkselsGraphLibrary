@@ -33,7 +33,7 @@ class Graph : BaseGraph<Any>(0) {
     override fun id2Node(id: Int): Any? = id2Node[id]
 
 
-    override fun getAllNodes(): List<Any> = id2Node.values.toList()
+    override fun getNodes(): List<Any> = id2Node.values.toList()
     override fun toString(): String {
         return buildString {
             adjacencyList.forEachIndexed { id, edges ->

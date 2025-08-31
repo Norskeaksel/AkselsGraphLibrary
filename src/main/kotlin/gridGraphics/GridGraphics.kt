@@ -39,7 +39,7 @@ class GridGraphics : Application() {
         primaryStage.title = screenTitle
         val root = Group()
         gc.fill = Color.BLACK
-        grid.nodes.forEach { node ->
+        grid.getNodes().forEach { node ->
             drawSquare(node.x, node.y, Color.BLACK)
         }
         root.children.add(canvas)

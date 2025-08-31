@@ -19,9 +19,9 @@ fun cantinaOfBabel(): Int {
         val name = languages.removeFirst()
         graph.addNode(Man(name, languages))
     }
-    graph.getAllNodes().forEach {
+    graph.getNodes().forEach {
         val node = it as Man
-        val recipients = graph.getAllNodes().map { it as Man }.filter { node.languages.first() in it.languages }
+        val recipients = graph.getNodes().map { it as Man }.filter { node.languages.first() in it.languages }
         recipients.forEach { recipient ->
             graph.addEdge(it, recipient, 1.0)
         }
