@@ -45,8 +45,7 @@ fun main() {
 
     // Visualizing the grid, the BFS and the final fastest path to the target
     grid.visualizeSearch(
-        target = grid.xy2Node(2, 2),
-        screenTitle = "Grid example visualizeing",
+        screenTitle = "Grid example visualizing",
         animationTimeOverride = 500.0,
         startPaused = false,
         closeOnEnd = false

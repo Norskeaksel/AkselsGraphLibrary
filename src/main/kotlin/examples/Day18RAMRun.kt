@@ -12,7 +12,9 @@ fun day18a(input: List<String>, gridSize: Int, lineCount: Int): Int {
         grid.deleteNodeAtXY(x, y)
     }
     grid.connectGridDefault()
-    grid.bfs(Tile(0,0))
-    val ans = grid.distanceTo(grid.xy2Node(gridSize - 1, gridSize - 1)!!).toInt()
+    val goal = grid.xy2Node(gridSize - 1, gridSize - 1)!!
+    grid.bfs(Tile(0,0), goal)
+    val ans = grid.distanceTo(goal).toInt()
+    // grid.visualizeSearch()
     return ans
 }

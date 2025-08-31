@@ -5,11 +5,16 @@ import com.brunomnsilva.smartgraph.graph.GraphEdgeList
 import com.brunomnsilva.smartgraph.graphview.SmartCircularSortedPlacementStrategy
 import com.brunomnsilva.smartgraph.graphview.SmartGraphPanel
 import com.brunomnsilva.smartgraph.graphview.SmartPlacementStrategy
+import javafx.animation.KeyFrame
+import javafx.animation.PauseTransition
+import javafx.animation.Timeline
 import javafx.application.Application
 import javafx.scene.Scene
 import javafx.stage.Stage
+import javafx.util.Duration
 
-class SmartGraphApp : Application() {
+// On linux, set -Dsun.java2d.opengl=True in intellij VM options for better performance
+class SmartGraphExample : Application() {
     override fun start(stage: Stage) {
         val g: Graph<String, String> = GraphEdgeList()
         val initialPlacement: SmartPlacementStrategy = SmartCircularSortedPlacementStrategy()
@@ -55,9 +60,27 @@ class SmartGraphApp : Application() {
         g.insertEdge("H", "N", "12")
         g.insertEdge("A", "H", "0")
         graphView.update()
+
+        // Pause then stop the automatic layout
+        val pauseTime = Duration.seconds(2.5)
+        val pause = PauseTransition(pauseTime)
+        pause.setOnFinished {
+            graphView.setAutomaticLayout(false)
+        }
+        pause.play()
+
+        val timeline = Timeline()
+        g.vertices().forEachIndexed { index, vertex ->
+            val keyFrame = KeyFrame(Duration.millis(250.0 * index).add(pauseTime), {
+                val stylableVertex = graphView.getStylableVertex(vertex)
+                stylableVertex?.setStyleClass("myVertex")
+            })
+            timeline.keyFrames.add(keyFrame)
+        }
+        timeline.play()
     }
 }
 
 fun main() {
-    Application.launch(SmartGraphApp::class.java)
+    Application.launch(SmartGraphExample::class.java)
 }

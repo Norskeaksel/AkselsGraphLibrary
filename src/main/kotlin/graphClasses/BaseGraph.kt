@@ -21,6 +21,7 @@ abstract class BaseGraph<T>(size: Int) {
     val nodes: List<T>
         get() = _nodes.filterNotNull()
     protected var searchResults: GraphSearchResults? = null
+    var finalPath: List<T> = emptyList()
 
     // ABSTRACT FUNCTIONS
     abstract fun getAllNodes(): List<T>
@@ -94,6 +95,9 @@ abstract class BaseGraph<T>(size: Int) {
         val targetId = target?.let { node2Id(it) } ?: -1
         if (reset) searchResults = null
         searchResults = BFS(unweightedAdjacencyList).bfs(startNodeIds, targetId, searchResults)
+        target?.let {
+            finalPath = getPath(it)
+        }
     }
 
     fun bfs(startNode: T, target: T? = null) = bfs(listOf(startNode), target)
@@ -115,6 +119,9 @@ abstract class BaseGraph<T>(size: Int) {
         val startId = node2Id(startNode) ?: error("Node $startNode not found in graph")
         val targetId = target?.let { node2Id(it) } ?: -1
         searchResults = Dijkstra(adjacencyList).dijkstra(startId, targetId, searchResults)
+        target?.let {
+            finalPath = getPath(it)
+        }
     }
 
     // ADDITIONAL ALGORITHMS
@@ -138,7 +145,8 @@ abstract class BaseGraph<T>(size: Int) {
         val targetId = node2Id(target)
         val pathIds = searchResults?.let { getPath(targetId, it.parents) }
             ?: error("Can't getPath because no search has been run yet")
-        return pathIds.mapNotNull { id2Node(it) }
+        finalPath = pathIds.mapNotNull { id2Node(it) }
+        return finalPath
     }
 
     private fun getPath(destination: Int?, parents: IntArray): List<Int> {

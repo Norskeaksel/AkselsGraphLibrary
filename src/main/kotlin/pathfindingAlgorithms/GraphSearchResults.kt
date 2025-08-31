@@ -15,8 +15,4 @@ data class GraphSearchResults(private val graphSize: Int) {
     } else {
         intDistances.map(Int::toDouble).toDoubleArray()
     }
-
-    /* TODO: Delete
-    fun getCurrentVisitedIds(): List<Int> = // Deep Copy
-        currentVisited.map { it } */
 }

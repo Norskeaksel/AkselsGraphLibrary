@@ -13,13 +13,12 @@ fun Grid.visualizeSearch(
     startPaused: Boolean = false,
     screenWidthOverride: Double? = null,
 ) {
+    target?.let {
+        this.finalPath = this.getPath(it) // TODO return final path
+    }
     GridGraphics.grid = this
-    val currentVisitedNodes = currentVisitedNodes()
-    GridGraphics.currentVisitedNodes = currentVisitedNodes
-    GridGraphics.nodeDistances = currentVisitedNodes.map { distanceTo(it) }
-    GridGraphics.finalPath = target?.let { getPath(it) } ?: emptyList()
     GridGraphics.screenTitle = screenTitle
-    GridGraphics.animationTimeOverride = animationTimeOverride
+    GridGraphics.animationTicTimeOverride = animationTimeOverride
     GridGraphics.startPaused = startPaused
     GridGraphics.closeOnEnd = closeOnEnd
     GridGraphics.screenWidthOverride = screenWidthOverride

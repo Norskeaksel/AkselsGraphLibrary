@@ -18,18 +18,15 @@ import javafx.util.Duration
 
 class GridGraphics : Application() {
     companion object {
-        var grid = Grid(0, 0)
-        var currentVisitedNodes = listOf<Tile>()
-        var nodeDistances = listOf<Double>()
-        var finalPath = listOf<Tile>()
+        lateinit var grid:Grid
         var screenTitle = "Grid visualizer (Click or space to pause and resume)"
-        var animationTimeOverride: Double? = null
+        var animationTicTimeOverride: Double? = null
         var startPaused = false
         var closeOnEnd = false
         var screenWidthOverride: Double? = null
     }
 
-    var animationKeyFrameTime = Duration.millis(animationTimeOverride ?: (10_000.0 / currentVisitedNodes.size))
+    var animationKeyFrameTime = Duration.millis(animationTicTimeOverride ?: (10_000.0 / grid.currentVisitedNodes().size))
     val sceneWith = screenWidthOverride ?: 1000.0
     val sceneHeight = 1000.0
     val canvas = Canvas(sceneWith, sceneHeight)
@@ -60,10 +57,10 @@ class GridGraphics : Application() {
     private fun animateVisitedNodes(stage: Stage) {
         val scene = stage.scene
         val timeline = Timeline()
+        val tilesToAnimate = grid.currentVisitedNodes()
         println("animationKeyFrameTime: $animationKeyFrameTime")
-        val maxDepth = nodeDistances.maxOrNull() ?: 1.0
-        currentVisitedNodes.forEachIndexed { i, node ->
-            val color = getInterpolatedColor((nodeDistances.getOrNull(i) ?: 0).toDouble(), maxDepth)
+        tilesToAnimate.forEachIndexed { i, node ->
+            val color = getInterpolatedColor((grid.distanceTo(node)), tilesToAnimate.maxOf { grid.distanceTo(it) })
             val keyFrame = KeyFrame(
                 animationKeyFrameTime.multiply(i.toDouble()), squareDrawer(
                     node, color
@@ -71,9 +68,9 @@ class GridGraphics : Application() {
             )
             timeline.keyFrames.add(keyFrame)
         }
-        finalPath.forEachIndexed { i, node ->
+        grid.finalPath.forEachIndexed { i, node ->
             val keyFrame = KeyFrame(
-                animationKeyFrameTime.multiply(1.05 * (i.toDouble() + currentVisitedNodes.size)), squareDrawer(
+                animationKeyFrameTime.multiply(1.05 * (i.toDouble() + grid.currentVisitedNodes().size)), squareDrawer(
                     node, Color.GREEN
                 )
             )

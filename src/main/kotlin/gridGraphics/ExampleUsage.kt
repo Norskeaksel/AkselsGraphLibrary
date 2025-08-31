@@ -16,13 +16,9 @@ fun main() {
         Tile(gridWidth - 1, gridHeight - 1)
     )
     val goal = grid.xy2Node(gridWidth / 2, gridHeight / 2)!!
-    grid.bfs(bfsStartNodes)
-    val path = grid.getPath(goal)
-    val visitedNodes = grid.currentVisitedNodes()
+    grid.bfs(bfsStartNodes, goal) // Comment out goal to visit all nodes
     GridGraphics.grid = grid
-    GridGraphics.currentVisitedNodes = visitedNodes
-    GridGraphics.nodeDistances = visitedNodes.map { grid.distanceTo(it) }
-    GridGraphics.finalPath = path
     GridGraphics.startPaused = false
+    GridGraphics.animationTicTimeOverride = 200.0
     Application.launch(GridGraphics()::class.java)
 }

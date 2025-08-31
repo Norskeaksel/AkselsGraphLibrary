@@ -3,6 +3,7 @@ package examples
 
 import graphClasses.Grid
 import graphClasses.Tile
+import gridGraphics.visualizeSearch
 
 
 fun day20a(input: List<String>, cheatGoal: Int, fairTime: Int): Int {
@@ -31,6 +32,7 @@ fun day20a(input: List<String>, cheatGoal: Int, fairTime: Int): Int {
         val path = grid.getPath(endNode)
         grid = gridWithoutCheatPath(path, grid)
     }
+    // grid.visualizeSearch(screenWidthOverride=2000.0)
     return c
 }
 
