@@ -8,7 +8,7 @@ import org.gridgraphics.GridGraphics
 fun Grid.visualizeSearch(
     target: Tile? = null,
     screenTitle: String = "Grid visualizer (Click or space to pause and resume)",
-    animationTimeOverride: Double? = null,
+    animationTicTimeOverride: Double? = null,
     closeOnEnd: Boolean = false,
     startPaused: Boolean = false,
     screenWidthOverride: Double? = null,
@@ -18,7 +18,7 @@ fun Grid.visualizeSearch(
     }
     GridGraphics.grid = this
     GridGraphics.screenTitle = screenTitle
-    GridGraphics.animationTicTimeOverride = animationTimeOverride
+    GridGraphics.animationTicTimeOverride = animationTicTimeOverride
     GridGraphics.startPaused = startPaused
     GridGraphics.closeOnEnd = closeOnEnd
     GridGraphics.screenWidthOverride = screenWidthOverride

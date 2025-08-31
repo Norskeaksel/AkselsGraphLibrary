@@ -74,7 +74,7 @@ class SmartGraphExample : Application() {
         g.vertices().forEachIndexed { index, vertex ->
             val keyFrame = KeyFrame(Duration.millis(300.0 * index).add(transitionTime), {
                 val stylableVertex = graphView.getStylableVertex(vertex)
-                stylableVertex?.setStyleClass("myVertex")
+                stylableVertex?.setStyleClass("visitedVertex")
             })
             timeline.keyFrames.add(keyFrame)
         }

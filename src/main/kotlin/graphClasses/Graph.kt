@@ -1,6 +1,6 @@
 package graphClasses
 
-class Graph : BaseGraph<Any>(0) {
+class Graph: BaseGraph<Any>(0) {
     private var nrOfNodes = 0
     private val node2id = mutableMapOf<Any, Int>()
     private val id2Node = mutableMapOf<Int, Any>()

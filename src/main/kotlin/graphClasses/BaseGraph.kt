@@ -66,7 +66,7 @@ abstract class BaseGraph<T>(size: Int) {
 
     fun currentVisitedNodes(): List<T> =
         searchResults?.currentVisited?.map { id2Node(it)!! }
-            ?: error("Can't retrieve currentVisitedNodes because no search has been run yet")
+            ?: emptyList()
 
     fun foundTarget() = searchResults?.foundTarget ?: false
     fun distanceTo(node: T): Double {

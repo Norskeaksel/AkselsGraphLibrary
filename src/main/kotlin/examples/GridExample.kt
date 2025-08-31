@@ -13,6 +13,10 @@ fun main() {
     )
     val grid = Grid(stringList)
 
+    // We can delete nodes, by specifying them, their coordinates or their data
+    grid.deleteNodeAtXY(1, 1) // Deleting a node at specific coordinate
+    grid.deleteNodesWithData('O') // Deleting all nodes with data 'O'
+
     // We could use `grid.connectGridDefault()` to connect all nodes, but let's define a custom connection instead.
     fun connectDownOrRight(t: Tile): List<Tile> = grid.getStraightNeighbours(t).filter { it.x >= t.x || it.y > t.y }
     grid.connectGrid(::connectDownOrRight)
@@ -20,12 +24,11 @@ fun main() {
     // Nodes in a grid consists of Tile objects with x, y coordinates and data
     val startNode = Tile(0, 0, 'S')
 
-    // We can delete nodes, by specifying them, their coordinates or their data
-    grid.deleteNodeAtXY(1, 1) // Deleting a node at specific coordinate
-    grid.deleteNodesWithData('O') // Deleting all nodes with data 'O'
+
 
     // We can run a seach algorithm like BFS (Breadth-First Search) from a start node
-    grid.bfs(startNode)
+    val target = Tile(2, 2, 'E') // Define a target to find a path to it
+    grid.bfs(startNode, target)
 
     // Printing distances to all nodes
     val nodes = grid.getNodes()
@@ -46,7 +49,7 @@ fun main() {
     // Visualizing the grid, the BFS and the final fastest path to the target
     grid.visualizeSearch(
         screenTitle = "Grid example visualizing",
-        animationTimeOverride = 500.0,
+        animationTicTimeOverride = 500.0,
         startPaused = false,
         closeOnEnd = false
     )

@@ -2,7 +2,7 @@ package examples
 
 import graphClasses.Graph
 import graphClasses.IntGraph
-import graphGraphics.visualize
+import graphGraphics.visualizeSearch
 
 
 fun main() {
@@ -54,7 +54,7 @@ fun main() {
             intGraph.addEdge(fromNode as Int, toNode, weight)
         }
     }
-    intGraph.dijkstra(startNode)
+    intGraph.dijkstra(startNode) // Provide a goal node to stop the search when the target is found
     val intNodes: List<Int> = intGraph.getNodes()
     println("Shortest paths from source node $startNode:")
     intNodes.forEach { node ->
@@ -64,5 +64,13 @@ fun main() {
     }
     // Outputs the same as the code above
 
-    graph.visualize()
+    // Visualize the graph using brunomnsilva's JavaFXSmartGraph: https://github.com/brunomnsilva/JavaFXSmartGraph
+    graph.visualizeSearch( // Or use: intGraph.visualize(
+        target = 3,
+        screenTitle = "Grid example visualizing",
+        animationTicTimeOverride = 500.0,
+        startPaused = false,
+        closeOnEnd = false
+    )
+
 }
