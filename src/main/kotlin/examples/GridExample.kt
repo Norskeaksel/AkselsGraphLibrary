@@ -13,7 +13,8 @@ fun main() {
     )
     val grid = Grid(stringList)
 
-    // We can delete nodes, by specifying them, their coordinates or their data
+    // We can delete nodes, by specifying them, their coordinates or their data. However, deletions MUST take place
+    // before connections are added. Otherwise, the grid can contain connections to the deleted tiles
     grid.deleteNodeAtXY(1, 1) // Deleting a node at specific coordinate
     grid.deleteNodesWithData('O') // Deleting all nodes with data 'O'
 
