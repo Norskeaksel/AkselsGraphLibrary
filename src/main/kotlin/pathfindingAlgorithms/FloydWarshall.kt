@@ -1,11 +1,12 @@
 package pathfindingAlgorithms
 
 import AdjacencyList
+import pathfindingAlgorithms.GraphSearchResults.Companion.INF
 import kotlin.math.min
 
 class FloydWarshall(val graph: AdjacencyList) {
     val n = graph.size
-    val distances = Array(n) { DoubleArray(n) { 1e9 } }
+    val distances = Array(n) { DoubleArray(n) { INF } }
 
     init {
         graph.forEachIndexed { u, edges ->

@@ -7,7 +7,7 @@ import graphClasses.Tile
 fun numbersConnectedToSymbol(input: List<String>): Int {
     val grid = Grid(input[0].length, input.size)
     initializeGrid(input, grid)
-    val numbers = grid.getAllNodes().filter { it.data.toString().toIntOrNull() !in listOf(null, 0) }
+    val numbers = grid.getNodes().filter { it.data.toString().toIntOrNull() !in listOf(null, 0) }
     val partNumbers = mutableListOf<Int>()
     numbers.forEach { t ->
         grid.dfs(t)
@@ -56,7 +56,7 @@ fun starWith2Numbers(input: List<String>): Long {
     }
     val grid = Grid(input[0].length, input.size)
     initializeGrid(cleanedInput, grid, true)
-    val gears = grid.getAllNodes().filter { it.data == '*' }
+    val gears = grid.getNodes().filter { it.data == '*' }
     val partNumbers = mutableListOf<Pair<Long, Long>>()
     gears.forEach { t ->
         grid.dfs(t)
