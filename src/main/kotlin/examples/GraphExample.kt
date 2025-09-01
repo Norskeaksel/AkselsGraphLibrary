@@ -37,13 +37,13 @@ fun main() {
         Distance to node 3: 9.0 Path: [0, 2, 1, 3]
         Distance to node 4: 5.0 Path: [0, 2, 4]
         Distance to node 5: Infinity Path: null
-        */
+    */
 
 
     /* --- Example IntGraph Definition ---
          * An IntGraph can be defined the same way as the Graph same way as above,
          * but it can also be initialized with a size, because the nodes are integers values from 0 to n-1.
-         */
+    */
 
     val n = graph.size()
     val intGraph = IntGraph(n)
