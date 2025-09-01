@@ -19,7 +19,8 @@ fun main() {
     graph.addNode(5) // Adding an isolated node is also possible
 
     val startNode = 0
-    graph.dijkstra(startNode)
+    val targetNode = 3
+    graph.dijkstra(startNode, targetNode) // Provide a goal target node to stop the search when the target is found
     val nodes: List<Int> =
         graph.getNodes().map { it as Int } // Nodes are of type Any and must therefore be casted to Int
     println("Shortest paths from source node $startNode:")
@@ -54,7 +55,7 @@ fun main() {
             intGraph.addEdge(fromNode as Int, toNode, weight)
         }
     }
-    intGraph.dijkstra(startNode) // Provide a goal node to stop the search when the target is found
+    intGraph.dijkstra(startNode, targetNode)
     val intNodes: List<Int> = intGraph.getNodes()
     println("Shortest paths from source node $startNode:")
     intNodes.forEach { node ->
@@ -66,11 +67,9 @@ fun main() {
 
     // Visualize the graph using brunomnsilva's JavaFXSmartGraph: https://github.com/brunomnsilva/JavaFXSmartGraph
     graph.visualizeSearch( // Or use: intGraph.visualize(
-        target = 3,
         screenTitle = "Grid example visualizing",
         animationTicTimeOverride = 500.0,
         startPaused = false,
         closeOnEnd = false
     )
-
 }

@@ -5,16 +5,12 @@ import graphClasses.IntGraph
 import javafx.application.Application
 
 fun Graph.visualizeSearch(
-    target: Any? = null,
     screenTitle: String = "Graph visualizer (Click or space to pause and resume)",
     animationTicTimeOverride: Double? = null,
     closeOnEnd: Boolean = false,
     startPaused: Boolean = false,
     screenWidthOverride: Double? = null,
 ) {
-    target?.let {
-        this.finalPath = this.getPath(it)
-    }
     GraphGraphics.graph = this
     GraphGraphics.screenTitle = screenTitle
     GraphGraphics.animationTicTimeOverride = animationTicTimeOverride

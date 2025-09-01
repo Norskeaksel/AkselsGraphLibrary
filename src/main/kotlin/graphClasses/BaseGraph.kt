@@ -146,8 +146,8 @@ abstract class BaseGraph<T>(size: Int) {
         val targetId = node2Id(target)
         val pathIds = searchResults?.let { getPath(targetId, it.parents) }
             ?: error("Can't getPath because no search has been run yet")
-        finalPath = pathIds.mapNotNull { id2Node(it) }
-        return finalPath
+        val path = pathIds.mapNotNull { id2Node(it) }
+        return path
     }
 
     private fun getPath(destination: Int?, parents: IntArray): List<Int> {
