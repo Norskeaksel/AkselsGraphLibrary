@@ -21,16 +21,12 @@ fun Graph.visualizeSearch(
 }
 
 fun IntGraph.visualizeSearch(
-    target: Int? = null,
     screenTitle: String = "IntGraph visualizer (Click or space to pause and resume)",
     animationTimeOverride: Double? = null,
     closeOnEnd: Boolean = false,
     startPaused: Boolean = false,
     screenWidthOverride: Double? = null,
 ) {
-    target?.let {
-        this.finalPath = this.getPath(it)
-    }
     GraphGraphics.intGraph = this
     GraphGraphics.screenTitle = screenTitle
     GraphGraphics.animationTicTimeOverride = animationTimeOverride

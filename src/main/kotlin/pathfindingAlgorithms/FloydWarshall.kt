@@ -6,7 +6,7 @@ import kotlin.math.min
 
 class FloydWarshall(val graph: AdjacencyList) {
     val n = graph.size
-    val distances = Array(n) { DoubleArray(n) { INF } }
+    private val distances = Array(n) { DoubleArray(n) { INF } }
 
     init {
         graph.forEachIndexed { u, edges ->
@@ -17,7 +17,7 @@ class FloydWarshall(val graph: AdjacencyList) {
         }
     }
 
-    fun floydWarshall() {
+    fun floydWarshall(): Array<DoubleArray> {
         repeat(n) { k ->
             repeat(n) { i ->
                 repeat(n) { j ->
@@ -25,6 +25,7 @@ class FloydWarshall(val graph: AdjacencyList) {
                 }
             }
         }
+        return distances
     }
     fun printDistances() {
         distances.forEachIndexed { i, row ->

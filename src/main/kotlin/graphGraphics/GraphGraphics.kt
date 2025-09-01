@@ -58,7 +58,7 @@ class GraphGraphics : Application() {
         stage.show()
         graphView.init()
 
-        val transitionTime = Duration.seconds(1.5)
+        val transitionTime = Duration.seconds(3.0)
         val pause = PauseTransition(transitionTime)
         pause.setOnFinished {
             graphView.setAutomaticLayout(false)
@@ -113,7 +113,8 @@ private fun Graph.convertToVisualizationGraph(): DigraphEdgeList<Any, Any> {
     }
     getNodes().forEach { node ->
         getEdges(node).forEach { edge ->
-            g.insertEdge(node, edge.second, edge)
+            val fromToWeight = Triple(node, edge.second, edge.first)
+            g.insertEdge(node, edge.second, fromToWeight)
         }
     }
     return g
@@ -126,7 +127,8 @@ private fun IntGraph.convertToVisualizationGraph(): DigraphEdgeList<Any, Any> {
     }
     getNodes().forEach { node ->
         getEdges(node).forEach { edge ->
-            g.insertEdge(node, edge.second, edge)
+            val fromToWeight = Triple(node, edge.second, edge.first)
+            g.insertEdge(node, edge.second, fromToWeight)
         }
     }
     return g
