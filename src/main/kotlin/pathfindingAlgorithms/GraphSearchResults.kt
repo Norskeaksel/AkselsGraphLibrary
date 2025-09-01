@@ -2,7 +2,7 @@ package pathfindingAlgorithms
 
 data class GraphSearchResults(private val graphSize: Int) {
     companion object{
-        val INF = 1e9
+        val INF = Double.POSITIVE_INFINITY
     }
     val visited = BooleanArray(graphSize)
     val intDistances: IntArray = IntArray(graphSize) { INF.toInt() }
