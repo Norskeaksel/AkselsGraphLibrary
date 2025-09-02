@@ -1,9 +1,6 @@
 package examples
 
 import graphClasses.*
-import graphGraphics.visualizeSearch
-import pathfindingAlgorithms.FloydWarshall
-import pathfindingAlgorithms.GraphSearchResults.Companion.INF
 
 // https://open.kattis.com/problems/slowleak
 fun main() {
@@ -13,7 +10,7 @@ fun main() {
 
 fun slowleak(): String {
     val (n, m, t, d) = readInts(4)
-    val g = IntGraph(n + 1)
+    val g = Graph()
     val start = 1
     val goal = n
     val repairStations = readInts(t)
@@ -23,7 +20,10 @@ fun slowleak(): String {
     }
     g.floydWarshall()
     val compressedGraphNodes = repairStations + listOf(start, goal)
-    val compressedGraph = IntGraph(n + 1)
+    val compressedGraph = Graph()
+    compressedGraphNodes.forEach { node ->
+        compressedGraph.addNode(node)
+    }
     for (i in compressedGraphNodes.indices) {
         for (j in i + 1 until compressedGraphNodes.size) {
             val u = compressedGraphNodes[i]
@@ -33,10 +33,10 @@ fun slowleak(): String {
                 compressedGraph.connect(u, v, w)
         }
     }
-    compressedGraph.dijkstra(start, goal)
+    compressedGraph.dijkstra(start)
     val finalDistance = compressedGraph.distanceTo(goal)
-    return if (finalDistance == INF)
+    return if (finalDistance == Double.POSITIVE_INFINITY)
         "stuck"
     else
-        compressedGraph.distanceTo(goal).toInt().toString()
+        finalDistance.toInt().toString()
 }

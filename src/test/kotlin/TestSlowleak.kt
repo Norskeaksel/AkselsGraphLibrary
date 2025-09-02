@@ -28,5 +28,4 @@ class SlowleakTest {
         _reader = File("src/test/SampleInput/Slowleak/input2").inputStream().bufferedReader()
         assertThat(slowleak()).isEqualTo(expectedOutput)
     }
-
 }

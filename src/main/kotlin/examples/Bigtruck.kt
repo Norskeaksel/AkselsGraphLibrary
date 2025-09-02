@@ -1,7 +1,6 @@
 package examples
 // https://open.kattis.com/problems/bigtruck
 import graphClasses.*
-import pathfindingAlgorithms.GraphSearchResults.Companion.INF
 import kotlin.math.ceil
 import kotlin.math.roundToInt
 
@@ -23,7 +22,7 @@ fun bigtruck(): String {
         ig.addEdge(b, a, d - ITEM_BOOST * items[a])
     }
     ig.dijkstra(1)
-    if (ig.distanceTo(n) == INF) {
+    if (ig.distanceTo(n) == Double.POSITIVE_INFINITY) {
         return "impossible"
     }
     val nrOfItems = ((ceil(ig.distanceTo(n)) - ig.distanceTo(n)) / ITEM_BOOST).roundToInt() + items[1]
