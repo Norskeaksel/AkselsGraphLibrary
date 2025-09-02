@@ -13,7 +13,7 @@ fun Grid.visualizeSearch(
 ) {
     GridGraphics.grid = this
     GridGraphics.screenTitle = screenTitle
-    GridGraphics.animationTicTimeOverride = animationTicTimeOverride
+    GridGraphics.animationKeyFrameOverride = animationTicTimeOverride
     GridGraphics.startPaused = startPaused
     GridGraphics.closeOnEnd = closeOnEnd
     GridGraphics.screenWidthOverride = screenWidthOverride

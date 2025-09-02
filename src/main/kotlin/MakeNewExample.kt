@@ -4,7 +4,7 @@ import java.io.File
 import java.nio.file.Files.createDirectories
 import kotlin.io.path.Path
 
-fun createExample(name: String) = """package examples
+private fun createExample(name: String) = """package examples
 
 import graphClasses.*
 
@@ -23,7 +23,7 @@ fun $name(): String {
 }
 """
 
-fun createExampleTest(name: String, nrOfSampleInputs: Int): String {
+private fun createExampleTest(name: String, nrOfSampleInputs: Int): String {
     var test = """import examples.$name
 import graphClasses.*
 import org.assertj.core.api.Assertions.assertThat

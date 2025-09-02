@@ -19,6 +19,6 @@ fun main() {
     grid.bfs(bfsStartNodes, goal) // Comment out goal to visit all nodes
     GridGraphics.grid = grid
     GridGraphics.startPaused = false
-    GridGraphics.animationTicTimeOverride = 200.0
+    GridGraphics.animationKeyFrameOverride = 200.0
     Application.launch(GridGraphics()::class.java)
 }

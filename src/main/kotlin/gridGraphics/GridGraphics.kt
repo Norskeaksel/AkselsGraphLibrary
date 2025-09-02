@@ -14,21 +14,24 @@ import javafx.scene.input.KeyCode
 import javafx.scene.paint.Color
 import javafx.stage.Stage
 import javafx.util.Duration
+import kotlin.math.max
+import kotlin.math.min
 
 
 class GridGraphics : Application() {
     companion object {
         lateinit var grid:Grid
         var screenTitle = "Grid visualizer (Click or space to pause and resume)"
-        var animationTicTimeOverride: Double? = null
+        var animationKeyFrameOverride: Double? = null
         var startPaused = false
         var closeOnEnd = false
         var screenWidthOverride: Double? = null
     }
-
-    var animationKeyFrameTime = Duration.millis(animationTicTimeOverride ?: (10_000.0 / grid.currentVisitedNodes().size))
+    val ratio = min(grid.width, grid.height).toDouble() / max(grid.width, grid.height)
     val sceneWith = screenWidthOverride ?: 1000.0
-    val sceneHeight = 1000.0
+    val sceneHeight = sceneWith * ratio
+
+    var animationKeyFrameTime = Duration.millis(animationKeyFrameOverride ?: (10_000.0 / grid.currentVisitedNodes().size))
     val canvas = Canvas(sceneWith, sceneHeight)
     val gc = canvas.graphicsContext2D
     val xNodes = sceneWith / (grid.width)
