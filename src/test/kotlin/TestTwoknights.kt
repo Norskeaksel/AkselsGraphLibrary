@@ -19,9 +19,16 @@ class TwoknightsTest {
         val expectedOutput = """1
 0
 1
-1"""
+1
+"""
         _reader = File("src/test/SampleInput/Twoknights/input1").inputStream().bufferedReader()
         assertThat(twoknights()).isEqualTo(expectedOutput)
     }
+    @Test
+    fun twoknightsb() {
+        val expectedOutput = "0\n"
 
+        _reader = File("src/test/SampleInput/Twoknights/input2").inputStream().bufferedReader()
+        assertThat(twoknights()).isEqualTo(expectedOutput)
+    }
 }

@@ -10,7 +10,7 @@ class BFS(private val graph: UnweightedAdjacencyList) {
     ): GraphSearchResults {
         val r = previousSearchResult ?: GraphSearchResults(graph.size)
         r.currentVisited.clear()
-        val queue = java.util.ArrayDeque<Int>()
+        val queue = ArrayDeque<Int>()
         startIds.forEach {
             queue.add(it)
             r.intDistances[it] = 0

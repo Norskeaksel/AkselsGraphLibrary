@@ -52,7 +52,6 @@ class Grid(val width: Int, val height: Int) : BaseGraph<Tile>(width * height) {
     fun xyInRange(x: Int, y: Int) = x in 0 until width && y in 0 until height
     private fun xy2Id(x: Int, y: Int) = if (xyInRange(x, y)) x + y * width else null
     fun xy2Node(x: Int, y: Int) = if (xyInRange(x, y)) id2Node(xy2Id(x, y)!!) else null
-
     protected fun deleteNodeId(id: Int) {
         if(nrOfConnections(unweightedAdjacencyList) > 0) error("Cannot delete nodes after the grid has gotten connections")
         _nodes[id] = null
