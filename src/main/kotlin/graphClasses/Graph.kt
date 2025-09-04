@@ -10,7 +10,7 @@ class Graph: BaseGraph<Any>(0) {
             System.err.println("Warning: The node already exists, it can't be added again")
             return
         }
-        _nodes.add(node)
+        nodes.add(node)
         node2id[node] = nrOfNodes
         id2Node[nrOfNodes++] = node
         adjacencyList.add(mutableListOf())
@@ -33,7 +33,7 @@ class Graph: BaseGraph<Any>(0) {
     override fun id2Node(id: Int): Any? = id2Node[id]
 
 
-    override fun getNodes(): List<Any> = id2Node.values.toList()
+    override fun nodes(): List<Any> = id2Node.values.toList()
     override fun toString(): String {
         return buildString {
             adjacencyList.forEachIndexed { id, edges ->

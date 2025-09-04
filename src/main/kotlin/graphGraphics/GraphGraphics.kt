@@ -38,11 +38,11 @@ class GraphGraphics : Application() {
         val path: List<Any>
         val graphVisualizer: DigraphEdgeList<Any, Any> = if (graphIsInitialized) {
             visitationOrder = graph.currentVisitedNodes()
-            path = graph.finalPath
+            path = graph.finalPath()
             graph.convertToVisualizationGraph()
         } else {
             visitationOrder = intGraph.currentVisitedNodes()
-            path = intGraph.finalPath
+            path = intGraph.finalPath()
             intGraph.convertToVisualizationGraph()
         }
         val animationKeyFrameTime =
@@ -108,10 +108,10 @@ class GraphGraphics : Application() {
 
 private fun Graph.convertToVisualizationGraph(): DigraphEdgeList<Any, Any> {
     val g = DigraphEdgeList<Any, Any>()
-    getNodes().forEach { node ->
+    nodes().forEach { node ->
         g.insertVertex(node)
     }
-    getNodes().forEach { node ->
+    nodes().forEach { node ->
         getEdges(node).forEach { edge ->
             val fromToWeight = Triple(node, edge.second, edge.first)
             g.insertEdge(node, edge.second, fromToWeight)
@@ -122,10 +122,10 @@ private fun Graph.convertToVisualizationGraph(): DigraphEdgeList<Any, Any> {
 
 private fun IntGraph.convertToVisualizationGraph(): DigraphEdgeList<Any, Any> {
     val g = DigraphEdgeList<Any, Any>()
-    getNodes().forEach { node ->
+    nodes().forEach { node ->
         g.insertVertex(node)
     }
-    getNodes().forEach { node ->
+    nodes().forEach { node ->
         getEdges(node).forEach { edge ->
             val fromToWeight = Triple(node, edge.second, edge.first)
             g.insertEdge(node, edge.second, fromToWeight)

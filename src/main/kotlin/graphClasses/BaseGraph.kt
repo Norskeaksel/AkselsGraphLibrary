@@ -17,13 +17,13 @@ abstract class BaseGraph<T>(size: Int) {
             }
             return field
         }
-    protected var _nodes: MutableList<T?> = MutableList(size) { null }
+    protected var nodes: MutableList<T?> = MutableList(size) { null }
     private var searchResults: GraphSearchResults? = null
+    private var finalPath: List<T> = emptyList()
     private var allDistances: Array<DoubleArray>? = null
-    var finalPath: List<T> = emptyList()
 
     // ABSTRACT FUNCTIONS
-    abstract fun getNodes(): List<T>
+    abstract fun nodes(): List<T>
     protected abstract fun id2Node(id: Int): T?
     protected abstract fun node2Id(node: T): Int?
     abstract fun addNode(node: T)
@@ -31,7 +31,7 @@ abstract class BaseGraph<T>(size: Int) {
     abstract fun addUnweightedEdge(node1: T, node2: T)
 
     // CORE GRAPH OPERATIONS
-    fun size() = getNodes().size
+    fun size() = nodes().size
     fun connect(node1: T, node2: T, weight: Number) {
         val weightDouble = weight.toDouble()
         addEdge(node1, node2, weightDouble)
@@ -68,6 +68,7 @@ abstract class BaseGraph<T>(size: Int) {
     fun currentVisitedNodes(): List<T> =
         searchResults?.currentVisited?.map { id2Node(it)!! }
             ?: emptyList()
+    fun finalPath(): List<T> = finalPath
 
     fun foundTarget() = searchResults?.foundTarget ?: false
     fun distanceTo(node: T): Double {
@@ -174,7 +175,7 @@ abstract class BaseGraph<T>(size: Int) {
 
     // HELPER FUNCTIONS
     fun resetSearchResults() {
-        searchResults = GraphSearchResults(_nodes.size)
+        searchResults = GraphSearchResults(nodes.size)
     }
 
     private fun useWeightedConnectionsIfNeeded() {

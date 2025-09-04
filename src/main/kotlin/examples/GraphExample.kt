@@ -22,7 +22,7 @@ fun main() {
     val targetNode = 3
     graph.dijkstra(startNode, targetNode) // Provide a goal target node to stop the search when the target is found
     val nodes: List<Int> =
-        graph.getNodes().map { it as Int } // Nodes are of type Any and must therefore be casted to Int
+        graph.nodes().map { it as Int } // Nodes are of type Any and must therefore be casted to Int
     println("Shortest paths from source node $startNode:")
     nodes.forEach { node ->
         val distValue = graph.distanceTo(node)
@@ -48,7 +48,7 @@ fun main() {
     val n = graph.size()
     val intGraph = IntGraph(n)
     // Add the same edges as the above Graph
-    graph.getNodes().forEach { fromNode ->
+    graph.nodes().forEach { fromNode ->
         graph.getEdges(fromNode).forEach { edge ->
             val weight = edge.first
             val toNode = edge.second as Int // Cast type Any to Int
@@ -56,7 +56,7 @@ fun main() {
         }
     }
     intGraph.dijkstra(startNode, targetNode)
-    val intNodes: List<Int> = intGraph.getNodes()
+    val intNodes: List<Int> = intGraph.nodes()
     println("Shortest paths from source node $startNode:")
     intNodes.forEach { node ->
         val distValue = intGraph.distanceTo(node)

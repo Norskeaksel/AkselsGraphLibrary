@@ -25,7 +25,7 @@ fun importspaghetti(): String {
     var shortestCycleLength = Int.MAX_VALUE
     var shortestCyclePath = listOf<Any>()
 
-    g.getNodes().reversed().forEach { node ->
+    g.nodes().reversed().forEach { node ->
         g.bfs(node, node)
         if(g.foundTarget() && g.depth() < shortestCycleLength) {
             shortestCycleLength = g.depth()

@@ -18,7 +18,7 @@ fun repostsDFS(): Int {
         g.addUnweightedEdge(u,v)
     }
     var longestChain = 0
-    g.getNodes().forEach { node ->
+    g.nodes().forEach { node ->
         g.dfs(node)
         longestChain = max(longestChain, g.depth())
     }

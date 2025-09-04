@@ -55,12 +55,21 @@ private fun Grid.stateSearch(target: String): String {
     val stateQueue = ArrayDeque<State>()
     stateQueue.add(initialState)
     val visitedStates = mutableSetOf<State>()
+    val stateSearch = mutableListOf<Tile>()
+    val nodeDistances = mutableListOf<Double>()
     while (stateQueue.isNotEmpty()) {
         val currentState = stateQueue.removeFirst()
         if(currentState in visitedStates) continue
         visitedStates.add(currentState)
         val (currentKnight1, currentKnight2, currentPoemIndex) = currentState
         if (currentPoemIndex == target.length) {
+            /*visualizeSearch(
+     currentVisitedNodes = stateSearch,
+     nodeDistances = nodeDistances,
+     screenTitle = "Writing: $target",
+     startPaused = true,
+     animationTicTimeOverride = 1000.0,
+ )*/
             return "1"
         }
         val nextChar = target[currentPoemIndex]
@@ -68,7 +77,9 @@ private fun Grid.stateSearch(target: String): String {
         listOf(currentKnight1 to currentKnight2, currentKnight2 to currentKnight1)
             .forEach { (movingKnight, standingKnight) ->
                 newStates.addAll(possibleKnightMoves(movingKnight, standingKnight, nextChar).map {
+                    stateSearch.add(it)
                     val newPoemIndex = if (it.data == ('!' to '!')) currentPoemIndex else currentPoemIndex + 1
+                    nodeDistances.add(newPoemIndex.toDouble())
                     if (movingKnight == currentKnight1)
                         State(it, standingKnight, newPoemIndex)
                     else
@@ -81,6 +92,13 @@ private fun Grid.stateSearch(target: String): String {
         } else
             stateQueue.addAll(newStates)
     }
+    /*visualizeSearch(
+        currentVisitedNodes = stateSearch,
+        nodeDistances = nodeDistances,
+        screenTitle = "Writing: $target",
+        startPaused = true,
+        animationTicTimeOverride = 1000.0,
+    )*/
     return "0"
 }
 
@@ -89,12 +107,12 @@ private fun Grid.possibleKnightMoves(moveingKnight: Tile, standingKnight: Tile, 
     val shiftIsPressedByStandingKnight = (standingKnight.data as Pair<*, *>).first == '!'
     val possibleKnightMoves = getNeighbours(moveingKnight).filter {
         val tileData = it.data as Pair<*, *>
-        tileData.first == '!' ||
+        (tileData.first == '!' ||
                 if (shiftIsPressedByStandingKnight) {
                     tileData.second == nextChar
                 } else {
                     tileData.first == nextChar
-                }
+                }) && it != standingKnight
     }
     return possibleKnightMoves
 }

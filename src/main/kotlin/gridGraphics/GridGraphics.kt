@@ -22,6 +22,7 @@ class GridGraphics : Application() {
     companion object {
         lateinit var grid: Grid
         var currentVisitedNodes: List<Tile> = emptyList()
+        var finalPath: List<Tile> = emptyList()
         var nodeDistances: List<Double> = emptyList()
         var screenTitle = "Grid visualizer (Click or space to pause and resume)"
         var animationKeyFrameOverride: Double? = null
@@ -45,7 +46,7 @@ class GridGraphics : Application() {
         primaryStage.title = screenTitle
         val root = Group()
         gc.fill = Color.BLACK
-        grid.getNodes().forEach { node ->
+        grid.nodes().forEach { node ->
             drawSquare(node.x, node.y, Color.BLACK)
         }
         root.children.add(canvas)
@@ -73,7 +74,7 @@ class GridGraphics : Application() {
             )
             timeline.keyFrames.add(keyFrame)
         }
-        grid.finalPath.forEachIndexed { i, node ->
+        finalPath.forEachIndexed { i, node ->
             val keyFrame = KeyFrame(
                 animationKeyFrameTime.multiply(1.05 * (i.toDouble() + tilesToAnimate.size + 1)),
                 squareDrawer(

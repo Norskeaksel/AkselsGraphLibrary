@@ -32,7 +32,7 @@ fun main() {
     grid.bfs(startNode, target)
 
     // Printing distances to all nodes
-    val nodes = grid.getNodes()
+    val nodes = grid.nodes()
     nodes.forEach { node ->
         val distance = grid.distanceTo(node)
         println("To node $node: $distance")

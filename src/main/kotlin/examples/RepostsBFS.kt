@@ -21,7 +21,7 @@ fun RepostsBFS(): Int {
         g.addUnweightedEdge(u, v)
     }
     var longestChain = 0
-    g.getNodes().forEach{ node ->
+    g.nodes().forEach{ node ->
         g.bfs(node)
         longestChain = max(longestChain, g.depth() + 1)
     }

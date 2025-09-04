@@ -7,6 +7,7 @@ import org.gridgraphics.GridGraphics
 
 fun Grid.visualizeSearch(
     currentVisitedNodes: List<Tile> = currentVisitedNodes(),
+    finalPath:List<Tile> = finalPath(),
     nodeDistances:List<Double> = currentVisitedNodes.map { distanceTo(it) },
     screenTitle: String = "Grid visualizer (Click or space to pause and resume)",
     animationTicTimeOverride: Double? = null,
@@ -16,6 +17,7 @@ fun Grid.visualizeSearch(
 ) {
     GridGraphics.grid = this
     GridGraphics.currentVisitedNodes = currentVisitedNodes
+    GridGraphics.finalPath = finalPath
     GridGraphics.nodeDistances = nodeDistances
     GridGraphics.screenTitle = screenTitle
     GridGraphics.animationKeyFrameOverride = animationTicTimeOverride
