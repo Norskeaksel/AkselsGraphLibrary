@@ -92,13 +92,13 @@ private fun Grid.stateSearch(target: String): String {
         } else
             stateQueue.addAll(newStates)
     }
-    /*visualizeSearch(
+    visualizeSearch(
         currentVisitedNodes = stateSearch,
         nodeDistances = nodeDistances,
         screenTitle = "Writing: $target",
         startPaused = true,
         animationTicTimeOverride = 1000.0,
-    )*/
+    )
     return "0"
 }
 

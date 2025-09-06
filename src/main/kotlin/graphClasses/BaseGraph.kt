@@ -17,7 +17,7 @@ abstract class BaseGraph<T>(size: Int) {
             }
             return field
         }
-    protected var nodes: MutableList<T?> = MutableList(size) { null }
+    var nodes: MutableList<T?> = MutableList(size) { null }
     private var searchResults: GraphSearchResults? = null
     private var finalPath: List<T> = emptyList()
     private var allDistances: Array<DoubleArray>? = null
@@ -133,7 +133,7 @@ abstract class BaseGraph<T>(size: Int) {
 
     fun distanceFromUtoV(u:T, v:T) = allDistances?.let {
         it[node2Id(u)!!][node2Id(v)!!]
-    } ?: error("FloydWarshall must be ran before calling distanceFromUtoV")
+    } ?: error("FloydWarshall must be run before calling distanceFromUtoV")
 
     // ADDITIONAL ALGORITHMS
     fun minimumSpanningTree(): Pair<Double, Graph> = minimumSpanningTree(adjacencyList).run {
