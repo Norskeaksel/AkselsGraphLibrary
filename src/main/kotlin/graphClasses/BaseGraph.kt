@@ -18,7 +18,7 @@ abstract class BaseGraph<T>(size: Int) {
             return field
         }
     var nodes: MutableList<T?> = MutableList(size) { null }
-    private var searchResults: GraphSearchResults? = null
+    protected var searchResults: GraphSearchResults? = null
     private var finalPath: List<T> = emptyList()
     private var allDistances: Array<DoubleArray>? = null
 

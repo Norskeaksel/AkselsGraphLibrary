@@ -4,6 +4,7 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.AfterAll
 import java.io.File
 import org.junit.jupiter.api.Test
+import kotlin.system.measureTimeMillis
 
 class BuggyrobotTest {
     companion object {
@@ -60,5 +61,15 @@ class BuggyrobotTest {
         _reader = File("src/test/SampleInput/Buggyrobot/input6").inputStream().bufferedReader()
         assertThat(buggyrobot()).isEqualTo(expectedOutput)
     }
-
+    @Test
+    fun buggyrobotfSpeedTest() {
+        val expectedOutput = """49"""
+        _reader = File("src/test/SampleInput/Buggyrobot/input7").inputStream().bufferedReader()
+        val ans:String
+        val time = measureTimeMillis {
+            ans = buggyrobot()
+        }
+        System.err.println("Buggy robot speedTime = $time ms")
+        assertThat(ans).isEqualTo(expectedOutput)
+    }
 }

@@ -2,6 +2,8 @@ package graphClasses
 
 import Edge
 import pathfindingAlgorithms.DFS
+import pathfindingAlgorithms.GraphSearchResults
+import kotlin.system.measureTimeMillis
 
 data class Tile(val x: Int, val y: Int, var data: Any? = null)
 
@@ -75,15 +77,21 @@ class Grid(val width: Int, val height: Int) : BaseGraph<Tile>(width * height) {
         }
     }
 
+    private fun getStraightCoordinates(x: Int, y: Int) =
+        listOf(
+            x - 1 to y,
+            x + 1 to y,
+            x to y - 1,
+            x to y + 1,
+        ).filter { xy2Id(it.first, it.second) != null }
+
     fun getStraightNeighbours(t: Tile?) =
-        t?.run {
-            listOfNotNull(
-                xy2Node(x - 1, y),
-                xy2Node(x + 1, y),
-                xy2Node(x, y - 1),
-                xy2Node(x, y + 1),
-            )
+        t?.let {
+            getStraightCoordinates(it.x, it.y).mapNotNull { xy ->
+                xy2Node(xy.first, xy.second)
+            }
         } ?: listOf()
+
 
     fun getDiagonalNeighbours(t: Tile) =
         listOfNotNull(
@@ -95,6 +103,7 @@ class Grid(val width: Int, val height: Int) : BaseGraph<Tile>(width * height) {
 
     fun getAllNeighbours(t: Tile) = getStraightNeighbours(t) + getDiagonalNeighbours(t)
 
+    /** Connects all nodes in the grid with their neighbours, by getNeighbours the user defined input function */
     fun connectGrid(getNeighbours: (t: Tile) -> List<Tile>) {
         if (nrOfConnections(unweightedAdjacencyList) > 0) {
             System.err.println("Warning: overwriting existing connections in the grid")

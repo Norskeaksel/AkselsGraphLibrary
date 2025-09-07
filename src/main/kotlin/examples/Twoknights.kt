@@ -1,7 +1,6 @@
 package examples
 
 import graphClasses.*
-import gridGraphics.visualizeSearch
 import kotlin.collections.ArrayDeque
 
 // https://open.kattis.com/problems/twoknights
@@ -46,15 +45,15 @@ ZXCVBNM<>?
     return ans
 }
 
-data class State(val knight1: Tile, val knight2: Tile, val currentPoemIndex: Int)
+data class KnightState(val knight1: Tile, val knight2: Tile, val currentPoemIndex: Int)
 
 private fun Grid.stateSearch(target: String): String {
     val initialKnight1 = Tile(0, height - 1, '!' to '!')
     val initialKnight2 = Tile(width - 1, height - 1, '!' to '!')
-    val initialState = State(initialKnight1, initialKnight2, 0)
-    val stateQueue = ArrayDeque<State>()
+    val initialState = KnightState(initialKnight1, initialKnight2, 0)
+    val stateQueue = ArrayDeque<KnightState>()
     stateQueue.add(initialState)
-    val visitedStates = mutableSetOf<State>()
+    val visitedStates = mutableSetOf<KnightState>()
     val stateSearch = mutableListOf<Tile>()
     val nodeDistances = mutableListOf<Double>()
     while (stateQueue.isNotEmpty()) {
@@ -73,7 +72,7 @@ private fun Grid.stateSearch(target: String): String {
             return "1"
         }
         val nextChar = target[currentPoemIndex]
-        val newStates = mutableListOf<State>()
+        val newStates = mutableListOf<KnightState>()
         listOf(currentKnight1 to currentKnight2, currentKnight2 to currentKnight1)
             .forEach { (movingKnight, standingKnight) ->
                 newStates.addAll(possibleKnightMoves(movingKnight, standingKnight, nextChar).map {
@@ -81,9 +80,9 @@ private fun Grid.stateSearch(target: String): String {
                     val newPoemIndex = if (it.data == ('!' to '!')) currentPoemIndex else currentPoemIndex + 1
                     nodeDistances.add(newPoemIndex.toDouble())
                     if (movingKnight == currentKnight1)
-                        State(it, standingKnight, newPoemIndex)
+                        KnightState(it, standingKnight, newPoemIndex)
                     else
-                        State(standingKnight, it, newPoemIndex)
+                        KnightState(standingKnight, it, newPoemIndex)
                 })
             }
         val nextLetterStates = newStates.filter { it.currentPoemIndex > currentPoemIndex }
@@ -92,13 +91,13 @@ private fun Grid.stateSearch(target: String): String {
         } else
             stateQueue.addAll(newStates)
     }
-    visualizeSearch(
+    /*visualizeSearch(
         currentVisitedNodes = stateSearch,
         nodeDistances = nodeDistances,
         screenTitle = "Writing: $target",
         startPaused = true,
         animationTicTimeOverride = 1000.0,
-    )
+    )*/
     return "0"
 }
 

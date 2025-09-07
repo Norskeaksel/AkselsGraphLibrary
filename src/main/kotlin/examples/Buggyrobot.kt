@@ -9,70 +9,85 @@ fun main() {
     println(ans)
 }
 
-data class TileData(val char: Char, val commandNr: Int)
-
 fun buggyrobot(): String {
-    var (height, width) = readInts(2)
-    width++
+    val (height, width) = readInts(2)
     val rows = mutableListOf<String>()
-    lateinit var start: Tile
-    repeat(height) {
-        rows.add((readString() + '#').replace('R', 'S').replace('E', 'G'))
+    var start: Int = 0
+    var goal: Int = 0
+    val walls = mutableListOf<Pair<Int,Int>>()
+    repeat(height) { it ->
+        rows.add((readString()).replace('R', 'S').replace('E', 'G'))
         if (rows.last().contains('S')) {
-            start = Tile(rows.last().indexOf('S'), it, TileData('S', 0))
+            start = rows.last().indexOf('S') + it * width
+        }
+        if (rows.last().contains('G')) {
+            goal = rows.last().indexOf('G') + it * width
+        }
+        rows.last().forEachIndexed { index, c ->
+            if (c == '#')
+                walls.add(index to it)
         }
     }
+    val grid = rows.joinToString("")
     val commands = readString()
-    val newWidth = width * commands.length + commands.length
-    val grid = Grid(height = height, width = newWidth)
-    repeat(height) { y ->
-        repeat(newWidth) { x ->
-            commands.indices.forEach { index ->
-                val node = Tile(x, y, TileData(rows[y][x % (width)], index))
-                grid.addNode(node)
+    val size = width * height
+    val goals = commands.indices.map { goal + it * size }.toSet()
+    fun move(currentId: Int, direction: Char) =
+        when (direction) {
+            'L' -> if (currentId % width != 0) currentId - 1 else null
+            'R' -> if ((currentId + 1) % width != 0) currentId + 1 else null
+            'U' -> if (currentId - width >= 0) currentId - width else null
+            'D' -> if (currentId + width < size) currentId + width else null
+            else -> error("Invalid direction: $direction")
+        }
+    // BFS //TODO: fix mapping between grids.
+    val visited = BooleanArray(size * commands.length)
+    val currentVisited = mutableListOf<Int>()
+    val distances = IntArray(size * commands.length) { Int.MAX_VALUE / 2 }
+    val queue = ArrayDeque<Int>()
+    queue.add(start)
+    distances[start] = 0
+    while (queue.isNotEmpty()) {
+        val currentId = queue.removeFirst()
+        if (visited[currentId])
+            continue
+        visited[currentId] = true
+        currentVisited.add(currentId)
+        val currentDistance = distances[currentId]
+        val commandNr = currentId / size
+        val directions = listOf('L', 'R', 'U', 'D')
+        directions.forEach { dir ->
+            val newId = move(currentId % size, dir) ?: return@forEach
+            if (dir == commands[commandNr] && currentId / size < commands.length) {
+                if (grid[newId % size] == '.') {
+                    val shadowId = newId + size
+                    distances[shadowId] = currentDistance
+                    queue.add(shadowId)
+                } else queue.add(currentId + size)
+                return@forEach
+            }
+            if (grid[newId] == '#' || visited[newId])
+                return@forEach
+            else {
+                distances[newId] = currentDistance + 1
+                queue.add(newId)
             }
         }
     }
-    repeat(commands.length) {
-        grid.deleteNodesWithData(TileData('#', it))
-    }
-    grid.printChars()
-    grid.connectGrid { t ->
-        val neighbours = grid.getStraightNeighbours(t).filter { (it.data as TileData).char != '#' }
-        val commandNr = t.x / width
-        if (commandNr >= commands.length - 1)
-            neighbours
-        else {
-            val nextGridTile = when (val command = commands[commandNr]) {
-                'U' -> grid.xy2Node(t.x + width, t.y - 1)
-                'D' -> grid.xy2Node(t.x + width, t.y + 1)
-                'L' -> grid.xy2Node(t.x + width - 1, t.y)
-                'R' -> grid.xy2Node(t.x + width + 1, t.y)
-                else -> error("Invalid command: $command")
-            }
-            neighbours + listOfNotNull(nextGridTile)
+    debug(currentVisited)
+    val currentVisitedNodes = currentVisited.map { Tile( it % width , it / width) }
+    debug(currentVisitedNodes)
+    val newHeight = height * commands.length
+    Grid(width, newHeight).apply { walls.forEach { (x,y) ->
+        commands.indices.forEach {
+            deleteNodeAtXY(x,y + size * it) // TODO why does this fail?
         }
-    }
-    grid.bfs(start)
-    //grid.visualizeSearch(screenTitle = "Searching with string: $commands")
-    val goals = grid.currentVisitedNodes().filter { (it.data as TileData).char in listOf('E', 'G') }
-    val distances = goals.map { grid.distanceTo(it) - it.x / width }
-    return distances.min().toInt().toString()
-}
-
-/*private fun Tile.move(char: Char, grid: Grid): Tile = when (char) {
-    'U' -> grid.xy2Node(x, y - 1) ?: this
-    'D' -> grid.xy2Node(x, y + 1) ?: this
-    'L' -> grid.xy2Node(x - 1, y) ?: this
-    'R' -> grid.xy2Node(x + 1, y) ?: this
-    else -> error("Invalid command: $char")
-}*/
-
-private fun Grid.printChars() {
-    nodes.forEachIndexed { id, t ->
-        if (id > 0 && id % width == 0)
-            println()
-        print(t?.data?.let { (it as TileData).char } ?: '#')
-    }
-    println()
+    }}.visualizeSearch(
+        currentVisitedNodes = currentVisitedNodes,
+        nodeDistances = currentVisited.map { distances[it].toDouble() },
+        screenTitle = "Seaching: $commands",
+        closeOnEnd = true,
+        screenWidthOverride = 6000.0
+    )
+    return goals.map { distances[it] }.min().toString()
 }
