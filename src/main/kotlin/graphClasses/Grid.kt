@@ -2,12 +2,11 @@ package graphClasses
 
 import Edge
 import pathfindingAlgorithms.DFS
-import pathfindingAlgorithms.GraphSearchResults
 import kotlin.system.measureTimeMillis
 
 data class Tile(val x: Int, val y: Int, var data: Any? = null)
 
-class Grid(val width: Int, val height: Int) : BaseGraph<Tile>(width * height) {
+open class Grid(val width: Int, val height: Int) : BaseGraph<Tile>(width * height) {
     constructor(stringGrid: List<String>) : this(stringGrid[0].length, stringGrid.size) {
         if (stringGrid.any { it.length != width })
             error("All lines in the string grid must have the same length")
@@ -53,16 +52,19 @@ class Grid(val width: Int, val height: Int) : BaseGraph<Tile>(width * height) {
     override fun stronglyConnectedComponents() = DFS(unweightedAdjacencyList).stronglyConnectedComponents(deleted())
     private fun deleted() = BooleanArray(nodes.size) { nodes[it] == null }
 
-    fun xyInRange(x: Int, y: Int) = x in 0 until width && y in 0 until height
-    private fun xy2Id(x: Int, y: Int) = if (xyInRange(x, y)) x + y * width else null
-    fun xy2Node(x: Int, y: Int) = if (xyInRange(x, y)) id2Node(xy2Id(x, y)!!) else null
-    protected fun deleteNodeId(id: Int) {
+    private fun xyInRange(x: Int, y: Int) = x in 0 until width && y in 0 until height
+    fun xy2Index(x: Int, y: Int) =
+        if (xyInRange(x, y)) (x + y * width).let { if (indexHasNode(it)) it else null } else null
+
+    fun xy2Node(x: Int, y: Int) = xy2Index(x, y)?.let { id2Node(it) }
+    fun indexHasNode(index: Int) = nodes.getOrNull(index) != null
+    private fun deleteNodeId(id: Int) {
         if (nrOfConnections(unweightedAdjacencyList) > 0) error("Cannot delete nodes after the grid has gotten connections")
         nodes[id] = null
     }
 
     fun deleteNodeAtXY(x: Int, y: Int) {
-        val id = xy2Id(x, y) ?: run {
+        val id = xy2Index(x, y) ?: run {
             System.err.println("Warning, coordinates ($x, $y) are outside the grid")
             return
         }
@@ -77,34 +79,52 @@ class Grid(val width: Int, val height: Int) : BaseGraph<Tile>(width * height) {
         }
     }
 
-    private fun getStraightCoordinates(x: Int, y: Int) =
-        listOf(
-            x - 1 to y,
-            x + 1 to y,
-            x to y - 1,
-            x to y + 1,
-        ).filter { xy2Id(it.first, it.second) != null }
+    fun getStraightNeighbourIndices(x: Int, y: Int) = listOfNotNull(
+        xy2Index(x - 1, y),
+        xy2Index(x + 1, y),
+        xy2Index(x, y - 1),
+        xy2Index(x, y + 1),
+    )
 
-    fun getStraightNeighbours(t: Tile?) =
-        t?.let {
-            getStraightCoordinates(it.x, it.y).mapNotNull { xy ->
-                xy2Node(xy.first, xy.second)
-            }
-        } ?: listOf()
-
-
-    fun getDiagonalNeighbours(t: Tile) =
+    fun getStraightNeighbours(t: Tile?) = t?.run {
         listOfNotNull(
-            xy2Node(t.x - 1, t.y - 1),
-            xy2Node(t.x + 1, t.y - 1),
-            xy2Node(t.x - 1, t.y + 1),
-            xy2Node(t.x + 1, t.y + 1),
+            xy2Node(x - 1, y),
+            xy2Node(x + 1, y),
+            xy2Node(x, y - 1),
+            xy2Node(x, y + 1),
         )
+    } ?: listOf()
+
+    fun getDiagonalNeighbours(t: Tile) = listOfNotNull(
+        xy2Node(t.x - 1, t.y - 1),
+        xy2Node(t.x + 1, t.y - 1),
+        xy2Node(t.x - 1, t.y + 1),
+        xy2Node(t.x + 1, t.y + 1),
+    )
 
     fun getAllNeighbours(t: Tile) = getStraightNeighbours(t) + getDiagonalNeighbours(t)
 
+    fun connectGridByIndices(getIndicesNeighbours: (x: Int, y: Int) -> List<Int>) {
+        if (nrOfConnections(unweightedAdjacencyList) > 0) {
+            System.err.println("Warning: overwriting existing connections in the grid")
+            adjacencyList.forEach { it.clear() }
+            unweightedAdjacencyList.forEach { it.clear() }
+        }
+        for (x in 0 until width) {
+            for (y in 0 until height) {
+                val currentId = x + y * width
+                val neighbours = getIndicesNeighbours(x, y)
+                neighbours.forEach {
+                    unweightedAdjacencyList[currentId].add(it)
+                }
+            }
+        }
+    }
+
     /** Connects all nodes in the grid with their neighbours, by getNeighbours the user defined input function */
     fun connectGrid(getNeighbours: (t: Tile) -> List<Tile>) {
+        var getNeighboursCost = 0L
+        var addEdgeCost = 0L
         if (nrOfConnections(unweightedAdjacencyList) > 0) {
             System.err.println("Warning: overwriting existing connections in the grid")
             adjacencyList.forEach { it.clear() }
@@ -113,12 +133,16 @@ class Grid(val width: Int, val height: Int) : BaseGraph<Tile>(width * height) {
         for (x in 0 until width) {
             for (y in 0 until height) {
                 val currentTile = xy2Node(x, y) ?: continue
-                val neighbours = getNeighbours(currentTile)
+                val neighbours: List<Tile>
+                getNeighboursCost += measureTimeMillis { neighbours = getNeighbours(currentTile) }
                 neighbours.forEach {
+                    addEdgeCost += measureTimeMillis {
                     addUnweightedEdge(currentTile, it)
+                    }
                 }
             }
         }
+        debug("getNeighbours cost: $getNeighboursCost ms, addEdge cost: $addEdgeCost ms")
     }
 
     /** Connects all nodes in the grid with their straight neighbours, i.e. top, down, left, right neighbours */
