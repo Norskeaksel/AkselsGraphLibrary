@@ -132,6 +132,7 @@ fun main() {
         "23E"
     )
     val grid = Grid(stringList)
+
     // We could use `grid.connectGridDefault()` to connect all nodes, but let's define a custom connection instead.
     fun connectDownOrRight(t: Tile): List<Tile> = grid.getStraightNeighbours(t).filter { it.x >= t.x || it.y > t.y }
     grid.connectGrid(::connectDownOrRight)
@@ -155,10 +156,19 @@ fun main() {
         To node Tile(x=1, y=2, data=3): 3
         To node Tile(x=2, y=2, data=E): 4
      */
+
+    // Visualizing the grid, the BFS and the final fastest path to the target
+    grid.visualizeSearch(
+        screenTitle = "Grid example visualizing",
+        animationTicTimeOverride = 500.0,
+        startPaused = false,
+        closeOnEnd = false
+    )
 }
+
 ```
 
 ## Graphics
 
-This library has also been used to make grid visualizations, which can be checked
-out [here](https://github.com/Norskeaksel/GridGraphics/).
+Some graph visualizations made with this library can be checked out
+[here](https://github.com/Norskeaksel/GridGraphics/).
