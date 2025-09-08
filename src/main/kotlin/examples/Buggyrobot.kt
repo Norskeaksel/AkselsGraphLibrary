@@ -40,7 +40,6 @@ fun buggyrobot(): String {
         }
     }
     grid.deleteNodesWithData('#')
-    // grid.printChars()
     // debug("Grid making took $gridMakeingTime ms")
     val connectTime = measureTimeMillis {
         grid.connectGrid { t ->

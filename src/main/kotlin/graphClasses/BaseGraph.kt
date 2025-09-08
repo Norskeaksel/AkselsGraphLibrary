@@ -11,12 +11,13 @@ abstract class BaseGraph<T>(size: Int) {
     // PROPERTIES AND INITIALIZATION
     protected val adjacencyList: AdjacencyList = MutableList(size) { mutableListOf() }
     protected var unweightedAdjacencyList: UnweightedAdjacencyList = MutableList(size) { mutableListOf() }
-        /*get() {
-            if (nrOfConnections(field) < nrOfConnections(adjacencyList)) {
-                field = adjacencyList.toUnweightedAdjacencyList()
-            }
-            return field
-        }*/
+
+    /*get() {
+        if (nrOfConnections(field) < nrOfConnections(adjacencyList)) {
+            field = adjacencyList.toUnweightedAdjacencyList()
+        }
+        return field
+    }*/
     var nodes: MutableList<T?> = MutableList(size) { null }
     var searchResults: GraphSearchResults? = null
     private var finalPath: List<T> = emptyList()
@@ -60,7 +61,7 @@ abstract class BaseGraph<T>(size: Int) {
         }
     }
 
-    protected fun deleteNodeId(id:Int){
+    protected fun deleteNodeId(id: Int) {
         nodes[id] = null
     }
 
@@ -72,6 +73,7 @@ abstract class BaseGraph<T>(size: Int) {
     fun currentVisitedNodes(): List<T> =
         searchResults?.currentVisited?.map { id2Node(it)!! }
             ?: emptyList()
+
     fun finalPath(): List<T> = finalPath
 
     fun foundTarget() = searchResults?.foundTarget ?: false
@@ -82,6 +84,7 @@ abstract class BaseGraph<T>(size: Int) {
         }
         error("Haven't computed distance to $node because no search algorithm (dfs, bfs, dijkstra) has been run yet.")
     }
+
     fun unweightedDistanceTo(node: T): Int {
         val id = node2Id(node) ?: error("Node $node not found in graph")
         searchResults?.let {
@@ -98,13 +101,14 @@ abstract class BaseGraph<T>(size: Int) {
     fun getNeighbours(t: T): List<T> =
         node2Id(t)?.let { unweightedAdjacencyList[it] }?.map { id2Node(it)!! }
             ?: error("Node $t not found in graph")
+
     fun getEdges(t: T): List<Pair<Double, T>> =
         node2Id(t)?.let { adjacencyList[it] }?.map { Pair(it.first, id2Node(it.second)!!) }
             ?: error("Node $t not found in graph")
 
     // SEARCH ALGORITHMS
     fun bfs(startNodes: List<T>, target: T? = null, reset: Boolean = true) {
-        useWeightedConnectionsIfNeeded()
+        useWeightedConnectionsIfNeeded("bfs")
         val startNodeIds = startNodes.map { node -> node2Id(node) ?: error("Node $node not found in graph") }
         val targetId = target?.let { node2Id(it) } ?: -1
         if (reset) searchResults = null
@@ -118,6 +122,7 @@ abstract class BaseGraph<T>(size: Int) {
     fun dfs(startNode: T, reset: Boolean = true) {
         val startId = node2Id(startNode) ?: error("Node $startNode not found in graph")
         if (reset) searchResults = null
+        useWeightedConnectionsIfNeeded("dfs")
         searchResults = DFS(unweightedAdjacencyList).dfs(startId, searchResults)
     }
 
@@ -138,11 +143,11 @@ abstract class BaseGraph<T>(size: Int) {
         }
     }
 
-    fun floydWarshall(){
+    fun floydWarshall() {
         allDistances = FloydWarshall(adjacencyList).floydWarshall()
     }
 
-    fun distanceFromUtoV(u:T, v:T) = allDistances?.let {
+    fun distanceFromUtoV(u: T, v: T) = allDistances?.let {
         it[node2Id(u)!!][node2Id(v)!!]
     } ?: error("FloydWarshall must be run before calling distanceFromUtoV")
 
@@ -160,7 +165,10 @@ abstract class BaseGraph<T>(size: Int) {
     }
 
     open fun topologicalSort() = DFS(unweightedAdjacencyList).topologicalSort()
-    open fun stronglyConnectedComponents() = DFS(unweightedAdjacencyList).stronglyConnectedComponents()
+    open fun stronglyConnectedComponents(): List<List<Int>> {
+        useWeightedConnectionsIfNeeded("stronglyConnectedComponents")
+        return DFS(unweightedAdjacencyList).stronglyConnectedComponents()
+    }
 
     // PATH UTILITIES
     fun getPath(target: T): List<T> {
@@ -189,15 +197,15 @@ abstract class BaseGraph<T>(size: Int) {
         searchResults = GraphSearchResults(nodes.size)
     }
 
-    private fun useWeightedConnectionsIfNeeded() {
+    private fun useWeightedConnectionsIfNeeded(algorithmName:String) {
         if (nrOfConnections(unweightedAdjacencyList) == 0) {
             unweightedAdjacencyList = adjacencyList.toUnweightedAdjacencyList()
             if (nrOfConnections(unweightedAdjacencyList) == 0) {
                 System.err.println("Warning: The graph has no connections, making pathfinding infeasible.")
             } else {
                 System.err.println(
-                    "Warning: An unweighted adjacency list is required. " +
-                            "Building one from the adjacencyList."
+                    "Warning: An unweighted adjacency list is required for $algorithmName. " +
+                            "Building one from the weighted adjacencyList."
                 )
             }
         }
