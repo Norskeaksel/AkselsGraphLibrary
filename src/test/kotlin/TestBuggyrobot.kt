@@ -61,4 +61,30 @@ class BuggyrobotTest {
         _reader = File("src/test/SampleInput/Buggyrobot/input6").inputStream().bufferedReader()
         assertThat(buggyrobot()).isEqualTo(expectedOutput)
     }
+    @Test
+    fun buggyrobotfSpeedTest() {
+        val expectedOutput = """49"""
+        _reader = File("src/test/SampleInput/Buggyrobot/input7").inputStream().bufferedReader()
+        val ans:String
+        val time = measureTimeMillis {
+            ans = buggyrobot()
+        }
+        System.err.println("Buggy robot speedTime = $time ms")
+        assertThat(ans).isEqualTo(expectedOutput)
+    }
+
+    @Test
+    fun buggyrobotgSpeedTest2() {
+        _reader = File("src/test/SampleInput/Buggyrobot/input8").inputStream().bufferedReader()
+        val time = measureTimeMillis {
+            buggyrobot()
+        }
+        System.err.println("Buggy robot speedTime = $time ms")
+    }
+    @Test
+    fun buggyroboth() {
+        val expectedOutput = """0"""
+        _reader = File("src/test/SampleInput/Buggyrobot/input9").inputStream().bufferedReader()
+        assertThat(buggyrobot()).isEqualTo(expectedOutput)
+    }
 }

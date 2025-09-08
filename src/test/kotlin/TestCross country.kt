@@ -5,7 +5,6 @@ import org.junit.jupiter.api.AfterAll
 import org.junit.jupiter.api.BeforeAll
 import java.io.File
 import org.junit.jupiter.api.Test
-import pathfindingAlgorithms.Dijkstra
 
 
 class CrossCountryTest {
@@ -34,6 +33,6 @@ class CrossCountryTest {
             }
         }
         graph.dijkstra(s)
-        assertThat(graph.distanceTo(t).toInt()).isEqualTo(11)
+        assertThat(graph.weightedDistanceTo(t).toInt()).isEqualTo(11)
     }
 }

@@ -36,6 +36,6 @@ fun baas(): Int {
             optimizedTime = min(optimizedTime, totalStepTime[n - 1])
         }
     }
-    System.err.println("Time spent running: $time ms")
+    System.err.println("BAAS time: $time ms")
     return optimizedTime
 }

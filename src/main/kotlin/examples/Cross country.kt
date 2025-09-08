@@ -1,6 +1,5 @@
 package examples
 // https://open.kattis.com/problems/crosscountry?tab=metadata
-import pathfindingAlgorithms.Dijkstra
 import graphClasses.IntGraph
 import graphClasses._writer
 import graphClasses.readDoubles
@@ -21,5 +20,5 @@ fun PrintWriter.execute() {
         }
     }
     graph.dijkstra(s)
-    println(graph.distanceTo(t).toInt())
+    println(graph.weightedDistanceTo(t).toInt())
 }
