@@ -24,11 +24,11 @@ fun buggyrobot(): String {
         }
     }
 
-    debug("Input reading took $inputReadingTime ms")
+    // debug("Input reading took $inputReadingTime ms")
     val commands = readString()
     val layers = commands.length + 1
     val newWidth = width * layers
-    //debug("nedWidth = $newWidth")
+    //// debug("nedWidth = $newWidth")
     var grid: Grid
     val gridMakeingTime = measureTimeMillis {
         grid = Grid(height = height, width = newWidth)
@@ -41,7 +41,7 @@ fun buggyrobot(): String {
     }
     grid.deleteNodesWithData('#')
     // grid.printChars()
-    debug("Grid making took $gridMakeingTime ms")
+    // debug("Grid making took $gridMakeingTime ms")
     val connectTime = measureTimeMillis {
         grid.connectGrid { t ->
             if (t.data == 'G') return@connectGrid emptyList<Tile>()
@@ -63,11 +63,11 @@ fun buggyrobot(): String {
             }
         }
     }
-    debug("Connecting took $connectTime ms")
+    // debug("Connecting took $connectTime ms")
     val bfsTime = measureTimeMillis {
         grid.bfs(start)
     }
-    debug("BFS took $bfsTime ms")
+    // debug("BFS took $bfsTime ms")
     //grid.printChars()
     //grid.visualizeSearch()
     var ans = ""
@@ -77,6 +77,6 @@ fun buggyrobot(): String {
         val fewestChanges = grid.unweightedDistanceTo(goal) - goal.x / width
         ans = fewestChanges.toString()
     }
-    debug("Answer computing took $ansTime ms")
+    // debug("Answer computing took $ansTime ms")
     return ans
 }
