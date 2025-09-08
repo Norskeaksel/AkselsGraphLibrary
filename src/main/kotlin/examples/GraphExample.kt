@@ -25,7 +25,7 @@ fun main() {
         graph.nodes().map { it as Int } // Nodes are of type Any and must therefore be casted to Int
     println("Shortest paths from source node $startNode:")
     nodes.forEach { node ->
-        val distValue = graph.distanceTo(node)
+        val distValue = graph.doubleDistanceTo(node)
         val path = graph.getPath(node)
         println("To node $node: Distance $distValue Path: ${if (distValue < Int.MAX_VALUE) path else null}")
     }
@@ -59,7 +59,7 @@ fun main() {
     val intNodes: List<Int> = intGraph.nodes()
     println("Shortest paths from source node $startNode:")
     intNodes.forEach { node ->
-        val distValue = intGraph.distanceTo(node)
+        val distValue = intGraph.doubleDistanceTo(node)
         val path = intGraph.getPath(node)
         println("To node $node: Distance $distValue Path: ${if (distValue < Int.MAX_VALUE) path else null}")
     }

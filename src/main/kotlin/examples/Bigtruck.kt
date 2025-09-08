@@ -22,9 +22,9 @@ fun bigtruck(): String {
         ig.addEdge(b, a, d - ITEM_BOOST * items[a])
     }
     ig.dijkstra(1)
-    if (ig.distanceTo(n) == Double.POSITIVE_INFINITY) {
+    if (ig.doubleDistanceTo(n) == Double.POSITIVE_INFINITY) {
         return "impossible"
     }
-    val nrOfItems = ((ceil(ig.distanceTo(n)) - ig.distanceTo(n)) / ITEM_BOOST).roundToInt() + items[1]
-    return "${ig.distanceTo(n).roundToInt()} $nrOfItems"
+    val nrOfItems = ((ceil(ig.doubleDistanceTo(n)) - ig.doubleDistanceTo(n)) / ITEM_BOOST).roundToInt() + items[1]
+    return "${ig.doubleDistanceTo(n).roundToInt()} $nrOfItems"
 }

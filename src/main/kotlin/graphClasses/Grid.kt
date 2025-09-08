@@ -32,6 +32,8 @@ open class Grid(val width: Int, val height: Int) : BaseGraph<Tile>(width * heigh
         val id = node2Id(node)
         nodes[id] = node
     }
+    override fun node2Id(node: Tile) = node.x + node.y * width
+    override fun id2Node(id: Int) = if (id in 0 until width * height) nodes[id] else null
 
     override fun addEdge(node1: Tile, node2: Tile, weight: Double) {
         val u = node2Id(node1)
@@ -45,8 +47,6 @@ open class Grid(val width: Int, val height: Int) : BaseGraph<Tile>(width * heigh
         unweightedAdjacencyList[u].add(v)
     }
 
-    override fun id2Node(id: Int) = if (id in 0 until width * height) nodes[id] else null
-    override fun node2Id(node: Tile) = node.x + node.y * width
     override fun nodes(): List<Tile> = nodes.filterNotNull().filter { it.x != -1 }
     override fun topologicalSort() = DFS(unweightedAdjacencyList).topologicalSort(deleted())
     override fun stronglyConnectedComponents() = DFS(unweightedAdjacencyList).stronglyConnectedComponents(deleted())
@@ -58,10 +58,6 @@ open class Grid(val width: Int, val height: Int) : BaseGraph<Tile>(width * heigh
 
     fun xy2Node(x: Int, y: Int) = xy2Index(x, y)?.let { id2Node(it) }
     fun indexHasNode(index: Int) = nodes.getOrNull(index) != null
-    private fun deleteNodeId(id: Int) {
-        if (nrOfConnections(unweightedAdjacencyList) > 0) error("Cannot delete nodes after the grid has gotten connections")
-        nodes[id] = null
-    }
 
     fun deleteNodeAtXY(x: Int, y: Int) {
         val id = xy2Index(x, y) ?: run {
@@ -78,13 +74,6 @@ open class Grid(val width: Int, val height: Int) : BaseGraph<Tile>(width * heigh
             }
         }
     }
-
-    fun getStraightNeighbourIndices(x: Int, y: Int) = listOfNotNull(
-        xy2Index(x - 1, y),
-        xy2Index(x + 1, y),
-        xy2Index(x, y - 1),
-        xy2Index(x, y + 1),
-    )
 
     fun getStraightNeighbours(t: Tile?) = t?.run {
         listOfNotNull(
@@ -104,27 +93,8 @@ open class Grid(val width: Int, val height: Int) : BaseGraph<Tile>(width * heigh
 
     fun getAllNeighbours(t: Tile) = getStraightNeighbours(t) + getDiagonalNeighbours(t)
 
-    fun connectGridByIndices(getIndicesNeighbours: (x: Int, y: Int) -> List<Int>) {
-        if (nrOfConnections(unweightedAdjacencyList) > 0) {
-            System.err.println("Warning: overwriting existing connections in the grid")
-            adjacencyList.forEach { it.clear() }
-            unweightedAdjacencyList.forEach { it.clear() }
-        }
-        for (x in 0 until width) {
-            for (y in 0 until height) {
-                val currentId = x + y * width
-                val neighbours = getIndicesNeighbours(x, y)
-                neighbours.forEach {
-                    unweightedAdjacencyList[currentId].add(it)
-                }
-            }
-        }
-    }
-
     /** Connects all nodes in the grid with their neighbours, by getNeighbours the user defined input function */
     fun connectGrid(getNeighbours: (t: Tile) -> List<Tile>) {
-        var getNeighboursCost = 0L
-        var addEdgeCost = 0L
         if (nrOfConnections(unweightedAdjacencyList) > 0) {
             System.err.println("Warning: overwriting existing connections in the grid")
             adjacencyList.forEach { it.clear() }
@@ -133,16 +103,12 @@ open class Grid(val width: Int, val height: Int) : BaseGraph<Tile>(width * heigh
         for (x in 0 until width) {
             for (y in 0 until height) {
                 val currentTile = xy2Node(x, y) ?: continue
-                val neighbours: List<Tile>
-                getNeighboursCost += measureTimeMillis { neighbours = getNeighbours(currentTile) }
+                val neighbours = getNeighbours(currentTile)
                 neighbours.forEach {
-                    addEdgeCost += measureTimeMillis {
                     addUnweightedEdge(currentTile, it)
-                    }
                 }
             }
         }
-        debug("getNeighbours cost: $getNeighboursCost ms, addEdge cost: $addEdgeCost ms")
     }
 
     /** Connects all nodes in the grid with their straight neighbours, i.e. top, down, left, right neighbours */

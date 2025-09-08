@@ -1,7 +1,5 @@
 //https://open.kattis.com/problems/shortestpath1
 
-import pathfindingAlgorithms.Dijkstra
-import graphClasses.Graph
 import graphClasses.IntGraph
 import graphClasses.readInt
 import graphClasses.readInts
@@ -19,10 +17,10 @@ fun main(){
         g.dijkstra(s)
         repeat(q){
             val goal = readInt()
-            if(g.distanceTo(goal) == Double.POSITIVE_INFINITY)
+            if(g.doubleDistanceTo(goal) == Double.POSITIVE_INFINITY)
                 println("Impossible")
             else
-                println(g.distanceTo(goal).toInt())
+                println(g.doubleDistanceTo(goal).toInt())
         }
     }
 }

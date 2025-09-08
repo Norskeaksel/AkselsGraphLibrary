@@ -11,14 +11,14 @@ abstract class BaseGraph<T>(size: Int) {
     // PROPERTIES AND INITIALIZATION
     protected val adjacencyList: AdjacencyList = MutableList(size) { mutableListOf() }
     protected var unweightedAdjacencyList: UnweightedAdjacencyList = MutableList(size) { mutableListOf() }
-        get() {
+        /*get() {
             if (nrOfConnections(field) < nrOfConnections(adjacencyList)) {
                 field = adjacencyList.toUnweightedAdjacencyList()
             }
             return field
-        }
+        }*/
     var nodes: MutableList<T?> = MutableList(size) { null }
-    protected var searchResults: GraphSearchResults? = null
+    var searchResults: GraphSearchResults? = null
     private var finalPath: List<T> = emptyList()
     private var allDistances: Array<DoubleArray>? = null
 
@@ -60,6 +60,10 @@ abstract class BaseGraph<T>(size: Int) {
         }
     }
 
+    protected fun deleteNodeId(id:Int){
+        nodes[id] = null
+    }
+
     // GRAPH INFORMATION
     fun depth() = searchResults?.depth ?: error("Can't retrieve depth because no search has been run yet")
     fun visitedNodes() = searchResults?.run { visited.indices.mapNotNull { if (visited[it]) id2Node(it) else null } }
@@ -71,10 +75,17 @@ abstract class BaseGraph<T>(size: Int) {
     fun finalPath(): List<T> = finalPath
 
     fun foundTarget() = searchResults?.foundTarget ?: false
-    fun distanceTo(node: T): Double {
+    fun doubleDistanceTo(node: T): Double {
         val id = node2Id(node) ?: error("Node $node not found in graph")
         searchResults?.let {
             return it.distances[id]
+        }
+        error("Haven't computed distance to $node because no search algorithm (dfs, bfs, dijkstra) has been run yet.")
+    }
+    fun intDistanceTo(node: T): Int {
+        val id = node2Id(node) ?: error("Node $node not found in graph")
+        searchResults?.let {
+            return it.intDistances[id]
         }
         error("Haven't computed distance to $node because no search algorithm (dfs, bfs, dijkstra) has been run yet.")
     }
