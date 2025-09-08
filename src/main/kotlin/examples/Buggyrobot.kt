@@ -67,7 +67,7 @@ fun buggyrobot(): String {
         grid.bfs(start)
     }
     // debug("BFS took $bfsTime ms")
-    //grid.printChars()
+    //grid.print()
     //grid.visualizeSearch()
     var ans = ""
     val ansTime = measureTimeMillis {

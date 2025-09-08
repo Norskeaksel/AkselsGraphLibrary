@@ -58,6 +58,9 @@ open class Grid(val width: Int, val height: Int) : BaseGraph<Tile>(width * heigh
 
     fun xy2Node(x: Int, y: Int) = xy2Index(x, y)?.let { id2Node(it) }
     fun indexHasNode(index: Int) = nodes.getOrNull(index) != null
+    private fun deleteNodeId(id: Int) {
+        nodes[id] = null
+    }
 
     fun deleteNodeAtXY(x: Int, y: Int) {
         val id = xy2Index(x, y) ?: run {

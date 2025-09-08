@@ -12,12 +12,6 @@ abstract class BaseGraph<T>(size: Int) {
     protected val adjacencyList: AdjacencyList = MutableList(size) { mutableListOf() }
     protected var unweightedAdjacencyList: UnweightedAdjacencyList = MutableList(size) { mutableListOf() }
 
-    /*get() {
-        if (nrOfConnections(field) < nrOfConnections(adjacencyList)) {
-            field = adjacencyList.toUnweightedAdjacencyList()
-        }
-        return field
-    }*/
     var nodes: MutableList<T?> = MutableList(size) { null }
     var searchResults: GraphSearchResults? = null
     private var finalPath: List<T> = emptyList()
@@ -61,11 +55,7 @@ abstract class BaseGraph<T>(size: Int) {
         }
     }
 
-    protected fun deleteNodeId(id: Int) {
-        nodes[id] = null
-    }
-
-    // GRAPH INFORMATION
+   // GRAPH INFORMATION
     fun depth() = searchResults?.depth ?: error("Can't retrieve depth because no search has been run yet")
     fun visitedNodes() = searchResults?.run { visited.indices.mapNotNull { if (visited[it]) id2Node(it) else null } }
         ?: error("Can't retrieve visitedNodes because no search has been run yet")
