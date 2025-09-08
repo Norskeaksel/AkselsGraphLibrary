@@ -73,19 +73,10 @@ fun buggyrobot(): String {
     var ans = ""
     val ansTime = measureTimeMillis {
         val goals = grid.currentVisitedNodes().filter { it.data == 'G' }
-        val goal = goals.minBy { grid.intDistanceTo(it) - it.x / width }
-        val fewestChanges = grid.intDistanceTo(goal) - goal.x / width
+        val goal = goals.minBy { grid.unweightedDistanceTo(it) - it.x / width }
+        val fewestChanges = grid.unweightedDistanceTo(goal) - goal.x / width
         ans = fewestChanges.toString()
     }
     debug("Answer computing took $ansTime ms")
     return ans
-}
-
-private fun Grid.printChars() {
-    nodes.forEachIndexed { id, t ->
-        if (id > 0 && id % width == 0)
-            println()
-        print(t?.data ?: '#')
-    }
-    println()
 }

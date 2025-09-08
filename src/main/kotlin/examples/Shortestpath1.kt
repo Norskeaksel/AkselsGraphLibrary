@@ -17,10 +17,10 @@ fun main(){
         g.dijkstra(s)
         repeat(q){
             val goal = readInt()
-            if(g.doubleDistanceTo(goal) == Double.POSITIVE_INFINITY)
+            if(g.weightedDistanceTo(goal) == Double.POSITIVE_INFINITY)
                 println("Impossible")
             else
-                println(g.doubleDistanceTo(goal).toInt())
+                println(g.weightedDistanceTo(goal).toInt())
         }
     }
 }

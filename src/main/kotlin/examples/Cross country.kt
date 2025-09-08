@@ -20,5 +20,5 @@ fun PrintWriter.execute() {
         }
     }
     graph.dijkstra(s)
-    println(graph.doubleDistanceTo(t).toInt())
+    println(graph.weightedDistanceTo(t).toInt())
 }

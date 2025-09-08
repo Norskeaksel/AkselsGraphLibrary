@@ -75,17 +75,17 @@ abstract class BaseGraph<T>(size: Int) {
     fun finalPath(): List<T> = finalPath
 
     fun foundTarget() = searchResults?.foundTarget ?: false
-    fun doubleDistanceTo(node: T): Double {
+    fun weightedDistanceTo(node: T): Double {
         val id = node2Id(node) ?: error("Node $node not found in graph")
         searchResults?.let {
             return it.distances[id]
         }
         error("Haven't computed distance to $node because no search algorithm (dfs, bfs, dijkstra) has been run yet.")
     }
-    fun intDistanceTo(node: T): Int {
+    fun unweightedDistanceTo(node: T): Int {
         val id = node2Id(node) ?: error("Node $node not found in graph")
         searchResults?.let {
-            return it.intDistances[id]
+            return it.unweightedDistances[id]
         }
         error("Haven't computed distance to $node because no search algorithm (dfs, bfs, dijkstra) has been run yet.")
     }
