@@ -54,11 +54,11 @@ class Grid(val width: Int, val height: Int, initWithDatalessTiles: Boolean = fal
     private fun deleted() = BooleanArray(nodes.size) { nodes[it] == null }
 
     private fun xyInRange(x: Int, y: Int) = x in 0 until width && y in 0 until height
-    fun xy2Index(x: Int, y: Int) =
+    private fun xy2Index(x: Int, y: Int) =
         if (xyInRange(x, y)) (x + y * width).let { if (indexHasNode(it)) it else null } else null
 
     fun xy2Node(x: Int, y: Int) = xy2Index(x, y)?.let { id2Node(it) }
-    fun indexHasNode(index: Int) = nodes.getOrNull(index) != null
+    private fun indexHasNode(index: Int) = nodes.getOrNull(index) != null
     private fun deleteNodeId(id: Int) {
         nodes[id] = null
     }

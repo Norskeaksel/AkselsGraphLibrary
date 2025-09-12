@@ -1,8 +1,22 @@
 package graphAlgorithms
 
-fun twoSat(nrOfNodes: Int, implications: List<Pair<Int, Int>>, presetNodeValues: List<Boolean?>? = null) {
-    presetNodeValues?.let {
-        if (it.size != nrOfNodes) error("presetNodeValues has size ${it.size}, but must match nrOfNodes: $nrOfNodes")
+import Clauses
+import graphClasses.Graph
+
+/** Clauses: a V b <--> -a -> b and -b -> a */
+fun twoSat(clauses: Clauses): Boolean {
+    val graph = Graph()
+    clauses.forEach { (u, v) ->
+        graph.addUnweightedEdge(u, v)
+        graph.addUnweightedEdge(-u, -v)
     }
-    val truthArray = Array(nrOfNodes * 2) { presetNodeValues?.get(it)}
+    val scc = graph.stronglyConnectedComponents()
+    scc.forEach { component ->
+        val nodeSet = component.toSet()
+        for (node in component) {
+            if (-node in nodeSet)
+                return false
+        }
+    }
+    return true
 }
