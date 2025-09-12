@@ -1,4 +1,4 @@
-package pathfindingAlgorithms
+package graphAlgorithms
 
 import UnweightedAdjacencyList
 

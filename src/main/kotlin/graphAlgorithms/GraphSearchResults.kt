@@ -1,4 +1,4 @@
-package pathfindingAlgorithms
+package graphAlgorithms
 
 data class GraphSearchResults(private val graphSize: Int) {
     val visited = BooleanArray(graphSize)

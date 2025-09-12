@@ -1,12 +1,11 @@
 package graphClasses
 
 import Edge
-import pathfindingAlgorithms.DFS
-import kotlin.system.measureTimeMillis
+import graphAlgorithms.DFS
 
 data class Tile(val x: Int, val y: Int, var data: Any? = null)
 
-open class Grid(val width: Int, val height: Int) : BaseGraph<Tile>(width * height) {
+class Grid(val width: Int, val height: Int, initWithDatalessTiles: Boolean = false) : BaseGraph<Tile>(width * height) {
     constructor(stringGrid: List<String>) : this(stringGrid[0].length, stringGrid.size) {
         if (stringGrid.any { it.length != width })
             error("All lines in the string grid must have the same length")
@@ -20,10 +19,11 @@ open class Grid(val width: Int, val height: Int) : BaseGraph<Tile>(width * heigh
     }
 
     init {
-        for (y in 0 until height) {
-            for (x in 0 until width) {
-                val id = x + y * width
-                nodes[id] = Tile(x, y)
+        if (initWithDatalessTiles) {
+            for (y in 0 until height) {
+                for (x in 0 until width) {
+                    addNode(Tile(x, y))
+                }
             }
         }
     }
@@ -32,6 +32,7 @@ open class Grid(val width: Int, val height: Int) : BaseGraph<Tile>(width * heigh
         val id = node2Id(node)
         nodes[id] = node
     }
+
     override fun node2Id(node: Tile) = node.x + node.y * width
     override fun id2Node(id: Int) = if (id in 0 until width * height) nodes[id] else null
 

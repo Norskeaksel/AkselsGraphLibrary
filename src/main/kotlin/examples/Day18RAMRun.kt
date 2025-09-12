@@ -4,7 +4,7 @@ import graphClasses.Grid
 import graphClasses.Tile
 
 fun day18a(input: List<String>, gridSize: Int, lineCount: Int): Int {
-    val grid = Grid(gridSize, gridSize)
+    val grid = Grid(gridSize, gridSize, true)
     for((i,line) in input.withIndex()){
         if (i >= lineCount)
             break

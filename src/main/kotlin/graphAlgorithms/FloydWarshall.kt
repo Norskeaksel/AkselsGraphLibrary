@@ -1,4 +1,4 @@
-package pathfindingAlgorithms
+package graphAlgorithms
 
 import AdjacencyList
 import kotlin.math.min

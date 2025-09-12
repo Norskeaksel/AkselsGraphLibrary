@@ -3,7 +3,7 @@ package graphClasses
 import AdjacencyList
 import Edge
 import UnweightedAdjacencyList
-import pathfindingAlgorithms.*
+import graphAlgorithms.*
 import toUnweightedAdjacencyList
 
 
