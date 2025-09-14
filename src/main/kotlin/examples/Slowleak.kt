@@ -16,7 +16,7 @@ fun slowleak(): String {
     val repairStations = readInts(t)
     repeat(m) {
         val (i, j, k) = readInts(3)
-        g.connect(i, j, k.toDouble())
+        g.connectWeighted(i, j, k.toDouble())
     }
     g.floydWarshall()
     val compressedGraphNodes = repairStations + listOf(start, goal)
@@ -30,7 +30,7 @@ fun slowleak(): String {
             val v = compressedGraphNodes[j]
             val w = g.distanceFromUtoV(u, v)
             if (w <= d)
-                compressedGraph.connect(u, v, w)
+                compressedGraph.connectWeighted(u, v, w)
         }
     }
     compressedGraph.dijkstra(start)

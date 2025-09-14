@@ -8,13 +8,13 @@ import graphGraphics.visualizeSearch
 fun main() {
     // --- Example Graph Definition ---
     val graph = Graph()
-    graph.addEdge(0, 1, 10.0)
-    graph.addEdge(0, 2, 3.0)
-    graph.addEdge(1, 3, 2.0)
-    graph.addEdge(2, 1, 4.0)
-    graph.addEdge(2, 3, 8.0)
-    graph.addEdge(2, 4, 2.0)
-    graph.addEdge(3, 4, 5.0)
+    graph.addWeightedEdge(0, 1, 10.0)
+    graph.addWeightedEdge(0, 2, 3.0)
+    graph.addWeightedEdge(1, 3, 2.0)
+    graph.addWeightedEdge(2, 1, 4.0)
+    graph.addWeightedEdge(2, 3, 8.0)
+    graph.addWeightedEdge(2, 4, 2.0)
+    graph.addWeightedEdge(3, 4, 5.0)
 
     graph.addNode(5) // Adding an isolated node is also possible
 
@@ -49,10 +49,10 @@ fun main() {
     val intGraph = IntGraph(n)
     // Add the same edges as the above Graph
     graph.nodes().forEach { fromNode ->
-        graph.getEdges(fromNode).forEach { edge ->
+        graph.getWeightedEdges(fromNode).forEach { edge ->
             val weight = edge.first
             val toNode = edge.second as Int // Cast type Any to Int
-            intGraph.addEdge(fromNode as Int, toNode, weight)
+            intGraph.addWeightedEdge(fromNode as Int, toNode, weight)
         }
     }
     intGraph.dijkstra(startNode, targetNode)
@@ -66,7 +66,7 @@ fun main() {
     // Outputs the same as the code above
 
     // Visualize the graph using brunomnsilva's JavaFXSmartGraph: https://github.com/brunomnsilva/JavaFXSmartGraph
-    graph.visualizeSearch( // Or use: intGraph.visualize(
+    graph.visualizeSearch( // Or use: intGraph.visualizeSearch(
         screenTitle = "Grid example visualizing",
         animationTicTimeOverride = 500.0,
         startPaused = false,

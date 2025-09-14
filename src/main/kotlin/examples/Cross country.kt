@@ -16,7 +16,7 @@ fun PrintWriter.execute() {
     repeat(n){i ->
         val nodes = readDoubles(n)
         nodes.forEachIndexed{ j, d ->
-            graph.addEdge(i,j,d)
+            graph.addWeightedEdge(i,j,d)
         }
     }
     graph.dijkstra(s)

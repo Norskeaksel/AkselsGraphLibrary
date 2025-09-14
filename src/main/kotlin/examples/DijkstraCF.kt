@@ -14,7 +14,7 @@ fun dijkstraCF(): List<Int> {
     val g = IntGraph(n+1)
     repeat(m) {
         val (u, v, w) = readInts(3)
-        g.connect(u, v, w.toDouble())
+        g.connectWeighted(u, v, w.toDouble())
     }
     g.dijkstra(1)
     val path = g.getPath(n)

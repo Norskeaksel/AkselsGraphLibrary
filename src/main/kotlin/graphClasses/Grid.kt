@@ -36,7 +36,7 @@ class Grid(val width: Int, val height: Int, initWithDatalessTiles: Boolean = fal
     override fun node2Id(node: Tile) = node.x + node.y * width
     override fun id2Node(id: Int) = if (id in 0 until width * height) nodes[id] else null
 
-    override fun addEdge(node1: Tile, node2: Tile, weight: Double) {
+    override fun addWeightedEdge(node1: Tile, node2: Tile, weight: Double) {
         val u = node2Id(node1)
         val v = node2Id(node2)
         adjacencyList[u].add(Edge(weight, v))
@@ -50,7 +50,7 @@ class Grid(val width: Int, val height: Int, initWithDatalessTiles: Boolean = fal
 
     override fun nodes(): List<Tile> = nodes.filterNotNull().filter { it.x != -1 }
     override fun topologicalSort() = DFS(unweightedAdjacencyList).topologicalSort(deleted())
-    override fun stronglyConnectedComponents() = DFS(unweightedAdjacencyList).stronglyConnectedComponents(deleted())
+    override fun stronglyConnectedComponents(visualizeSCC:Boolean) = DFS(unweightedAdjacencyList).stronglyConnectedComponents(deleted())
     private fun deleted() = BooleanArray(nodes.size) { nodes[it] == null }
 
     private fun xyInRange(x: Int, y: Int) = x in 0 until width && y in 0 until height

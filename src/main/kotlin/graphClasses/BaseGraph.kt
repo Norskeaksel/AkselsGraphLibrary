@@ -1,10 +1,10 @@
 package graphClasses
 
 import AdjacencyList
-import Clauses
 import Edge
 import UnweightedAdjacencyList
 import graphAlgorithms.*
+import graphGraphics.visualizeSearch
 import toUnweightedAdjacencyList
 
 
@@ -23,18 +23,17 @@ abstract class BaseGraph<T>(size: Int) {
     protected abstract fun id2Node(id: Int): T?
     abstract fun node2Id(node: T): Int?
     abstract fun addNode(node: T)
-    abstract fun addEdge(node1: T, node2: T, weight: Double)
+    abstract fun addWeightedEdge(node1: T, node2: T, weight: Double)
     abstract fun addUnweightedEdge(node1: T, node2: T)
 
     // CORE GRAPH OPERATIONS
     fun size() = nodes().size
-    fun connect(node1: T, node2: T, weight: Number) {
+    fun connectWeighted(node1: T, node2: T, weight: Number) {
         val weightDouble = weight.toDouble()
-        addEdge(node1, node2, weightDouble)
-        addEdge(node2, node1, weightDouble)
+        addWeightedEdge(node1, node2, weightDouble)
+        addWeightedEdge(node2, node1, weightDouble)
     }
 
-    fun connect(node1: T, node2: T) = connect(node1, node2, 1.0)
     fun connectUnweighted(node1: T, node2: T) {
         addUnweightedEdge(node1, node2)
         addUnweightedEdge(node2, node1)
@@ -56,7 +55,7 @@ abstract class BaseGraph<T>(size: Int) {
         }
     }
 
-   // GRAPH INFORMATION
+    // GRAPH INFORMATION
     fun depth() = searchResults?.depth ?: error("Can't retrieve depth because no search has been run yet")
     fun visitedNodes() = searchResults?.run { visited.indices.mapNotNull { if (visited[it]) id2Node(it) else null } }
         ?: error("Can't retrieve visitedNodes because no search has been run yet")
@@ -93,8 +92,12 @@ abstract class BaseGraph<T>(size: Int) {
         node2Id(t)?.let { unweightedAdjacencyList[it] }?.map { id2Node(it)!! }
             ?: error("Node $t not found in graph")
 
-    fun getEdges(t: T): List<Pair<Double, T>> =
+    fun getWeightedEdges(t: T): List<Pair<Double, T>> =
         node2Id(t)?.let { adjacencyList[it] }?.map { Pair(it.first, id2Node(it.second)!!) }
+            ?: error("Node $t not found in graph")
+
+    fun getUnweightedEdges(t: T): List<T> =
+        node2Id(t)?.let { unweightedAdjacencyList[it].map { id2Node(it)!! } }
             ?: error("Node $t not found in graph")
 
     // SEARCH ALGORITHMS
@@ -148,7 +151,7 @@ abstract class BaseGraph<T>(size: Int) {
             val mstGraph = Graph()
             adjacencyList.forEachIndexed { id, edges ->
                 edges.forEach { (w, v) ->
-                    mstGraph.connect(id2Node(id)!!, id2Node(v)!!, w)
+                    mstGraph.connectWeighted(id2Node(id)!!, id2Node(v)!!, w)
                 }
             }
             mstGraph
@@ -156,9 +159,22 @@ abstract class BaseGraph<T>(size: Int) {
     }
 
     open fun topologicalSort() = DFS(unweightedAdjacencyList).topologicalSort()
-    open fun stronglyConnectedComponents(): List<List<Int>> {
+    open fun stronglyConnectedComponents(visualizeSCC: Boolean = false): List<List<Int>> {
         useWeightedConnectionsIfNeeded("stronglyConnectedComponents")
-        return DFS(unweightedAdjacencyList).stronglyConnectedComponents()
+        val scc = DFS(unweightedAdjacencyList).stronglyConnectedComponents()
+        if (visualizeSCC) {
+            val vg = Graph()
+            scc.forEach { component ->
+                for (i in component.indices) {
+                    val u = component[i].let { id2Node(it) ?: it }
+                    val v = component[(i + 1) % component.size].let { id2Node(it) ?: it }
+                    vg.addUnweightedEdge(u, v)
+                }
+            }
+            vg.printUnweightedConnections()
+            vg.visualizeSearch()
+        }
+        return scc
     }
 
     // PATH UTILITIES
@@ -188,7 +204,7 @@ abstract class BaseGraph<T>(size: Int) {
         searchResults = GraphSearchResults(nodes.size)
     }
 
-    private fun useWeightedConnectionsIfNeeded(algorithmName:String) {
+    private fun useWeightedConnectionsIfNeeded(algorithmName: String) {
         if (nrOfConnections(unweightedAdjacencyList) == 0) {
             unweightedAdjacencyList = adjacencyList.toUnweightedAdjacencyList()
             if (nrOfConnections(unweightedAdjacencyList) == 0) {
@@ -205,8 +221,8 @@ abstract class BaseGraph<T>(size: Int) {
     protected fun <T> nrOfConnections(twoDList: List<List<T>>) = twoDList.sumOf { it.size }
 
     // PRINTER FUNCTIONS
-    fun printConnections() = printGraph(false)
-    fun printWeightlessConnections() = printGraph(true)
+    fun printWeightedConnections() = printGraph(false)
+    fun printUnweightedConnections() = printGraph(true)
     private fun printGraph(weightless: Boolean) =
         if (weightless) {
             unweightedAdjacencyList.forEachIndexed { nodeId, connections ->

@@ -5,8 +5,7 @@ import com.brunomnsilva.smartgraph.graph.DigraphEdgeList
 import com.brunomnsilva.smartgraph.graphview.SmartCircularSortedPlacementStrategy
 import com.brunomnsilva.smartgraph.graphview.SmartGraphPanel
 import com.brunomnsilva.smartgraph.graphview.SmartPlacementStrategy
-import graphClasses.Graph
-import graphClasses.IntGraph
+import graphClasses.BaseGraph
 import javafx.animation.KeyFrame
 import javafx.animation.PauseTransition
 import javafx.animation.Timeline
@@ -19,16 +18,12 @@ import javafx.util.Duration
 
 class GraphGraphics : Application() {
     companion object {
-        lateinit var graph: Graph
-        lateinit var intGraph: IntGraph
+        lateinit var graph: BaseGraph<Any>
         var screenTitle = "JavaFXGraph Visualization"
         var animationTicTimeOverride: Double? = null
         var startPaused = false
         var closeOnEnd = false
         var screenWidthOverride: Double? = null
-
-        private val graphIsInitialized: Boolean
-            get() = this::graph.isInitialized
     }
 
 
@@ -36,14 +31,10 @@ class GraphGraphics : Application() {
     override fun start(stage: Stage) {
         val visitationOrder: List<Any>
         val path: List<Any>
-        val graphVisualizer: DigraphEdgeList<Any, Any> = if (graphIsInitialized) {
+        val graphVisualizer: DigraphEdgeList<Any, Any> = run {
             visitationOrder = graph.currentVisitedNodes()
             path = graph.finalPath()
             graph.convertToVisualizationGraph()
-        } else {
-            visitationOrder = intGraph.currentVisitedNodes()
-            path = intGraph.finalPath()
-            intGraph.convertToVisualizationGraph()
         }
         val animationKeyFrameTime =
             animationTicTimeOverride ?: (10_000.0 / graphVisualizer.numVertices())
@@ -106,27 +97,14 @@ class GraphGraphics : Application() {
     }
 }
 
-private fun Graph.convertToVisualizationGraph(): DigraphEdgeList<Any, Any> {
+private fun BaseGraph<Any>.convertToVisualizationGraph(): DigraphEdgeList<Any, Any> {
     val g = DigraphEdgeList<Any, Any>()
     nodes().forEach { node ->
         g.insertVertex(node)
     }
     nodes().forEach { node ->
-        getEdges(node).forEach { edge ->
-            val fromToWeight = Triple(node, edge.second, edge.first)
-            g.insertEdge(node, edge.second, fromToWeight)
-        }
-    }
-    return g
-}
-
-private fun IntGraph.convertToVisualizationGraph(): DigraphEdgeList<Any, Any> {
-    val g = DigraphEdgeList<Any, Any>()
-    nodes().forEach { node ->
-        g.insertVertex(node)
-    }
-    nodes().forEach { node ->
-        getEdges(node).forEach { edge ->
+        val edges = getWeightedEdges(node).ifEmpty { getUnweightedEdges(node).map { 1.0 to it } }
+        edges.forEach { edge ->
             val fromToWeight = Triple(node, edge.second, edge.first)
             g.insertEdge(node, edge.second, fromToWeight)
         }
