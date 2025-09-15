@@ -7,7 +7,6 @@ import com.brunomnsilva.smartgraph.graphview.SmartGraphPanel
 import com.brunomnsilva.smartgraph.graphview.SmartPlacementStrategy
 import graphClasses.BaseGraph
 import javafx.animation.KeyFrame
-import javafx.animation.PauseTransition
 import javafx.animation.Timeline
 import javafx.application.Application
 import javafx.scene.Scene
@@ -50,11 +49,11 @@ class GraphGraphics : Application() {
         graphView.init()
 
         val transitionTime = Duration.seconds(3.0)
-        val pause = PauseTransition(transitionTime)
+        /* val pause = PauseTransition(transitionTime) // Stop graph movement after transitionTime
         pause.setOnFinished {
             graphView.setAutomaticLayout(false)
         }
-        pause.play()
+        pause.play() */
         val timeline = Timeline()
         visitationOrder.forEachIndexed { index, vertex ->
             val keyFrame = KeyFrame(Duration.millis(animationKeyFrameTime * index).add(transitionTime), {

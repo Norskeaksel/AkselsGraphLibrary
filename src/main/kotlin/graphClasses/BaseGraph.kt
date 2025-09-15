@@ -4,7 +4,6 @@ import AdjacencyList
 import Edge
 import UnweightedAdjacencyList
 import graphAlgorithms.*
-import graphGraphics.visualizeSearch
 import toUnweightedAdjacencyList
 
 
@@ -13,8 +12,8 @@ abstract class BaseGraph<T>(size: Int) {
     protected val adjacencyList: AdjacencyList = MutableList(size) { mutableListOf() }
     protected var unweightedAdjacencyList: UnweightedAdjacencyList = MutableList(size) { mutableListOf() }
 
-    var nodes: MutableList<T?> = MutableList(size) { null }
-    var searchResults: GraphSearchResults? = null
+    protected var nodes: MutableList<T?> = MutableList(size) { null }
+    private var searchResults: GraphSearchResults? = null
     private var finalPath: List<T> = emptyList()
     private var allDistances: Array<DoubleArray>? = null
 
@@ -146,7 +145,7 @@ abstract class BaseGraph<T>(size: Int) {
     } ?: error("FloydWarshall must be run before calling distanceFromUtoV")
 
     // ADDITIONAL ALGORITHMS
-    fun minimumSpanningTree(): Pair<Double, Graph> = minimumSpanningTree(adjacencyList).run {
+    fun minimumSpanningTree(): Pair<Double, Graph> = prims(adjacencyList).run {
         first to second.let { adjacencyList ->
             val mstGraph = Graph()
             adjacencyList.forEachIndexed { id, edges ->
@@ -158,7 +157,7 @@ abstract class BaseGraph<T>(size: Int) {
         }
     }
 
-    open fun topologicalSort() = DFS(unweightedAdjacencyList).topologicalSort()
+    open fun topologicalSort() = DFS(unweightedAdjacencyList).topologicalSort().map { id2Node(it)!! }
     open fun stronglyConnectedComponents(): List<List<T>> {
         useWeightedConnectionsIfNeeded("stronglyConnectedComponents")
         val scc = DFS(unweightedAdjacencyList).stronglyConnectedComponents()

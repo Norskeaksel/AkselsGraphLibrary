@@ -48,23 +48,23 @@ class Grid(val width: Int, val height: Int, initWithDatalessTiles: Boolean = fal
         unweightedAdjacencyList[u].add(v)
     }
 
-    override fun nodes(): List<Tile> = nodes.filterNotNull().filter { it.x != -1 }
-    override fun topologicalSort() = DFS(unweightedAdjacencyList).topologicalSort(deleted())
+    override fun nodes(): List<Tile> = nodes.filterNotNull()
+    override fun topologicalSort() = DFS(unweightedAdjacencyList).topologicalSort(deleted()).map { id2Node(it)!! }
     override fun stronglyConnectedComponents() = DFS(unweightedAdjacencyList).stronglyConnectedComponents(deleted()).map { component -> component.mapNotNull { id2Node(it) } }
     private fun deleted() = BooleanArray(nodes.size) { nodes[it] == null }
 
     private fun xyInRange(x: Int, y: Int) = x in 0 until width && y in 0 until height
-    private fun xy2Index(x: Int, y: Int) =
+    private fun xy2Id(x: Int, y: Int) =
         if (xyInRange(x, y)) (x + y * width).let { if (indexHasNode(it)) it else null } else null
 
-    fun xy2Node(x: Int, y: Int) = xy2Index(x, y)?.let { id2Node(it) }
+    fun xy2Node(x: Int, y: Int) = xy2Id(x, y)?.let { id2Node(it) }
     private fun indexHasNode(index: Int) = nodes.getOrNull(index) != null
     private fun deleteNodeId(id: Int) {
         nodes[id] = null
     }
 
     fun deleteNodeAtXY(x: Int, y: Int) {
-        val id = xy2Index(x, y) ?: run {
+        val id = xy2Id(x, y) ?: run {
             System.err.println("Warning, coordinates ($x, $y) are outside the grid")
             return
         }
