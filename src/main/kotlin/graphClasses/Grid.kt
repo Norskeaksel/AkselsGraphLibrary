@@ -50,7 +50,7 @@ class Grid(val width: Int, val height: Int, initWithDatalessTiles: Boolean = fal
 
     override fun nodes(): List<Tile> = nodes.filterNotNull().filter { it.x != -1 }
     override fun topologicalSort() = DFS(unweightedAdjacencyList).topologicalSort(deleted())
-    override fun stronglyConnectedComponents(visualizeSCC:Boolean) = DFS(unweightedAdjacencyList).stronglyConnectedComponents(deleted()).map { component -> component.mapNotNull { id2Node(it) } }
+    override fun stronglyConnectedComponents() = DFS(unweightedAdjacencyList).stronglyConnectedComponents(deleted()).map { component -> component.mapNotNull { id2Node(it) } }
     private fun deleted() = BooleanArray(nodes.size) { nodes[it] == null }
 
     private fun xyInRange(x: Int, y: Int) = x in 0 until width && y in 0 until height

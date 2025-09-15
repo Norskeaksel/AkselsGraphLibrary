@@ -34,7 +34,7 @@ class IlluminationTest {
     fun illuminationSpeedTest() {
         val expectedOutput = """1"""
         _reader = File("src/test/SampleInput/Illumination/input3").inputStream().bufferedReader()
-        var ans = "-1"
+        var ans: String
         val time = measureTimeMillis {
             ans = illumination()
         }
