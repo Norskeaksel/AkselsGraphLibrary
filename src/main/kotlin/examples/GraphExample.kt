@@ -66,7 +66,7 @@ fun main() {
     // Outputs the same as the code above
 
     // Visualize the graph using brunomnsilva's JavaFXSmartGraph: https://github.com/brunomnsilva/JavaFXSmartGraph
-    graph.visualizeSearch( // Or use: intGraph.visualizeSearch(
+    graph.visualizeSearch( // Also works with intGraph.visualizeSearch(
         screenTitle = "Grid example visualizing",
         animationTicTimeOverride = 500.0,
         startPaused = false,
