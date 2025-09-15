@@ -7,7 +7,7 @@ import graphGraphics.visualizeSearch
 
 /** Clauses:
  * -a -> b and -b -> a  <--> a V b
- * a -> -b and b -> -a  <--> a ^ b
+ * a -> -b and b -> -a and -a -> b and -b to a <--> a ^ b
  */
 fun twoSat(
     clauses: Clauses,
@@ -46,8 +46,8 @@ fun twoSat(
     sortedNodes.forEach { node ->
         val literal = node as Int
         if (literal !in truthMap && -literal !in truthMap) {
-            truthMap[literal] = true
-            truthMap[-literal] = false
+            truthMap[literal] = false
+            truthMap[-literal] = true
         }
     }
     return truthMap

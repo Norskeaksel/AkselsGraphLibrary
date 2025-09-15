@@ -14,7 +14,7 @@ class AmandaTest {
         }
     }   
 
-    /*@Test
+    @Test
     fun amandaa() {
         val expectedOutput = """3"""
         _reader = File("src/test/SampleInput/Amanda/input1").inputStream().bufferedReader()
@@ -35,5 +35,5 @@ class AmandaTest {
         val expectedOutput = """2"""
         _reader = File("src/test/SampleInput/Amanda/input3").inputStream().bufferedReader()
         assertThat(amanda()).isEqualTo(expectedOutput)
-    }*/
+    }
 }
