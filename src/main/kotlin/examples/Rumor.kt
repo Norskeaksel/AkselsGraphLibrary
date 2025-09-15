@@ -19,7 +19,7 @@ fun rumor(): Long {
     System.err.println(components)
     var sum = 0L
     components.forEach { component ->
-        val min = component.map { c[it] }.min()
+        val min = component.map { c[g.node2Id(it)!!] }.min()
         sum += min
     }
     return sum

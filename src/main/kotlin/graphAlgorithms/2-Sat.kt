@@ -2,6 +2,7 @@ package graphAlgorithms
 
 import Clauses
 import graphClasses.Graph
+import graphClasses.debug
 
 /** Clauses: a V b <--> -a -> b and -b -> a */
 fun twoSat(clauses: Clauses, visualizeComponents:Boolean=false): Boolean {
@@ -10,11 +11,15 @@ fun twoSat(clauses: Clauses, visualizeComponents:Boolean=false): Boolean {
         graph.addUnweightedEdge(u, v)
         graph.addUnweightedEdge(-u, -v)
     }
+    if(visualizeComponents){
+        debug("2-Sat Implication Graph:")
+        graph.printUnweightedConnections()
+    }
     val scc = graph.stronglyConnectedComponents(visualizeComponents)
     scc.forEach { component ->
         val nodeSet = component.toSet()
         for (node in component) {
-            if (-node in nodeSet)
+            if (-(node as Int) in nodeSet)
                 return false
         }
     }

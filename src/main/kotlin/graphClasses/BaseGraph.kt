@@ -159,7 +159,7 @@ abstract class BaseGraph<T>(size: Int) {
     }
 
     open fun topologicalSort() = DFS(unweightedAdjacencyList).topologicalSort()
-    open fun stronglyConnectedComponents(visualizeSCC: Boolean = false): List<List<Int>> {
+    open fun stronglyConnectedComponents(visualizeSCC: Boolean = false): List<List<T>> {
         useWeightedConnectionsIfNeeded("stronglyConnectedComponents")
         val scc = DFS(unweightedAdjacencyList).stronglyConnectedComponents()
         if (visualizeSCC) {
@@ -174,7 +174,7 @@ abstract class BaseGraph<T>(size: Int) {
             vg.printUnweightedConnections()
             vg.visualizeSearch()
         }
-        return scc
+        return scc.map { component -> component.map { id2Node(it)!! } }
     }
 
     // PATH UTILITIES

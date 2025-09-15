@@ -4,6 +4,7 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.AfterAll
 import java.io.File
 import org.junit.jupiter.api.Test
+import kotlin.system.measureTimeMillis
 
 class IlluminationTest {
     companion object {
@@ -12,7 +13,7 @@ class IlluminationTest {
         fun resetInput() {
             _reader = INPUT.bufferedReader()
         }
-    }   
+    }
 
     @Test
     fun illuminationa() {
@@ -29,4 +30,15 @@ class IlluminationTest {
         assertThat(illumination()).isEqualTo(expectedOutput)
     }
 
+    @Test
+    fun illuminationSpeedTest() {
+        val expectedOutput = """1"""
+        _reader = File("src/test/SampleInput/Illumination/input3").inputStream().bufferedReader()
+        var ans = "-1"
+        val time = measureTimeMillis {
+            ans = illumination()
+        }
+        debug("Illumination speed test time: $time ms")
+        assertThat(ans).isEqualTo(expectedOutput)
+    }
 }
