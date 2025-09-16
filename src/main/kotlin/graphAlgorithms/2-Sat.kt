@@ -42,8 +42,9 @@ fun twoSat(
                 return null // unsatisfiable
         }
     }
-    val sortedNodes = graph.topologicalSort().reversed()
+    val sortedNodes = graph.topologicalSort()
     sortedNodes.forEach { node ->
+        // TODO review this so that the variables are set correctly
         val literal = node as Int
         if (literal !in truthMap && -literal !in truthMap) {
             truthMap[literal] = false

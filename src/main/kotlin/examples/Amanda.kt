@@ -21,8 +21,8 @@ fun amanda(): String {
             2 -> true
             else -> null
         }
-        nodeValues[a - 1] = value
-        nodeValues[b - 1] = value
+        nodeValues[a] = value
+        nodeValues[b] = value
         if (value == null) {
             clauses.add(a to -b)
             clauses.add(b to -a)
@@ -33,8 +33,8 @@ fun amanda(): String {
     val truthMap = mutableMapOf<Int, Boolean>().apply {
         nodeValues.forEachIndexed { index, value ->
             if (value != null) {
-                this[index + 1] = value
-                this[-(index + 1)] = !value
+                this[index] = value
+                this[-index] = !value
             }
         }
     }
