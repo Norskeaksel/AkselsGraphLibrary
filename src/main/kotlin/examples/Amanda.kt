@@ -24,10 +24,8 @@ fun amanda(): String {
         nodeValues[a] = value
         nodeValues[b] = value
         if (value == null) {
-            clauses.add(a to -b)
-            clauses.add(b to -a)
-            clauses.add(-a to b)
-            clauses.add(-b to a)
+            clauses.add(a to b)
+            clauses.add(-b to -a)
         }
     }
     val truthMap = mutableMapOf<Int, Boolean>().apply {
@@ -38,6 +36,6 @@ fun amanda(): String {
             }
         }
     }
-    twoSat(clauses, truthMap) ?: return "impossible"
-    truthMap.filter { it.key > 0 }.count{ it.value }.let { return it.toString() }
+    val (_, scc) = twoSat(clauses, truthMap, false) ?: return "impossible"
+    return "0"
 }

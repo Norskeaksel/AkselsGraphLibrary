@@ -20,7 +20,7 @@ abstract class BaseGraph<T>(size: Int) {
     // ABSTRACT FUNCTIONS
     abstract fun nodes(): List<T>
     protected abstract fun id2Node(id: Int): T?
-    abstract fun node2Id(node: T): Int?
+    abstract fun node2Id(node: T): Int? // TODO make protected
     abstract fun addNode(node: T)
     abstract fun addWeightedEdge(node1: T, node2: T, weight: Double)
     abstract fun addUnweightedEdge(node1: T, node2: T)

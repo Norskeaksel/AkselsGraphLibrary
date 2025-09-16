@@ -1,29 +1,31 @@
 package graphAlgorithms
 
+import Components
 import Clauses
 import graphClasses.Graph
 import graphClasses.debug
 import graphGraphics.visualizeSearch
 
-/** Clauses:
- * -a -> b and -b -> a  <--> a V b
- * a -> -b and b -> -a and -a -> b and -b to a <--> a ^ b
- */
+/** Clauses: a V b <--> -a -> b and -b -> a */
 fun twoSat(
     clauses: Clauses,
-    truthMap: MutableMap<Int, Boolean> = mutableMapOf(),
+    truthMap: Map<Int, Boolean> = mapOf(),
     debugMode: Boolean = false
-): Map<Int, Boolean>? {
+): Pair<Map<Int, Boolean>, Components>? {
     val graph = Graph()
     clauses.forEach { (u, v) ->
         if (u == 0 || v == 0) error("Literal in 2-Sat clauses cannot be 0, because -0 is also 0")
-        graph.addUnweightedEdge(u, v)
+        graph.addUnweightedEdge(-u, v)
+        graph.addUnweightedEdge(-v, u)
     }
     if (debugMode) {
         debug("2-Sat Implication Graph:")
         graph.printUnweightedConnections()
     }
-    val scc = graph.stronglyConnectedComponents()
+    val scc: Components = graph.stronglyConnectedComponents().map { component ->
+        component.map { it as Int }
+    }
+
     if (debugMode) {
         val debugGraph = Graph()
         scc.forEach { component ->
@@ -35,21 +37,25 @@ fun twoSat(
         }
         debugGraph.visualizeSearch()
     }
+    val componentMap = mutableMapOf<Int, Int>()
+    scc.forEachIndexed { index, component ->
+        component.forEach { node -> componentMap[node] = index }
+    }
+    val newTruthMap = truthMap.toMutableMap()
     scc.forEach { component ->
-        val nodeSet = component.toSet()
-        for (node in component) {
-            if (-(node as Int) in nodeSet)
+        component.forEach { node ->
+            val nodeComponentIndex = componentMap[node]!!
+            val antiNodeComponentIndex = componentMap[-node]!!
+            if(nodeComponentIndex == antiNodeComponentIndex)
                 return null // unsatisfiable
+            else if(nodeComponentIndex > antiNodeComponentIndex) {
+                newTruthMap[node] = true
+                newTruthMap[-node] = false
+            } else {
+                newTruthMap[node] = false
+                newTruthMap[-node] = true
+            }
         }
     }
-    val sortedNodes = graph.topologicalSort()
-    sortedNodes.forEach { node ->
-        // TODO review this so that the variables are set correctly
-        val literal = node as Int
-        if (literal !in truthMap && -literal !in truthMap) {
-            truthMap[literal] = false
-            truthMap[-literal] = true
-        }
-    }
-    return truthMap
+    return newTruthMap to scc
 }

@@ -31,12 +31,12 @@ fun illumination(): String {
                 val yDistance = abs(lamp1.y - lamp2.y)
                 val id1 = lamp1.x + 1 + lamp1.y * n
                 val id2 = lamp2.x + 1 + lamp2.y * n
-                if (lamp1 != lamp2){
-                    if(xDistance <= r * 2 && yDistance == 0){
-                        clauses.add(id1 to -id2)
+                if (lamp1 != lamp2) {
+                    if (yDistance <= r * 2 && xDistance == 0) {
+                        clauses.add(id1 to id2)  // id1 V id2
                     }
-                    if(yDistance <= r * 2 && xDistance == 0){
-                        clauses.add(-id1 to id2)
+                    if (xDistance <= r * 2 && yDistance == 0) {
+                        clauses.add(-id1 to -id2)  // ¬id1 V ¬id2
                     }
                 }
             }
