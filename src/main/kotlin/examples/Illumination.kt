@@ -42,5 +42,5 @@ fun illumination(): String {
             }
         }
     }
-    return if (twoSat(clauses, debugMode = false) == null) "0" else "1"
+    return if (twoSat(clauses) == null) "0" else "1"
 }

@@ -28,14 +28,28 @@ fun amanda(): String {
             clauses.add(-b to -a)
         }
     }
-    val truthMap = mutableMapOf<Int, Boolean>().apply {
+    val truthMap = mutableMapOf<Int, Boolean?>().apply {
         nodeValues.forEachIndexed { index, value ->
-            if (value != null) {
                 this[index] = value
-                this[-index] = !value
-            }
+                this[-index] = value?.not()
         }
     }
-    val (_, scc) = twoSat(clauses, truthMap, false) ?: return "impossible"
-    return "0"
+    val (_, scc) = twoSat(clauses, emptyMap()) ?: return "impossible"
+    debug(truthMap)
+    debug(scc)
+    val fixedSCCs = scc.filter { component ->
+        component.any { truthMap[it] == true }
+    }
+    val fixedTruths = fixedSCCs.flatten().filter { it > 0 }.size
+    val flexibleSCCs = scc.filter { component ->
+        component.all { truthMap[it] == null }
+    }
+    val minmalTruths = flexibleSCCs.fold(0) { acc, component ->
+        val nrOfPositiveNodes = component.count { it > 0 }
+        val nrOfNegativeNodes = component.count { it < 0 }
+        acc + minOf(nrOfPositiveNodes, nrOfNegativeNodes)
+    }
+
+
+    return (minmalTruths+fixedTruths).toString()
 }

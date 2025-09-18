@@ -1,16 +1,17 @@
 package graphGraphics
 
+import Components
 import graphClasses.Graph
 
-fun <T : Any> List<List<T>>.visualizeComponents() {
-    val vg = Graph()
+fun Components.visualizeComponents() {
+    val sccGraph = Graph()
     forEach { component ->
-        for (i in component.indices) {
-            val u = component[i]
-            val v = component[(i + 1) % component.size]
-            vg.addUnweightedEdge(u, v)
+        component.indices.forEach { i ->
+            component.let { c ->
+                sccGraph.addUnweightedEdge(c[i], c[(i + 1) % c.size])
+            }
         }
     }
-    vg.printUnweightedConnections()
-    vg.visualizeSearch()
+    sccGraph.printUnweightedConnections()
+    sccGraph.visualizeSearch()
 }
