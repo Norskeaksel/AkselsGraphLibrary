@@ -12,8 +12,8 @@ fun main() {
 
 fun amanda(): String {
     val (n, m) = readInts(2)
-    val nodeValues = Array<Boolean?>(n + 1) { null }
-    val clauses: Clauses = mutableListOf()
+    /*val nodeValues = Array<Boolean?>(n + 1) { null }
+    val clauses = mutableListOf()
     repeat(m) {
         val (a, b, c) = readInts(3)
         val value = when (c) {
@@ -36,6 +36,6 @@ fun amanda(): String {
             }
         }
     }
-    val (_, scc) = twoSat(clauses, truthMap) ?: return "impossible"
+    val (_, scc) = twoSat(clauses, truthMap) ?: return "impossible"*/
     return "0"
 }
