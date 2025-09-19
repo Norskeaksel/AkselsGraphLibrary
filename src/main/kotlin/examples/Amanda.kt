@@ -36,6 +36,6 @@ fun amanda(): String {
             }
         }
     }
-    val (_, scc) = twoSat(clauses, truthMap, false) ?: return "impossible"
+    val (_, scc) = twoSat(clauses, truthMap) ?: return "impossible"
     return "0"
 }

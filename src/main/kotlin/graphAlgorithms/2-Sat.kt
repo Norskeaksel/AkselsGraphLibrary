@@ -3,14 +3,11 @@ package graphAlgorithms
 import Components
 import Clauses
 import graphClasses.Graph
-import graphClasses.debug
-import graphGraphics.visualizeSearch
 
 /** Clauses: a V b <--> -a -> b and -b -> a */
 fun twoSat(
     clauses: Clauses,
     truthMap: Map<Int, Boolean> = mapOf(),
-    debugMode: Boolean = false
 ): Pair<Map<Int, Boolean>, Components>? {
     val graph = Graph()
     clauses.forEach { (u, v) ->
@@ -18,25 +15,10 @@ fun twoSat(
         graph.addUnweightedEdge(-u, v)
         graph.addUnweightedEdge(-v, u)
     }
-    if (debugMode) {
-        debug("2-Sat Implication Graph:")
-        graph.printUnweightedConnections()
-    }
     val scc: Components = graph.stronglyConnectedComponents().map { component ->
         component.map { it as Int }
     }
 
-    if (debugMode) {
-        val debugGraph = Graph()
-        scc.forEach { component ->
-            component.indices.forEach { i ->
-                component.let { c ->
-                    debugGraph.addUnweightedEdge(c[i], c[(i + 1) % c.size])
-                }
-            }
-        }
-        debugGraph.visualizeSearch()
-    }
     val componentMap = mutableMapOf<Int, Int>()
     scc.forEachIndexed { index, component ->
         component.forEach { node -> componentMap[node] = index }
