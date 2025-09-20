@@ -1,10 +1,11 @@
 package examples
 
 import graphClasses.*
+import readInts
 
 // https://open.kattis.com/problems/horror
 fun main() {
-    val ans = horrorList(); _writer.flush()
+    val ans = horrorList()
     println(ans)
 }
 

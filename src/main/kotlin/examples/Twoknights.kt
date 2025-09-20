@@ -1,11 +1,12 @@
 package examples
 
 import graphClasses.*
+import readString
 import kotlin.collections.ArrayDeque
 
 // https://open.kattis.com/problems/twoknights
 fun main() {
-    val ans = twoknights(); _writer.flush()
+    val ans = twoknights()
     println(ans)
 }
 

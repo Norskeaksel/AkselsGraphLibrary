@@ -2,7 +2,7 @@ package examples
 //https://codeforces.com/problemset/problem/893/C
 
 import graphClasses.IntGraph
-import graphClasses.readInts
+import readInts
 
 fun rumor(): Long {
     val (n, m) = readInts(2)

@@ -1,12 +1,13 @@
 package examples
 
-import graphClasses.*
+import readInt
+import readString
 
 // https://open.kattis.com/problems/units
 
 
 fun main() {
-    val ans = units(); _writer.flush()
+    val ans = units()
     println(ans)
 }
 

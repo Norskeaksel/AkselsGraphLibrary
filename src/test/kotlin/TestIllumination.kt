@@ -1,5 +1,4 @@
 import examples.illumination
-import graphClasses.*
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.AfterAll
 import java.io.File
@@ -31,7 +30,7 @@ class IlluminationTest {
     }
 
     @Test
-    fun illuminationSpeedTest() {
+    fun AilluminationSpeedTest() {
         val expectedOutput = """1"""
         _reader = File("src/test/SampleInput/Illumination/input3").inputStream().bufferedReader()
         var ans: String

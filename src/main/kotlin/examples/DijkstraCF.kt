@@ -1,9 +1,10 @@
 package examples
 //https://codeforces.com/problemset/problem/20/C
 import graphClasses.*
+import readInts
 
 fun main() {
-    val path = dijkstraCF(); _writer.flush()
+    val path = dijkstraCF()
     path.forEach {
         print("$it ")
     }

@@ -1,12 +1,10 @@
 package examples
 
-import Clauses
-import graphAlgorithms.twoSat
-import graphClasses.*
+import readInts
 
 // https://open.kattis.com/problems/amanda
 fun main() {
-    val ans = amanda(); _writer.flush()
+    val ans = amanda()
     println(ans)
 }
 

@@ -182,9 +182,9 @@ abstract class BaseGraph<T>(size: Int) {
         xorClauses: List<Pair<T, T>> = listOf(),
         antiOrClauses: List<Pair<T, T>> = listOf(),
         initialTruthMap: Map<T, Boolean> = mapOf(),
-    ): Pair<Map<T, Boolean>, List<List<T>>?>? {
+    ): Pair<Map<T, Boolean>, List<List<T>>>? {
         val integerTruthMap = initialTruthMap.mapKeys { k ->
-            node2Id(k.key) ?: error("Node ${k.key} not found in graph")
+            (node2Id(k.key) ?: error("Node ${k.key} not found in graph")) + 1
         }
         val (truthMap, sCCs) =
             twoSat(orClauses.ids(), xorClauses.ids(), antiOrClauses.ids(), integerTruthMap) ?: return null

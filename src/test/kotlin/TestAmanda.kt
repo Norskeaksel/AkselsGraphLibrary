@@ -1,9 +1,4 @@
-import examples.amanda
-import graphClasses.*
-import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.AfterAll
-import java.io.File
-import org.junit.jupiter.api.Test
 
 class AmandaTest {
     companion object {
@@ -12,7 +7,7 @@ class AmandaTest {
         fun resetInput() {
             _reader = INPUT.bufferedReader()
         }
-    }   
+    }
 
     /*@Test
     fun amandaa() {

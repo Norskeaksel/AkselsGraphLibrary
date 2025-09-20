@@ -1,10 +1,12 @@
 package examples
 
 import graphClasses.*
+import readInt
+import readString
 
 // https://open.kattis.com/problems/torn2pieces
 fun main() {
-    val ans = torn2pieces(); _writer.flush()
+    val ans = torn2pieces()
     println(ans)
 }
 

@@ -1,12 +1,14 @@
 package examples
 
 import graphClasses.*
+import readDoubles
+import readInts
 import kotlin.math.pow
 import kotlin.math.sqrt
 
 // https://open.kattis.com/problems/treehouses
 fun main() {
-    val ans = treehouses(); _writer.flush()
+    val ans = treehouses()
     println(ans)
 }
 

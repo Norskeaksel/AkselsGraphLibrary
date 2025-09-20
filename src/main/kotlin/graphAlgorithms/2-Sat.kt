@@ -2,7 +2,9 @@ package graphAlgorithms
 
 import Components
 import Clauses
+import debug
 import graphClasses.Graph
+import graphGraphics.visualizeSearch
 
 /**
  *
@@ -16,8 +18,9 @@ fun twoSat(
     val graph = Graph()
     (orClauses + xorClauses + antiOrClauses).flatMap { listOf(it.first, it.second) }
         .toSet().forEach { node ->
-            if (node == 0) error("Literal in 2-Sat clauses cannot be 0, because -0 is also 0")
+            if (node <= 0) error("Literal in 2-Sat clauses must be a positive integer, but it was $node")
             graph.addNode(node)
+            graph.addNode(-node)
         }
     orClauses.forEach { (u, v) ->
         graph.addUnweightedEdge(-u, v)
@@ -33,6 +36,12 @@ fun twoSat(
         graph.addUnweightedEdge(u, -v)
         graph.addUnweightedEdge(v, -u)
     }
+    truthMap.forEach { (node, nodeIsTrue) ->
+        if (nodeIsTrue) graph.addUnweightedEdge(-node, node)
+        else graph.addUnweightedEdge(node, -node)
+    }
+    debug("2-Sat dependency graph:")
+    graph.printUnweightedConnections()
 
     val scc: Components = graph.stronglyConnectedComponents().map { component ->
         component.map { it as Int }
@@ -42,7 +51,7 @@ fun twoSat(
     scc.forEachIndexed { index, component ->
         component.forEach { node -> componentMap[node] = index }
     }
-    val newTruthMap = truthMap.toMutableMap()
+    val newTruthMap = mutableMapOf<Int, Boolean>()
     scc.forEach { component ->
         component.forEach { node ->
             val nodeComponentIndex = componentMap[node]!!

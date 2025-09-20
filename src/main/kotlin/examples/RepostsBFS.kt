@@ -2,15 +2,14 @@ package examples
 // https://codeforces.com/problemset/problem/522/A
 
 import graphClasses.Graph
-import graphClasses._writer
-import graphClasses.readInt
-import graphClasses.readStrings
+import readInt
+import readStrings
 import java.util.*
 import kotlin.math.max
 
 
 fun main() {
-    print(RepostsBFS()); _writer.flush()
+    print(RepostsBFS())
 }
 
 fun RepostsBFS(): Int {

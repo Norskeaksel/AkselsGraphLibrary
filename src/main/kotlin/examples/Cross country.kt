@@ -1,16 +1,15 @@
 package examples
 // https://open.kattis.com/problems/crosscountry?tab=metadata
 import graphClasses.IntGraph
-import graphClasses._writer
-import graphClasses.readDoubles
-import graphClasses.readInts
-import java.io.PrintWriter
+import readDoubles
+import readInts
 
 fun main() {
-    _writer.execute(); _writer.flush()
+    val ans = crossCountry()
+    println(ans)
 }
 
-fun PrintWriter.execute() {
+fun crossCountry(): Int {
     val (n, s, t) = readInts(3)
     val graph = IntGraph(n)
     repeat(n){i ->
@@ -20,5 +19,5 @@ fun PrintWriter.execute() {
         }
     }
     graph.dijkstra(s)
-    println(graph.weightedDistanceTo(t).toInt())
+    return graph.weightedDistanceTo(t).toInt()
 }

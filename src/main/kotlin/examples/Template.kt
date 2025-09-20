@@ -1,10 +1,10 @@
 package examples
 
-import graphClasses.*
+import readInt
 
 // https:// TODO update link
 fun main() {
-    val ans = solve(); _writer.flush()
+    val ans = solve()
     println(ans)
 }
 fun solve(): String {

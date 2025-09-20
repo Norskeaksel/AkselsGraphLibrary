@@ -1,13 +1,16 @@
 package examples
 // https://open.kattis.com/problems/bigtruck
 import graphClasses.*
+import readInt
+import readInts
+import readString
 import kotlin.math.ceil
 import kotlin.math.roundToInt
 
 const val ITEM_BOOST = 1E-9
 
 fun main() {
-    val ans = bigtruck(); _writer.flush()
+    val ans = bigtruck()
     println(ans)
 }
 

@@ -1,6 +1,4 @@
 import examples.cantinaOfBabel
-import graphClasses.INPUT
-import graphClasses._reader
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.AfterAll
 import java.io.File

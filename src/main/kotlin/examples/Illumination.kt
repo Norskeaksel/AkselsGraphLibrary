@@ -1,13 +1,12 @@
 package examples
 
-import Clauses
-import graphAlgorithms.twoSat
 import graphClasses.*
+import readInts
 import kotlin.math.abs
 
 // https://open.kattis.com/problems/illumination
 fun main() {
-    val ans = illumination(); _writer.flush()
+    val ans = illumination()
     println(ans)
 }
 

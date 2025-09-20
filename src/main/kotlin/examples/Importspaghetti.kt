@@ -1,10 +1,12 @@
 package examples
 
 import graphClasses.*
+import readInt
+import readString
 
 // https://open.kattis.com/problems/importspaghetti
 fun main() {
-    val ans = importspaghetti(); _writer.flush()
+    val ans = importspaghetti()
     println(ans)
 }
 

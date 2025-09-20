@@ -1,10 +1,11 @@
 package examples
 
 import graphClasses.*
+import readInts
 
 // https://open.kattis.com/problems/slowleak
 fun main() {
-    val ans = slowleak(); _writer.flush()
+    val ans = slowleak()
     println(ans)
 }
 
