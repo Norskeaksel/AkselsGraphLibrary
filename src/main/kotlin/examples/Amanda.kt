@@ -1,5 +1,7 @@
 package examples
 
+import Clauses
+import graphAlgorithms.twoSat
 import readInts
 
 // https://open.kattis.com/problems/amanda
@@ -10,8 +12,8 @@ fun main() {
 
 fun amanda(): String {
     val (n, m) = readInts(2)
-    /*val nodeValues = Array<Boolean?>(n + 1) { null }
-    val clauses = mutableListOf()
+    val nodeValues = Array<Boolean?>(n + 1) { null }
+    val xorClauses = mutableListOf<Pair<Int, Int>>()
     repeat(m) {
         val (a, b, c) = readInts(3)
         val value = when (c) {
@@ -22,8 +24,7 @@ fun amanda(): String {
         nodeValues[a] = value
         nodeValues[b] = value
         if (value == null) {
-            clauses.add(a to b)
-            clauses.add(-b to -a)
+            xorClauses.add(a to b)
         }
     }
     val truthMap = mutableMapOf<Int, Boolean>().apply {
@@ -34,6 +35,6 @@ fun amanda(): String {
             }
         }
     }
-    val (_, scc) = twoSat(clauses, truthMap) ?: return "impossible"*/
-    return "0"
+    val (finalTruthMap, scc) = twoSat(xorClauses = xorClauses, truthMap = truthMap) ?: return "impossible"
+    return finalTruthMap.count { it.value && it.key > 0 }.toString()
 }

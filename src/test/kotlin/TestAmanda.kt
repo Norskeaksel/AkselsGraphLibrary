@@ -1,4 +1,8 @@
+import examples.amanda
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.AfterAll
+import org.junit.jupiter.api.Test
+import java.io.File
 
 class AmandaTest {
     companion object {
@@ -9,7 +13,7 @@ class AmandaTest {
         }
     }
 
-    /*@Test
+    @Test
     fun amandaa() {
         val expectedOutput = """3"""
         _reader = File("src/test/SampleInput/Amanda/input1").inputStream().bufferedReader()
@@ -37,5 +41,5 @@ class AmandaTest {
         val expectedOutput = """3"""
         _reader = File("src/test/SampleInput/Amanda/input4").inputStream().bufferedReader()
         assertThat(amanda()).isEqualTo(expectedOutput)
-    }*/
+    }
 }
