@@ -1,12 +1,11 @@
 package examples
 // https://codeforces.com/problemset/problem/1033/A
 
-import graphClasses._writer
-import graphClasses.readInt
-import graphClasses.readInts
+import readInt
+import readInts
 
 fun main() {
-    val ans = kingEscape3(); _writer.flush()
+    val ans = kingEscape3()
     println(ans)
 }
 

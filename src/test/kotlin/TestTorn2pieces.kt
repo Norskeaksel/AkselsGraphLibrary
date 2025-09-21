@@ -1,5 +1,4 @@
 import examples.torn2pieces
-import graphClasses.*
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.AfterAll
 import java.io.File

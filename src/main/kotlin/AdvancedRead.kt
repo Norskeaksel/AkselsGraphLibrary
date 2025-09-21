@@ -1,25 +1,8 @@
-package graphClasses
-
-import java.io.File
 import java.io.InputStream
-import java.io.OutputStream
-import java.io.PrintWriter
 import java.util.*
 
 @JvmField
-var INPUT: InputStream = "src/main/kotlin/SampleInput.txt".let { path ->
-    if (File(path).exists())
-        File("src/main/kotlin/SampleInput.txt").inputStream()
-    else System.`in`
-}
-
-@JvmField
-val OUTPUT: OutputStream = "src/main/kotlin/ProgramOutput.txt".let { path ->
-    if (File(path).exists())
-        File(path).outputStream()
-    else
-        System.out
-}
+var INPUT: InputStream = System.`in` // Override this in tests to read from files instead
 
 @JvmField
 var _reader = INPUT.bufferedReader()
@@ -34,9 +17,6 @@ fun read(): String {
     return _tokenizer.nextToken()
 }
 
-@JvmField
-val _writer = PrintWriter(OUTPUT, false)
-
 fun readInt() = read().toInt()
 fun readDouble() = read().toDouble()
 fun readLong() = read().toLong()
@@ -48,5 +28,4 @@ fun readDoubles(n: Int) = List(n) { read().toDouble() }
 fun readDoubleArray(n: Int) = DoubleArray(n) { read().toDouble() }
 fun readLongs(n: Int) = List(n) { read().toLong() }
 fun readLongArray(n: Int) = LongArray(n) { read().toLong() }
-fun readFileLines(fileName: String) = File(fileName).readLines()
 fun debug(x: Any) = System.err.println("DEBUG: $x")

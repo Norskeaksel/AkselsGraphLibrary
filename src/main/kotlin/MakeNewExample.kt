@@ -1,5 +1,3 @@
-import graphClasses.readInt
-import graphClasses.readString
 import java.io.File
 import java.nio.file.Files.createDirectories
 import kotlin.io.path.Path
@@ -10,7 +8,7 @@ import graphClasses.*
 
 // https://open.kattis.com/problems/$name
 fun main() {
-    val ans = $name(); _writer.flush()
+    val ans = $name()
     println(ans)
 }
 

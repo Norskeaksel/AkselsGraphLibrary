@@ -1,8 +1,6 @@
 //https://open.kattis.com/problems/shortestpath1
 
 import graphClasses.IntGraph
-import graphClasses.readInt
-import graphClasses.readInts
 
 fun main(){
     while(true){

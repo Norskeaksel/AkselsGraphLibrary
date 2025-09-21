@@ -1,6 +1,8 @@
 package examples
 
 import graphClasses.*
+import readInt
+import readInts
 import kotlin.math.min
 import kotlin.system.measureTimeMillis
 
@@ -9,9 +11,10 @@ import kotlin.system.measureTimeMillis
    functions that's not needed. */
 
 fun main() {
-    val ans = baas(); _writer.flush()
+    val ans = baas()
     println(ans)
 }
+
 fun baas(): Int {
     val n = readInt()
     val intGraph = IntGraph(n)
@@ -24,18 +27,15 @@ fun baas(): Int {
         }
     }
     var optimizedTime = Int.MAX_VALUE
-    val time = measureTimeMillis {
-        val topologicalOrder = intGraph.topologicalSort()
-        val totalStepTime = IntArray(n)
-        topologicalOrder.indices.forEach {
-            topologicalOrder.forEachIndexed { i, node ->
-                totalStepTime[node] = stepTime[node] + (intGraph.getNeighbours(node).maxOfOrNull { totalStepTime[it] } ?: 0)
-                if (i == it)
-                    totalStepTime[node] -= stepTime[node]
-            }
-            optimizedTime = min(optimizedTime, totalStepTime[n - 1])
+    val topologicalOrder = intGraph.topologicalSort()
+    val totalStepTime = IntArray(n)
+    topologicalOrder.indices.forEach {
+        topologicalOrder.forEachIndexed { i, node ->
+            totalStepTime[node] = stepTime[node] + (intGraph.getNeighbours(node).maxOfOrNull { totalStepTime[it] } ?: 0)
+            if (i == it)
+                totalStepTime[node] -= stepTime[node]
         }
+        optimizedTime = min(optimizedTime, totalStepTime[n - 1])
     }
-    System.err.println("BAAS time: $time ms")
     return optimizedTime
 }

@@ -1,13 +1,15 @@
 package examples
 
 import graphClasses.*
+import readInt
+import readString
 
 // https://open.kattis.com/problems/cantinaofbabel
 
 data class Man(val name: String, val languages: MutableList<String>)
 
 fun main() {
-    val ans = cantinaOfBabel(); _writer.flush()
+    val ans = cantinaOfBabel()
     println(ans)
 }
 

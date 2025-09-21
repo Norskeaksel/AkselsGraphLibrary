@@ -1,10 +1,11 @@
 package examples
 
 import graphClasses.*
+import readLines
 
 // https://open.kattis.com/problems/island
 fun main() {
-    val ans = islandBuses(); _writer.flush()
+    val ans = islandBuses()
     println(ans)
 }
 

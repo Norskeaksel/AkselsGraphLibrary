@@ -1,21 +1,14 @@
 // https://open.kattis.com/problems/crosscountry?tab=metadata
 import examples.baas
-import graphClasses.INPUT
-import graphClasses._reader
+import examples.illumination
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.AfterAll
 import java.io.File
 import org.junit.jupiter.api.Test
+import kotlin.system.measureTimeMillis
 
 
 class BAASTest {
-    companion object {
-        @JvmStatic
-        @AfterAll
-        fun resetInput() {
-            _reader = INPUT.bufferedReader()
-        }
-    }
     @Test
     fun Baasa() {
         _reader = File("src/test/SampleInput/Baas/input1").inputStream().bufferedReader()
@@ -29,6 +22,11 @@ class BAASTest {
     @Test
     fun Baasc() {
         _reader = File("src/test/SampleInput/Baas/heavyTestInput").inputStream().bufferedReader()
-        assertThat(baas()).isEqualTo(399)
+        val ans:Int
+        val time = measureTimeMillis {
+            ans = baas()
+        }
+        debug("BAAS speed test time: $time ms")
+        assertThat(ans).isEqualTo(399)
     }
 }

@@ -1,12 +1,15 @@
 package examples
 
+import debug
 import graphClasses.*
+import readInt
+import readInts
 
 import java.lang.Math.pow
 
 // https://open.kattis.com/problems/honeyheist
 fun main() {
-    val ans = honeyheist(); _writer.flush()
+    val ans = honeyheist()
     println(ans)
 }
 

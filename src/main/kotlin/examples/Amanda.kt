@@ -2,18 +2,18 @@ package examples
 
 import Clauses
 import graphAlgorithms.twoSat
-import graphClasses.*
+import readInts
 
 // https://open.kattis.com/problems/amanda
 fun main() {
-    val ans = amanda(); _writer.flush()
+    val ans = amanda()
     println(ans)
 }
 
 fun amanda(): String {
     val (n, m) = readInts(2)
     val nodeValues = Array<Boolean?>(n + 1) { null }
-    val clauses: Clauses = mutableListOf()
+    val xorClauses = mutableListOf<Pair<Int, Int>>()
     repeat(m) {
         val (a, b, c) = readInts(3)
         val value = when (c) {
@@ -24,32 +24,17 @@ fun amanda(): String {
         nodeValues[a] = value
         nodeValues[b] = value
         if (value == null) {
-            clauses.add(a to b)
-            clauses.add(-b to -a)
+            xorClauses.add(a to b)
         }
     }
-    val truthMap = mutableMapOf<Int, Boolean?>().apply {
+    val truthMap = mutableMapOf<Int, Boolean>().apply {
         nodeValues.forEachIndexed { index, value ->
+            if (value != null) {
                 this[index] = value
-                this[-index] = value?.not()
+                this[-index] = !value
+            }
         }
     }
-    val (_, scc) = twoSat(clauses, emptyMap()) ?: return "impossible"
-    debug(truthMap)
-    debug(scc)
-    val fixedSCCs = scc.filter { component ->
-        component.any { truthMap[it] == true }
-    }
-    val fixedTruths = fixedSCCs.flatten().filter { it > 0 }.size
-    val flexibleSCCs = scc.filter { component ->
-        component.all { truthMap[it] == null }
-    }
-    val minmalTruths = flexibleSCCs.fold(0) { acc, component ->
-        val nrOfPositiveNodes = component.count { it > 0 }
-        val nrOfNegativeNodes = component.count { it < 0 }
-        acc + minOf(nrOfPositiveNodes, nrOfNegativeNodes)
-    }
-
-
-    return (minmalTruths+fixedTruths).toString()
+    val (finalTruthMap, scc) = twoSat(xorClauses = xorClauses, truthMap = truthMap) ?: return "impossible"
+    return finalTruthMap.count { it.value && it.key > 0 }.toString()
 }

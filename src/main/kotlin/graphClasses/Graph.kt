@@ -20,7 +20,7 @@ class Graph: BaseGraph<Any>(0) {
     override fun addWeightedEdge(node1: Any, node2: Any, weight: Double) {
         val id1 = node2id[node1] ?: addNode(node1).run { node2id[node1]!! }
         val id2 = node2id[node2] ?: addNode(node2).run { node2id[node2]!! }
-        adjacencyList[id1].add(Pair(weight, id2))
+        adjacencyList[id1].add(weight to id2)
     }
 
     override fun addUnweightedEdge(node1: Any, node2: Any) {
@@ -42,5 +42,4 @@ class Graph: BaseGraph<Any>(0) {
             }
         }
     }
-
 }

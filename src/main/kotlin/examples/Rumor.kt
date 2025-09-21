@@ -1,16 +1,13 @@
 package examples
 //https://codeforces.com/problemset/problem/893/C
 
-import graphClasses.Graph
-import graphClasses.readInts
+import graphClasses.IntGraph
+import readInts
 
 fun rumor(): Long {
     val (n, m) = readInts(2)
-    val g = Graph()
-    val c = readInts(n)
-    repeat(n) {
-        g.addNode(it + 1)
-    }
+    val g = IntGraph(n+1)
+    val c = listOf(0) + readInts(n)
     repeat(m) {
         val (x, y) = readInts(2)
         g.connectUnweighted(x, y)
@@ -19,7 +16,7 @@ fun rumor(): Long {
     System.err.println(components)
     var sum = 0L
     components.forEach { component ->
-        val min = component.map { c[g.node2Id(it)!!] }.min()
+        val min = component.map { c[it] }.min()
         sum += min
     }
     return sum

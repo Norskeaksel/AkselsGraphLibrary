@@ -1,6 +1,7 @@
 package graphClasses
 
 import AdjacencyList
+import Clauses
 import Edge
 import UnweightedAdjacencyList
 import graphAlgorithms.*
@@ -11,6 +12,7 @@ abstract class BaseGraph<T>(size: Int) {
     // PROPERTIES AND INITIALIZATION
     protected val adjacencyList: AdjacencyList = MutableList(size) { mutableListOf() }
     protected var unweightedAdjacencyList: UnweightedAdjacencyList = MutableList(size) { mutableListOf() }
+    private val connections = mutableListOf<Pair<T, T>>()
 
     protected var nodes: MutableList<T?> = MutableList(size) { null }
     private var searchResults: GraphSearchResults? = null
@@ -20,7 +22,7 @@ abstract class BaseGraph<T>(size: Int) {
     // ABSTRACT FUNCTIONS
     abstract fun nodes(): List<T>
     protected abstract fun id2Node(id: Int): T?
-    abstract fun node2Id(node: T): Int? // TODO make protected
+    protected abstract fun node2Id(node: T): Int?
     abstract fun addNode(node: T)
     abstract fun addWeightedEdge(node1: T, node2: T, weight: Double)
     abstract fun addUnweightedEdge(node1: T, node2: T)
@@ -31,11 +33,13 @@ abstract class BaseGraph<T>(size: Int) {
         val weightDouble = weight.toDouble()
         addWeightedEdge(node1, node2, weightDouble)
         addWeightedEdge(node2, node1, weightDouble)
+        connections.add(node1 to node2)
     }
 
     fun connectUnweighted(node1: T, node2: T) {
         addUnweightedEdge(node1, node2)
         addUnweightedEdge(node2, node1)
+        connections.add(node1 to node2)
     }
 
     fun removeEdge(node1: T, node2: T, weight: Double? = null) {
@@ -55,6 +59,15 @@ abstract class BaseGraph<T>(size: Int) {
     }
 
     // GRAPH INFORMATION
+    fun weightedEdges() = adjacencyList.flatMapIndexed { u, neighbours ->
+        neighbours.map { v -> u to v.second }
+    }
+
+    fun unweightedEdges() = unweightedAdjacencyList.flatMapIndexed { u, neighbours ->
+        neighbours.map { v -> u to v }
+    }
+
+    fun connections() = connections.toList()
     fun depth() = searchResults?.depth ?: error("Can't retrieve depth because no search has been run yet")
     fun visitedNodes() = searchResults?.run { visited.indices.mapNotNull { if (visited[it]) id2Node(it) else null } }
         ?: error("Can't retrieve visitedNodes because no search has been run yet")
@@ -162,6 +175,29 @@ abstract class BaseGraph<T>(size: Int) {
         useWeightedConnectionsIfNeeded("stronglyConnectedComponents")
         val scc = DFS(unweightedAdjacencyList).stronglyConnectedComponents()
         return scc.map { component -> component.map { id2Node(it)!! } }
+    }
+
+    fun twoSat(
+        orClauses: List<Pair<T, T>> = listOf(),
+        xorClauses: List<Pair<T, T>> = listOf(),
+        antiOrClauses: List<Pair<T, T>> = listOf(),
+        initialTruthMap: Map<T, Boolean> = mapOf(),
+    ): Pair<Map<T, Boolean>, List<List<T>>>? {
+        val integerTruthMap = initialTruthMap.mapKeys { k ->
+            (node2Id(k.key) ?: error("Node ${k.key} not found in graph")) + 1
+        }
+        val (truthMap, sCCs) =
+            twoSat(orClauses.ids(), xorClauses.ids(), antiOrClauses.ids(), integerTruthMap) ?: return null
+        val truthMapZeroIndexed = truthMap.mapKeys { k -> k.key - 1 }.filter { it.key >= 0 }
+        val sCCsZeroIndexed = sCCs.map { component -> component.filter { it > 0 }.map { it - 1 } }
+        return truthMapZeroIndexed.mapKeys { k -> id2Node(k.key)!! as T } to
+                sCCsZeroIndexed.map { component -> component.map { id2Node(it)!! as T } }
+    }
+
+    private fun List<Pair<T, T>>.ids(): Clauses = map { (a, b) ->
+        val ida = (node2Id(a) ?: error("Node $a not found in graph")) + 1
+        val idb = (node2Id(b) ?: error("Node $b not found in graph")) + 1
+        ida to idb
     }
 
     // PATH UTILITIES

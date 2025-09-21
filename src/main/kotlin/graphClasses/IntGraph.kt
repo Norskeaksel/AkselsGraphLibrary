@@ -10,7 +10,7 @@ class IntGraph(size: Int) : BaseGraph<Int>(size) {
         error("IntGraph doesn't support addNode(), because nodes are defined by the IntGraph size")
 
     override fun addWeightedEdge(node1: Int, node2: Int, weight: Double) {
-        adjacencyList[node1].add(Pair(weight, node2))
+        adjacencyList[node1].add(weight to node2)
     }
 
     override fun id2Node(id: Int) = id

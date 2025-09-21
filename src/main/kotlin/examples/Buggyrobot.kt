@@ -1,11 +1,13 @@
 package examples
 
 import graphClasses.*
+import readInts
+import readString
 import kotlin.system.measureTimeMillis
 
 // https://open.kattis.com/problems/buggyrobot
 fun main() {
-    val ans = buggyrobot(); _writer.flush()
+    val ans = buggyrobot()
     println(ans)
 }
 
