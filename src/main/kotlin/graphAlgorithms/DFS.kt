@@ -1,6 +1,6 @@
 package graphAlgorithms
 
-import Components
+import IntComponents
 import UnweightedAdjacencyList
 
 
@@ -29,7 +29,7 @@ class DFS(private val graph: UnweightedAdjacencyList) {
         return r
     }
 
-    fun stronglyConnectedComponents(deleted:BooleanArray = BooleanArray(graph.size)): Components {
+    fun stronglyConnectedComponents(deleted:BooleanArray = BooleanArray(graph.size)): IntComponents {
         val reversedGraph: UnweightedAdjacencyList =
             MutableList<MutableList<Int>>(graph.size) { mutableListOf() }.apply {
                 graph.forEachIndexed { u, neighbors ->
@@ -39,7 +39,7 @@ class DFS(private val graph: UnweightedAdjacencyList) {
                 }
             }
         val topologicalOrder = DFS(reversedGraph).topologicalSort(deleted).reversed()
-        val stronglyConnectedComponents:Components = topologicalOrder.mapNotNull { id ->
+        val stronglyConnectedComponents:IntComponents = topologicalOrder.mapNotNull { id ->
             if (r.visited[id]) null
             else {
                 dfs(id, r)

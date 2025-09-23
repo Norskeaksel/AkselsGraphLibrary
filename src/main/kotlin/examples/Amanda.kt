@@ -1,9 +1,8 @@
 package examples
 
-import Clauses
 import graphAlgorithms.twoSat
+import map2Ints
 import readInts
-import kotlin.math.min
 
 // https://open.kattis.com/problems/amanda
 fun main() {
@@ -46,10 +45,10 @@ fun amanda(): String {
     val (_, scc) = twoSat(xorClauses = xorClauses, truthMap = truthMap) ?: return "impossible"
     val givenSCC = scc.filter { component ->
         component.any { it in truthMap.keys }
-    }
+    }.map2Ints()
     val unsetSCC = scc.filter { component ->
         component.all { it !in truthMap.keys }
-    }
+    }.map2Ints()
     unsetSCC.forEach { component ->
         if(component.count { it > 0 } > component.count { it < 0 }){
             component.forEach { truthMap[it] = false; truthMap[-it] = true }

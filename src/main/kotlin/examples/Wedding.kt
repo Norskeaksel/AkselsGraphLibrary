@@ -3,6 +3,7 @@ package examples
 import debug
 import graphClasses.*
 import graphGraphics.visualizeComponents
+import graphGraphics.visualizeSearch
 import readInts
 import readStrings
 
@@ -15,23 +16,23 @@ fun main() {
 fun wedding(): String {
     val (n, m) = readInts(2)
     val g = Graph()
-    repeat(n-1) {
-        val h = "${it+1}h"
-        val w = "${it+1}w"
+    repeat(n) {
+        val h = "${it}h"
+        val w = "${it}w"
         g.connectUnweighted(h, w)
     }
     val xorClauses = g.connections()
-    val orClauses = mutableListOf<Pair<Any, Any>>()
+    val orClauses = mutableListOf<Pair<Any, Any>>("0w" to "0w")
     repeat(m) {
         val (a, b) = readStrings(2)
         orClauses.add(a to b)
     }
     debug("xorClauses: $xorClauses")
     debug("orClauses: $orClauses")
-    val (truthmap, sccs) = g.twoSat(orClauses,  xorClauses) ?: return "bad luck"
+    val (_, sccs, truthmap) = g.twoSat(orClauses,  xorClauses) ?: return "bad luck"
     debug("truthmap: $truthmap")
     debug("sccs: $sccs")
-    val ans =  truthmap.filter { it.value }.keys.joinToString(" ")
+    val ans =  truthmap.filter { it.key != "0w" && it.value }.keys.joinToString(" ")
     debug("ans: $ans")
     return ans
 }

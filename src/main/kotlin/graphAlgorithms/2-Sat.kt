@@ -1,10 +1,18 @@
 package graphAlgorithms
 
-import Components
 import Clauses
+import IntComponents
 import debug
 import graphClasses.Graph
-import graphGraphics.visualizeSearch
+
+fun List<Pair<Int, Int>>.flattenPairs(): List<Int> {
+    val accumulator = ArrayList<Int>(size * 2)
+    this.forEach {
+        accumulator.add(it.first)
+        accumulator.add(it.second)
+    }
+    return accumulator
+}
 
 /**
  *
@@ -14,36 +22,36 @@ fun twoSat(
     xorClauses: Clauses = mutableListOf(),
     antiOrClauses: Clauses = mutableListOf(),
     truthMap: Map<Int, Boolean> = mapOf(),
-): Pair<Map<Int, Boolean>, Components>? {
-    val graph = Graph()
+): Triple<Graph, IntComponents, Map<Int, Boolean>>? {
+    val dependencyGraph = Graph()
     (orClauses + xorClauses + antiOrClauses).flatMap { listOf(it.first, it.second) }
         .toSet().forEach { node ->
             if (node <= 0) error("Literal in 2-Sat clauses must be a positive integer, but it was $node")
-            graph.addNode(node)
-            graph.addNode(-node)
+            dependencyGraph.addNode(node)
+            dependencyGraph.addNode(-node)
         }
     orClauses.forEach { (u, v) ->
-        graph.addUnweightedEdge(-u, v)
-        graph.addUnweightedEdge(-v, u)
+        dependencyGraph.addUnweightedEdge(-u, v)
+        dependencyGraph.addUnweightedEdge(-v, u)
     }
     xorClauses.forEach { (u, v) ->
-        graph.addUnweightedEdge(u, -v)
-        graph.addUnweightedEdge(v, -u)
-        graph.addUnweightedEdge(-u, v)
-        graph.addUnweightedEdge(-v, u)
+        dependencyGraph.addUnweightedEdge(u, -v)
+        dependencyGraph.addUnweightedEdge(v, -u)
+        dependencyGraph.addUnweightedEdge(-u, v)
+        dependencyGraph.addUnweightedEdge(-v, u)
     }
     antiOrClauses.forEach { (u, v) ->
-        graph.addUnweightedEdge(u, -v)
-        graph.addUnweightedEdge(v, -u)
+        dependencyGraph.addUnweightedEdge(u, -v)
+        dependencyGraph.addUnweightedEdge(v, -u)
     }
     truthMap.forEach { (node, nodeIsTrue) ->
-        if (nodeIsTrue) graph.addUnweightedEdge(-node, node)
-        else graph.addUnweightedEdge(node, -node)
+        if (nodeIsTrue) dependencyGraph.addUnweightedEdge(-node, node)
+        else dependencyGraph.addUnweightedEdge(node, -node)
     }
     debug("2-Sat dependency graph:")
-    graph.printUnweightedConnections()
+    dependencyGraph.printUnweightedConnections()
 
-    val scc: Components = graph.stronglyConnectedComponents().map { component ->
+    val scc: IntComponents = dependencyGraph.stronglyConnectedComponents().map { component ->
         component.map { it as Int }
     }
 
@@ -51,6 +59,7 @@ fun twoSat(
     scc.forEachIndexed { index, component ->
         component.forEach { node -> componentMap[node] = index }
     }
+    debug("componentMap: $componentMap")
     val newTruthMap = mutableMapOf<Int, Boolean>()
     scc.forEach { component ->
         component.forEach { node ->
@@ -58,14 +67,11 @@ fun twoSat(
             val antiNodeComponentIndex = componentMap[-node]!!
             if (nodeComponentIndex == antiNodeComponentIndex)
                 return null // unsatisfiable
-            else if (nodeComponentIndex > antiNodeComponentIndex) {
+            else if (nodeComponentIndex < antiNodeComponentIndex) {
                 newTruthMap[node] = true
                 newTruthMap[-node] = false
-            } else {
-                newTruthMap[node] = false
-                newTruthMap[-node] = true
             }
         }
     }
-    return newTruthMap to scc
+    return Triple(dependencyGraph, scc, newTruthMap)
 }

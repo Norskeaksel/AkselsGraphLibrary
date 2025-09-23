@@ -2,13 +2,14 @@ package graphClasses
 
 import AdjacencyList
 import Clauses
+import Components
 import Edge
 import UnweightedAdjacencyList
 import graphAlgorithms.*
 import toUnweightedAdjacencyList
 
 
-abstract class BaseGraph<T>(size: Int) {
+abstract class BaseGraph<T:Any>(size: Int) {
     // PROPERTIES AND INITIALIZATION
     protected val adjacencyList: AdjacencyList = MutableList(size) { mutableListOf() }
     protected var unweightedAdjacencyList: UnweightedAdjacencyList = MutableList(size) { mutableListOf() }
@@ -182,16 +183,18 @@ abstract class BaseGraph<T>(size: Int) {
         xorClauses: List<Pair<T, T>> = listOf(),
         antiOrClauses: List<Pair<T, T>> = listOf(),
         initialTruthMap: Map<T, Boolean> = mapOf(),
-    ): Pair<Map<T, Boolean>, List<List<T>>>? {
+    ): Triple<Graph, Components, Map<T, Boolean>>? {
         val integerTruthMap = initialTruthMap.mapKeys { k ->
             (node2Id(k.key) ?: error("Node ${k.key} not found in graph")) + 1
         }
-        val (truthMap, sCCs) =
+        val (dependencyGraph, sCCs, truthMap) =
             twoSat(orClauses.ids(), xorClauses.ids(), antiOrClauses.ids(), integerTruthMap) ?: return null
         val truthMapZeroIndexed = truthMap.mapKeys { k -> k.key - 1 }.filter { it.key >= 0 }
         val sCCsZeroIndexed = sCCs.map { component -> component.filter { it > 0 }.map { it - 1 } }
-        return truthMapZeroIndexed.mapKeys { k -> id2Node(k.key)!! as T } to
-                sCCsZeroIndexed.map { component -> component.map { id2Node(it)!! as T } }
+        return Triple(
+            dependencyGraph,
+            sCCsZeroIndexed.map { component -> component.map { id2Node(it)!! as T } },
+            truthMapZeroIndexed.mapKeys { k -> id2Node(k.key)!! as T })
     }
 
     private fun List<Pair<T, T>>.ids(): Clauses = map { (a, b) ->

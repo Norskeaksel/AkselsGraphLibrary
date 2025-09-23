@@ -1,6 +1,7 @@
 package graphGraphics
 
 import Components
+import IntComponents
 import graphClasses.Graph
 
 fun Components.visualizeComponents() {
@@ -15,3 +16,5 @@ fun Components.visualizeComponents() {
     sccGraph.printUnweightedConnections()
     sccGraph.visualizeSearch()
 }
+
+fun IntComponents.visualizeIntComponents() = (this as Components).visualizeComponents()
