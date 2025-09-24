@@ -6,7 +6,7 @@ typealias UnweightedAdjacencyList = MutableList<MutableList<Int>>
 
 /** list of a V b meaning a or b or both must be true. Can define a ^ b, meaning either a or b is true,
  * with the two clauses a V b and -a V -b. */
-typealias Clauses = List<Pair<Int,Int>>
+typealias IntClauses = List<Pair<Int,Int>>
 
 /** List of list of nodes */
 typealias Components = List<List<Any>>

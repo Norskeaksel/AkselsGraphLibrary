@@ -1,9 +1,9 @@
 package graphClasses
 
 import AdjacencyList
-import Clauses
 import Components
 import Edge
+import IntClauses
 import UnweightedAdjacencyList
 import graphAlgorithms.*
 import toUnweightedAdjacencyList
@@ -27,6 +27,8 @@ abstract class BaseGraph<T:Any>(size: Int) {
     abstract fun addNode(node: T)
     abstract fun addWeightedEdge(node1: T, node2: T, weight: Double)
     abstract fun addUnweightedEdge(node1: T, node2: T)
+
+    companion object
 
     // CORE GRAPH OPERATIONS
     fun size() = nodes().size
@@ -179,16 +181,14 @@ abstract class BaseGraph<T:Any>(size: Int) {
     }
 
     fun twoSat(
-        orClauses: List<Pair<T, T>> = listOf(),
-        xorClauses: List<Pair<T, T>> = listOf(),
-        antiOrClauses: List<Pair<T, T>> = listOf(),
+        c:Clauses,
         initialTruthMap: Map<T, Boolean> = mapOf(),
     ): Triple<Graph, Components, Map<T, Boolean>>? {
         val integerTruthMap = initialTruthMap.mapKeys { k ->
             (node2Id(k.key) ?: error("Node ${k.key} not found in graph")) + 1
         }
         val (dependencyGraph, sCCs, truthMap) =
-            twoSat(orClauses.ids(), xorClauses.ids(), antiOrClauses.ids(), integerTruthMap) ?: return null
+            twoSat(c.orClauses.ids(), c.xorClauses.ids(), c.antiOrClauses.ids(), integerTruthMap) ?: return null
         val truthMapZeroIndexed = truthMap.mapKeys { k -> k.key - 1 }.filter { it.key >= 0 }
         val sCCsZeroIndexed = sCCs.map { component -> component.filter { it > 0 }.map { it - 1 } }
         return Triple(
@@ -197,9 +197,9 @@ abstract class BaseGraph<T:Any>(size: Int) {
             truthMapZeroIndexed.mapKeys { k -> id2Node(k.key)!! as T })
     }
 
-    private fun List<Pair<T, T>>.ids(): Clauses = map { (a, b) ->
-        val ida = (node2Id(a) ?: error("Node $a not found in graph")) + 1
-        val idb = (node2Id(b) ?: error("Node $b not found in graph")) + 1
+    private fun List<Pair<Any, Any>>.ids(): IntClauses = map { (a, b) ->
+        val ida = (node2Id(a as T) ?: error("Node $a not found in graph")) + 1
+        val idb = (node2Id(b as T) ?: error("Node $b not found in graph")) + 1
         ida to idb
     }
 

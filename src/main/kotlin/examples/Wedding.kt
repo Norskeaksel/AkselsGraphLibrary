@@ -1,9 +1,7 @@
 package examples
 
-import debug
+import graphAlgorithms.Clauses
 import graphClasses.*
-import graphGraphics.visualizeComponents
-import graphGraphics.visualizeSearch
 import readInts
 import readStrings
 
@@ -16,23 +14,20 @@ fun main() {
 fun wedding(): String {
     val (n, m) = readInts(2)
     val g = Graph()
+    val clauses = Clauses()
+    clauses.add { "0w" or "0w" }
+    clauses.add { "0h" antiOr "0h" }
     repeat(n) {
         val h = "${it}h"
         val w = "${it}w"
         g.connectUnweighted(h, w)
+        clauses.add { h xor w }
     }
-    val xorClauses = g.connections()
-    val orClauses = mutableListOf<Pair<Any, Any>>("0w" to "0w")
     repeat(m) {
         val (a, b) = readStrings(2)
-        orClauses.add(a to b)
+        clauses.add {a or b}
     }
-    debug("xorClauses: $xorClauses")
-    debug("orClauses: $orClauses")
-    val (_, sccs, truthmap) = g.twoSat(orClauses,  xorClauses) ?: return "bad luck"
-    debug("truthmap: $truthmap")
-    debug("sccs: $sccs")
+    val (_, _, truthmap) = g.twoSat(clauses) ?: return "bad luck"
     val ans =  truthmap.filter { it.key != "0w" && it.value }.keys.joinToString(" ")
-    debug("ans: $ans")
     return ans
 }

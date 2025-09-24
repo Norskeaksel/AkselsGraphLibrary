@@ -1,10 +1,36 @@
 package graphAlgorithms
 
-import Clauses
+import IntClauses
 import IntComponents
-import debug
 import graphClasses.Graph
 
+
+class Clauses {
+    val orClauses = mutableListOf<Pair<Any, Any>>()
+    val xorClauses = mutableListOf<Pair<Any, Any>>()
+    val antiOrClauses = mutableListOf<Pair<Any, Any>>()
+    val orNotClauses = mutableListOf<Pair<Any, Any>>()
+
+    fun add(clause: Clauses.() -> Unit) {
+        this.clause()
+    }
+
+    infix fun Any.or(other: Any) {
+        orClauses.add(this to other)
+    }
+
+    infix fun Any.xor(other: Any) {
+        xorClauses.add(this to other)
+    }
+
+    infix fun Any.antiOr(other: Any) {
+        antiOrClauses.add(this to other)
+    }
+
+    infix fun Any.orNot(other: Any) {
+        orNotClauses.add(this to other)
+    }
+}
 fun List<Pair<Int, Int>>.flattenPairs(): List<Int> {
     val accumulator = ArrayList<Int>(size * 2)
     this.forEach {
@@ -18,9 +44,9 @@ fun List<Pair<Int, Int>>.flattenPairs(): List<Int> {
  *
  * Clauses: a V b <--> -a -> b and -b -> a */
 fun twoSat(
-    orClauses: Clauses = mutableListOf(),
-    xorClauses: Clauses = mutableListOf(),
-    antiOrClauses: Clauses = mutableListOf(),
+    orClauses: IntClauses = mutableListOf(),
+    xorClauses: IntClauses = mutableListOf(),
+    antiOrClauses: IntClauses = mutableListOf(),
     truthMap: Map<Int, Boolean> = mapOf(),
 ): Triple<Graph, IntComponents, Map<Int, Boolean>>? {
     val dependencyGraph = Graph()
@@ -48,8 +74,6 @@ fun twoSat(
         if (nodeIsTrue) dependencyGraph.addUnweightedEdge(-node, node)
         else dependencyGraph.addUnweightedEdge(node, -node)
     }
-    debug("2-Sat dependency graph:")
-    dependencyGraph.printUnweightedConnections()
 
     val scc: IntComponents = dependencyGraph.stronglyConnectedComponents().map { component ->
         component.map { it as Int }
@@ -59,7 +83,6 @@ fun twoSat(
     scc.forEachIndexed { index, component ->
         component.forEach { node -> componentMap[node] = index }
     }
-    debug("componentMap: $componentMap")
     val newTruthMap = mutableMapOf<Int, Boolean>()
     scc.forEach { component ->
         component.forEach { node ->

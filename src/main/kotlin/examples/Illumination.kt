@@ -1,5 +1,6 @@
 package examples
 
+import graphAlgorithms.Clauses
 import graphClasses.*
 import readInts
 import kotlin.math.abs
@@ -22,8 +23,7 @@ fun illumination(): String {
         grid2.addNode(Tile(x, y))
         lampTiles.add(Tile(x, y))
     }
-    val orClauses = mutableListOf<Pair<Tile, Tile>>()
-    val antiOrClauses = mutableListOf<Pair<Tile, Tile>>()
+    val clauses = Clauses()
     grid2.nodes().let { lamps ->
         lamps.forEach { lamp1 ->
             lamps.forEach { lamp2 ->
@@ -31,14 +31,14 @@ fun illumination(): String {
                 val yDistance = abs(lamp1.y - lamp2.y)
                 if (lamp1 != lamp2) {
                     if (yDistance <= r * 2 && xDistance == 0) {
-                        orClauses.add(lamp1 to lamp2)  // id1 V id2
+                        clauses.add{lamp1 or lamp2}
                     }
                     if (xDistance <= r * 2 && yDistance == 0) {
-                        antiOrClauses.add(lamp1 to lamp2)  // ¬id1 V ¬id2
+                        clauses.add{lamp1 antiOr lamp2}
                     }
                 }
             }
         }
     }
-    return if (grid2.twoSat(orClauses = orClauses, antiOrClauses = antiOrClauses) == null) "0" else "1"
+    return if (grid2.twoSat(clauses) == null) "0" else "1"
 }
