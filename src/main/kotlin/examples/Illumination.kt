@@ -34,7 +34,7 @@ fun illumination(): String {
                         clauses.add{lamp1 or lamp2}
                     }
                     if (xDistance <= r * 2 && yDistance == 0) {
-                        clauses.add{lamp1 antiOr lamp2}
+                        clauses.add{lamp1 nand lamp2}
                     }
                 }
             }

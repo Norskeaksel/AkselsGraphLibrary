@@ -5,6 +5,10 @@ class Graph: BaseGraph<Any>(0) {
     private val node2id = mutableMapOf<Any, Int>()
     private val id2Node = mutableMapOf<Int, Any>()
 
+    private fun getOrAddNodeId(node: Any): Int {
+        return node2id[node] ?: addNode(node).run { node2id[node]!! }
+    }
+
     override fun addNode(node: Any) {
         if (node2id.containsKey(node)) {
             System.err.println("Warning: The node already exists, it can't be added again")
@@ -18,14 +22,14 @@ class Graph: BaseGraph<Any>(0) {
     }
 
     override fun addWeightedEdge(node1: Any, node2: Any, weight: Double) {
-        val id1 = node2id[node1] ?: addNode(node1).run { node2id[node1]!! }
-        val id2 = node2id[node2] ?: addNode(node2).run { node2id[node2]!! }
+        val id1 = getOrAddNodeId(node1)
+        val id2 = getOrAddNodeId(node2)
         adjacencyList[id1].add(weight to id2)
     }
 
     override fun addUnweightedEdge(node1: Any, node2: Any) {
-        val id1 = node2id[node1] ?: addNode(node1).run { node2id[node1]!! }
-        val id2 = node2id[node2] ?: addNode(node2).run { node2id[node2]!! }
+        val id1 = getOrAddNodeId(node1)
+        val id2 = getOrAddNodeId(node2)
         unweightedAdjacencyList[id1].add(id2)
     }
 

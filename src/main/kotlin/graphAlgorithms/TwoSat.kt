@@ -15,15 +15,18 @@ class Clauses {
         this.clause()
     }
 
+    /** a V b <--> -a -> b and -b -> a */
     infix fun Any.or(other: Any) {
         orClauses.add(this to other)
     }
 
+    /** a ^ b <--> (a V b) and (-a V -b) */
     infix fun Any.xor(other: Any) {
         xorClauses.add(this to other)
     }
 
-    infix fun Any.antiOr(other: Any) {
+    /** not (a and b) <--> a -> -b and b -> -a */
+    infix fun Any.nand(other: Any) {
         antiOrClauses.add(this to other)
     }
 

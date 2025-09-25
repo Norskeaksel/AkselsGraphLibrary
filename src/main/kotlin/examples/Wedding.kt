@@ -16,7 +16,7 @@ fun wedding(): String {
     val g = Graph()
     val clauses = Clauses()
     clauses.add { "0w" or "0w" }
-    clauses.add { "0h" antiOr "0h" }
+    clauses.add { "0h" nand "0h" }
     repeat(n) {
         val h = "${it}h"
         val w = "${it}w"

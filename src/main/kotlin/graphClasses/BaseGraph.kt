@@ -21,12 +21,12 @@ abstract class BaseGraph<T:Any>(size: Int) {
     private var allDistances: Array<DoubleArray>? = null
 
     // ABSTRACT FUNCTIONS
-    abstract fun nodes(): List<T>
-    protected abstract fun id2Node(id: Int): T?
-    protected abstract fun node2Id(node: T): Int?
     abstract fun addNode(node: T)
     abstract fun addWeightedEdge(node1: T, node2: T, weight: Double)
     abstract fun addUnweightedEdge(node1: T, node2: T)
+    protected abstract fun id2Node(id: Int): T?
+    protected abstract fun node2Id(node: T): Int?
+    abstract fun nodes(): List<T>
 
     companion object
 
