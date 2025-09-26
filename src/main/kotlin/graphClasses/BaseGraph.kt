@@ -24,8 +24,8 @@ abstract class BaseGraph<T:Any>(size: Int) {
     abstract fun addNode(node: T)
     abstract fun addWeightedEdge(node1: T, node2: T, weight: Double)
     abstract fun addUnweightedEdge(node1: T, node2: T)
-    protected abstract fun id2Node(id: Int): T?
     protected abstract fun node2Id(node: T): Int?
+    protected abstract fun id2Node(id: Int): T?
     abstract fun nodes(): List<T>
 
     companion object

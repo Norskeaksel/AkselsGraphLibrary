@@ -2,10 +2,10 @@ package graphClasses
 
 open class Graph: BaseGraph<Any>(0) {
     private var nrOfNodes = 0
-    protected val node2id = mutableMapOf<Any, Int>()
-    protected val id2Node = mutableMapOf<Int, Any>()
+    private val node2id = mutableMapOf<Any, Int>()
+    private val id2Node = mutableMapOf<Int, Any>()
 
-    protected fun getOrAddNodeId(node: Any): Int {
+    private fun getOrAddNodeId(node: Any): Int {
         return node2id[node] ?: addNode(node).run { node2id[node]!! }
     }
 
