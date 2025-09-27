@@ -8,7 +8,7 @@ operator fun Any.not() = NotNode(this)
 
 class DependencyGraph {
     private val nodes = mutableListOf<Any?>()
-    private var edgeNr = 1.0
+    // private var edgeNr = 1.0
     private var id = 1
     private val node2id = mutableMapOf<Any, Int>()
     private val id2Node = mutableMapOf<Int, Any>()
@@ -31,16 +31,16 @@ class DependencyGraph {
     infix fun not(node: Any) = NotNode(node)
 
     /** a V b <--> -a -> b and -b -> a */
-    infix fun Any.V(other: Any) {
+    infix fun Any.Or(other: Any) {
         val (u, v) = getUVIDPairs(this, other)
-        dependencyGraph.addWeightedEdge(-u, v, edgeNr++)
-        dependencyGraph.addWeightedEdge(-v, u, edgeNr++)
+        dependencyGraph.addUnweightedEdge(-u, v)
+        dependencyGraph.addUnweightedEdge(-v, u)
     }
 
     /** a ^ b <--> (a V b) and (-a V -b) */
-    infix fun Any.xor(other: Any) {
-        this V other
-        !this V !other
+    infix fun Any.Xor(other: Any) {
+        this Or other
+        !this Or !other
     }
 
     fun addNode(node: Any) {
@@ -56,19 +56,11 @@ class DependencyGraph {
         id++
     }
 
-    fun addEdge(node1: Any, node2: Any) {
-        val (u, v) = getUVIDPairs(node1, node2)
-        dependencyGraph.addWeightedEdge(u, v, edgeNr++)
-    }
-
-    fun node2Id(node: Any) = node2id[node]
-    fun id2Node(id: Int) = id2Node[id]
-
     fun nodes() = nodes.filterNotNull()
 
     fun twoSat(): Pair<IntComponents, Map<Any, Boolean>>? {
         val (intSCC, integerTruthMap) = twoSat2(dependencyGraph) ?: return null
-        val truthMap = integerTruthMap.filter { it.key > 0 }.mapKeys { k -> id2Node(k.key)!! }
+        val truthMap = integerTruthMap.filter { it.key > 0 }.mapKeys { k -> id2Node[k.key]!! }
         return intSCC to truthMap
     }
 }

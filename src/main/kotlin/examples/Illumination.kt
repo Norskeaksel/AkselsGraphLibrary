@@ -11,7 +11,7 @@ fun main() {
 }
 
 fun illumination(): String {
-    val (n, r, k) = readInts(3)
+    val (_, r, k) = readInts(3)
     val g = DependencyGraph()
     repeat(k) {
         val (i, j) = readInts(2)
@@ -27,10 +27,10 @@ fun illumination(): String {
                 val yDistance = abs(lamp1.y - lamp2.y)
                 if (lamp1 != lamp2) {
                     if (yDistance <= r * 2 && xDistance == 0) {
-                        g.addClause { lamp1 V lamp2 }
+                        g.addClause { lamp1 Or lamp2 }
                     }
                     if (xDistance <= r * 2 && yDistance == 0) {
-                        g.addClause { !lamp1 V !lamp2 }
+                        g.addClause { !lamp1 Or !lamp2 }
                     }
                 }
             }

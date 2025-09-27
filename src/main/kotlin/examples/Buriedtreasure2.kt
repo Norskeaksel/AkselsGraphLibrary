@@ -23,16 +23,16 @@ fun buriedtreasure2(): String {
         val absA = abs(a)
         val absB = abs(b)
         if(a > 0 && b > 0){
-            g.addClause { absA V absB }
+            g.addClause { absA Or absB }
         }
         if(a > 0 && b < 0){
-            g.addClause { absA V !absB }
+            g.addClause { absA Or !absB }
         }
         if(a < 0 && b > 0){
-            g.addClause { absB V !absA }
+            g.addClause { absB Or !absA }
         }
         if(a < 0 && b < 0){
-            g.addClause { !absA V !absB }
+            g.addClause { !absA Or !absB }
         }
     }
     val (_, truthMap) = g.twoSat() ?: return "NO"

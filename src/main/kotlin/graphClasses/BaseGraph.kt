@@ -1,9 +1,7 @@
 package graphClasses
 
 import AdjacencyList
-import Components
 import Edge
-import IntClauses
 import UnweightedAdjacencyList
 import graphAlgorithms.*
 import toUnweightedAdjacencyList
@@ -178,29 +176,6 @@ abstract class BaseGraph<T:Any>(size: Int) {
         useWeightedConnectionsIfNeeded("stronglyConnectedComponents")
         val scc = DFS(unweightedAdjacencyList).stronglyConnectedComponents()
         return scc.map { component -> component.map { id2Node(it)!! } }
-    }
-
-    fun twoSat(
-        c:Clauses,
-        initialTruthMap: Map<T, Boolean> = mapOf(),
-    ): Triple<Graph, Components, Map<T, Boolean>>? {
-        val integerTruthMap = initialTruthMap.mapKeys { k ->
-            (node2Id(k.key) ?: error("Node ${k.key} not found in graph")) + 1
-        }
-        val (dependencyGraph, sCCs, truthMap) =
-            twoSat(c.orClauses.ids(), c.xorClauses.ids(), c.antiOrClauses.ids(), integerTruthMap) ?: return null
-        val truthMapZeroIndexed = truthMap.mapKeys { k -> k.key - 1 }.filter { it.key >= 0 }
-        val sCCsZeroIndexed = sCCs.map { component -> component.filter { it > 0 }.map { it - 1 } }
-        return Triple(
-            dependencyGraph,
-            sCCsZeroIndexed.map { component -> component.map { id2Node(it)!! as T } },
-            truthMapZeroIndexed.mapKeys { k -> id2Node(k.key)!! as T })
-    }
-
-    private fun List<Pair<Any, Any>>.ids(): IntClauses = map { (a, b) ->
-        val ida = (node2Id(a as T) ?: error("Node $a not found in graph")) + 1
-        val idb = (node2Id(b as T) ?: error("Node $b not found in graph")) + 1
-        ida to idb
     }
 
     // PATH UTILITIES

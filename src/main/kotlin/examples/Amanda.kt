@@ -1,7 +1,7 @@
 package examples
 
-import graphAlgorithms.twoSat
-import map2Ints
+import graphClasses.DependencyGraph
+import graphClasses.not
 import readInts
 
 // https://open.kattis.com/problems/amanda
@@ -13,7 +13,9 @@ fun main() {
 fun amanda(): String {
     val (n, m) = readInts(2)
     val nodeValues = Array<Boolean?>(n + 1) { null }
-    val xorClauses = mutableListOf<Pair<Int, Int>>()
+    val g = DependencyGraph()
+    repeat(n) { g.addNode(it + 1) }
+
     repeat(m) {
         val (a, b, c) = readInts(3)
         val value = when (c) {
@@ -23,7 +25,7 @@ fun amanda(): String {
         }
 
         if (value == null) {
-            xorClauses.add(a to b)
+            g.addClause { a Xor b }
         } else {
             val prevA = nodeValues[a]
             if (prevA != null && prevA != value) return "impossible"
@@ -32,8 +34,18 @@ fun amanda(): String {
             val prevB = nodeValues[b]
             if (prevB != null && prevB != value) return "impossible"
             nodeValues[b] = value
+
+            if (value) {
+                g.addClause { a Or a }
+                g.addClause { b Or b }
+            } else {
+                g.addClause { !a Or !a }
+                g.addClause { !b Or!b }
+            }
         }
     }
+
+    // build the truthMap for the forced literals like before
     val truthMap = mutableMapOf<Int, Boolean>().apply {
         nodeValues.forEachIndexed { index, value ->
             if (value != null) {
@@ -42,26 +54,27 @@ fun amanda(): String {
             }
         }
     }
-    val (_, scc) = twoSat(xorClauses = xorClauses, truthMap = truthMap) ?: return "impossible"
+
+    val (scc, _) = g.twoSat() ?: return "impossible"
+
     val givenSCC = scc.filter { component ->
         component.any { it in truthMap.keys }
-    }.map2Ints()
+    }
     val unsetSCC = scc.filter { component ->
         component.all { it !in truthMap.keys }
-    }.map2Ints()
+    }
     unsetSCC.forEach { component ->
-        if(component.count { it > 0 } > component.count { it < 0 }){
+        if (component.count { it > 0 } > component.count { it < 0 }) {
             component.forEach { truthMap[it] = false; truthMap[-it] = true }
-        }
-        else {
+        } else {
             component.forEach { truthMap[it] = true; truthMap[-it] = false }
         }
     }
     givenSCC.forEach { component ->
-        if(component.any { truthMap[it] == true }) {
-            component.forEach { truthMap[it] = true}
+        if (component.any { truthMap[it] == true }) {
+            component.forEach { truthMap[it] = true }
         }
     }
-    val ans = truthMap.filter { it.key > 0}.count { it.value }
+    val ans = truthMap.filter { it.key > 0 }.count { it.value }
     return ans.toString()
 }
