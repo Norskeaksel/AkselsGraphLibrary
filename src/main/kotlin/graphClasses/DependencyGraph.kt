@@ -17,6 +17,14 @@ class DependencyGraph {
     fun addClause(clause: DependencyGraph.() -> Unit) {
         this.clause()
     }
+    fun addClause(node: Any) {
+        val (u, _) = getUVIDPairs(node, node)
+        dependencyGraph.addUnweightedEdge(-u, u)
+    }
+    fun addClause(node: NotNode) {
+        val (u, _) = getUVIDPairs(node, node)
+        dependencyGraph.addUnweightedEdge(u, -u)
+    }
 
     private fun getUVIDPairs(node1: Any, node2: Any): Pair<Int, Int> {
         fun getNodeId(node: Any): Int {
@@ -40,7 +48,9 @@ class DependencyGraph {
     /** a ^ b <--> (a V b) and (-a V -b) */
     infix fun Any.Xor(other: Any) {
         this Or other
-        !this Or !other
+        val newThis = if(this is NotNode) this.node else this
+        val newOther = if(other is NotNode) other.node else other
+        !newThis Or !newOther
     }
 
     fun addNode(node: Any) {
