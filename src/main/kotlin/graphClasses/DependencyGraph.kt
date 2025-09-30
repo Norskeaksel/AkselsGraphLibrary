@@ -1,7 +1,7 @@
 package graphClasses
 
 import IntComponents
-import graphAlgorithms.twoSat2
+import graphAlgorithms.twoSat
 
 data class NotNode(val node: Any)
 operator fun Any.not() = NotNode(this)
@@ -69,7 +69,7 @@ class DependencyGraph {
     fun nodes() = nodes.filterNotNull()
 
     fun twoSat(): Pair<IntComponents, Map<Any, Boolean>>? {
-        val (intSCC, integerTruthMap) = twoSat2(dependencyGraph) ?: return null
+        val (intSCC, integerTruthMap) = twoSat(dependencyGraph) ?: return null
         val truthMap = integerTruthMap.filter { it.key > 0 }.mapKeys { k -> id2Node[k.key]!! }
         return intSCC to truthMap
     }

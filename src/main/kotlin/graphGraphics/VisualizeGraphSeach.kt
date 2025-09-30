@@ -3,7 +3,7 @@ package graphGraphics
 import graphClasses.BaseGraph
 import javafx.application.Application
 
-fun <T : Any> BaseGraph<T>.visualizeSearch(
+fun <T : Any> BaseGraph<T>.visualize(
     screenTitle: String = "Graph visualizer (Click or space to pause and resume)",
     animationTicTimeOverride: Double? = null,
     closeOnEnd: Boolean = false,

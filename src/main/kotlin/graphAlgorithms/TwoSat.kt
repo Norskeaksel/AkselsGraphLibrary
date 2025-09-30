@@ -4,7 +4,7 @@ import IntComponents
 import graphClasses.Graph
 
 
-fun twoSat2(
+fun twoSat(
     dependencyGraph: Graph,
 ): Pair<IntComponents, Map<Int, Boolean>>? {
     val scc: IntComponents = dependencyGraph.stronglyConnectedComponents().map { component ->

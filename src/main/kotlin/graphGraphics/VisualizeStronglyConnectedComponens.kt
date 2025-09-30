@@ -14,7 +14,7 @@ fun Components.visualizeComponents() {
         }
     }
     sccGraph.printUnweightedConnections()
-    sccGraph.visualizeSearch()
+    sccGraph.visualize()
 }
 
 fun IntComponents.visualizeIntComponents() = (this as Components).visualizeComponents()
