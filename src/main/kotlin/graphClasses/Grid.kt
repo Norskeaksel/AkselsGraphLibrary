@@ -50,7 +50,9 @@ class Grid(val width: Int, val height: Int, initWithDatalessTiles: Boolean = fal
 
     override fun nodes(): List<Tile> = nodes.filterNotNull()
     override fun topologicalSort() = DFS(unweightedAdjacencyList).topologicalSort(deleted()).map { id2Node(it)!! }
-    override fun stronglyConnectedComponents() = DFS(unweightedAdjacencyList).stronglyConnectedComponents(deleted()).map { component -> component.mapNotNull { id2Node(it) } }
+    override fun stronglyConnectedComponents() = DFS(unweightedAdjacencyList).stronglyConnectedComponents(deleted())
+        .map { component -> component.mapNotNull { id2Node(it) } }
+
     private fun deleted() = BooleanArray(nodes.size) { nodes[it] == null }
 
     private fun xyInRange(x: Int, y: Int) = x in 0 until width && y in 0 until height
@@ -81,9 +83,9 @@ class Grid(val width: Int, val height: Int, initWithDatalessTiles: Boolean = fal
 
     fun getStraightNeighbours(t: Tile?) = t?.run {
         listOfNotNull(
+            xy2Node(x, y - 1),
             xy2Node(x - 1, y),
             xy2Node(x + 1, y),
-            xy2Node(x, y - 1),
             xy2Node(x, y + 1),
         )
     } ?: listOf()
@@ -98,7 +100,7 @@ class Grid(val width: Int, val height: Int, initWithDatalessTiles: Boolean = fal
     fun getAllNeighbours(t: Tile) = getStraightNeighbours(t) + getDiagonalNeighbours(t)
 
     /** Connects all nodes in the grid with their neighbours, by getNeighbours the user defined input function */
-    fun connectGrid(getNeighbours: (t: Tile) -> List<Tile>) {
+    fun connectGrid(bidirectional: Boolean = false, getNeighbours: (t: Tile) -> List<Tile>) {
         if (nrOfConnections(unweightedAdjacencyList) > 0) {
             System.err.println("Warning: overwriting existing connections in the grid")
             adjacencyList.forEach { it.clear() }
@@ -109,7 +111,11 @@ class Grid(val width: Int, val height: Int, initWithDatalessTiles: Boolean = fal
                 val currentTile = xy2Node(x, y) ?: continue
                 val neighbours = getNeighbours(currentTile)
                 neighbours.forEach {
-                    addUnweightedEdge(currentTile, it)
+                    if (bidirectional) {
+                        connectUnweighted(currentTile, it)
+                    } else {
+                        addUnweightedEdge(currentTile, it)
+                    }
                 }
             }
         }

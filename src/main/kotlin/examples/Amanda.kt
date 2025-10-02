@@ -1,6 +1,7 @@
 package examples
 
 import graphClasses.DependencyGraph
+import graphClasses.Not
 import graphClasses.not
 import readInts
 
@@ -14,7 +15,6 @@ fun amanda(): String {
     val (n, m) = readInts(2)
     val nodeValues = Array<Boolean?>(n + 1) { null }
     val g = DependencyGraph()
-    repeat(n) { g.addNode(it + 1) }
 
     repeat(m) {
         val (a, b, c) = readInts(3)
@@ -40,17 +40,16 @@ fun amanda(): String {
                 g.addClause { b Or b }
             } else {
                 g.addClause { !a Or !a }
-                g.addClause { !b Or!b }
+                g.addClause { !b Or !b }
             }
         }
     }
 
-    // build the truthMap for the forced literals like before
-    val truthMap = mutableMapOf<Int, Boolean>().apply {
+    val truthMap = mutableMapOf<Any, Boolean>().apply {
         nodeValues.forEachIndexed { index, value ->
             if (value != null) {
                 this[index] = value
-                this[-index] = !value
+                this[!index] = !value
             }
         }
     }
@@ -64,10 +63,10 @@ fun amanda(): String {
         component.all { it !in truthMap.keys }
     }
     unsetSCC.forEach { component ->
-        if (component.count { it > 0 } > component.count { it < 0 }) {
-            component.forEach { truthMap[it] = false; truthMap[-it] = true }
+        if (component.filterIsInstance<Int>().count() > component.filterIsInstance<Not>().count()) {
+            component.forEach { truthMap[it] = false; truthMap[!it] = true }
         } else {
-            component.forEach { truthMap[it] = true; truthMap[-it] = false }
+            component.forEach { truthMap[it] = true; truthMap[!it] = false }
         }
     }
     givenSCC.forEach { component ->
@@ -75,6 +74,6 @@ fun amanda(): String {
             component.forEach { truthMap[it] = true }
         }
     }
-    val ans = truthMap.filter { it.key > 0 }.count { it.value }
+    val ans = truthMap.filter { it.key is Int }.count { it.value }
     return ans.toString()
 }

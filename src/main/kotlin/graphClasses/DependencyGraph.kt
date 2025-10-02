@@ -1,13 +1,15 @@
 package graphClasses
 
-import IntComponents
+import Components
 import graphAlgorithms.twoSat
 
-data class NotNode(val node: Any)
-operator fun Any.not() = NotNode(this)
+data class Not(val node: Any)
+
+operator fun Any.not() = Not(this)
 
 class DependencyGraph {
     private val nodes = mutableListOf<Any?>()
+
     // private var edgeNr = 1.0
     private var id = 1
     private val node2id = mutableMapOf<Any, Int>()
@@ -17,26 +19,31 @@ class DependencyGraph {
     fun addClause(clause: DependencyGraph.() -> Unit) {
         this.clause()
     }
-    fun addClause(node: Any) {
-        val (u, _) = getUVIDPairs(node, node)
-        dependencyGraph.addUnweightedEdge(-u, u)
-    }
-    fun addClause(node: NotNode) {
-        val (u, _) = getUVIDPairs(node, node)
-        dependencyGraph.addUnweightedEdge(u, -u)
+
+    fun setTrue(node: Any) {
+        addClause { node Or node }
     }
 
     private fun getUVIDPairs(node1: Any, node2: Any): Pair<Int, Int> {
         fun getNodeId(node: Any): Int {
-            val id = node2id[if (node is NotNode) node.node else node] ?: error("Node $node not found")
-            return if (node is NotNode) -id else id
+            val id = node2id[if (node is Not) node.node else node] ?: /*error("Node $node not found") */ run {
+                if (node is Not) {
+                    addNode(node.node)
+                    node2id[node.node]!!
+                } else {
+                    addNode(node)
+                    node2id[node]!!
+                }
+            }
+            return if (node is Not) -id else id
         }
+
         val u = getNodeId(node1)
         val v = getNodeId(node2)
         return u to v
     }
 
-    infix fun not(node: Any) = NotNode(node)
+    fun not(node: Any) = Not(node)
 
     /** a V b <--> -a -> b and -b -> a */
     infix fun Any.Or(other: Any) {
@@ -48,8 +55,8 @@ class DependencyGraph {
     /** a ^ b <--> (a V b) and (-a V -b) */
     infix fun Any.Xor(other: Any) {
         this Or other
-        val newThis = if(this is NotNode) this.node else this
-        val newOther = if(other is NotNode) other.node else other
+        val newThis = if (this is Not) this.node else this
+        val newOther = if (other is Not) other.node else other
         !newThis Or !newOther
     }
 
@@ -68,9 +75,12 @@ class DependencyGraph {
 
     fun nodes() = nodes.filterNotNull()
 
-    fun twoSat(): Pair<IntComponents, Map<Any, Boolean>>? {
+    fun twoSat(): Pair<Components, Map<Any, Boolean>>? {
         val (intSCC, integerTruthMap) = twoSat(dependencyGraph) ?: return null
+        val scc = intSCC.map { component ->
+            component.map { if (it > 0) id2Node[it]!! else not(id2Node[-it]!!) }
+        }
         val truthMap = integerTruthMap.filter { it.key > 0 }.mapKeys { k -> id2Node[k.key]!! }
-        return intSCC to truthMap
+        return scc to truthMap
     }
 }

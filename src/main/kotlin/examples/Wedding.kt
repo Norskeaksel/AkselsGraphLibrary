@@ -16,12 +16,10 @@ fun wedding(): String {
     repeat(n) {
         val h = "${it}h"
         val w = "${it}w"
-        g.addNode(h)
-        g.addNode(w)
         g.addClause { h Xor w }
     }
-    g.addClause { "0w" Or "0w" }
-    g.addClause { !"0h" Or !"0h" }
+    g.setTrue("0w")
+    g.setTrue(!"0h")
     repeat(m) {
         val (a, b) = readStrings(2)
         g.addClause { a Or b }

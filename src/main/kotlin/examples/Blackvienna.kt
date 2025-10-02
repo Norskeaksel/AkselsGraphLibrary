@@ -1,11 +1,10 @@
 package examples
 
-import debug
 import graphClasses.*
+import graphGraphics.visualizeComponents
 import readInt
 import readString
 import java.util.ArrayList
-import kotlin.system.measureTimeMillis
 
 // https://open.kattis.com/problems/blackvienna
 fun main() {
@@ -13,13 +12,13 @@ fun main() {
     println(ans)
 }
 
-val a = ('A'..'Z').map { it.toString() }
-val p1 = Array(26) { i -> ('A' + i).toString() }
-val p2 = Array(26) { i -> p1[i] + p1[i] }
-private fun all3SetsOfLetters(): List<Set<String>> {
-    val result = ArrayList<Set<String>>(2600)
-    for (i in 0 until 26) for (j in i + 1 until 26) for (k in j + 1 until 26) {
-        result.add(setOf(p1[i], p1[j], p1[k]))
+private val a = ('A'..'Z').map { it.toString() }
+private val s = a.size
+
+private fun all3SetsOfLetters(): List<List<String>> {
+    val result = ArrayList<List<String>>(2600)
+    for (i in 0 until s) for (j in i + 1 until s) for (k in j + 1 until s) {
+        result.add(listOf(a[i], a[j], a[k]))
     }
     return result
 }
@@ -31,82 +30,52 @@ fun blackvienna(): String {
         inputs.add(readString())
 
     }
-    val allSets: List<Set<String>>
-    val time = measureTimeMillis {
-        allSets = all3SetsOfLetters()
+    val allSets = all3SetsOfLetters()
+    var ans = allSets.size
+    val gameGraph = DependencyGraph()
+    a.forEach {
+        gameGraph.addNode(it)
+        gameGraph.addNode(it + it)
+        gameGraph.addClause { !it Or !(it + it) }
     }
-    debug("All sets creation time: $time ms")
-    var ans = 0
-    allSets.forEach { suspects ->
-        val gameGraph = DependencyGraph()
-        a.forEach {
-            gameGraph.addNode(it)
-            gameGraph.addNode(it + it)
-        }
-        suspects.forEach {
-            gameGraph.addClause { !it Or !it }
-            gameGraph.addClause { !(it + it) Or !(it + it) }
-        }
-        a.forEach {
-            if (it !in suspects) {
-                gameGraph.addClause { it Or it + it }
+    inputs.forEach { line ->
+        val (letters, player, count) = line.split(" ")
+        val (a, b) = letters.toCharArray().map { it.toString() }
+
+        val p1a = a
+        val p1b = b
+        val p2a = a + a
+        val p2b = b + b
+
+        val askedA = if (player == "1") p1a else p2a
+        val askedB = if (player == "1") p1b else p2b
+        val otherA = if (player == "1") p2a else p1a
+        val otherB = if (player == "1") p2b else p1b
+
+        when (count) {
+            "0" -> {
+                gameGraph.setTrue(!askedA)
+                gameGraph.setTrue(!askedB)
+            }
+
+            "1" -> {
+                gameGraph.addClause { askedA Xor askedB }
+                gameGraph.addClause { !otherA Xor !otherB }
+            }
+
+            "2" -> {
+                gameGraph.setTrue(askedA)
+                gameGraph.setTrue(askedB)
+                gameGraph.setTrue(!otherA)
+                gameGraph.setTrue(!otherB)
             }
         }
-        inputs.forEach { line ->
-            val (letters, player, count) = line.split(" ")
-            val (a, b) = letters.toCharArray().map { it.toString() }
-            when (count) {
-                "0" -> {
-                    when (player) {
-                        "1" -> {
-                            gameGraph.addClause { !a Or !a }
-                            gameGraph.addClause { !b Or !b }
-                        }
+    }
+    val game2Sat = gameGraph.twoSat() ?: return "0"
+    val (scc, _) = game2Sat
+    val non1Sccs = scc.filter { it.count() > 1 }
+    non1Sccs.forEach { component ->
 
-                        "2" -> {
-                            gameGraph.addClause { !(a + a) Or !(a + a) }
-                            gameGraph.addClause { !(b + b) Or !(b + b) }
-                        }
-                    }
-                }
-
-                "1" -> {
-                    when (player) {
-                        "1" -> {
-                            gameGraph.addClause { a Xor b }
-                            gameGraph.addClause { !(a + a) Xor !(b + b) }
-                        }
-
-                        "2" -> {
-                            gameGraph.addClause { (a + a) Xor (b + b) }
-                            gameGraph.addClause { !a Xor !b }
-                        }
-                    }
-                }
-
-                "2" -> {
-                    when (player) {
-                        "1" -> {
-                            gameGraph.addClause { a Or a }
-                            gameGraph.addClause { b Or b }
-                            gameGraph.addClause { !(a + a) Or !(a + a) }
-                            gameGraph.addClause { !(b + b) Or !(b + b) }
-                        }
-
-                        "2" -> {
-                            gameGraph.addClause { a + a Or a + a }
-                            gameGraph.addClause { b + b Or b + b }
-                            gameGraph.addClause { !a Or !a }
-                            gameGraph.addClause { !b Or !b }
-                        }
-                    }
-                }
-            }
-        }
-        val game2Sat = gameGraph.twoSat()
-        if (game2Sat != null) {
-            ans++
-        }
     }
     return ans.toString()
 }

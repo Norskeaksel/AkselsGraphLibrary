@@ -5,7 +5,7 @@ import graphClasses.Tile
 import javafx.application.Application
 import org.gridgraphics.GridGraphics
 
-fun Grid.visualizeSearch(
+fun Grid.visualize(
     currentVisitedNodes: List<Tile> = currentVisitedNodes(),
     finalPath:List<Tile> = finalPath(),
     nodeDistances:List<Double> = currentVisitedNodes.map { weightedDistanceTo(it) },

@@ -2,7 +2,7 @@ package examples
 
 import graphClasses.Grid
 import graphClasses.Tile
-import gridGraphics.visualizeSearch
+import gridGraphics.visualize
 
 fun main() {
     // Example Grid Definition. We can also initialize it with a with and a height, e.g. `Grid(3, 3)`,
@@ -20,7 +20,7 @@ fun main() {
 
     // We could use `grid.connectGridDefault()` to connect all nodes, but let's define a custom connection instead.
     fun connectDownOrRight(t: Tile): List<Tile> = grid.getStraightNeighbours(t).filter { it.x >= t.x || it.y > t.y }
-    grid.connectGrid(::connectDownOrRight)
+    grid.connectGrid(false, ::connectDownOrRight)
 
     // Nodes in a grid consists of Tile objects with x, y coordinates and data
     val startNode = Tile(0, 0, 'S')
@@ -48,7 +48,7 @@ fun main() {
      */
 
     // Visualizing the grid, the BFS and the final fastest path to the target
-    grid.visualizeSearch(
+    grid.visualize(
         screenTitle = "Grid example visualizing",
         animationTicTimeOverride = 500.0,
         startPaused = false,

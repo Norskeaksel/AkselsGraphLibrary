@@ -15,9 +15,6 @@ fun main() {
 fun buriedtreasure2(): String {
     val (n,m) = readInts(2)
     val g = DependencyGraph()
-    repeat(m){
-        g.addNode(it+1)
-    }
     repeat(n){
         val (a,b) = readInts(2)
         val absA = abs(a)
