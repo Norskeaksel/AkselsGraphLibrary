@@ -3,6 +3,7 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.AfterAll
 import java.io.File
 import org.junit.jupiter.api.Test
+import kotlin.system.measureTimeMillis
 
 class BlackviennaTest {
     companion object {
@@ -15,9 +16,12 @@ class BlackviennaTest {
 
     @Test
     fun blackviennaa() {
-        val expectedOutput = """2600"""
-        _reader = File("src/test/SampleInput/Blackvienna/input1").inputStream().bufferedReader()
-        assertThat(blackvienna()).isEqualTo(expectedOutput)
+        val time = measureTimeMillis {
+            val expectedOutput = """2600"""
+            _reader = File("src/test/SampleInput/Blackvienna/input1").inputStream().bufferedReader()
+            assertThat(blackvienna()).isEqualTo(expectedOutput)
+        }
+        debug("Blackvienna test time: $time ms")
     }
 
 
