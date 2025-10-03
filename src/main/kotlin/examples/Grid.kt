@@ -1,0 +1,36 @@
+package examples
+
+import graphClasses.*
+import readInts
+import readString
+
+// https://open.kattis.com/problems/grid
+fun main() {
+    val ans = grid()
+    println(ans)
+}
+
+fun grid(): Int {
+    val (n, m) = readInts(2)
+    val lines = mutableListOf<String>()
+    repeat(n) {
+        val line = readString()
+        lines.add(line)
+    }
+    val grid = Grid(lines)
+    grid.connectGrid { t ->
+        val nr = t.data as Char - '0'
+        val neighbours = listOfNotNull(
+            grid.xy2Node(t.x + nr, t.y),
+            grid.xy2Node(t.x - nr, t.y),
+            grid.xy2Node(t.x, t.y + nr),
+            grid.xy2Node(t.x, t.y - nr)
+        )
+        neighbours
+    }
+    val start = Tile(0, 0)
+    val end = Tile(m - 1, n - 1)
+    grid.bfs(start, end)
+    val distance = grid.unweightedDistanceTo(end)
+    return if (distance == Int.MAX_VALUE) -1 else distance
+}
