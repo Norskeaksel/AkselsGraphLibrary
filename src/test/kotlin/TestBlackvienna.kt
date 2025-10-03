@@ -27,9 +27,12 @@ class BlackviennaTest {
 
     @Test
     fun blackviennab() {
+        val time = measureTimeMillis {
         val expectedOutput = """506"""
         _reader = File("src/test/SampleInput/Blackvienna/input2").inputStream().bufferedReader()
         assertThat(blackvienna()).isEqualTo(expectedOutput)
+        }
+        debug("Blackvienna test time: $time ms")
     }
 
 
@@ -39,5 +42,4 @@ class BlackviennaTest {
         _reader = File("src/test/SampleInput/Blackvienna/input3").inputStream().bufferedReader()
         assertThat(blackvienna()).isEqualTo(expectedOutput)
     }
-
 }
