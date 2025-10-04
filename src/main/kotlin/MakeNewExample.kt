@@ -4,7 +4,6 @@ import kotlin.io.path.Path
 
 private fun createExample(name: String) = """package examples
 
-import graphClasses.*
 import readInt
 
 // https://open.kattis.com/problems/$name
