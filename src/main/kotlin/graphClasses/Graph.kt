@@ -11,7 +11,7 @@ open class Graph: BaseGraph<Any>(0) {
 
     override fun addNode(node: Any) {
         if (node2id.containsKey(node)) {
-            System.err.println("Warning: The node already exists, it can't be added again")
+            //System.err.println("Warning: The node already exists, it can't be added again")
             return
         }
         nodes.add(node)
