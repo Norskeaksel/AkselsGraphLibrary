@@ -3,7 +3,9 @@ package graphClasses
 import Edge
 import graphAlgorithms.DFS
 
-data class Tile(val x: Int, val y: Int, var data: Any? = null)
+data class Tile(val x: Int, val y: Int, var data: Any? = null){
+    fun dataIsDigit() = data is Char && (data as Char).isDigit()
+}
 
 class Grid(val width: Int, val height: Int, initWithDatalessTiles: Boolean = false) : BaseGraph<Tile>(width * height) {
     constructor(stringGrid: List<String>) : this(stringGrid[0].length, stringGrid.size) {
