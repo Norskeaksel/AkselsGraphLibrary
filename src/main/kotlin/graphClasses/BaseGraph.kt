@@ -143,8 +143,7 @@ abstract class BaseGraph<T:Any>(size: Int) {
             }
         }
         val startId = node2Id(startNode) ?: error("Node $startNode not found in graph")
-        val targetId = target?.let { node2Id(it) } ?: -1
-        searchResults = Dijkstra(adjacencyList).dijkstra(startId, targetId, searchResults)
+        searchResults = Dijkstra(adjacencyList).dijkstra(startId, searchResults)
         target?.let {
             finalPath = getPath(it)
         }
