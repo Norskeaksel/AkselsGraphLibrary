@@ -23,7 +23,6 @@ fun $name(): String {
 
 private fun createExampleTest(name: String, nrOfSampleInputs: Int): String {
     var test = """import examples.$name
-import graphClasses.*
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.AfterAll
 import java.io.File

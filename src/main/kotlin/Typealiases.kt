@@ -18,3 +18,5 @@ fun Components.map2Ints() = map { component -> component.map { it as Int } }
 
 /** Replaces the edges with just the destination nodes */
 fun AdjacencyList.toUnweightedAdjacencyList() = map { edges -> edges.map { it.second }.toMutableList() }.toMutableList()
+
+fun AdjacencyList.deepCopy() = map { it.toMutableList() }.toMutableList()

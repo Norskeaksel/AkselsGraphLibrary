@@ -28,9 +28,9 @@ fun charlesincharge(): String {
     return binarySearchDijkstra(g, maxTime).toString()
 }
 
-const val INF = 1e20
-const val MAX_W = 1e9
-fun binarySearchDijkstra(g: AdjacencyList, maxTime: Double): Int {
+private const val INF = 1e20
+private const val MAX_W = 1e9
+private fun binarySearchDijkstra(g: AdjacencyList, maxTime: Double): Int {
     var lowerBound = g.minOf { it.minOfOrNull { e -> e.first } ?: MAX_W }.toInt()
     var upperBound = g.maxOf { it.maxOfOrNull { e -> e.first } ?: MAX_W }.toInt()
     while (upperBound - lowerBound >= 1) {
