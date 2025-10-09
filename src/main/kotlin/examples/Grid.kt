@@ -31,6 +31,6 @@ fun grid(): Int {
     val start = Tile(0, 0)
     val end = Tile(m - 1, n - 1)
     grid.bfs(start, end)
-    val distance = grid.unweightedDistanceTo(end)
+    val distance = grid.distanceUnweightedTo(end)
     return if (distance == Int.MAX_VALUE) -1 else distance
 }

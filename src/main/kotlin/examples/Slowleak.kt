@@ -35,7 +35,7 @@ fun slowleak(): String {
         }
     }
     compressedGraph.dijkstra(start)
-    val finalDistance = compressedGraph.weightedDistanceTo(goal)
+    val finalDistance = compressedGraph.distanceWeightedTo(goal)
     return if (finalDistance == Double.POSITIVE_INFINITY)
         "stuck"
     else

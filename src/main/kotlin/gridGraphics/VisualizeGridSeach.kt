@@ -8,7 +8,7 @@ import org.gridgraphics.GridGraphics
 fun Grid.visualize(
     currentVisitedNodes: List<Tile> = currentVisitedNodes(),
     finalPath:List<Tile> = finalPath(),
-    nodeDistances:List<Double> = currentVisitedNodes.map { weightedDistanceTo(it) },
+    nodeDistances:List<Double> = currentVisitedNodes.map { distanceWeightedTo(it) },
     screenTitle: String = "Grid visualizer (Click or space to pause and resume)",
     animationTicTimeOverride: Double? = null,
     closeOnEnd: Boolean = false,

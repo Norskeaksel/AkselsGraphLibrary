@@ -14,7 +14,7 @@ fun day18a(input: List<String>, gridSize: Int, lineCount: Int): Int {
     grid.connectGridDefault()
     val goal = grid.xy2Node(gridSize - 1, gridSize - 1)!!
     grid.bfs(Tile(0,0), goal)
-    val ans = grid.weightedDistanceTo(goal).toInt()
+    val ans = grid.distanceWeightedTo(goal).toInt()
     // grid.visualizeSearch()
     return ans
 }
