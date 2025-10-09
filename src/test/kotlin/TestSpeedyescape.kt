@@ -35,4 +35,11 @@ class SpeedyescapeTest {
         assertThat(speedyescape()).isBetween(expectedOutput-1e-6, expectedOutput+1e-6)
     }
 
+
+    @Test
+    fun speedyescapee() {
+        val expectedOutput = 213.3333333
+        _reader = File("src/test/SampleInput/Speedyescape/input5").inputStream().bufferedReader()
+        assertThat(speedyescape()).isBetween(expectedOutput-1e-6, expectedOutput+1e-6)
+    }
 }

@@ -1,4 +1,8 @@
 import graphAlgorithms.Dijkstra
+import graphClasses.Graph
+import graphGraphics.visualize
+import graphGraphics.visualizeComponents
+import java.util.*
 
 
 // https://open.kattis.com/problems/speedyescape
@@ -7,18 +11,20 @@ fun main() {
     if (ans == -1.0)
         println("IMPOSSIBLE")
     else
-        println(ans) // println(String.format(Locale.US, "%.6f", ans)) Not helping
+        println(String.format(Locale.US, "%.7f", ans))
 }
 
 fun speedyescape(): Double {
     val (n, m, e) = readInts(3)
     val g: AdjacencyList = MutableList(n) { mutableListOf() }
+    val visualGraph = Graph()
     repeat(m) {
         var (u, v, l) = readInts(3); u--; v--
         val edgeUV: Edge = l.toDouble() to v
         val edgeVU: Edge = l.toDouble() to u
         g[u].add(edgeUV)
         g[v].add(edgeVU)
+        visualGraph.connectWeighted(u, v, l.toDouble())
     }
     val ends = IntArray(e)
     repeat(e) {
@@ -37,7 +43,7 @@ fun speedyescape(): Double {
 private fun binarySearchDijkstra(b: Int, g: AdjacencyList, pDistances: DoubleArray, ends: IntArray): Double {
     var speedRatioUpperBound = 10_000.0
     var speedRationLowerBound = 0.0
-    while (speedRatioUpperBound - speedRationLowerBound > 1e-9) {
+    repeat(100) {
         val speedRatio = (speedRatioUpperBound + speedRationLowerBound) / 2
         val unInterceptedNodes = unInterceptedNodes(g, b, pDistances, speedRatio)
         if (ends.any { it in unInterceptedNodes }) {
@@ -65,6 +71,9 @@ private fun unInterceptedNodes(
         }
         gCopy.setInfAsWeightsToNodes(bannedNodes)
         bDistances = Dijkstra(gCopy).dijkstra(b).distances.map { it / speedRatio }
+    }
+    pDistances.indices.forEach {
+        if (bDistances[it] >= pDistances[it]) bannedNodes.add(it)
     }
     val unBannedNodes = bDistances.indices.filter { it !in bannedNodes }
     return unBannedNodes.toSet()
