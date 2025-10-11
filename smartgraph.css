@@ -60,8 +60,8 @@ This should help you understand which styles you can apply to each type of eleme
 
 .edge-label {
     -fx-font: normal 5pt "sans-serif";
-    -fx-fill: white;
-    -fx-background-color: red;
+    -fx-fill: black;
+    -fx-background-color: yellow;
     -fx-background-radius: 0;
     -fx-border-color: black;
     -fx-padding: 2px;
