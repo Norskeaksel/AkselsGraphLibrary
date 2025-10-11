@@ -1,6 +1,6 @@
 package graphClasses
 
-class IntGraph(size: Int) : BaseGraph<Int>(size) {
+class IntGraph(size: Int, isWeighted:Boolean=true) : BaseGraph<Int>(size, isWeighted) {
     init {
         repeat(size){
             nodes[it] = it

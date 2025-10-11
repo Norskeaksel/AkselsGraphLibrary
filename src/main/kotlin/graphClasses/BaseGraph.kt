@@ -7,7 +7,7 @@ import graphAlgorithms.*
 import toUnweightedAdjacencyList
 
 
-abstract class BaseGraph<T:Any>(size: Int) {
+abstract class BaseGraph<T : Any>(size: Int, val isWeighted: Boolean = true) {
     // PROPERTIES AND INITIALIZATION
     protected val adjacencyList: AdjacencyList = MutableList(size) { mutableListOf() }
     protected var unweightedAdjacencyList: UnweightedAdjacencyList = MutableList(size) { mutableListOf() }
@@ -101,16 +101,15 @@ abstract class BaseGraph<T:Any>(size: Int) {
         searchResults?.let { r -> id2Node(r.distances.indices.first { r.distances[it] == maxDistance() })!! }
             ?: error("Haven't computed furthest node because no search algorithm (dfs, bfs, dijkstra) has been run yet.")
 
-    fun getNeighbours(t: T): List<T> =
-        node2Id(t)?.let { unweightedAdjacencyList[it] }?.map { id2Node(it)!! }
-            ?: error("Node $t not found in graph")
 
-    fun getWeightedEdges(t: T): List<Pair<Double, T>> =
+    fun weightedEdges(t: T): List<Pair<Double, T>> =
         node2Id(t)?.let { adjacencyList[it] }?.map { Pair(it.first, id2Node(it.second)!!) }
             ?: error("Node $t not found in graph")
 
-    fun getUnweightedEdges(t: T): List<T> =
-        node2Id(t)?.let { unweightedAdjacencyList[it].map { id2Node(it)!! } }
+    fun neighbours(t: T): List<T> =
+        if (isWeighted) weightedEdges(t).map { it.second }
+        else node2Id(t)?.let { unweightedAdjacencyList[it] }
+            ?.map { id2Node(it)!! }
             ?: error("Node $t not found in graph")
 
     // SEARCH ALGORITHMS
@@ -170,7 +169,11 @@ abstract class BaseGraph<T:Any>(size: Int) {
         }
     }
 
-    open fun topologicalSort() = DFS(unweightedAdjacencyList).topologicalSort().map { id2Node(it)!! }
+    open fun topologicalSort(): List<T> {
+        val dfsGraph = if (isWeighted) adjacencyList.toUnweightedAdjacencyList() else unweightedAdjacencyList
+        return DFS(dfsGraph).topologicalSort().map { id2Node(it)!! }
+    }
+
     open fun stronglyConnectedComponents(): List<List<T>> {
         useWeightedConnectionsIfNeeded("stronglyConnectedComponents")
         val scc = DFS(unweightedAdjacencyList).stronglyConnectedComponents()

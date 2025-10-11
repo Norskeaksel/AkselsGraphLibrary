@@ -105,7 +105,7 @@ private fun Grid.stateSearch(target: String): String {
 
 private fun Grid.possibleKnightMoves(moveingKnight: Tile, standingKnight: Tile, nextChar: Char): List<Tile> {
     val shiftIsPressedByStandingKnight = (standingKnight.data as Pair<*, *>).first == '!'
-    val possibleKnightMoves = getNeighbours(moveingKnight).filter {
+    val possibleKnightMoves = neighbours(moveingKnight).filter {
         val tileData = it.data as Pair<*, *>
         (tileData.first == '!' ||
                 if (shiftIsPressedByStandingKnight) {

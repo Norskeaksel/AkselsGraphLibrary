@@ -1,11 +1,10 @@
 package graphGraphics
 
 import com.brunomnsilva.smartgraph.containers.SmartGraphDemoContainer
-import com.brunomnsilva.smartgraph.graph.DigraphEdgeList
+import com.brunomnsilva.smartgraph.graph.GraphEdgeList
 import com.brunomnsilva.smartgraph.graphview.SmartCircularSortedPlacementStrategy
 import com.brunomnsilva.smartgraph.graphview.SmartGraphPanel
 import com.brunomnsilva.smartgraph.graphview.SmartPlacementStrategy
-import debug
 import graphClasses.BaseGraph
 import javafx.animation.KeyFrame
 import javafx.animation.PauseTransition
@@ -16,8 +15,7 @@ import javafx.scene.input.KeyCode
 import javafx.stage.Stage
 import javafx.util.Duration
 
-
-class GraphGraphics : Application() {
+class BidirectionalGraphGraphics : Application() {
     companion object {
         lateinit var graph: BaseGraph<Any>
         var screenTitle = "JavaFXGraph Visualization"
@@ -32,7 +30,7 @@ class GraphGraphics : Application() {
     override fun start(stage: Stage) {
         val visitationOrder: List<Any>
         val path: List<Any>
-        val graphVisualizer: DigraphEdgeList<Any, Any> = run {
+        val graphVisualizer: GraphEdgeList<Any, Any> = run {
             visitationOrder = graph.currentVisitedNodes()
             path = graph.finalPath()
             graph.convertToVisualizationGraph()
@@ -98,16 +96,23 @@ class GraphGraphics : Application() {
     }
 }
 
-private fun BaseGraph<Any>.convertToVisualizationGraph(): DigraphEdgeList<Any, Any> {
-    val g = DigraphEdgeList<Any, Any>()
+private fun BaseGraph<Any>.convertToVisualizationGraph(): GraphEdgeList<Any, Any> {
+    val g = GraphEdgeList<Any, Any>()
     nodes().forEach { node ->
         g.insertVertex(node)
     }
-    nodes().forEach { node ->
-        val edges = weightedEdges(node).ifEmpty { neighbours(node).map { 1.0 to it } }
-        edges.forEach { edge ->
-            val fromToWeight = Triple(node, edge.second, edge.first)
-            g.insertEdge(node, edge.second, fromToWeight)
+    val addedEdges = mutableSetOf<Pair<Any, Any>>()
+    nodes().forEach { u ->
+        val edges = weightedEdges(u).ifEmpty { neighbours(u).map { 1.0 to it } }
+        edges.forEach { (w,v) ->
+            val uv = u to v
+            val vu = v to u
+            if (uv !in addedEdges && vu !in addedEdges) {
+                val fromToWeight = Triple(u, v, w)
+                g.insertEdge(u, v, fromToWeight)
+                addedEdges.add(uv)
+                addedEdges.add(vu)
+            }
         }
     }
     return g

@@ -1,6 +1,6 @@
 package graphClasses
 
-open class Graph: BaseGraph<Any>(0) {
+open class Graph(isWeighted:Boolean=true): BaseGraph<Any>(0, isWeighted) {
     private var nrOfNodes = 0
     private val node2id = mutableMapOf<Any, Int>()
     private val id2Node = mutableMapOf<Int, Any>()

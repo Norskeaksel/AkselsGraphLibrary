@@ -49,7 +49,7 @@ fun main() {
     val intGraph = IntGraph(n)
     // Add the same edges as the above Graph
     graph.nodes().forEach { fromNode ->
-        graph.getWeightedEdges(fromNode).forEach { edge ->
+        graph.weightedEdges(fromNode).forEach { edge ->
             val weight = edge.first
             val toNode = edge.second as Int // Cast type Any to Int
             intGraph.addWeightedEdge(fromNode as Int, toNode, weight)

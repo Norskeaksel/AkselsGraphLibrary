@@ -7,7 +7,7 @@ data class Tile(val x: Int, val y: Int, var data: Any? = null){
     fun dataIsDigit() = data is Char && (data as Char).isDigit()
 }
 
-class Grid(val width: Int, val height: Int, initWithDatalessTiles: Boolean = false) : BaseGraph<Tile>(width * height) {
+class Grid(val width: Int, val height: Int, initWithDatalessTiles: Boolean = false, isWeighted:Boolean=false) : BaseGraph<Tile>(width * height, isWeighted) {
     constructor(stringGrid: List<String>) : this(stringGrid[0].length, stringGrid.size) {
         if (stringGrid.any { it.length != width })
             error("All lines in the string grid must have the same length")

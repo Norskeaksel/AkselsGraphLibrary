@@ -27,6 +27,6 @@ fun faultyrobot(): String {
     val reachableWithBug = trueGraph.currentVisitedNodes().filter { trueGraph.distanceWeightedTo(it) <= 1.0 }
     forcedGraph.bfs(reachableWithBug)
     val trueReachableNodes = forcedGraph.currentVisitedNodes()
-    val restNodes = trueReachableNodes.count { forcedGraph.getNeighbours(it).isEmpty() }
+    val restNodes = trueReachableNodes.count { forcedGraph.neighbours(it).isEmpty() }
     return restNodes.toString()
 }
