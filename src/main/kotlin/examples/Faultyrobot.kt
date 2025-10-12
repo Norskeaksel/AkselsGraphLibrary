@@ -11,14 +11,14 @@ fun main() {
 
 fun faultyrobot(): String {
     val (n, m) = readInts(2)
-    val forcedGraph = IntGraph(n+1)
-    val trueGraph = IntGraph(n+1)
+    val forcedGraph = IntGraph(n+1, false)
+    val trueGraph = IntGraph(n+1, false)
     repeat(m) {
         val (a, b) = readInts(2)
         if (a < 0) {
-            forcedGraph.addUnweightedEdge(-1 * a, b)
+            forcedGraph.addEdge(-1 * a, b)
         } else {
-            trueGraph.addUnweightedEdge(a, b)
+            trueGraph.addEdge(a, b)
         }
     }
     forcedGraph.dfs(1)

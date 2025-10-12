@@ -9,7 +9,7 @@ fun Components.visualizeComponents() {
     forEach { component ->
         component.indices.forEach { i ->
             component.let { c ->
-                sccGraph.addUnweightedEdge(c[i], c[(i + 1) % c.size])
+                sccGraph.addEdge(c[i], c[(i + 1) % c.size])
             }
         }
     }

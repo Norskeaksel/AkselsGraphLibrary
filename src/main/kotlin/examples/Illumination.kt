@@ -12,7 +12,7 @@ fun main() {
 
 fun illumination(): String {
     val (_, r, k) = readInts(3)
-    val g = DependencyGraph()
+    val g = ClauseGraph()
     repeat(k) {
         val (i, j) = readInts(2)
         val (x, y) = j - 1 to i - 1

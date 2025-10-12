@@ -1,7 +1,5 @@
 import graphAlgorithms.Dijkstra
 import graphClasses.Graph
-import graphGraphics.visualize
-import graphGraphics.visualizeComponents
 import java.util.*
 
 
@@ -24,7 +22,7 @@ fun speedyescape(): Double {
         val edgeVU: Edge = l.toDouble() to u
         g[u].add(edgeUV)
         g[v].add(edgeVU)
-        visualGraph.connectWeighted(u, v, l.toDouble())
+        visualGraph.connect(u, v, l.toDouble())
     }
     val ends = IntArray(e)
     repeat(e) {

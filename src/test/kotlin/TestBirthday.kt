@@ -22,5 +22,4 @@ Yes
         _reader = File("src/test/SampleInput/Birthday/input1").inputStream().bufferedReader()
         assertThat(birthday()).isEqualTo(expectedOutput)
     }
-
 }

@@ -12,7 +12,7 @@ fun main() {
 
 fun wedding(): String {
     val (n, m) = readInts(2)
-    val g = DependencyGraph()
+    val g = ClauseGraph()
     repeat(n) {
         val h = "${it}h"
         val w = "${it}w"

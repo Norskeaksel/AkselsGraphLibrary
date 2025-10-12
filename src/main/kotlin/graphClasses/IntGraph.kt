@@ -12,11 +12,11 @@ class IntGraph(size: Int, isWeighted:Boolean=true) : BaseGraph<Int>(size, isWeig
     override fun addWeightedEdge(node1: Int, node2: Int, weight: Double) {
         adjacencyList[node1].add(weight to node2)
     }
-
-    override fun id2Node(id: Int) = id
-    override fun node2Id(node: Int) = node
-    override fun nodes(): List<Int> = adjacencyList.indices.toList()
     override fun addUnweightedEdge(node1: Int, node2: Int) {
         unweightedAdjacencyList[node1].add(node2)
     }
+    override fun id2Node(id: Int) = id
+    override fun node2Id(node: Int) = node
+    override fun nodes(): List<Int> = adjacencyList.indices.toList()
+
 }

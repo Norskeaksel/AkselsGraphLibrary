@@ -16,13 +16,13 @@ fun main() {
 
 fun baas(): Int {
     val n = readInt()
-    val intGraph = IntGraph(n)
+    val intGraph = IntGraph(n, false)
     val stepTime = readInts(n)
     repeat(n) { step_i ->
         val c_i = readInt()
         repeat(c_i) {
             val a_j = readInt() - 1
-            intGraph.addUnweightedEdge(step_i, a_j)
+            intGraph.addEdge(step_i, a_j)
         }
     }
     var optimizedTime = Int.MAX_VALUE

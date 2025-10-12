@@ -8,13 +8,13 @@ import graphGraphics.visualize
 fun main() {
     // --- Example Graph Definition ---
     val graph = Graph()
-    graph.addWeightedEdge(0, 1, 10.0)
-    graph.addWeightedEdge(0, 2, 3.0)
-    graph.addWeightedEdge(1, 3, 2.0)
-    graph.addWeightedEdge(2, 1, 4.0)
-    graph.addWeightedEdge(2, 3, 8.0)
-    graph.addWeightedEdge(2, 4, 2.0)
-    graph.addWeightedEdge(3, 4, 5.0)
+    graph.addEdge(0, 1, 10.0)
+    graph.addEdge(0, 2, 3.0)
+    graph.addEdge(1, 3, 2.0)
+    graph.addEdge(2, 1, 4.0)
+    graph.addEdge(2, 3, 8.0)
+    graph.addEdge(2, 4, 2.0)
+    graph.addEdge(3, 4, 5.0)
 
     graph.addNode(5) // Adding an isolated node is also possible
 
@@ -52,7 +52,7 @@ fun main() {
         graph.weightedEdges(fromNode).forEach { edge ->
             val weight = edge.first
             val toNode = edge.second as Int // Cast type Any to Int
-            intGraph.addWeightedEdge(fromNode as Int, toNode, weight)
+            intGraph.addEdge(fromNode as Int, toNode, weight)
         }
     }
     intGraph.dijkstra(startNode, targetNode)

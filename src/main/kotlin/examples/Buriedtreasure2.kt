@@ -13,8 +13,8 @@ fun main() {
 }
 
 fun buriedtreasure2(): String {
-    val (n,m) = readInts(2)
-    val g = DependencyGraph()
+    val (n,_) = readInts(2)
+    val g = ClauseGraph()
     repeat(n){
         val (a,b) = readInts(2)
         val absA = abs(a)

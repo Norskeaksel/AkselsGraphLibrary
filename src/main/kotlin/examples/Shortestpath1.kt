@@ -10,7 +10,7 @@ fun main(){
         val g = IntGraph(n)
         repeat(m){
             val (u,v,w) = readInts(3)
-            g.addWeightedEdge(u,v,w.toDouble())
+            g.addEdge(u,v,w.toDouble())
         }
         g.dijkstra(s)
         repeat(q){

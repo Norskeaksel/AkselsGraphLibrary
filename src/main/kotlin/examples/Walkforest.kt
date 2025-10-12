@@ -20,7 +20,7 @@ fun walkforest(): String {
         val m = readInt()
         repeat(m) {
             val (a, b, l) = readInts(3)
-            g.connectWeighted(a, b, l)
+            g.connect(a, b, l)
         }
         g.dijkstra(2, 1)
         val dag = makeDAG(g)
@@ -43,7 +43,7 @@ private fun makeDAG(g: IntGraph): IntGraph {
         val uDist = g.distanceWeightedTo(u)
         g.weightedEdges(u).filter { (_, v) -> g.distanceWeightedTo(v) < uDist }.forEach { (w, v) ->
             if (visited[v]) return@forEach
-            dag.addWeightedEdge(u, v, w)
+            dag.addEdge(u, v, w)
             q.add(v)
         }
     }

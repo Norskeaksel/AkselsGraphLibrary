@@ -14,5 +14,7 @@ typealias IntComponents = List<List<Int>>
 
 /** Replaces the edges with just the destination nodes */
 fun AdjacencyList.toUnweightedAdjacencyList() = map { edges -> edges.map { it.second }.toMutableList() }.toMutableList()
+fun UnweightedAdjacencyList.toWeightedAdjacencyList() =
+    map { edges -> edges.map { 1.0 to it }.toMutableList() }.toMutableList()
 
 fun AdjacencyList.deepCopy() = map { it.toMutableList() }.toMutableList()

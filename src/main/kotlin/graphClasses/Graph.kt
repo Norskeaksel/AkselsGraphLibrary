@@ -1,6 +1,6 @@
 package graphClasses
 
-open class Graph(isWeighted:Boolean=true): BaseGraph<Any>(0, isWeighted) {
+class Graph(isWeighted:Boolean=true): BaseGraph<Any>(0, isWeighted) {
     private var nrOfNodes = 0
     private val node2id = mutableMapOf<Any, Int>()
     private val id2Node = mutableMapOf<Int, Any>()
@@ -34,6 +34,8 @@ open class Graph(isWeighted:Boolean=true): BaseGraph<Any>(0, isWeighted) {
     }
 
     override fun node2Id(node: Any): Int? = node2id[node]
+
+
     override fun id2Node(id: Int): Any? = id2Node[id]
 
 

@@ -5,6 +5,7 @@ import Edge
 import UnweightedAdjacencyList
 import graphAlgorithms.*
 import toUnweightedAdjacencyList
+import toWeightedAdjacencyList
 
 
 abstract class BaseGraph<T : Any>(size: Int, val isWeighted: Boolean = true) {
@@ -20,24 +21,40 @@ abstract class BaseGraph<T : Any>(size: Int, val isWeighted: Boolean = true) {
 
     // ABSTRACT FUNCTIONS
     abstract fun addNode(node: T)
-    abstract fun addWeightedEdge(node1: T, node2: T, weight: Double)
-    abstract fun addUnweightedEdge(node1: T, node2: T)
+    protected abstract fun addWeightedEdge(node1: T, node2: T, weight: Double)
+    protected abstract fun addUnweightedEdge(node1: T, node2: T)
     protected abstract fun node2Id(node: T): Int?
     protected abstract fun id2Node(id: Int): T?
     abstract fun nodes(): List<T>
 
-    companion object
-
     // CORE GRAPH OPERATIONS
+
+    fun addEdge(node1: T, node2: T, weight: Number? = null) {
+        if (!isWeighted) addUnweightedEdge(node1, node2)
+        else if (weight == null) error(
+            "A weight must be provided when adding edges in a weighted graph. " +
+                    "To make the graph unweighted, set the parameter isWeighted=false when creating it."
+        )
+        else addWeightedEdge(node1, node2, weight.toDouble())
+    }
+
     fun size() = nodes().size
-    fun connectWeighted(node1: T, node2: T, weight: Number) {
-        val weightDouble = weight.toDouble()
-        addWeightedEdge(node1, node2, weightDouble)
-        addWeightedEdge(node2, node1, weightDouble)
+    fun connect(node1: T, node2: T, weight: Number? = null) {
+        if (!isWeighted) connectUnweighted(node1, node2)
+        else if (weight == null) error(
+            "A weight must be provided when connecting nodes in a weighted graph. " +
+                    "To make the graph unweighted, set the parameter isWeighted=false when creating it."
+        )
+        else connectWeighted(node1, node2, weight.toDouble())
+    }
+
+    private fun connectWeighted(node1: T, node2: T, weight: Double) {
+        addWeightedEdge(node1, node2, weight)
+        addWeightedEdge(node2, node1, weight)
         connections.add(node1 to node2)
     }
 
-    fun connectUnweighted(node1: T, node2: T) {
+    private fun connectUnweighted(node1: T, node2: T) {
         addUnweightedEdge(node1, node2)
         addUnweightedEdge(node2, node1)
         connections.add(node1 to node2)
@@ -60,11 +77,11 @@ abstract class BaseGraph<T : Any>(size: Int, val isWeighted: Boolean = true) {
     }
 
     // GRAPH INFORMATION
-    fun weightedEdges() = adjacencyList.flatMapIndexed { u, neighbours ->
+    private fun weightedEdges() = adjacencyList.flatMapIndexed { u, neighbours ->
         neighbours.map { v -> u to v.second }
     }
 
-    fun unweightedEdges() = unweightedAdjacencyList.flatMapIndexed { u, neighbours ->
+    private fun unweightedEdges() = unweightedAdjacencyList.flatMapIndexed { u, neighbours ->
         neighbours.map { v -> u to v }
     }
 
@@ -157,17 +174,20 @@ abstract class BaseGraph<T : Any>(size: Int, val isWeighted: Boolean = true) {
     } ?: error("FloydWarshall must be run before calling distanceFromUtoV")
 
     // ADDITIONAL ALGORITHMS
-    fun minimumSpanningTree(): Pair<Double, Graph> = prims(adjacencyList).run {
-        first to second.let { adjacencyList ->
-            val mstGraph = Graph()
-            adjacencyList.forEachIndexed { id, edges ->
-                edges.forEach { (w, v) ->
-                    mstGraph.connectWeighted(id2Node(id)!!, id2Node(v)!!, w)
+    fun minimumSpanningTree(): Pair<Double, Graph> =
+        (if (isWeighted) adjacencyList else unweightedAdjacencyList.toWeightedAdjacencyList()).let {graph ->
+            return prims(graph).run {
+                first to second.let { adjacencyList ->
+                    val mstGraph = Graph()
+                    adjacencyList.forEachIndexed { id, edges ->
+                        edges.forEach { (w, v) ->
+                            mstGraph.connect(id2Node(id)!!, id2Node(v)!!, w)
+                        }
+                    }
+                    mstGraph
                 }
             }
-            mstGraph
         }
-    }
 
     open fun topologicalSort(): List<T> {
         val dfsGraph = if (isWeighted) adjacencyList.toUnweightedAdjacencyList() else unweightedAdjacencyList

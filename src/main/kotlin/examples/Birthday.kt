@@ -21,11 +21,11 @@ fun birthday(): String {
             input.add(a to b)
         }
         repeat(c){i ->
-            val g = IntGraph(p)
+            val g = IntGraph(p,false)
             repeat(c){j->
                 if(i != j){
                     val (a, b) = input[j]
-                    g.connectWeighted(a, b, 1)
+                    g.connect(a, b)
                 }
             }
             try{

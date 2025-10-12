@@ -7,16 +7,16 @@ data class Not(val node: Any)
 
 operator fun Any.not() = Not(this)
 
-class DependencyGraph {
+class ClauseGraph {
     private val nodes = mutableListOf<Any?>()
 
     // private var edgeNr = 1.0
     private var id = 1
     private val node2id = mutableMapOf<Any, Int>()
     private val id2Node = mutableMapOf<Int, Any>()
-    val dependencyGraph = Graph()
+    val dependencyGraph = Graph(false)
 
-    fun addClause(clause: DependencyGraph.() -> Unit) {
+    fun addClause(clause: ClauseGraph.() -> Unit) {
         this.clause()
     }
 
@@ -48,8 +48,8 @@ class DependencyGraph {
     /** a V b <--> -a -> b and -b -> a */
     infix fun Any.Or(other: Any) {
         val (u, v) = getUVIDPairs(this, other)
-        dependencyGraph.addUnweightedEdge(-u, v)
-        dependencyGraph.addUnweightedEdge(-v, u)
+        dependencyGraph.addEdge(-u, v)
+        dependencyGraph.addEdge(-v, u)
     }
 
     /** a ^ b <--> (a V b) and (-a V -b) */

@@ -17,7 +17,7 @@ fun buttonbashing(): String {
         val done = BooleanArray(3601)
         val (nrOfButtons, target) = readInts(2)
         val buttons = readInts(nrOfButtons)
-        val g = IntGraph(3601)
+        val g = IntGraph(3601, false)
         val q = ArrayDeque<Int>()
         q.add(0)
         while (q.isNotEmpty()) {
@@ -25,7 +25,7 @@ fun buttonbashing(): String {
             if (done[current]) continue
             buttons.forEach { b ->
                 val v = (current + b).coerceIn(0..3600)
-                g.addUnweightedEdge(current, v)
+                g.addEdge(current, v)
                 if (!done[v])
                     q.add(v)
             }

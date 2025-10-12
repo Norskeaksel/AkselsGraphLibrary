@@ -36,6 +36,7 @@ class Grid(val width: Int, val height: Int, initWithDatalessTiles: Boolean = fal
     }
 
     override fun node2Id(node: Tile) = node.x + node.y * width
+
     override fun id2Node(id: Int) = if (id in 0 until width * height) nodes[id] else null
 
     override fun addWeightedEdge(node1: Tile, node2: Tile, weight: Double) {
@@ -114,9 +115,9 @@ class Grid(val width: Int, val height: Int, initWithDatalessTiles: Boolean = fal
                 val neighbours = getNeighbours(currentTile)
                 neighbours.forEach {
                     if (bidirectional) {
-                        connectUnweighted(currentTile, it)
+                        connect(currentTile, it)
                     } else {
-                        addUnweightedEdge(currentTile, it)
+                        addEdge(currentTile, it)
                     }
                 }
             }

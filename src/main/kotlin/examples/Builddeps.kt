@@ -12,13 +12,13 @@ fun main() {
 
 fun builddeps(): String {
     val n = readInt()
-    val g = Graph()
+    val g = Graph(false)
     repeat(n) {
         val words = readString().split(" ")
         val file = words[0].removeSuffix(":")
         val dependencies = if (words.size > 1) words.subList(1, words.size) else emptyList()
         dependencies.forEach { dependency ->
-            g.addUnweightedEdge(dependency, file)
+            g.addEdge(dependency, file)
         }
     }
     val changedFile = readString()

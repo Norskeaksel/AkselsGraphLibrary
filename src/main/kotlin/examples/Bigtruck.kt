@@ -21,8 +21,8 @@ fun bigtruck(): String {
     val m = readInt()
     repeat(m) {
         val (a, b, d) = readInts(3)
-        ig.addWeightedEdge(a, b, d - ITEM_BOOST * items[b])
-        ig.addWeightedEdge(b, a, d - ITEM_BOOST * items[a])
+        ig.addEdge(a, b, d - ITEM_BOOST * items[b])
+        ig.addEdge(b, a, d - ITEM_BOOST * items[a])
     }
     ig.dijkstra(1)
     if (ig.distanceWeightedTo(n) == Double.POSITIVE_INFINITY) {

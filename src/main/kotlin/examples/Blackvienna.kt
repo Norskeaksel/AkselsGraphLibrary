@@ -47,9 +47,9 @@ fun blackvienna(): String {
             return ans.toString()
         }*/
         loopTime += measureTimeMillis {
-            val gameGraph: DependencyGraph
+            val gameGraph: ClauseGraph
             graphInitiationTime += measureTimeMillis {
-                gameGraph = DependencyGraph()
+                gameGraph = ClauseGraph()
                 a.forEach {
                     gameGraph.addNode(it)
                     gameGraph.addNode(it + s)

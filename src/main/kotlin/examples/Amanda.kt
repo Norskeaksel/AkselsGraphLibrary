@@ -1,6 +1,6 @@
 package examples
 
-import graphClasses.DependencyGraph
+import graphClasses.ClauseGraph
 import graphClasses.Not
 import graphClasses.not
 import readInts
@@ -14,7 +14,7 @@ fun main() {
 fun amanda(): String {
     val (n, m) = readInts(2)
     val nodeValues = Array<Boolean?>(n + 1) { null }
-    val g = DependencyGraph()
+    val g = ClauseGraph()
 
     repeat(m) {
         val (a, b, c) = readInts(3)

@@ -6,11 +6,11 @@ import readInts
 
 fun rumor(): Long {
     val (n, m) = readInts(2)
-    val g = IntGraph(n+1)
+    val g = IntGraph(n+1, false)
     val c = listOf(0) + readInts(n)
     repeat(m) {
         val (x, y) = readInts(2)
-        g.connectUnweighted(x, y)
+        g.connect(x, y)
     }
     val components = g.stronglyConnectedComponents()
     System.err.println(components)

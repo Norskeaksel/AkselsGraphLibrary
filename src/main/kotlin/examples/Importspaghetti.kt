@@ -12,7 +12,7 @@ fun main() {
 
 fun importspaghetti(): String {
     val n = readInt()
-    val g = Graph()
+    val g = Graph(false)
     val files = readString().split(" ")
     files.forEach { file ->
         g.addNode(file)
@@ -21,7 +21,7 @@ fun importspaghetti(): String {
         val (file, importLines) = readString().split(" ")
         repeat(importLines.toInt()) {
             val imports = readString().replace("import ", "").split(", ")
-            imports.forEach { g.addUnweightedEdge(file, it) }
+            imports.forEach { g.addEdge(file, it) }
         }
     }
     var shortestCycleLength = Int.MAX_VALUE
