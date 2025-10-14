@@ -25,7 +25,7 @@ fun day20a(input: List<String>, cheatGoal: Int, fairTime: Int): Int {
     while (timeSaved >= cheatGoal) {
         grid.bfs(startNode, endNode)
         c++
-        val cheatDist = grid.distanceWeightedTo(endNode)
+        val cheatDist = grid.distanceTo(endNode)
         timeSaved = (fairTime - cheatDist).toInt()
         println("timeSaved: $timeSaved")
         val path = grid.getPath(endNode)

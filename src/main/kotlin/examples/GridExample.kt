@@ -34,7 +34,7 @@ fun main() {
     // Printing distances to all nodes
     val nodes = grid.nodes()
     nodes.forEach { node ->
-        val distance = grid.distanceWeightedTo(node)
+        val distance = grid.distanceTo(node)
         println("To node $node: $distance")
     }
     /* Output:

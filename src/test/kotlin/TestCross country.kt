@@ -33,6 +33,6 @@ class CrossCountryTest {
             }
         }
         graph.dijkstra(s)
-        assertThat(graph.distanceWeightedTo(t).toInt()).isEqualTo(11)
+        assertThat(graph.distanceTo(t).toInt()).isEqualTo(11)
     }
 }

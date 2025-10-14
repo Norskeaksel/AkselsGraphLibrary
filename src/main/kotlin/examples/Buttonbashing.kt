@@ -33,12 +33,12 @@ fun buttonbashing(): String {
         }
         g.bfs(0, target)
         var newTarget = target
-        while (g.distanceUnweightedTo(newTarget) == Int.MAX_VALUE) {
+        while (g.distanceTo(newTarget).toInt() == Int.MAX_VALUE) {
             newTarget++.coerceAtMost(3600)
             if (newTarget == 3600)
                 break
         }
-        val buttonPresses = g.distanceUnweightedTo(newTarget)
+        val buttonPresses = g.distanceTo(newTarget).toInt()
         val overshooting = newTarget - target
         ans.appendLine("$buttonPresses $overshooting")
     }

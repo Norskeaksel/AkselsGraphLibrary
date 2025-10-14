@@ -19,5 +19,5 @@ fun crossCountry(): Int {
         }
     }
     graph.dijkstra(s)
-    return graph.distanceWeightedTo(t).toInt()
+    return graph.distanceTo(t).toInt()
 }

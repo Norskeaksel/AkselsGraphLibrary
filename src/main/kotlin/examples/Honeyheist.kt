@@ -45,7 +45,7 @@ fun honeyheist(): String {
     val start = grid.nodes().first{ it.data == a }
     val end = grid.nodes().first{ it.data == b }
     grid.bfs(start)
-    val distance = grid.distanceWeightedTo(end)
+    val distance = grid.distanceTo(end)
     val path = grid.getPath(end)
     println(path.map { it.data })
     return if (distance <= n) {

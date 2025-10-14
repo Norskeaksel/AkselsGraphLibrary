@@ -40,8 +40,8 @@ private fun makeDAG(g: IntGraph): IntGraph {
         val u = q.removeFirst()
         if(visited[u]) continue
         visited[u] = true
-        val uDist = g.distanceWeightedTo(u)
-        g.weightedEdges(u).filter { (_, v) -> g.distanceWeightedTo(v) < uDist }.forEach { (w, v) ->
+        val uDist = g.distanceTo(u)
+        g.weightedEdges(u).filter { (_, v) -> g.distanceTo(v) < uDist }.forEach { (w, v) ->
             if (visited[v]) return@forEach
             dag.addEdge(u, v, w)
             q.add(v)

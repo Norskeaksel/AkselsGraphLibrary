@@ -97,7 +97,11 @@ abstract class BaseGraph<T : Any>(size: Int, val isWeighted: Boolean = true) {
     fun finalPath(): List<T> = finalPath
 
     fun foundTarget() = searchResults?.foundTarget ?: false
-    fun distanceWeightedTo(node: T): Double {
+    fun distanceTo(node: T) =
+        if (isWeighted) distanceWeightedTo(node)
+        else distanceUnweightedTo(node).toDouble()
+
+    private fun distanceWeightedTo(node: T): Double {
         val id = node2Id(node) ?: error("Node $node not found in graph")
         searchResults?.let {
             return it.distances[id]
@@ -105,7 +109,7 @@ abstract class BaseGraph<T : Any>(size: Int, val isWeighted: Boolean = true) {
         error("Haven't computed distance to $node because no search algorithm (dfs, bfs, dijkstra) has been run yet.")
     }
 
-    fun distanceUnweightedTo(node: T): Int {
+    private fun distanceUnweightedTo(node: T): Int {
         val id = node2Id(node) ?: error("Node $node not found in graph")
         searchResults?.let {
             return it.unweightedDistances[id]
@@ -175,7 +179,7 @@ abstract class BaseGraph<T : Any>(size: Int, val isWeighted: Boolean = true) {
 
     // ADDITIONAL ALGORITHMS
     fun minimumSpanningTree(): Pair<Double, Graph> =
-        (if (isWeighted) adjacencyList else unweightedAdjacencyList.toWeightedAdjacencyList()).let {graph ->
+        (if (isWeighted) adjacencyList else unweightedAdjacencyList.toWeightedAdjacencyList()).let { graph ->
             return prims(graph).run {
                 first to second.let { adjacencyList ->
                     val mstGraph = Graph()
