@@ -1,6 +1,8 @@
 package examples
 
+import graphClasses.Graph
 import graphClasses.IntGraph
+import graphGraphics.visualize
 import readInt
 import readInts
 
@@ -25,44 +27,36 @@ fun walkforest(): String {
         g.dijkstra(2, 1)
         val dag = makeDAG(g)
         //g.visualize(true)
-        // dag.visualize()
+        //dag.visualize()
         ans.appendLine(nrOfPaths(dag))
     }
     return ans.toString()
 }
 
-private fun makeDAG(g: IntGraph): IntGraph {
-    val dag = IntGraph(g.size())
-    val q = ArrayDeque<Int>()
-    q.add(1)
-    val visited = BooleanArray(g.size())
-    while (q.isNotEmpty()) {
-        val u = q.removeFirst()
-        if(visited[u]) continue
-        visited[u] = true
-        val uDist = g.distanceTo(u)
-        g.weightedEdges(u).filter { (_, v) -> g.distanceTo(v) < uDist }.forEach { (w, v) ->
-            if (visited[v]) return@forEach
-            dag.addEdge(u, v, w)
-            q.add(v)
+private fun makeDAG(g: IntGraph): Graph {
+    val newG = Graph()
+    val distances =  DoubleArray(g.size())
+    g.nodes().forEach { distances[it] = g.distanceTo(it) }
+    g.nodes().forEach { u ->
+        g.weightedEdges(u).forEach { (w, v) ->
+            if (distances[v] < distances[u])
+                newG.addEdge(u, v, w)
         }
     }
-    return dag
+    return newG
 }
 
-private fun nrOfPaths(g: IntGraph): Int {
+private fun nrOfPaths(g: Graph): Int {
     val nodesSorted = g.topologicalSort().reversed()
-    val dp = IntArray(g.size())
-    var c = 0
-    var ans = 0
+    val dp = IntArray(1001)
+    dp[1] = 1
     nodesSorted.forEach { u ->
+        u as Int
         val neighbours = g.neighbours(u)
         neighbours.forEach { v ->
-            if (++c == 1)
-                dp[u] = 1
+            v as Int
             dp[v] += dp[u]
-            ans = dp[v]
         }
     }
-    return ans
+    return dp[2]
 }

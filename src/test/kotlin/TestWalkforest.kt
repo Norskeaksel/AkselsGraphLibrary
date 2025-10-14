@@ -29,5 +29,12 @@ class WalkforestTest {
         _reader = File("src/test/SampleInput/Walkforest/input2").inputStream().bufferedReader()
         assertThat(walkforest()).isEqualTo(expectedOutput)
     }
+    @Test
+    fun walkforestc() {
+        val expectedOutput = """1
+"""
+        _reader = File("src/test/SampleInput/Walkforest/input3").inputStream().bufferedReader()
+        assertThat(walkforest()).isEqualTo(expectedOutput)
+    }
 
 }
