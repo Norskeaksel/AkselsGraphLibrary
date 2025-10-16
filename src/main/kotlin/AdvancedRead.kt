@@ -8,7 +8,7 @@ var INPUT: InputStream = System.`in` // Override this in tests to read from file
 var _reader = INPUT.bufferedReader()
 fun readLine(): String? = _reader.readLine()
 fun readLines(): List<String> = generateSequence { readLine() }.toList()
-fun readString() = _reader.readLine()!!
+fun readString() = _reader.readLine()
 
 @JvmField
 var _tokenizer: StringTokenizer = StringTokenizer("")

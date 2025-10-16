@@ -104,7 +104,7 @@ private fun BaseGraph<Any>.convertToVisualizationGraph(): DigraphEdgeList<Any, A
         g.insertVertex(node)
     }
     nodes().forEach { node ->
-        val edges = weightedEdges(node).ifEmpty { neighbours(node).map { 1.0 to it } }
+        val edges = edges(node).ifEmpty { neighbours(node).map { 1.0 to it } }
         edges.forEach { edge ->
             val fromToWeight = Triple(node, edge.second, edge.first)
             g.insertEdge(node, edge.second, fromToWeight)

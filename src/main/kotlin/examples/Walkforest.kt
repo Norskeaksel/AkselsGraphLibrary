@@ -38,7 +38,7 @@ private fun makeDAG(g: IntGraph): Graph {
     val distances =  DoubleArray(g.size())
     g.nodes().forEach { distances[it] = g.distanceTo(it) }
     g.nodes().forEach { u ->
-        g.weightedEdges(u).forEach { (w, v) ->
+        g.edges(u).forEach { (w, v) ->
             if (distances[v] < distances[u])
                 newG.addEdge(u, v, w)
         }

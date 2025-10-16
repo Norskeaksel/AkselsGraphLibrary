@@ -77,14 +77,6 @@ abstract class BaseGraph<T : Any>(size: Int, val isWeighted: Boolean = true) {
     }
 
     // GRAPH INFORMATION
-    private fun weightedEdges() = adjacencyList.flatMapIndexed { u, neighbours ->
-        neighbours.map { v -> u to v.second }
-    }
-
-    private fun unweightedEdges() = unweightedAdjacencyList.flatMapIndexed { u, neighbours ->
-        neighbours.map { v -> u to v }
-    }
-
     fun connections() = connections.toList()
     fun depth() = searchResults?.depth ?: error("Can't retrieve depth because no search has been run yet")
     fun visitedNodes() = searchResults?.run { visited.indices.mapNotNull { if (visited[it]) id2Node(it) else null } }
@@ -123,10 +115,13 @@ abstract class BaseGraph<T : Any>(size: Int, val isWeighted: Boolean = true) {
             ?: error("Haven't computed furthest node because no search algorithm (dfs, bfs, dijkstra) has been run yet.")
 
 
-    fun weightedEdges(t: T): List<Pair<Double, T>> =
+
+    fun edges(t:T): List<Pair<Double, T>> = if(isWeighted) weightedEdges(t)
+    else neighbours(t).map { 1.0 to it }
+
+    private fun weightedEdges(t: T): List<Pair<Double, T>> =
         node2Id(t)?.let { adjacencyList[it] }?.map { Pair(it.first, id2Node(it.second)!!) }
             ?: error("Node $t not found in graph")
-
     fun neighbours(t: T): List<T> =
         if (isWeighted) weightedEdges(t).map { it.second }
         else node2Id(t)?.let { unweightedAdjacencyList[it] }

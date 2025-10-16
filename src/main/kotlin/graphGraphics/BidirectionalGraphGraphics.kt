@@ -103,7 +103,7 @@ private fun BaseGraph<Any>.convertToVisualizationGraph(): GraphEdgeList<Any, Any
     }
     val addedEdges = mutableSetOf<Pair<Any, Any>>()
     nodes().forEach { u ->
-        val edges = weightedEdges(u).ifEmpty { neighbours(u).map { 1.0 to it } }
+        val edges = edges(u).ifEmpty { neighbours(u).map { 1.0 to it } }
         edges.forEach { (w,v) ->
             val uv = u to v
             val vu = v to u
