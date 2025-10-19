@@ -14,12 +14,34 @@ which defines the basic functionality of a graph.
 
 ## The Graph class
 
-This is the most generic class, supporting all graph creation of any datatype. Any new node is given an ID upon
-creation,
-which is used to build an adjacency list. The class maintains maps between ID's and nodes and vice versa.
-The ID's can be retrieved with `.node2id(node)` and nodes can be retrieved with `.id2node(id)`.
-Nodes can be connected unidirectional with `.addEdge(node1, node2)` or bidirectional with `.connect(node1, node2)`.
-Once the graph is built, you may use one of the graph traversal classes.
+A Graph data structure supports nodes of any datatype.
+
+Any new node is given an ID upon creation, which is used to build an adjacency list. The class maintains internal
+maps between IDs and nodes and vice versa. Nodes can be connected unidirectionally with `.addEdge(node1, node2)`
+or bidirectionally with `.connect(node1, node2)`.
+Once the graph is built, you may use one of the following graph algorithms:
+
+- **Breadth-First Search (BFS)**:
+    - `bfs(startNode: T, target: T? = null, reset: Boolean = true)`
+    - `bfs(startNodes: List<T>, target: T? = null, reset: Boolean = true)`
+
+- **Depth-First Search (DFS)**:
+    - `dfs(startNode: T, reset: Boolean = true)`
+
+- **Dijkstra's Algorithm**:
+    - `dijkstra(startNode: T, target: T? = null)`
+
+- **Floyd-Warshall Algorithm**:
+    - `floydWarshall()`
+
+- **Topological Sort**:
+    - `topologicalSort()`
+
+- **Strongly Connected Components (SCC)**:
+    - `stronglyConnectedComponents()`
+
+- **Prims (MST)**:
+    - `minimumSpanningTree()`
 [Example usage:](src/main/kotlin/examples/GraphExample.kt)
 
 ```kotlin
@@ -104,7 +126,7 @@ fun main() {
 
 The IntGraph class behaves a lot like the Graph class when used with integers like the example above. However,
 it's more performant, because it does not need to maintain an internal mapping between the nodes and their indexes in
-the adjacency list.
+the adjacency list. The obvious drawback being it only supports integer nodes.
 [Example usage.](src/main/kotlin/examples/GraphExample.kt)
 
 ## The Grid class

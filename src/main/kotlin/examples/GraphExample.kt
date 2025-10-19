@@ -17,7 +17,6 @@ fun main() {
     graph.addEdge(3, 4, 5.0)
 
     graph.addNode(5) // Adding an isolated node is also possible
-
     val startNode = 0
     val targetNode = 3
     graph.dijkstra(startNode, targetNode) // Provide a goal target node to stop the search when the target is found

@@ -18,11 +18,15 @@ abstract class BaseGraph<T : Any>(size: Int, val isWeighted: Boolean = true) {
     private var allDistances: Array<DoubleArray>? = null
 
     // ABSTRACT FUNCTIONS
+    /** Adds the given node to the graph
+     * @param node The node to add */
     abstract fun addNode(node: T)
     protected abstract fun addWeightedEdge(node1: T, node2: T, weight: Double)
     protected abstract fun addUnweightedEdge(node1: T, node2: T)
     protected abstract fun node2Id(node: T): Int?
     protected abstract fun id2Node(id: Int): T?
+
+    /** @return the nodes in the graph */
     abstract fun nodes(): List<T>
 
     // CORE GRAPH OPERATIONS
@@ -94,28 +98,23 @@ abstract class BaseGraph<T : Any>(size: Int, val isWeighted: Boolean = true) {
 
     /** Retrieves a list of all visited nodes on the order they were visited during the last search operation (DFS, BFS, Dijkstra).
      *
-     * @return A list of visited nodes.
-     * @throws IllegalStateException If no search has been run yet*/
+     * @return A list of visited nodes. or an empty list if no search algorithm (DFS, BFS, Dijkstra) has been run yet. */
     fun currentVisitedNodes(): List<T> =
         searchResults?.currentVisited?.map { id2Node(it)!! }
-            ?: error("Can't retrieve depth because no search (DFS, BFS, Dijkstra) has been run yet")
+            ?: emptyList()
 
 
     /** Retrieves a (unordered) list of all visited nodes during any non-reset search operation (DFS, BFS, Dijkstra).
      *
-     * @return A list of visited nodes.
-     * @throws IllegalStateException If no search has been run yet*/
+     * @return A list of visited nodes or an empty list if no search algorithm (DFS, BFS, Dijkstra) has been run yet. */
     fun visitedNodes() = searchResults?.run { visited.indices.mapNotNull { if (visited[it]) id2Node(it) else null } }
-        ?: error("Can't retrieve visitedNodes because no search (DFS, BFS, Dijkstra) has been run yet")
+        ?: emptyList()
 
     /** Retrieves the shortest path from the start to target node path during the most recent search operation
      * (DFS, BFS, Dijkstra)
      *
-     * @return A list of nodes representing the final path.
-     * @throws IllegalStateException If neither BFS nor Dijkstar has been run, or if they were run without specifying a target node*/
-    fun finalPath(): List<T> = finalPath ?: error(
-        "Can't retrieve finalPath because no search with a target (BFS, Dijkstra) has been run yet"
-    )
+     * @return A list of nodes representing the final path or an empty list if no search algorithm (DFS, BFS, Dijkstra) has been run yet. */
+    fun finalPath(): List<T> = finalPath ?: emptyList()
 
     /** Checks if the target node was found during the most recent search operation (BFS, Dijkstra).
      *
@@ -194,7 +193,7 @@ abstract class BaseGraph<T : Any>(size: Int, val isWeighted: Boolean = true) {
 
     // SEARCH ALGORITHMS
 
-    /** Performs a Breadth-First Search, which finds the shortest path from the starting node to all other nodes, 
+    /** Performs a Breadth-First Search, which finds the shortest path from the starting node to all other nodes,
      * assuming the graph is unweighted (all edges have a weight of 1.0)
      * It stores results that can be retrieved with the following functions:
      *
@@ -217,7 +216,7 @@ abstract class BaseGraph<T : Any>(size: Int, val isWeighted: Boolean = true) {
     /** Performs a Breadth-First Search, which finds the shortest path from the starting node to all other nodes,
      * assuming the graph is unweighted (all edges have a weight of 1.0)
      * It stores results that can be retrieved with the following functions:
-     * 
+     *
      * - `depth()`
      * - `currentVisitedNodes()`
      * - `visitedNodes()`
@@ -299,11 +298,26 @@ abstract class BaseGraph<T : Any>(size: Int, val isWeighted: Boolean = true) {
         allDistances = FloydWarshall(adjacencyList).floydWarshall()
     }
 
+    /** Retrieves the shortest distance between two nodes in the graph.
+     *
+     * This function uses the results of the Floyd-Warshall algorithm to determine the shortest path distance
+     * between the specified nodes.
+     *
+     * @param u The starting node.
+     * @param v The target node.
+     * @return The shortest distance between the two nodes.
+     * @throws IllegalStateException If the Floyd-Warshall algorithm has not been executed before calling this function. */
     fun distanceFromUtoV(u: T, v: T) = allDistances?.let {
         it[node2Id(u)!!][node2Id(v)!!]
     } ?: error("FloydWarshall must be run before calling distanceFromUtoV")
 
     // ADDITIONAL ALGORITHMS
+    /** Computes the Minimum Spanning Tree (MST) of the graph using Prim's algorithm.
+     *
+     * If the graph is unweighted, it is first converted to a weighted graph with default edge weights.
+     *
+     * @return A pair containing the total weight of the MST and the graph representing the MST.
+     * @throws IllegalStateException If the graph is empty or not fully connected. */
     fun minimumSpanningTree(): Pair<Double, Graph> =
         (if (isWeighted) adjacencyList else unweightedAdjacencyList.toWeightedAdjacencyList()).let { graph ->
             return prims(graph).run {
@@ -319,11 +333,25 @@ abstract class BaseGraph<T : Any>(size: Int, val isWeighted: Boolean = true) {
             }
         }
 
+    /** Builds an order of nodes so that the first nodes has no outgoing edges, then nodes with edges pointing to these
+     * and so on, assuming the graph is a Directed Acyclic Graph (DAG). This is done by running a DFS from each node
+     * and ordering the nodes by descending depth (post-order).
+     *
+     * @return A list of nodes in topological order if the graph was a DAG.
+     * Otherwise, returns a list of nodes in undefined order */
     open fun topologicalSort(): List<T> {
         val dfsGraph = if (isWeighted) adjacencyList.toUnweightedAdjacencyList() else unweightedAdjacencyList
         return DFS(dfsGraph).topologicalSort().map { id2Node(it)!! }
     }
 
+    /** Identifies groups where each node is reachable from every other node in the group.
+     *
+     * It does this by creating a reversed graph by reversing the direction of all edges in the graph.
+     * Then, it performs a topological sort on the reversed graph to determine the order of processing nodes.
+     * Now it can run a depth-first search (DFS) on the original graph in the order determined by the topological sort.
+     * Nodes visited during each DFS traversal belong to the same strongly connected component.
+     *
+     * @return A list of strongly connected components, where each component is a list of nodes. */
     open fun stronglyConnectedComponents(): List<List<T>> {
         useWeightedConnectionsIfNeeded("stronglyConnectedComponents")
         val scc = DFS(unweightedAdjacencyList).stronglyConnectedComponents()
