@@ -13,7 +13,7 @@ fun Components.visualizeComponents() {
             }
         }
     }
-    sccGraph.printUnweightedConnections()
+    sccGraph.print(false)
     sccGraph.visualize()
 }
 
