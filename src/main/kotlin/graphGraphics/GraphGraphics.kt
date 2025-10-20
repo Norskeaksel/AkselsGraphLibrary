@@ -5,7 +5,6 @@ import com.brunomnsilva.smartgraph.graph.DigraphEdgeList
 import com.brunomnsilva.smartgraph.graphview.SmartCircularSortedPlacementStrategy
 import com.brunomnsilva.smartgraph.graphview.SmartGraphPanel
 import com.brunomnsilva.smartgraph.graphview.SmartPlacementStrategy
-import debug
 import graphClasses.BaseGraph
 import javafx.animation.KeyFrame
 import javafx.animation.PauseTransition
