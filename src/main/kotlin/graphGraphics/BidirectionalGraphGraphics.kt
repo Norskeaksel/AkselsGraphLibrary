@@ -18,6 +18,7 @@ import javafx.util.Duration
 class BidirectionalGraphGraphics : Application() {
     companion object {
         lateinit var graph: BaseGraph<Any>
+        var finalPath: List<Any> = emptyList()
         var screenTitle = "JavaFXGraph Visualization"
         var animationTicTimeOverride: Double? = null
         var startPaused = false
@@ -29,10 +30,8 @@ class BidirectionalGraphGraphics : Application() {
     private var isPaused = startPaused
     override fun start(stage: Stage) {
         val visitationOrder: List<Any>
-        val path: List<Any>
         val graphVisualizer: GraphEdgeList<Any, Any> = run {
             visitationOrder = graph.currentVisitedNodes()
-            path = graph.finalPath()
             graph.convertToVisualizationGraph()
         }
         val animationKeyFrameTime =
@@ -62,7 +61,7 @@ class BidirectionalGraphGraphics : Application() {
             })
             timeline.keyFrames.add(keyFrame)
         }
-        path.forEachIndexed { index, vertex ->
+        finalPath.forEachIndexed { index, vertex ->
             val keyFrame = KeyFrame(
                 Duration.millis(animationKeyFrameTime * index)
                     .add(Duration.millis(animationKeyFrameTime * visitationOrder.size)).add(transitionTime), {

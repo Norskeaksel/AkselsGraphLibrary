@@ -3,13 +3,13 @@ package graphGraphics
 import graphClasses.BaseGraph
 import javafx.application.Application
 
-/** * Visualizes the graph using a graphical interface.
+/** * Visualizes the graph using a graphical interface, made by Bruno Silva's SmartGraph library.
  *
- * This function provides a visualization of the graph's structure and traversal process.
- * It supports both directed and bidirectional graph visualizations, with options to customize
- * the animation speed, screen title, and other parameters.
+ * The function visualizes nodes with edges using a force-directed algorithm. Then it animates the traversal of the graph,
+ * highlighting visited nodes and the final path from the start node to the target node if a search has been performed.
  *
  * @param bidirectional If `true`, visualizes the graph as bidirectional, otherwise as directed.
+ * @param finalPath A list of nodes that can override the final path, and be animated instead. If not provided, the graph's own final path is used.
  * @param screenTitle The title of the visualization window.
  * @param animationTicTimeOverride Overrides the default animation speed in milliseconds.
  * @param closeOnEnd If `true`, closes the visualization window when the animation ends.
@@ -18,6 +18,7 @@ import javafx.application.Application
  * @throws IllegalStateException If the graph is improperly configured for visualization. */
 fun <T : Any> BaseGraph<T>.visualize(
     bidirectional: Boolean = false,
+    finalPath:List<T> = finalPath(),
     screenTitle: String = "Graph visualizer (Click or space to pause and resume)",
     animationTicTimeOverride: Double? = null,
     closeOnEnd: Boolean = false,
@@ -27,6 +28,7 @@ fun <T : Any> BaseGraph<T>.visualize(
     if (bidirectional) {
         @Suppress("UNCHECKED_CAST")
         BidirectionalGraphGraphics.graph = this as BaseGraph<Any>
+        BidirectionalGraphGraphics.finalPath = finalPath
         BidirectionalGraphGraphics.screenTitle = screenTitle
         BidirectionalGraphGraphics.animationTicTimeOverride = animationTicTimeOverride
         BidirectionalGraphGraphics.startPaused = startPaused
@@ -36,6 +38,7 @@ fun <T : Any> BaseGraph<T>.visualize(
     } else {
         @Suppress("UNCHECKED_CAST")
         GraphGraphics.graph = this as BaseGraph<Any>
+        GraphGraphics.finalPath = finalPath
         GraphGraphics.screenTitle = screenTitle
         GraphGraphics.animationTicTimeOverride = animationTicTimeOverride
         GraphGraphics.startPaused = startPaused
