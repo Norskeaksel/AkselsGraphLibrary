@@ -1,7 +1,6 @@
 package examples
 
 import graphClasses.IntGraph
-import graphGraphics.visualize
 import readInts
 
 // https://open.kattis.com/problems/brexit
@@ -15,35 +14,39 @@ fun brexit(): String {
     val g = IntGraph(c + 1, false)
     repeat(p) {
         val (u, v) = readInts(2)
-        if (u == l)
-            g.addEdge(l, v)
-        else if (v == l)
-            g.addEdge(l, u)
-        else
-            g.connect(u, v)
+        g.connect(u, v)
     }
-    //g.visualize(bidirectional = true)
+    if (x == l)
+        return "leave"
     return stayOrLeave(g, x, l)
 }
 
 fun stayOrLeave(g: IntGraph, x: Int, l: Int): String {
     val leavers = BooleanArray(g.size())
-    leavers[x] = true
+    leavers[l] = true
     val q = ArrayDeque<Int>()
-    q.add(x)
+    q.add(l)
+    val finalPath = mutableListOf(x)
+    var loopTime = 0L
     while (q.isNotEmpty()) {
+        val loopStartTime = System.currentTimeMillis()
         val c = q.removeFirst()
         val n = g.neighbours(c)
         n.forEach { u ->
-            if (leavers[u])
+            if (leavers[u] || u == x)
                 return@forEach
             val nn = g.neighbours(u)
             if (nn.count { v -> leavers[v] } >= nn.size / 2.0) {
                 q.add(u)
+                finalPath.add(u)
                 leavers[u] = true
             }
         }
+        loopTime += System.currentTimeMillis() - loopStartTime
+        if (loopTime > 2000L) break
     }
-    return if (g.neighbours(l).count { v -> leavers[v] } < g.neighbours(l).size / 2.0) "leave" else "stay"
+    // debug(finalPath)
+    // g.visualize(bidirectional = true, finalPath=finalPath)
+    return if (g.neighbours(x).count { v -> leavers[v] } >= g.neighbours(x).size / 2.0) "leave" else "stay"
 }
 
