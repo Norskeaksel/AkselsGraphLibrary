@@ -18,7 +18,7 @@ fun Components.visualizeComponents() {
         }
     }
     sccGraph.print(false)
-    sccGraph.visualize()
+    sccGraph.visualizeGraph()
 }
 
 /** Visualizes the strongly connected components (SCCs) of a graph with integer nodes.

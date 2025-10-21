@@ -19,7 +19,7 @@ import org.gridgraphics.GridGraphics
  * @param startPaused If `true`, starts the visualization in a paused state.
  * @param screenWidthOverride Overrides the default screen width for the visualization.
  * @throws IllegalStateException If the grid is improperly configured for visualization. */
-fun Grid.visualize(
+fun Grid.visualizeGrid(
     currentVisitedNodes: List<Tile> = currentVisitedNodes(),
     finalPath:List<Tile> = finalPath(),
     nodeDistances:List<Double> = currentVisitedNodes.map { distanceTo(it) },

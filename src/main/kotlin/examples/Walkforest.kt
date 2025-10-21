@@ -2,7 +2,6 @@ package examples
 
 import graphClasses.Graph
 import graphClasses.IntGraph
-import graphGraphics.visualize
 import readInt
 import readInts
 

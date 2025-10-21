@@ -2,7 +2,7 @@ package examples
 
 import graphClasses.Grid
 import graphClasses.Tile
-import gridGraphics.visualize
+import gridGraphics.visualizeGrid
 
 fun main() {
     // Example Grid Definition. We can also initialize it with a with and a height, e.g. `Grid(3, 3)`,
@@ -48,7 +48,7 @@ fun main() {
      */
 
     // Visualizing the grid, the BFS and the final fastest path to the target
-    grid.visualize(
+    grid.visualizeGrid(
         screenTitle = "Grid example visualizing",
         animationTicTimeOverride = 500.0,
         startPaused = false,

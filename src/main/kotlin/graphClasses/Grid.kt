@@ -13,6 +13,8 @@ data class Tile(val x: Int, val y: Int, var data: Any? = null){
      *
      * @return `true` if `data` is a `Char` and is a digit, otherwise `false`. */
     fun dataIsDigit() = data is Char && (data as Char).isDigit()
+
+    fun xPlusYTimesWidth(width:Int) = x + y * width
 }
 
 /** The Grid class is a specialized graph class.

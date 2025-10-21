@@ -16,7 +16,7 @@ import javafx.application.Application
  * @param startPaused If `true`, starts the visualization in a paused state.
  * @param screenWidthOverride Overrides the default screen width for the visualization.
  * @throws IllegalStateException If the graph is improperly configured for visualization. */
-fun <T : Any> BaseGraph<T>.visualize(
+fun <T : Any> BaseGraph<T>.visualizeGraph(
     bidirectional: Boolean = false,
     finalPath:List<T> = finalPath(),
     screenTitle: String = "Graph visualizer (Click or space to pause and resume)",

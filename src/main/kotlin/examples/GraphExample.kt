@@ -2,7 +2,7 @@ package examples
 
 import graphClasses.Graph
 import graphClasses.IntGraph
-import graphGraphics.visualize
+import graphGraphics.visualizeGraph
 
 
 fun main() {
@@ -65,7 +65,7 @@ fun main() {
     // Outputs the same as the code above
 
     // Visualize the graph using brunomnsilva's JavaFXSmartGraph: https://github.com/brunomnsilva/JavaFXSmartGraph
-    graph.visualize( // Also works with intGraph.visualizeSearch(
+    graph.visualizeGraph( // Also works with intGraph.visualizeSearch(
         screenTitle = "Grid example visualizing",
         animationTicTimeOverride = 500.0,
         startPaused = false,
