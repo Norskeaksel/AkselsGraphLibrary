@@ -1,6 +1,6 @@
-# AkselsGraphLibrary
+# GraphMateKT
 
-![My Workflow Status](https://github.com/Norskeaksel/AkselsGraphLibrary/actions/workflows/ci.yml/badge.svg)
+![My Workflow Status](https://github.com/Norskeaksel/GraphMateKT/actions/workflows/ci.yml/badge.svg)
 
 This repository contains classes and algorithms for making graphs, and traversing them in various ways.
 This can for example be used to solve competitive programming problems.
