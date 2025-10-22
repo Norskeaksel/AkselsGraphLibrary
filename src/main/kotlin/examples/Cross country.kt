@@ -1,5 +1,5 @@
 package examples
-// https://open.kattis.com/problems/crosscountry?tab=metadata
+// Solves https://open.kattis.com/problems/crosscountry?tab=metadata
 import graphClasses.IntGraph
 import readDoubles
 import readInts

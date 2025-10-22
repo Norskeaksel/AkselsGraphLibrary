@@ -4,7 +4,7 @@ import graphClasses.*
 import readInts
 import readString
 
-// https://open.kattis.com/problems/grid
+// Solves https://open.kattis.com/problems/grid
 fun main() {
     val ans = grid()
     println(ans)

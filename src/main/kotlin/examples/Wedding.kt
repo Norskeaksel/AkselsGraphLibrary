@@ -4,7 +4,7 @@ import graphClasses.*
 import readInts
 import readStrings
 
-// https://open.kattis.com/problems/wedding
+// Solves https://open.kattis.com/problems/wedding
 fun main() {
     val ans = wedding()
     println(ans)

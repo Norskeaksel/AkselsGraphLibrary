@@ -3,7 +3,7 @@ package examples
 import graphClasses.IntGraph
 import readInts
 
-// https://open.kattis.com/problems/brexit
+// Solves https://open.kattis.com/problems/brexit
 fun main() {
     val ans = brexit()
     println(ans)

@@ -4,7 +4,7 @@ import AdjacencyList
 import Edge
 import java.util.*
 
-class Dijkstra(private val graph: AdjacencyList) {
+internal class Dijkstra(private val graph: AdjacencyList) {
     private var r = GraphSearchResults(graph.size)
     fun dijkstra(start: Int, previousSearchResults: GraphSearchResults? = null): GraphSearchResults {
         r = previousSearchResults ?: GraphSearchResults(graph.size)

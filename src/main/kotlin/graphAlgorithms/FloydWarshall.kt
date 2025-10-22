@@ -3,7 +3,7 @@ package graphAlgorithms
 import AdjacencyList
 import kotlin.math.min
 
-class FloydWarshall(val graph: AdjacencyList) {
+internal class FloydWarshall(val graph: AdjacencyList) {
     val n = graph.size
     private val distances = Array(n) { DoubleArray(n) { Double.POSITIVE_INFINITY } }
 

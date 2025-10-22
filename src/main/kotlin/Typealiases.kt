@@ -1,7 +1,10 @@
 /** Edge has a weight w to a destination node v */
 typealias Edge = Pair<Double, Int>
+/** List of edges */
 typealias Edges = MutableList<Edge>
+/** Used to represent a weighted graph */
 typealias AdjacencyList = MutableList<Edges>
+/** Used to represent an unweighted graph */
 typealias UnweightedAdjacencyList = MutableList<MutableList<Int>>
 
 

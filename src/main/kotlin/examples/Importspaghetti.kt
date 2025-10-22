@@ -4,7 +4,7 @@ import graphClasses.*
 import readInt
 import readString
 
-// https://open.kattis.com/problems/importspaghetti
+// Solves https://open.kattis.com/problems/importspaghetti
 fun main() {
     val ans = importspaghetti()
     println(ans)

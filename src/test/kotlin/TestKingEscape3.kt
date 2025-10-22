@@ -1,4 +1,4 @@
-// https://open.kattis.com/problems/crosscountry?tab=metadata
+// Solves https://open.kattis.com/problems/crosscountry?tab=metadata
 import examples.kingEscape3
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.AfterAll

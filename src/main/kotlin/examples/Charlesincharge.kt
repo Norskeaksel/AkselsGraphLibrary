@@ -5,7 +5,7 @@ import Edge
 import graphAlgorithms.Dijkstra
 import readInts
 
-// https://open.kattis.com/problems/charlesincharge
+// Solves https://open.kattis.com/problems/charlesincharge
 fun main() {
     val ans = charlesincharge()
     println(ans)

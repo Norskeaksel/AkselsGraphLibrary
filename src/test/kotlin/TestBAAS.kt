@@ -1,8 +1,6 @@
-// https://open.kattis.com/problems/crosscountry?tab=metadata
+// Solves https://open.kattis.com/problems/crosscountry?tab=metadata
 import examples.baas
-import examples.illumination
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.AfterAll
 import java.io.File
 import org.junit.jupiter.api.Test
 import kotlin.system.measureTimeMillis

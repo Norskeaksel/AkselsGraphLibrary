@@ -4,7 +4,7 @@ import graphClasses.IntGraph
 import readInt
 import readInts
 
-// https://open.kattis.com/problems/buttonbashing
+// Solves https://open.kattis.com/problems/buttonbashing
 fun main() {
     val ans = buttonbashing()
     println(ans)

@@ -3,7 +3,7 @@ package examples
 import readInt
 import readString
 
-// https://open.kattis.com/problems/units
+// Solves https://open.kattis.com/problems/units
 
 
 fun main() {

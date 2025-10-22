@@ -16,7 +16,7 @@ import javafx.stage.Stage
 import javafx.util.Duration
 
 
-class GraphGraphics : Application() {
+internal class GraphGraphics : Application() {
     companion object {
         lateinit var graph: BaseGraph<Any>
         var finalPath: List<Any> = emptyList()

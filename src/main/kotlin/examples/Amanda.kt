@@ -5,12 +5,12 @@ import graphClasses.Not
 import graphClasses.not
 import readInts
 
-// https://open.kattis.com/problems/amanda
 fun main() {
     val ans = amanda()
     println(ans)
 }
 
+/** Solves https://open.kattis.com/problems/amanda */
 fun amanda(): String {
     val (n, m) = readInts(2)
     val nodeValues = Array<Boolean?>(n + 1) { null }

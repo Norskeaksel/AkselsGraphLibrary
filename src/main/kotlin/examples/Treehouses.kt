@@ -6,7 +6,7 @@ import readInts
 import kotlin.math.pow
 import kotlin.math.sqrt
 
-// https://open.kattis.com/problems/treehouses
+// Solves https://open.kattis.com/problems/treehouses
 fun main() {
     val ans = treehouses()
     println(ans)

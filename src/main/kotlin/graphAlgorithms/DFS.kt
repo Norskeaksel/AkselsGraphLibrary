@@ -4,7 +4,7 @@ import IntComponents
 import UnweightedAdjacencyList
 
 
-class DFS(private val graph: UnweightedAdjacencyList) {
+internal class DFS(private val graph: UnweightedAdjacencyList) {
     private var r = GraphSearchResults(graph.size)
 
     fun dfs(

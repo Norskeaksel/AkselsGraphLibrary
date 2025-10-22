@@ -6,7 +6,7 @@ import readInts
 import kotlin.math.abs
 
 
-// https://open.kattis.com/problems/buriedtreasure2
+// Solves https://open.kattis.com/problems/buriedtreasure2
 fun main() {
     val ans = buriedtreasure2()
     println(ans)

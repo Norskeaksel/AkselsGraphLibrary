@@ -3,7 +3,7 @@ package examples
 import graphClasses.*
 import readLines
 
-// https://open.kattis.com/problems/island
+// Solves https://open.kattis.com/problems/island
 fun main() {
     val ans = islandBuses()
     println(ans)

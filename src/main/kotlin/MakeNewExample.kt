@@ -7,7 +7,7 @@ private fun createExample(name: String) = """package examples
 import readInt
 import readInts
 
-// https://open.kattis.com/problems/$name
+// Solves https://open.kattis.com/problems/$name
 fun main() {
     val ans = $name()
     println(ans)

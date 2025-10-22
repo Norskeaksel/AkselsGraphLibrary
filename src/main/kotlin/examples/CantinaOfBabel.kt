@@ -4,7 +4,7 @@ import graphClasses.*
 import readInt
 import readString
 
-// https://open.kattis.com/problems/cantinaofbabel
+// Solves https://open.kattis.com/problems/cantinaofbabel
 
 data class Man(val name: String, val languages: MutableList<String>)
 

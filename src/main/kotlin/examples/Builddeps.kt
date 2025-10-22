@@ -4,7 +4,7 @@ import graphClasses.Graph
 import readInt
 import readString
 
-// https://open.kattis.com/problems/builddeps
+// Solves https://open.kattis.com/problems/builddeps
 fun main() {
     val ans = builddeps()
     println(ans)

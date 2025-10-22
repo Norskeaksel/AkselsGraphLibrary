@@ -15,7 +15,7 @@ import javafx.scene.input.KeyCode
 import javafx.stage.Stage
 import javafx.util.Duration
 
-class BidirectionalGraphGraphics : Application() {
+internal class BidirectionalGraphGraphics : Application() {
     companion object {
         lateinit var graph: BaseGraph<Any>
         var finalPath: List<Any> = emptyList()

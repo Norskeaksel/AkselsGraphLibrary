@@ -5,7 +5,7 @@ import graphClasses.IntGraph
 import readInt
 import readInts
 
-// https://open.kattis.com/problems/walkforest
+// Solves https://open.kattis.com/problems/walkforest
 fun main() {
     val ans = walkforest()
     println(ans)

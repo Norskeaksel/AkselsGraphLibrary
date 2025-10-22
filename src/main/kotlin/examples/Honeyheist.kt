@@ -7,7 +7,7 @@ import readInts
 
 import java.lang.Math.pow
 
-// https://open.kattis.com/problems/honeyheist
+// Solves https://open.kattis.com/problems/honeyheist
 fun main() {
     val ans = honeyheist()
     println(ans)

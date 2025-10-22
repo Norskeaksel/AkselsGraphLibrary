@@ -4,7 +4,7 @@ import graphClasses.Grid
 import readInts
 import readString
 
-// https://open.kattis.com/problems/amoebas
+// Solves https://open.kattis.com/problems/amoebas
 fun main() {
     val ans = amoebas()
     println(ans)

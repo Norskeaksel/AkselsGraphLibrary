@@ -4,7 +4,7 @@ import graphClasses.Graph
 import readString
 
 
-// https://open.kattis.com/problems/familydag
+// Solves https://open.kattis.com/problems/familydag
 fun main() {
     val ans = familydag()
     println(ans)

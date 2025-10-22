@@ -4,7 +4,7 @@ import graphClasses.Grid
 import graphClasses.Tile
 import readString
 
-// https://open.kattis.com/problems/day3GearRatios2023
+// Solves https://open.kattis.com/problems/day3GearRatios2023
 fun main() {
     val ans = day3GearRatios2023()
     println(ans)

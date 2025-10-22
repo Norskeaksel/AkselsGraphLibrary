@@ -3,7 +3,7 @@ package examples
 import graphClasses.IntGraph
 import readInts
 
-// https://open.kattis.com/problems/birthday
+// Solves https://open.kattis.com/problems/birthday
 fun main() {
     val ans = birthday()
     println(ans)

@@ -4,7 +4,7 @@ import AdjacencyList
 import Edge
 import java.util.*
 
-fun prims(graph: AdjacencyList): Pair<Double, AdjacencyList> {
+internal fun prims(graph: AdjacencyList): Pair<Double, AdjacencyList> {
     if (graph.size == 0) error("The graph is empty. Cannot do minimumSpanningTree")
 
     val visited = BooleanArray(graph.size)

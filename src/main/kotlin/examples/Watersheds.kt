@@ -5,7 +5,7 @@ import graphClasses.Tile
 import readInt
 import readInts
 
-// https://open.kattis.com/problems/watersheds
+// Solves https://open.kattis.com/problems/watersheds
 fun main() {
     val ans = watersheds()
     println(ans)

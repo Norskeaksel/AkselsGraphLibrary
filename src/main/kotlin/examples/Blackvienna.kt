@@ -7,7 +7,7 @@ import readString
 import java.util.ArrayList
 import kotlin.system.measureTimeMillis
 
-// https://open.kattis.com/problems/blackvienna
+// Solves https://open.kattis.com/problems/blackvienna
 fun main() {
     val ans = blackvienna()
     println(ans)

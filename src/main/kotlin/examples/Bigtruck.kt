@@ -1,5 +1,5 @@
 package examples
-// https://open.kattis.com/problems/bigtruck
+// Solves https://open.kattis.com/problems/bigtruck
 import graphClasses.*
 import readInt
 import readInts

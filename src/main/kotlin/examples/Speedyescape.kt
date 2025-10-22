@@ -3,7 +3,7 @@ import graphClasses.Graph
 import java.util.*
 
 
-// https://open.kattis.com/problems/speedyescape
+// Solves https://open.kattis.com/problems/speedyescape
 fun main() {
     val ans = speedyescape()
     if (ans == -1.0)

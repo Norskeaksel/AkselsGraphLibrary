@@ -2,7 +2,7 @@ package graphAlgorithms
 
 import UnweightedAdjacencyList
 
-class BFS(private val graph: UnweightedAdjacencyList) {
+internal class BFS(private val graph: UnweightedAdjacencyList) {
     fun bfs(
         startIds: List<Int>,
         targetId: Int = -1,

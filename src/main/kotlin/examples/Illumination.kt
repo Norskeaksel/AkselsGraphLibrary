@@ -4,7 +4,7 @@ import graphClasses.*
 import readInts
 import kotlin.math.abs
 
-// https://open.kattis.com/problems/illumination
+// Solves https://open.kattis.com/problems/illumination
 fun main() {
     val ans = illumination()
     println(ans)

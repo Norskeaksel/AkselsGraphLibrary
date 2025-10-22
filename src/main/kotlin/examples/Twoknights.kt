@@ -4,7 +4,7 @@ import graphClasses.*
 import readString
 import kotlin.collections.ArrayDeque
 
-// https://open.kattis.com/problems/twoknights
+// Solves https://open.kattis.com/problems/twoknights
 fun main() {
     val ans = twoknights()
     println(ans)

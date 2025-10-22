@@ -5,7 +5,7 @@ import readInt
 import readInts
 import kotlin.math.min
 
-// https://open.kattis.com/problems/baas
+// Solves https://open.kattis.com/problems/baas
 /* Note, this solution is close to the time limit. To make it pass, the submitted solution must cut away all library
    functions that's not needed. */
 

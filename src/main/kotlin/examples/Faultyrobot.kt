@@ -3,7 +3,7 @@ package examples
 import graphClasses.*
 import readInts
 
-// https://open.kattis.com/problems/faultyrobot
+// Solves https://open.kattis.com/problems/faultyrobot
 fun main() {
     val ans = faultyrobot()
     println(ans)

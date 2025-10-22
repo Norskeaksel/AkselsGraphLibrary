@@ -1,6 +1,6 @@
 package graphAlgorithms
 
-data class GraphSearchResults(private val graphSize: Int) {
+internal data class GraphSearchResults(private val graphSize: Int) {
     val visited = BooleanArray(graphSize)
     val unweightedDistances: IntArray = IntArray(graphSize) { Int.MAX_VALUE }
     val weightedDistances: DoubleArray = DoubleArray(graphSize) { Double.POSITIVE_INFINITY }

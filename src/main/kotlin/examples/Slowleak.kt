@@ -3,7 +3,7 @@ package examples
 import graphClasses.*
 import readInts
 
-// https://open.kattis.com/problems/slowleak
+// Solves https://open.kattis.com/problems/slowleak
 fun main() {
     val ans = slowleak()
     println(ans)

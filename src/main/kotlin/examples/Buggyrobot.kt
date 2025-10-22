@@ -5,7 +5,7 @@ import readInts
 import readString
 import kotlin.system.measureTimeMillis
 
-// https://open.kattis.com/problems/buggyrobot
+// Solves https://open.kattis.com/problems/buggyrobot
 fun main() {
     val ans = buggyrobot()
     println(ans)

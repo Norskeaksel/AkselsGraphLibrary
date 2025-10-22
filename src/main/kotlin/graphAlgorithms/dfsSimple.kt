@@ -2,7 +2,7 @@ package graphAlgorithms
 
 import UnweightedAdjacencyList
 
-fun dfsSimple(graph: UnweightedAdjacencyList, start: Int, currentVisited: MutableSet<Int> = mutableSetOf()): Set<Int> {
+internal fun dfsSimple(graph: UnweightedAdjacencyList, start: Int, currentVisited: MutableSet<Int> = mutableSetOf()): Set<Int> {
     if (start !in currentVisited) {
         currentVisited.add(start)
         graph[start].forEach { neighbour ->

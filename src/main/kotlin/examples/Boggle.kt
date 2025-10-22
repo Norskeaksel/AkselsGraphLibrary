@@ -7,7 +7,7 @@ import graphClasses.TrieNode
 import readInt
 import readString
 
-// https://open.kattis.com/problems/boggle
+// Solves https://open.kattis.com/problems/boggle
 //Contraints: 4x4 grid, letter only valid once per word
 private val wordScore = IntArray(9).apply {
     this[3] = 1
