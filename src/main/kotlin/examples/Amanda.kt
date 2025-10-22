@@ -8,6 +8,7 @@ import readInts
 fun main() {
     val ans = amanda()
     println(ans)
+    System.out.flush()
 }
 
 /** Solves https://open.kattis.com/problems/amanda */

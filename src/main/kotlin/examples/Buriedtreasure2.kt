@@ -10,6 +10,7 @@ import kotlin.math.abs
 fun main() {
     val ans = buriedtreasure2()
     println(ans)
+    System.out.flush()
 }
 
 fun buriedtreasure2(): String {

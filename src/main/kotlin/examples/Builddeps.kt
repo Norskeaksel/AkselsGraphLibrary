@@ -8,6 +8,7 @@ import readString
 fun main() {
     val ans = builddeps()
     println(ans)
+    System.out.flush()
 }
 
 fun builddeps(): String {

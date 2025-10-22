@@ -7,6 +7,7 @@ import readInts
 fun main() {
     val ans = brexit()
     println(ans)
+    System.out.flush()
 }
 
 fun brexit(): String {

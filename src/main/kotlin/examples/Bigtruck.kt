@@ -12,6 +12,7 @@ const val ITEM_BOOST = 1E-9
 fun main() {
     val ans = bigtruck()
     println(ans)
+    System.out.flush()
 }
 
 fun bigtruck(): String {

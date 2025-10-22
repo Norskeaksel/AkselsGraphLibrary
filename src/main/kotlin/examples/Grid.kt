@@ -8,6 +8,7 @@ import readString
 fun main() {
     val ans = grid()
     println(ans)
+    System.out.flush()
 }
 
 fun grid(): Int {

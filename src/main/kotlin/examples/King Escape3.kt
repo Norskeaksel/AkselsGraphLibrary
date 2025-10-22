@@ -7,6 +7,7 @@ import readInts
 fun main() {
     val ans = kingEscape3()
     println(ans)
+    System.out.flush()
 }
 
 fun kingEscape3(): String {

@@ -8,6 +8,7 @@ import readString
 fun main() {
     val ans = torn2pieces()
     println(ans)
+    System.out.flush()
 }
 
 fun torn2pieces(): String {

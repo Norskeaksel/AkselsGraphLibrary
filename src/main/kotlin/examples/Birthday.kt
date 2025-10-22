@@ -7,6 +7,7 @@ import readInts
 fun main() {
     val ans = birthday()
     println(ans)
+    System.out.flush()
 }
 
 fun birthday(): String {

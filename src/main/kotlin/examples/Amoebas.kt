@@ -8,6 +8,7 @@ import readString
 fun main() {
     val ans = amoebas()
     println(ans)
+    System.out.flush()
 }
 
 fun amoebas(): String {

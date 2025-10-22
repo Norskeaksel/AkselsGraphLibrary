@@ -8,6 +8,7 @@ import readStrings
 fun main() {
     val ans = wedding()
     println(ans)
+    System.out.flush()
 }
 
 fun wedding(): String {

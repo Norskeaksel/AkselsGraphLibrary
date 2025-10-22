@@ -10,6 +10,7 @@ import kotlin.math.sqrt
 fun main() {
     val ans = treehouses()
     println(ans)
+    System.out.flush()
 }
 
 data class Point(val x: Double, val y: Double)

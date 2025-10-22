@@ -11,6 +11,7 @@ import readInts
 fun main() {
     val ans = $name()
     println(ans)
+    System.out.flush()
 }
 
 fun $name(): String {

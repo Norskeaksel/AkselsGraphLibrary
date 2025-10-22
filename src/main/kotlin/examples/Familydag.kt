@@ -8,6 +8,7 @@ import readString
 fun main() {
     val ans = familydag()
     println(ans)
+    System.out.flush()
 }
 
 fun familydag(): String {

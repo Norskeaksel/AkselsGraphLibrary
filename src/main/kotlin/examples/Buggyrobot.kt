@@ -9,6 +9,7 @@ import kotlin.system.measureTimeMillis
 fun main() {
     val ans = buggyrobot()
     println(ans)
+    System.out.flush()
 }
 
 

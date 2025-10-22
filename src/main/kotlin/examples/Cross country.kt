@@ -7,6 +7,7 @@ import readInts
 fun main() {
     val ans = crossCountry()
     println(ans)
+    System.out.flush()
 }
 
 fun crossCountry(): Int {

@@ -8,6 +8,7 @@ import kotlin.collections.ArrayDeque
 fun main() {
     val ans = twoknights()
     println(ans)
+    System.out.flush()
 }
 
 fun twoknights(): String {

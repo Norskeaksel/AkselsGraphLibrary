@@ -11,6 +11,7 @@ import kotlin.system.measureTimeMillis
 fun main() {
     val ans = blackvienna()
     println(ans)
+    System.out.flush()
 }
 
 private val a = ('A'..'Z').map { it.code - 'A'.code }

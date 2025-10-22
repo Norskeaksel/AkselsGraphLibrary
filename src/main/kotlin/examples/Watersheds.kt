@@ -9,6 +9,7 @@ import readInts
 fun main() {
     val ans = watersheds()
     println(ans)
+    System.out.flush()
 }
 
 fun watersheds(): String {

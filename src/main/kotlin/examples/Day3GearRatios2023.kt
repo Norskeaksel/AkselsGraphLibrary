@@ -8,6 +8,7 @@ import readString
 fun main() {
     val ans = day3GearRatios2023()
     println(ans)
+    System.out.flush()
 }
 
 fun day3GearRatios2023(): Int {

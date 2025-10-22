@@ -7,6 +7,7 @@ import readInts
 fun main() {
     val ans = slowleak()
     println(ans)
+    System.out.flush()
 }
 
 fun slowleak(): String {

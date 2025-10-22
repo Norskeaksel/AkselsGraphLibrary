@@ -8,6 +8,7 @@ import readString
 fun main() {
     val ans = importspaghetti()
     println(ans)
+    System.out.flush()
 }
 
 fun importspaghetti(): String {

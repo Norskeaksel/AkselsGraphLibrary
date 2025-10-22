@@ -8,6 +8,7 @@ import readInts
 fun main() {
     val ans = buttonbashing()
     println(ans)
+    System.out.flush()
 }
 
 fun buttonbashing(): String {

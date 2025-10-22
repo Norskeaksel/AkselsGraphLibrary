@@ -9,6 +9,7 @@ import readInts
 fun main() {
     val ans = walkforest()
     println(ans)
+    System.out.flush()
 }
 
 fun walkforest(): String {

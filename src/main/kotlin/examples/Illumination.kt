@@ -8,6 +8,7 @@ import kotlin.math.abs
 fun main() {
     val ans = illumination()
     println(ans)
+    System.out.flush()
 }
 
 fun illumination(): String {

@@ -11,6 +11,7 @@ data class Man(val name: String, val languages: MutableList<String>)
 fun main() {
     val ans = cantinaOfBabel()
     println(ans)
+    System.out.flush()
 }
 
 fun cantinaOfBabel(): Int {

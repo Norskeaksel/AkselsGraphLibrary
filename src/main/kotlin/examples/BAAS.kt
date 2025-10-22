@@ -12,6 +12,7 @@ import kotlin.math.min
 fun main() {
     val ans = baas()
     println(ans)
+    System.out.flush()
 }
 
 fun baas(): Int {

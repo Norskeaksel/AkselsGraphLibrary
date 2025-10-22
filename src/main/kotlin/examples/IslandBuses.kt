@@ -7,6 +7,7 @@ import readLines
 fun main() {
     val ans = islandBuses()
     println(ans)
+    System.out.flush()
 }
 
 fun islandBuses(): String {

@@ -9,6 +9,7 @@ import readString
 fun main() {
     val ans = units()
     println(ans)
+    System.out.flush()
 }
 
 fun floydWarshallMultiplication(conversionMatrix: MutableList<MutableList<Double?>>) {

@@ -7,6 +7,7 @@ import readInts
 fun main() {
     val ans = faultyrobot()
     println(ans)
+    System.out.flush()
 }
 
 fun faultyrobot(): String {

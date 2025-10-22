@@ -21,6 +21,7 @@ private val wordScore = IntArray(9).apply {
 fun main() {
     val ans = boggle()
     println(ans)
+    System.out.flush()
 }
 
 

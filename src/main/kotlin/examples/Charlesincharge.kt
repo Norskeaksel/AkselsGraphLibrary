@@ -9,6 +9,7 @@ import readInts
 fun main() {
     val ans = charlesincharge()
     println(ans)
+    System.out.flush()
 }
 
 fun charlesincharge(): String {

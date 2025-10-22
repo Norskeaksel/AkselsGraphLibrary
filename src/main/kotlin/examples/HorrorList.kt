@@ -7,6 +7,7 @@ import readInts
 fun main() {
     val ans = horrorList()
     println(ans)
+    System.out.flush()
 }
 
 fun horrorList(): Int {

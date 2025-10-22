@@ -11,6 +11,7 @@ import java.lang.Math.pow
 fun main() {
     val ans = honeyheist()
     println(ans)
+    System.out.flush()
 }
 
 fun honeyheist(): String {
