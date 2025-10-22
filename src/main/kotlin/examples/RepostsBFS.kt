@@ -8,11 +8,11 @@ import kotlin.math.max
 
 
 fun main() {
-    print(RepostsBFS())
+    print(repostsBFS())
 }
 
 /** Solves https://codeforces.com/problemset/problem/522/A */
-fun RepostsBFS(): Int {
+fun repostsBFS(): Int {
     val n = readInt()
     val g = Graph()
     repeat(n) {

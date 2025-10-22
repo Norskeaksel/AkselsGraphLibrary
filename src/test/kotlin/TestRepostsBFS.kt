@@ -1,5 +1,5 @@
 // Solves https://open.kattis.com/problems/crosscountry?tab=metadata
-import examples.RepostsBFS
+import examples.repostsBFS
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.AfterAll
 import java.io.File
@@ -18,16 +18,16 @@ class RepostsBFSTest {
     @Test
     fun RepostsBFSa() {
         _reader = File("src/test/SampleInput/Reposts/input1").inputStream().bufferedReader()
-        assertThat(RepostsBFS()).isEqualTo(6)
+        assertThat(repostsBFS()).isEqualTo(6)
     }
     @Test
     fun RepostsBFSb() {
         _reader = File("src/test/SampleInput/Reposts/input2").inputStream().bufferedReader()
-        assertThat(RepostsBFS()).isEqualTo(2)
+        assertThat(repostsBFS()).isEqualTo(2)
     }
     @Test
     fun RepostsBFSc() {
         _reader = File("src/test/SampleInput/Reposts/input3").inputStream().bufferedReader()
-        assertThat(RepostsBFS()).isEqualTo(2)
+        assertThat(repostsBFS()).isEqualTo(2)
     }
 }
