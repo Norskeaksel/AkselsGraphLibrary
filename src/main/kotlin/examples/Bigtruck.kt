@@ -1,5 +1,5 @@
 package examples
-// Solves https://open.kattis.com/problems/bigtruck
+
 import graphClasses.*
 import readInt
 import readInts
@@ -15,6 +15,7 @@ fun main() {
     System.out.flush()
 }
 
+/** Solves https://open.kattis.com/problems/bigtruck */
 fun bigtruck(): String {
     val n = readInt()
     val ig = IntGraph(n + 1)

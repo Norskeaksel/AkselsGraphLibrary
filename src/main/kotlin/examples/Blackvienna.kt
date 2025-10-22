@@ -7,7 +7,6 @@ import readString
 import java.util.ArrayList
 import kotlin.system.measureTimeMillis
 
-// Solves https://open.kattis.com/problems/blackvienna
 fun main() {
     val ans = blackvienna()
     println(ans)
@@ -25,6 +24,7 @@ private fun all3SetsOfLetters(): List<List<Int>> {
     return result
 }
 
+/** Solves https://open.kattis.com/problems/blackvienna */
 fun blackvienna(): String {
     var graphInitiationTime = 0L
     var inputProcessingTime = 0L

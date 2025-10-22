@@ -3,13 +3,13 @@ package examples
 import graphClasses.*
 import readInts
 
-// Solves https://open.kattis.com/problems/slowleak
 fun main() {
     val ans = slowleak()
     println(ans)
     System.out.flush()
 }
 
+/** Solves https://open.kattis.com/problems/slowleak */
 fun slowleak(): String {
     val (n, m, t, d) = readInts(4)
     val g = Graph()

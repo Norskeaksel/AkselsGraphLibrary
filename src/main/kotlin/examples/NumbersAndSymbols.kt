@@ -1,9 +1,9 @@
 package examples
-// https://adventofcode.com/2023/day/3
 
 import graphClasses.Grid
 import graphClasses.Tile
 
+/** Solves https://adventofcode.com/2023/day/3 */
 fun numbersConnectedToSymbol(input: List<String>): Int {
     val grid = Grid(input[0].length, input.size)
     initializeGrid(input, grid)

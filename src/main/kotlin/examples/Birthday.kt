@@ -3,13 +3,13 @@ package examples
 import graphClasses.IntGraph
 import readInts
 
-// Solves https://open.kattis.com/problems/birthday
 fun main() {
     val ans = birthday()
     println(ans)
     System.out.flush()
 }
 
+/** Solves https://open.kattis.com/problems/birthday */
 fun birthday(): String {
     val stringBuilder = StringBuilder()
     (0..9).forEach { _ ->
@@ -32,7 +32,7 @@ fun birthday(): String {
             try{
                 g.minimumSpanningTree() // Fails if not connected
             }
-            catch(e: IllegalStateException){
+            catch(_: IllegalStateException){
                 stringBuilder.appendLine("Yes")
                 return@forEach
             }

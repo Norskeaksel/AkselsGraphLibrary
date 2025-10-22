@@ -1,5 +1,4 @@
 package examples
-// Solves https://open.kattis.com/problems/crosscountry?tab=metadata
 import graphClasses.IntGraph
 import readDoubles
 import readInts
@@ -10,6 +9,7 @@ fun main() {
     System.out.flush()
 }
 
+/** Solves https://open.kattis.com/problems/crosscountry?tab=metadata */
 fun crossCountry(): Int {
     val (n, s, t) = readInts(3)
     val graph = IntGraph(n)

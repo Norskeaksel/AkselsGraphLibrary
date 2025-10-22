@@ -1,5 +1,4 @@
 package examples
-// https://codeforces.com/problemset/problem/522/A
 
 import graphClasses.Graph
 import readInt
@@ -12,6 +11,7 @@ fun main() {
     print(RepostsBFS())
 }
 
+/** Solves https://codeforces.com/problemset/problem/522/A */
 fun RepostsBFS(): Int {
     val n = readInt()
     val g = Graph()

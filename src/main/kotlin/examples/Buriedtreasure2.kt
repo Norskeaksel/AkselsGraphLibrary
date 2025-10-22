@@ -5,14 +5,13 @@ import graphClasses.*
 import readInts
 import kotlin.math.abs
 
-
-// Solves https://open.kattis.com/problems/buriedtreasure2
 fun main() {
     val ans = buriedtreasure2()
     println(ans)
     System.out.flush()
 }
 
+/** Solves https://open.kattis.com/problems/buriedtreasure2 */
 fun buriedtreasure2(): String {
     val (n,_) = readInts(2)
     val g = ClauseGraph()

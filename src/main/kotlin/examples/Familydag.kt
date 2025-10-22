@@ -4,13 +4,13 @@ import graphClasses.Graph
 import readString
 
 
-// Solves https://open.kattis.com/problems/familydag
 fun main() {
     val ans = familydag()
     println(ans)
     System.out.flush()
 }
 
+/** Solves https://open.kattis.com/problems/familydag */
 fun familydag(): String {
     var graph = Graph(false)
     val ans = StringBuilder()

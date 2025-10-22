@@ -7,13 +7,13 @@ import readInts
 
 import java.lang.Math.pow
 
-// Solves https://open.kattis.com/problems/honeyheist
 fun main() {
     val ans = honeyheist()
     println(ans)
     System.out.flush()
 }
 
+/** Solves https://open.kattis.com/problems/honeyheist */
 fun honeyheist(): String {
     val (r, n, a, b, w) = readInts(5)
     val xy = 2 * r - 1

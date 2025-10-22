@@ -4,8 +4,6 @@ import graphClasses.*
 import readInt
 import readString
 
-// Solves https://open.kattis.com/problems/cantinaofbabel
-
 data class Man(val name: String, val languages: MutableList<String>)
 
 fun main() {
@@ -14,6 +12,7 @@ fun main() {
     System.out.flush()
 }
 
+/** Solves https://open.kattis.com/problems/cantinaofbabel */
 fun cantinaOfBabel(): Int {
     val n = readInt()
     val graph = Graph()

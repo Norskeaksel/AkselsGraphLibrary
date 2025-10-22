@@ -3,13 +3,13 @@ package examples
 import graphClasses.*
 import readInts
 
-// Solves https://open.kattis.com/problems/horror
 fun main() {
     val ans = horrorList()
     println(ans)
     System.out.flush()
 }
 
+/** Solves https://open.kattis.com/problems/horror */
 fun horrorList(): Int {
     val (n, h, l) = readInts(3)
     val intGraph = IntGraph(n, false)

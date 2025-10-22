@@ -3,7 +3,6 @@ import graphClasses.Graph
 import java.util.*
 
 
-// Solves https://open.kattis.com/problems/speedyescape
 fun main() {
     val ans = speedyescape()
     if (ans == -1.0)
@@ -12,6 +11,7 @@ fun main() {
         println(String.format(Locale.US, "%.7f", ans))
 }
 
+/** Solves https://open.kattis.com/problems/speedyescape */
 fun speedyescape(): Double {
     val (n, m, e) = readInts(3)
     val g: AdjacencyList = MutableList(n) { mutableListOf() }

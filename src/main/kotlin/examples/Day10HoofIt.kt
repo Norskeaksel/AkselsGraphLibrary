@@ -1,7 +1,7 @@
 package examples
-// https://adventofcode.com/2024/day/10
 import graphClasses.Grid
 
+/** Solves https://adventofcode.com/2024/day/10 */
 fun day10a(input: List<String>): Long {
     var ans = 0L
     val grid = Grid(input)

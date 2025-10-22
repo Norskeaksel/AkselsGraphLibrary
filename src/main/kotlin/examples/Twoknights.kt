@@ -11,6 +11,7 @@ fun main() {
     System.out.flush()
 }
 
+/** Solves https://open.kattis.com/problems/twoknights */
 fun twoknights(): String {
     val lowercaseKeyboard = """qwertyuiop
 asdfghjkl;

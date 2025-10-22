@@ -7,13 +7,13 @@ private fun createExample(name: String) = """package examples
 import readInt
 import readInts
 
-// Solves https://open.kattis.com/problems/$name
 fun main() {
     val ans = $name()
     println(ans)
     System.out.flush()
 }
 
+/** Solves https://open.kattis.com/problems/$name */
 fun $name(): String {
     val n = readInt()
     repeat(n){

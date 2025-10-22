@@ -3,9 +3,6 @@ package examples
 import readInt
 import readString
 
-// Solves https://open.kattis.com/problems/units
-
-
 fun main() {
     val ans = units()
     println(ans)
@@ -32,6 +29,7 @@ fun floydWarshallMultiplication(conversionMatrix: MutableList<MutableList<Double
     }
 }
 
+/** Solves https://open.kattis.com/problems/units */
 fun units(): String {
     var ans = ""
     while (true) {

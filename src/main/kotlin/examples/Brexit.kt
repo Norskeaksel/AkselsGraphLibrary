@@ -3,13 +3,13 @@ package examples
 import graphClasses.IntGraph
 import readInts
 
-// Solves https://open.kattis.com/problems/brexit
 fun main() {
     val ans = brexit()
     println(ans)
     System.out.flush()
 }
 
+/** Solves https://open.kattis.com/problems/brexit */
 fun brexit(): String {
     val (c, p, x, l) = readInts(4)
     val g = IntGraph(c + 1, false)
@@ -50,4 +50,3 @@ fun stayOrLeave(g: IntGraph, x: Int, l: Int): String {
     // g.visualize(bidirectional = true, finalPath=finalPath)
     return if (g.neighbours(x).count { v -> leavers[v] } >= g.neighbours(x).size / 2.0) "leave" else "stay"
 }
-

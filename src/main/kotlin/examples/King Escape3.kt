@@ -1,5 +1,4 @@
 package examples
-// https://codeforces.com/problemset/problem/1033/A
 
 import readInt
 import readInts
@@ -10,6 +9,7 @@ fun main() {
     System.out.flush()
 }
 
+/** https://codeforces.com/problemset/problem/1033/A */
 fun kingEscape3(): String {
     val n = readInt()
     var (ax, ay) = readInts(2)

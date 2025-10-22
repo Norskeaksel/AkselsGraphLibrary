@@ -3,13 +3,13 @@ package examples
 import graphClasses.*
 import readInts
 
-// Solves https://open.kattis.com/problems/faultyrobot
 fun main() {
     val ans = faultyrobot()
     println(ans)
     System.out.flush()
 }
 
+/** Solves https://open.kattis.com/problems/faultyrobot */
 fun faultyrobot(): String {
     val (n, m) = readInts(2)
     val forcedGraph = IntGraph(n+1, false)

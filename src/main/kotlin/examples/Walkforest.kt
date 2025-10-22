@@ -5,13 +5,13 @@ import graphClasses.IntGraph
 import readInt
 import readInts
 
-// Solves https://open.kattis.com/problems/walkforest
 fun main() {
     val ans = walkforest()
     println(ans)
     System.out.flush()
 }
 
+/** Solves https://open.kattis.com/problems/walkforest */
 fun walkforest(): String {
     val ans = StringBuilder()
     while (true) {

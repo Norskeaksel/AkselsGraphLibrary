@@ -5,13 +5,13 @@ import graphClasses.Tile
 import readInt
 import readInts
 
-// Solves https://open.kattis.com/problems/watersheds
 fun main() {
     val ans = watersheds()
     println(ans)
     System.out.flush()
 }
 
+/** Solves https://open.kattis.com/problems/watersheds */
 fun watersheds(): String {
     val n = readInt()
     var ans = ""

@@ -1,5 +1,5 @@
 package examples
-//https://codeforces.com/problemset/problem/20/C
+
 import graphClasses.*
 import readInts
 
@@ -10,6 +10,7 @@ fun main() {
     }
 }
 
+/** Solves https://codeforces.com/problemset/problem/20/C */
 fun dijkstraCF(): List<Int> {
     val (n, m) = readInts(2)
     val g = IntGraph(n+1)

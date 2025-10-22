@@ -4,13 +4,13 @@ import graphClasses.*
 import readInt
 import readString
 
-// Solves https://open.kattis.com/problems/importspaghetti
 fun main() {
     val ans = importspaghetti()
     println(ans)
     System.out.flush()
 }
 
+/** Solves https://open.kattis.com/problems/importspaghetti */
 fun importspaghetti(): String {
     val n = readInt()
     val g = Graph(false)
@@ -38,4 +38,3 @@ fun importspaghetti(): String {
     if(shortestCycleLength == Int.MAX_VALUE) return "SHIP IT"
     return shortestCyclePath.joinToString().replace(", ", " ")
 }
-

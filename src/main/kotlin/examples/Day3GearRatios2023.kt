@@ -4,13 +4,13 @@ import graphClasses.Grid
 import graphClasses.Tile
 import readString
 
-// Solves https://open.kattis.com/problems/day3GearRatios2023
 fun main() {
     val ans = day3GearRatios2023()
     println(ans)
     System.out.flush()
 }
 
+/** Solves https://adventofcode.com/2023/day/3 */
 fun day3GearRatios2023(): Int {
     val lines = mutableListOf<String>()
     while (true) {

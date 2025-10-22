@@ -4,13 +4,13 @@ import graphClasses.*
 import readInt
 import readString
 
-// Solves https://open.kattis.com/problems/torn2pieces
 fun main() {
     val ans = torn2pieces()
     println(ans)
     System.out.flush()
 }
 
+/** Solves https://open.kattis.com/problems/torn2pieces */
 fun torn2pieces(): String {
     val n = readInt()
     val graph = Graph()

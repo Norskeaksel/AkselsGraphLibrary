@@ -5,14 +5,13 @@ import readInts
 import readString
 import kotlin.system.measureTimeMillis
 
-// Solves https://open.kattis.com/problems/buggyrobot
 fun main() {
     val ans = buggyrobot()
     println(ans)
     System.out.flush()
 }
 
-
+/** Solves https://open.kattis.com/problems/buggyrobot */
 fun buggyrobot(): String {
     var (height, width) = readInts(2)
     width++

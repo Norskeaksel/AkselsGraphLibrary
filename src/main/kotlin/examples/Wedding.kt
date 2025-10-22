@@ -4,13 +4,13 @@ import graphClasses.*
 import readInts
 import readStrings
 
-// Solves https://open.kattis.com/problems/wedding
 fun main() {
     val ans = wedding()
     println(ans)
     System.out.flush()
 }
 
+/** Solves https://open.kattis.com/problems/wedding */
 fun wedding(): String {
     val (n, m) = readInts(2)
     val g = ClauseGraph()

@@ -4,13 +4,13 @@ import graphClasses.IntGraph
 import readInt
 import readInts
 
-// Solves https://open.kattis.com/problems/buttonbashing
 fun main() {
     val ans = buttonbashing()
     println(ans)
     System.out.flush()
 }
 
+/** Solves https://open.kattis.com/problems/buttonbashing */
 fun buttonbashing(): String {
     val n = readInt()
     val ans = StringBuilder()

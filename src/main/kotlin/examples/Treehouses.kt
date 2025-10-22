@@ -6,7 +6,6 @@ import readInts
 import kotlin.math.pow
 import kotlin.math.sqrt
 
-// Solves https://open.kattis.com/problems/treehouses
 fun main() {
     val ans = treehouses()
     println(ans)
@@ -15,6 +14,7 @@ fun main() {
 
 data class Point(val x: Double, val y: Double)
 
+/** Solves https://open.kattis.com/problems/treehouses */
 fun treehouses(): Double {
     val (n, e, p) = readInts(3)
     val g = Graph()

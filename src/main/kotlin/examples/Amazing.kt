@@ -1,9 +1,7 @@
 package examples
 
-import debug
 import graphClasses.Grid
 import graphClasses.Tile
-import gridGraphics.visualizeGrid
 import readString
 import kotlin.system.exitProcess
 

@@ -5,13 +5,13 @@ import Edge
 import graphAlgorithms.Dijkstra
 import readInts
 
-// Solves https://open.kattis.com/problems/charlesincharge
 fun main() {
     val ans = charlesincharge()
     println(ans)
     System.out.flush()
 }
 
+/** Solves https://open.kattis.com/problems/charlesincharge */
 fun charlesincharge(): String {
     val (n, m, x) = readInts(3)
     val g: AdjacencyList = MutableList(n + 1) { mutableListOf() }

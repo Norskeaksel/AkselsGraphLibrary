@@ -7,7 +7,6 @@ import graphClasses.TrieNode
 import readInt
 import readString
 
-// Solves https://open.kattis.com/problems/boggle
 //Contraints: 4x4 grid, letter only valid once per word
 private val wordScore = IntArray(9).apply {
     this[3] = 1
@@ -24,32 +23,7 @@ fun main() {
     System.out.flush()
 }
 
-
-private fun trieBFS(trie: PrefixTree, grid: Grid, startTile: Tile): Set<String> {
-    val foundWords = mutableSetOf<String>()
-    val queue = ArrayDeque<Pair<TrieNode, List<Tile>>>()
-    val startChar = startTile.data
-    val startNode = trie.root.children[startChar] ?: return emptySet()
-    queue.add(startNode to listOf(startTile))
-    while (queue.isNotEmpty()) {
-        val (node, path) = queue.removeFirst()
-        if (node.isTerminal) {
-            val word = path.joinToString("") { it.data.toString() }
-            foundWords.add(word)
-        }
-
-        grid.getAllNeighbours(path.last()).forEach { neighbour ->
-            val nextChar = neighbour.data
-            val nextNode = node.children[nextChar]
-            if (nextNode != null && neighbour !in path) {
-                queue.add(nextNode to path + listOf(neighbour))
-            }
-        }
-    }
-
-    return foundWords
-}
-
+/** Solves https://open.kattis.com/problems/boggle */
 fun boggle(): String {
     val w = readInt()
 
@@ -85,4 +59,29 @@ fun boggle(): String {
             readString()
     }
     return ans.toString()
+}
+
+private fun trieBFS(trie: PrefixTree, grid: Grid, startTile: Tile): Set<String> {
+    val foundWords = mutableSetOf<String>()
+    val queue = ArrayDeque<Pair<TrieNode, List<Tile>>>()
+    val startChar = startTile.data
+    val startNode = trie.root.children[startChar] ?: return emptySet()
+    queue.add(startNode to listOf(startTile))
+    while (queue.isNotEmpty()) {
+        val (node, path) = queue.removeFirst()
+        if (node.isTerminal) {
+            val word = path.joinToString("") { it.data.toString() }
+            foundWords.add(word)
+        }
+
+        grid.getAllNeighbours(path.last()).forEach { neighbour ->
+            val nextChar = neighbour.data
+            val nextNode = node.children[nextChar]
+            if (nextNode != null && neighbour !in path) {
+                queue.add(nextNode to path + listOf(neighbour))
+            }
+        }
+    }
+
+    return foundWords
 }

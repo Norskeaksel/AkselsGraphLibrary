@@ -1,8 +1,8 @@
 package examples
-// https://adventofcode.com/2024/day/18
 import graphClasses.Grid
 import graphClasses.Tile
 
+/** Solves https://adventofcode.com/2024/day/18 */
 fun day18a(input: List<String>, gridSize: Int, lineCount: Int): Int {
     val grid = Grid(gridSize, gridSize, true)
     for((i,line) in input.withIndex()){

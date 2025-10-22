@@ -4,13 +4,13 @@ import graphClasses.*
 import readInts
 import readString
 
-// Solves https://open.kattis.com/problems/grid
 fun main() {
     val ans = grid()
     println(ans)
     System.out.flush()
 }
 
+/** Solves https://open.kattis.com/problems/grid */
 fun grid(): Int {
     val (n, m) = readInts(2)
     val lines = mutableListOf<String>()

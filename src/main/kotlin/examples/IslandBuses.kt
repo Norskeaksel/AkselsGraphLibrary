@@ -3,13 +3,13 @@ package examples
 import graphClasses.*
 import readLines
 
-// Solves https://open.kattis.com/problems/island
 fun main() {
     val ans = islandBuses()
     println(ans)
     System.out.flush()
 }
 
+/** Solves https://open.kattis.com/problems/island */
 fun islandBuses(): String {
     val input = readLines()
     val maps = input.joinToString("\n").split("\n\n")

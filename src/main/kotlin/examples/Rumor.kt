@@ -1,9 +1,9 @@
 package examples
-//https://codeforces.com/problemset/problem/893/C
 
 import graphClasses.IntGraph
 import readInts
 
+/** Solves https://codeforces.com/problemset/problem/893/C */
 fun rumor(): Long {
     val (n, m) = readInts(2)
     val g = IntGraph(n+1, false)
@@ -16,7 +16,7 @@ fun rumor(): Long {
     System.err.println(components)
     var sum = 0L
     components.forEach { component ->
-        val min = component.map { c[it] }.min()
+        val min = component.minOf { c[it] }
         sum += min
     }
     return sum
