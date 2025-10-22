@@ -62,6 +62,9 @@
                 <groupId>org.jetbrains.dokka</groupId>
                 <artifactId>dokka-maven-plugin</artifactId>
                 <version>${dokka.version}</version>
+                <configuration>
+                    <outputDir>${project.basedir}/docs</outputDir>
+                </configuration>
                 <executions>
                     <execution>
                         <phase>pre-site</phase>
