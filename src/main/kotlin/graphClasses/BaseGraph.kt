@@ -7,7 +7,7 @@ import toUnweightedAdjacencyList
 import toWeightedAdjacencyList
 
 /** And abstract class that's used by the Graph, IntGraph and Grid classes for common functionality */
-abstract class BaseGraph<T : Any>(size: Int, val isWeighted: Boolean = true) {
+abstract class BaseGraph<T : Any>(size: Int, private val isWeighted: Boolean = true) {
     // PROPERTIES AND INITIALIZATION
     protected val adjacencyList: AdjacencyList = MutableList(size) { mutableListOf() }
     protected var unweightedAdjacencyList: UnweightedAdjacencyList = MutableList(size) { mutableListOf() }

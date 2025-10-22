@@ -1,3 +1,4 @@
+import examples.speedyescape
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.AfterAll
 import java.io.File

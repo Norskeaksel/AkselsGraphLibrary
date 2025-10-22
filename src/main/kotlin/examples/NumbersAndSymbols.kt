@@ -46,7 +46,7 @@ private fun initializeGrid(input: List<String>, grid: Grid, padWithDuplicates:Bo
     }
 }
 
-fun starWith2Numbers(input: List<String>): Long {
+private fun starWith2Numbers(input: List<String>): Long {
     val cleanedInput = mutableListOf<String>()
     input.forEach { line ->
         val newLine = line.map {

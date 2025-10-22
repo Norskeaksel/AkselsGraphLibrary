@@ -3,11 +3,11 @@ package graphClasses
 import Components
 import graphAlgorithms.twoSat
 
-data class Not(val node: Any)
+internal data class Not(val node: Any)
 
-operator fun Any.not() = Not(this)
+internal operator fun Any.not() = Not(this)
 
-class ClauseGraph {
+internal class ClauseGraph {
     private val nodes = mutableListOf<Any?>()
 
     // private var edgeNr = 1.0

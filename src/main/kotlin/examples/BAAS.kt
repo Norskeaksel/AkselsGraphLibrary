@@ -5,9 +5,7 @@ import readInt
 import readInts
 import kotlin.math.min
 
-// Solves https://open.kattis.com/problems/baas
-/* Note, this solution is close to the time limit. To make it pass, the submitted solution must cut away all library
-   functions that's not needed. */
+
 
 fun main() {
     val ans = baas()
@@ -15,6 +13,9 @@ fun main() {
     System.out.flush()
 }
 
+/** Solves https://open.kattis.com/problems/baas
+*  Note, this solution is close to the time limit. To make it pass, the submitted solution must cut away all library
+*  functions that's not needed. */
 fun baas(): Int {
     val n = readInt()
     val intGraph = IntGraph(n, false)

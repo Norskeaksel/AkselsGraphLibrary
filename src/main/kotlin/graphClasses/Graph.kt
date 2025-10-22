@@ -5,31 +5,8 @@ package graphClasses
  * Any new node is given an ID upon creation, which is used to build an adjacency list. The class maintains internal
  * maps between ID's and nodes and vice versa. Nodes can be connected unidirectional with `.addEdge(node1, node2)`
  * or bidirectional with `.connect(node1, node2)`.
- * Once the graph is built, you may use one of the following graph algorithms:
  *
-  - **Breadth-First Search (BFS)**:
- *   - `bfs(startNode: T, target: T? = null, reset: Boolean = true)`
- *   - `bfs(startNodes: List<T>, target: T? = null, reset: Boolean = true)`
- *
- * - **Depth-First Search (DFS)**:
- *   - `dfs(startNode: T, reset: Boolean = true)`
- *
- * - **Dijkstra's Algorithm**:
- *   - `dijkstra(startNode: T, target: T? = null)`
- *
- * - **Floyd-Warshall Algorithm**:
- *   - `floydWarshall()`
- *
- * - **Topological Sort**:
- *   - `topologicalSort()`
- *
- * - **Strongly Connected Components (SCC)**:
- *   - `stronglyConnectedComponents()`
- *
- * - **Minimum Spanning Tree (MST)**:
- *   - `minimumSpanningTree()`
- *
- * @property isWeighted Indicates whether uses weighted or unweigtred edges. Traversel algorithms like BFS and DFS
+ * @param isWeighted Indicates whether it uses weighted or unweigtred edges. Traversel algorithms like BFS and DFS
  * operate on unweighted graphs, while minimum cost algorithms like Dijkstra, floyd warshall and prims is based on weighted edges */
 class Graph(isWeighted:Boolean=true): BaseGraph<Any>(0, isWeighted) {
     private var nrOfNodes = 0

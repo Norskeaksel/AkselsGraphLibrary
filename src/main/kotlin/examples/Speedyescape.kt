@@ -1,5 +1,12 @@
+package examples
+
+import AdjacencyList
+import Edge
+import deepCopy
 import graphAlgorithms.Dijkstra
 import graphClasses.Graph
+import readInt
+import readInts
 import java.util.*
 
 

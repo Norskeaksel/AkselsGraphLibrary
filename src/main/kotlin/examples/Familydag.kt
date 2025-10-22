@@ -35,7 +35,7 @@ fun familydag(): String {
     return ans.toString()
 }
 
-fun findHillbilliesAndParadoxes(graph: Graph, sortedNodes: List<Any>): MutableMap<Any, String> {
+private fun findHillbilliesAndParadoxes(graph: Graph, sortedNodes: List<Any>): MutableMap<Any, String> {
     val status = mutableMapOf<Any, String>()
     sortedNodes.forEach { node ->
         graph.bfs(node, node)

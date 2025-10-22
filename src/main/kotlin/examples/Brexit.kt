@@ -22,7 +22,7 @@ fun brexit(): String {
     return stayOrLeave(g, x, l)
 }
 
-fun stayOrLeave(g: IntGraph, x: Int, l: Int): String {
+private fun stayOrLeave(g: IntGraph, x: Int, l: Int): String {
     val leavers = BooleanArray(g.size())
     leavers[l] = true
     val q = ArrayDeque<Int>()

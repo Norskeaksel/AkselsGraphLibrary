@@ -5,7 +5,6 @@ import graphClasses.Not
 import graphClasses.not
 import readInts
 
-/** https://open.kattis.com/problems/amanda */
 fun main(){
     val ans = amanda()
     println(ans)

@@ -48,7 +48,7 @@ ZXCVBNM<>?
     return ans
 }
 
-data class KnightState(val knight1: Tile, val knight2: Tile, val currentPoemIndex: Int)
+internal data class KnightState(val knight1: Tile, val knight2: Tile, val currentPoemIndex: Int)
 
 private fun Grid.stateSearch(target: String): String {
     val initialKnight1 = Tile(0, height - 1, '!' to '!')

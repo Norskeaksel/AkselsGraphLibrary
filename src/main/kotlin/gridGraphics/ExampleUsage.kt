@@ -1,4 +1,4 @@
-package org.gridgraphics
+package gridGraphics
 
 import graphClasses.Grid
 import graphClasses.Tile

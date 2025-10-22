@@ -35,10 +35,10 @@ fun day20a(input: List<String>, cheatGoal: Int, fairTime: Int): Int {
     return c
 }
 
-fun findPortals(path: List<Tile>, grid: Grid) =
+private fun findPortals(path: List<Tile>, grid: Grid) =
     path.windowed(2).firstOrNull { (a, b) -> b !in grid.getStraightNeighbours(a) }
 
-fun gridWithoutCheatPath(path: List<Tile>, grid: Grid): Grid {
+private fun gridWithoutCheatPath(path: List<Tile>, grid: Grid): Grid {
     val cheatPath = findPortals(path, grid) ?: return grid
     grid.removeEdge(cheatPath.first(), cheatPath.last())
     return grid

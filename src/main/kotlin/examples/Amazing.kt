@@ -11,11 +11,12 @@ fun main() {
     System.out.flush()
 }
 
-const val DIM = 201 // TODO set to 201
-val dx = intArrayOf(0, -1, 1, 0)
-val dy = intArrayOf(-1, 0, 0, 1)
+private const val DIM = 201 // TODO set to 201
+private val dx = intArrayOf(0, -1, 1, 0)
+private val dy = intArrayOf(-1, 0, 0, 1)
 
-val visited = BooleanArray(DIM * DIM)
+private val visited = BooleanArray(DIM * DIM)
+/** Solves https://open.kattis.com/problems/amazing */
 fun amazing(): String {
     val g = Grid(DIM, DIM, true)
     val s = Tile(DIM / 2, DIM / 2)
@@ -69,7 +70,7 @@ fun amazing(): String {
     return "no way out"
 }
 
-fun postMove(c: Tile, p: Tile) = when {
+private fun postMove(c: Tile, p: Tile) = when {
     c.x == p.x && c.y < p.y -> {
         println("up")
         "down"

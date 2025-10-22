@@ -4,7 +4,7 @@ import graphClasses.*
 import readInt
 import readString
 
-data class Man(val name: String, val languages: MutableList<String>)
+internal data class Man(val name: String, val languages: MutableList<String>)
 
 fun main() {
     val ans = cantinaOfBabel()

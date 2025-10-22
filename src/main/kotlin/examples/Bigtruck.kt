@@ -7,7 +7,7 @@ import readString
 import kotlin.math.ceil
 import kotlin.math.roundToInt
 
-const val ITEM_BOOST = 1E-9
+private const val ITEM_BOOST = 1E-9
 
 fun main() {
     val ans = bigtruck()

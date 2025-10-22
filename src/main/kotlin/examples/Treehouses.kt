@@ -12,7 +12,7 @@ fun main() {
     System.out.flush()
 }
 
-data class Point(val x: Double, val y: Double)
+internal data class Point(val x: Double, val y: Double)
 
 /** Solves https://open.kattis.com/problems/treehouses */
 fun treehouses(): Double {

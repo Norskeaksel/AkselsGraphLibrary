@@ -1,8 +1,8 @@
 package graphClasses
 
-data class TrieNode(val children:MutableMap<Char,TrieNode> = mutableMapOf(), var isTerminal:Boolean = false)
+internal data class TrieNode(val children:MutableMap<Char,TrieNode> = mutableMapOf(), var isTerminal:Boolean = false)
 
-class PrefixTree {
+internal class PrefixTree {
     val root = TrieNode()
 
     fun add(word:String){

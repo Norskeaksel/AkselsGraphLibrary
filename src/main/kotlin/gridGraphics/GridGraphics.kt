@@ -1,4 +1,4 @@
-package org.gridgraphics
+package gridGraphics
 
 import graphClasses.Grid
 import graphClasses.Tile
@@ -18,7 +18,7 @@ import kotlin.math.max
 import kotlin.math.min
 
 
-class GridGraphics : Application() {
+internal class GridGraphics : Application() {
     companion object {
         lateinit var grid: Grid
         var currentVisitedNodes: List<Tile> = emptyList()

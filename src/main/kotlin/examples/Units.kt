@@ -9,7 +9,7 @@ fun main() {
     System.out.flush()
 }
 
-fun floydWarshallMultiplication(conversionMatrix: MutableList<MutableList<Double?>>) {
+private fun floydWarshallMultiplication(conversionMatrix: MutableList<MutableList<Double?>>) {
     val n = conversionMatrix.size
     repeat(n) { i ->
         conversionMatrix[i][i] = 1.0
