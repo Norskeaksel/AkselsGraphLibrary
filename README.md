@@ -2,7 +2,7 @@
 
 ![My Workflow Status](https://github.com/Norskeaksel/GraphMateKT/actions/workflows/ci.yml/badge.svg)
 
-This repository contains classes and algorithms for making graphs, and traversing them in various ways.
+This repository contains classes and algorithms for making graphs, traversing them and vi in various ways.
 This can for example be used to solve competitive programming problems.
 The [examples](src/main/kotlin/examples) folder contains example code solutions using this graphLibraryPackage to solve
 various problems.
@@ -11,6 +11,10 @@ the `IntGraph` class, which is performance optimized for integer nodes,
 and the `Grid` class, where each node has x and y coordinates in addition to containing any data type.
 All the classes inherit from the [BaseGraph.kt](src%2Fmain%2Fkotlin%2FgraphClasses%2FBaseGraph.kt) interface,
 which defines the basic functionality of a graph.
+
+## Documentation 
+Detailed documentation can be found [here](https://norskeaksel.github.io/GraphMateKT/). 
+The following is a brief overview of the library.
 
 ## The Graph class
 
@@ -42,6 +46,7 @@ Once the graph is built, you may use one of the following graph algorithms:
 
 - **Prims (MST)**:
     - `minimumSpanningTree()`
+
 [Example usage:](src/main/kotlin/examples/GraphExample.kt)
 
 ```kotlin
@@ -194,3 +199,7 @@ fun main() {
 
 Some graph visualizations made with this library can be checked out
 [here](https://github.com/Norskeaksel/GridGraphics/).
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE.txt) file for details. **All derivative work should include this license**.
