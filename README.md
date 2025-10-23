@@ -52,9 +52,9 @@ Once the graph is built, you may use one of the following graph algorithms:
 ```kotlin
 package examples
 
-import graphClasses.Graph
-import graphClasses.IntGraph
-import graphGraphics.visualizeSearch
+import graphMateKT.graphClasses.Graph
+import graphMateKT.graphClasses.IntGraph
+import graphMateKT.graphGraphics.visualizeGraph
 
 
 fun main() {
@@ -148,8 +148,9 @@ can be used, where yourCustomFunction takes a `Tile` and returns a `List<Tile>` 
 to. [Example usage:](src/main/kotlin/graphMateKT/examples/GridExample.kt)
 
 ```kotlin
-import graphClasses.Grid
-import graphClasses.Tile
+import graphMateKT.graphClasses.Grid
+import graphMateKT.Tile
+import graphMateKT.gridGraphics.visualizeGrid
 
 fun main() {
     // --- Example Grid Definition ---
@@ -202,4 +203,4 @@ Some graph visualizations made with this library can be checked out
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE.txt) file for details. **All derivative work should include this license**.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE-AkselsGraphLibrary) files for details. **All derivative work should include this license**.
