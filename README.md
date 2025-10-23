@@ -12,9 +12,9 @@ and the `Grid` class, where each node has x and y coordinates in addition to con
 All the classes inherit from the [BaseGraph.kt](src%2Fmain%2Fkotlin%2FgraphClasses%2FBaseGraph.kt) interface,
 which defines the basic functionality of a graph.
 
-## Documentation 
-Detailed documentation can be found [here](https://norskeaksel.github.io/GraphMateKT/). 
-The following is a brief overview of the library.
+## API Reference
+
+[![kdoc](https://img.shields.io/badge/kdoc-1.0.0-brightgreen)](https://norskeaksel.github.io/GraphMateKT)
 
 ## The Graph class
 
