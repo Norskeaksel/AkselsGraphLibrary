@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>IntGraph</title>
+    <link href="../../../images/logo-icon.svg" rel="icon" type="image/svg">
+        <script>var pathToRoot = "../../../";</script>
+    <script>document.documentElement.classList.replace("no-js", "js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+      if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      } else {
+        const savedDarkMode = JSON.parse(storage)
+        if (savedDarkMode === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      }
+    </script>
+<script type="text/javascript" src="https://unpkg.com/kotlin-playground@1/dist/playground.min.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async="async"></script>
+<link href="../../../styles/style.css" rel="Stylesheet">
+<link href="../../../styles/main.css" rel="Stylesheet">
+<link href="../../../styles/prism.css" rel="Stylesheet">
+<link href="../../../styles/logo-styles.css" rel="Stylesheet">
+<link href="../../../ui-kit/ui-kit.min.css" rel="Stylesheet">
+<script type="text/javascript" src="../../../scripts/safe-local-storage_blocking.js"></script>
+<script type="text/javascript" src="../../../scripts/navigation-loader.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/platform-content-handler.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/main.js" defer="defer"></script>
+<script type="text/javascript" src="../../../scripts/prism.js" async="async"></script>
+<script type="text/javascript" src="../../../ui-kit/ui-kit.min.js" defer="defer"></script>
+</head>
+<body>
+<div class="root">
+    <header class="navigation theme-dark" id="navigation-wrapper" role="banner">
+            <a class="library-name--link" href="../../../index.html" tabindex="1">
+                    graphmatekt
+            </a>
+        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle"
+                type="button">Toggle table of contents
+        </button>
+        <div class="navigation-controls--break ui-kit_mobile-only"></div>
+        <div class="library-version" id="library-version">
+        </div>
+        <div class="navigation-controls">
+        <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
+                <button class="platform-tag platform-selector jvm-like" data-active="" aria-pressed="true"
+                        data-filter="graphmatekt/JVM">JVM</button>
+            <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
+                <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox"
+                        data-role="dropdown-toggle"
+                        aria-controls="platform-tags-listbox"
+                        aria-haspopup="listbox"
+                        aria-expanded="false"
+                        aria-label="Toggle source sets"
+                ></button>
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox" aria-label="Target filter">
+                    <div class="dropdown--header"><span>Target filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close target filter">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                        <li role="option" class="dropdown--option platform-selector-option jvm-like" tabindex="0">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkbox--input" id="graphmatekt/JVM"
+                                       data-filter="graphmatekt/JVM"/>
+                                <span class="checkbox--icon"></span>
+                                JVM
+                            </label>
+                        </li>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </ul>
+            <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button"
+                    type="button">Switch theme
+            </button>
+            <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
+                API
+            </div>
+        </div>
+    </header>
+    <div id="container">
+        <nav id="leftColumn" class="sidebar" data-item-type="SECTION" data-item-config='{"defaultSize": 280, "minSize": 200, "maxSize": 400}'>
+            <a class="toc--skip-link" href="#main">Skip to content</a>
+            <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list"
+                    data-role="dropdown-listbox" aria-label="Table of contents">
+                    <div class="dropdown--header">
+                            <span>
+                                    graphmatekt
+                            </span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                    <div class="sidebar--inner" id="sideMenu"></div>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </nav>
+        <div id="resizer" class="resizer" data-item-type="BAR"></div>
+        <div id="main" data-item-type="SECTION" role="main">
+<div class="main-content" data-page-type="classlike" id="content" pageIds="graphmatekt::graphMateKT.graphClasses/IntGraph///PointingToDeclaration//-1349670334">
+  <div class="breadcrumbs"><a href="../../../index.html">graphmatekt</a><span class="delimiter">/</span><a href="../index.html">graphMateKT.graphClasses</a><span class="delimiter">/</span><span class="current">IntGraph</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span>Int</span><wbr></wbr><span><span>Graph</span></span></h1>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="graphmatekt/JVM"><div class="symbol monospace"><span class="token keyword">class </span><a href="index.html">IntGraph</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">size<span class="token operator">: </span><span data-unresolved-link="kotlin/Int///PointingToDeclaration/">Int</span><span class="token punctuation">, </span></span><span class="parameter ">isWeighted<span class="token operator">: </span><span data-unresolved-link="kotlin/Boolean///PointingToDeclaration/">Boolean</span><span class="token operator"> = </span><span class="token boolean">true</span></span></span><span class="token punctuation">)</span> : <a href="../-base-graph/index.html">BaseGraph</a><span class="token operator">&lt;</span><span data-unresolved-link="kotlin/Int///PointingToDeclaration/">Int</span><span class="token operator">&gt; </span></div><p class="paragraph">The IntGraph class behaves a lot like the Graph class when used with integers like the example above. However, * it's more performant, because it does not need to maintain an internal mapping between the nodes and their indexes in the adjacency list. The obvious drawback being it only supports integer nodes.</p><h4 class="tableheader">Parameters</h4><div class="table"><div class="table-row table-row_content" data-filterable-current="graphmatekt/JVM" data-filterable-set="graphmatekt/JVM"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span><span>size</span></span></u></div></span></div><div><div class="title"><p class="paragraph">The number of nodes in the graph. Nodes are represented as integers from 0 to size-1. This cannot be altered later</p></div></div></div></div><div class="table-row table-row_content" data-filterable-current="graphmatekt/JVM" data-filterable-set="graphmatekt/JVM"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span>is</span><wbr></wbr><span><span>Weighted</span></span></u></div></span></div><div><div class="title"><p class="paragraph">Indicates whether the graph uses weighted or unweighted edges.</p></div></div></div></div></div></div></div>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button><button class="section-tab" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION,EXTENSION_PROPERTY,EXTENSION_FUNCTION">Members &amp; Extensions</button></div>
+    <div class="tabs-section-body">
+      <div data-togglable="CONSTRUCTOR">
+        <h2 class="tableheader">Constructors</h2>
+        <div class="table"><a data-name="-2134920877%2FConstructors%2F-1349670334" anchor-label="IntGraph" id="-2134920877%2FConstructors%2F-1349670334" data-filterable-set="graphmatekt/JVM"></a>
+          <div class="table-row table-row_content" data-togglable="CONSTRUCTOR" data-filterable-current="graphmatekt/JVM" data-filterable-set="graphmatekt/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-int-graph.html"><span>Int</span><wbr></wbr><span><span>Graph</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2134920877%2FConstructors%2F-1349670334"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="graphmatekt/JVM"><div class="symbol monospace"><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">size<span class="token operator">: </span><span data-unresolved-link="kotlin/Int///PointingToDeclaration/">Int</span><span class="token punctuation">, </span></span><span class="parameter ">isWeighted<span class="token operator">: </span><span data-unresolved-link="kotlin/Boolean///PointingToDeclaration/">Boolean</span><span class="token operator"> = </span><span class="token boolean">true</span></span></span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="FUNCTION">
+        <h2 class="tableheader">Functions</h2>
+        <div class="table"><a data-name="-1357268371%2FFunctions%2F-1349670334" anchor-label="addEdge" id="-1357268371%2FFunctions%2F-1349670334" data-filterable-set="graphmatekt/JVM"></a>
+          <div class="table-row table-row_content" data-filterable-current="graphmatekt/JVM" data-filterable-set="graphmatekt/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../-base-graph/add-edge.html"><span>add</span><wbr></wbr><span><span>Edge</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1357268371%2FFunctions%2F-1349670334"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="graphmatekt/JVM"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../-base-graph/add-edge.html"><span class="token function">addEdge</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">node1<span class="token operator">: </span><span data-unresolved-link="kotlin/Int///PointingToDeclaration/">Int</span><span class="token punctuation">, </span></span><span class="parameter ">node2<span class="token operator">: </span><span data-unresolved-link="kotlin/Int///PointingToDeclaration/">Int</span><span class="token punctuation">, </span></span><span class="parameter ">weight<span class="token operator">: </span><span data-unresolved-link="kotlin/Number///PointingToDeclaration/">Number</span><span class="token operator">?</span></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Adds an edge between two nodes in the graph, and creates the nodes if they don't exist.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1431578947%2FFunctions%2F-1349670334" anchor-label="addNode" id="1431578947%2FFunctions%2F-1349670334" data-filterable-set="graphmatekt/JVM"></a>
+          <div class="table-row table-row_content" data-filterable-current="graphmatekt/JVM" data-filterable-set="graphmatekt/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="add-node.html"><span>add</span><wbr></wbr><span><span>Node</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1431578947%2FFunctions%2F-1349670334"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="graphmatekt/JVM"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="add-node.html"><span class="token function">addNode</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">node<span class="token operator">: </span><span data-unresolved-link="kotlin/Int///PointingToDeclaration/">Int</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="kotlin/Nothing///PointingToDeclaration/">Nothing</span></div><div class="brief "><p class="paragraph">Adds the given node to the graph</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="992934900%2FFunctions%2F-1349670334" anchor-label="bfs" id="992934900%2FFunctions%2F-1349670334" data-filterable-set="graphmatekt/JVM"></a>
+          <div class="table-row table-row_content" data-filterable-current="graphmatekt/JVM" data-filterable-set="graphmatekt/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../-base-graph/bfs.html"><span><span>bfs</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="992934900%2FFunctions%2F-1349670334"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="graphmatekt/JVM"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../-base-graph/bfs.html"><span class="token function">bfs</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">startNode<span class="token operator">: </span><span data-unresolved-link="kotlin/Int///PointingToDeclaration/">Int</span><span class="token punctuation">, </span></span><span class="parameter ">target<span class="token operator">: </span><span data-unresolved-link="kotlin/Int///PointingToDeclaration/">Int</span><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter ">reset<span class="token operator">: </span><span data-unresolved-link="kotlin/Boolean///PointingToDeclaration/">Boolean</span></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Overload of fun bfs(startNodes: List<T>, target: T?, reset: Boolean) that accepts a single starting node istead of a list</p></div><div class="symbol monospace"><span class="token keyword">fun </span><a href="../-base-graph/bfs.html"><span class="token function">bfs</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">startNodes<span class="token operator">: </span><span data-unresolved-link="kotlin.collections/List///PointingToDeclaration/">List</span><span class="token operator">&lt;</span><span data-unresolved-link="kotlin/Int///PointingToDeclaration/">Int</span><span class="token operator">&gt;</span><span class="token punctuation">, </span></span><span class="parameter ">target<span class="token operator">: </span><span data-unresolved-link="kotlin/Int///PointingToDeclaration/">Int</span><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter ">reset<span class="token operator">: </span><span data-unresolved-link="kotlin/Boolean///PointingToDeclaration/">Boolean</span></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Performs a Breadth-First Search, which finds the shortest path from the starting node to all other nodes, assuming the graph is unweighted (all edges have a weight of 1.0) It stores results that can be retrieved with the following functions:</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1415583999%2FFunctions%2F-1349670334" anchor-label="connect" id="-1415583999%2FFunctions%2F-1349670334" data-filterable-set="graphmatekt/JVM"></a>
+          <div class="table-row table-row_content" data-filterable-current="graphmatekt/JVM" data-filterable-set="graphmatekt/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../-base-graph/connect.html"><span><span>connect</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1415583999%2FFunctions%2F-1349670334"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="graphmatekt/JVM"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../-base-graph/connect.html"><span class="token function">connect</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">node1<span class="token operator">: </span><span data-unresolved-link="kotlin/Int///PointingToDeclaration/">Int</span><span class="token punctuation">, </span></span><span class="parameter ">node2<span class="token operator">: </span><span data-unresolved-link="kotlin/Int///PointingToDeclaration/">Int</span><span class="token punctuation">, </span></span><span class="parameter ">weight<span class="token operator">: </span><span data-unresolved-link="kotlin/Number///PointingToDeclaration/">Number</span><span class="token operator">?</span></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Connects two nodes in the graph, by calling addEdge(node1,node2, weight) and addEdge(node2, node1, weight)</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-578744300%2FFunctions%2F-1349670334" anchor-label="currentVisitedNodes" id="-578744300%2FFunctions%2F-1349670334" data-filterable-set="graphmatekt/JVM"></a>
+          <div class="table-row table-row_content" data-filterable-current="graphmatekt/JVM" data-filterable-set="graphmatekt/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../-base-graph/current-visited-nodes.html"><span>current</span><wbr></wbr><span>Visited</span><wbr></wbr><span><span>Nodes</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-578744300%2FFunctions%2F-1349670334"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="graphmatekt/JVM"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../-base-graph/current-visited-nodes.html"><span class="token function">currentVisitedNodes</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="kotlin.collections/List///PointingToDeclaration/">List</span><span class="token operator">&lt;</span><span data-unresolved-link="kotlin/Int///PointingToDeclaration/">Int</span><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Retrieves a list of all visited nodes on the order they were visited during the last search operation (DFS, BFS, Dijkstra).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1585201329%2FFunctions%2F-1349670334" anchor-label="depth" id="1585201329%2FFunctions%2F-1349670334" data-filterable-set="graphmatekt/JVM"></a>
+          <div class="table-row table-row_content" data-filterable-current="graphmatekt/JVM" data-filterable-set="graphmatekt/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../-base-graph/depth.html"><span><span>depth</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1585201329%2FFunctions%2F-1349670334"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="graphmatekt/JVM"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../-base-graph/depth.html"><span class="token function">depth</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="kotlin/Int///PointingToDeclaration/">Int</span></div><div class="brief "><p class="paragraph">Retrieves the depth of the graph from the most recent search operation</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="758701588%2FFunctions%2F-1349670334" anchor-label="dfs" id="758701588%2FFunctions%2F-1349670334" data-filterable-set="graphmatekt/JVM"></a>
+          <div class="table-row table-row_content" data-filterable-current="graphmatekt/JVM" data-filterable-set="graphmatekt/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../-base-graph/dfs.html"><span><span>dfs</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="758701588%2FFunctions%2F-1349670334"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="graphmatekt/JVM"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../-base-graph/dfs.html"><span class="token function">dfs</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">startNode<span class="token operator">: </span><span data-unresolved-link="kotlin/Int///PointingToDeclaration/">Int</span><span class="token punctuation">, </span></span><span class="parameter ">reset<span class="token operator">: </span><span data-unresolved-link="kotlin/Boolean///PointingToDeclaration/">Boolean</span></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Performs a Depth-First Search on the graph which finds all nodes that's reachable from the starting node it. It stores results that can be retrieved with the following functions:</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1332991212%2FFunctions%2F-1349670334" anchor-label="dijkstra" id="-1332991212%2FFunctions%2F-1349670334" data-filterable-set="graphmatekt/JVM"></a>
+          <div class="table-row table-row_content" data-filterable-current="graphmatekt/JVM" data-filterable-set="graphmatekt/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../-base-graph/dijkstra.html"><span><span>dijkstra</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1332991212%2FFunctions%2F-1349670334"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="graphmatekt/JVM"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../-base-graph/dijkstra.html"><span class="token function">dijkstra</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">startNode<span class="token operator">: </span><span data-unresolved-link="kotlin/Int///PointingToDeclaration/">Int</span><span class="token punctuation">, </span></span><span class="parameter ">target<span class="token operator">: </span><span data-unresolved-link="kotlin/Int///PointingToDeclaration/">Int</span><span class="token operator">?</span></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Performs Dijkstra's algorithm, which finds the shortest path from the starting node to all other nodes. It stores results that can be retrieved with the following functions:</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="116524574%2FFunctions%2F-1349670334" anchor-label="distanceFromUtoV" id="116524574%2FFunctions%2F-1349670334" data-filterable-set="graphmatekt/JVM"></a>
+          <div class="table-row table-row_content" data-filterable-current="graphmatekt/JVM" data-filterable-set="graphmatekt/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../-base-graph/distance-from-uto-v.html"><span>distance</span><wbr></wbr><span>From</span><wbr></wbr><span>Uto</span><wbr></wbr><span><span>V</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="116524574%2FFunctions%2F-1349670334"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="graphmatekt/JVM"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../-base-graph/distance-from-uto-v.html"><span class="token function">distanceFromUtoV</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">u<span class="token operator">: </span><span data-unresolved-link="kotlin/Int///PointingToDeclaration/">Int</span><span class="token punctuation">, </span></span><span class="parameter ">v<span class="token operator">: </span><span data-unresolved-link="kotlin/Int///PointingToDeclaration/">Int</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="kotlin/Double///PointingToDeclaration/">Double</span></div><div class="brief "><p class="paragraph">Retrieves the shortest distance between two nodes in the graph.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1120273437%2FFunctions%2F-1349670334" anchor-label="distanceTo" id="-1120273437%2FFunctions%2F-1349670334" data-filterable-set="graphmatekt/JVM"></a>
+          <div class="table-row table-row_content" data-filterable-current="graphmatekt/JVM" data-filterable-set="graphmatekt/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../-base-graph/distance-to.html"><span>distance</span><wbr></wbr><span><span>To</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1120273437%2FFunctions%2F-1349670334"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="graphmatekt/JVM"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../-base-graph/distance-to.html"><span class="token function">distanceTo</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">node<span class="token operator">: </span><span data-unresolved-link="kotlin/Int///PointingToDeclaration/">Int</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="kotlin/Double///PointingToDeclaration/">Double</span></div><div class="brief "><p class="paragraph">Retrieves the distance to the specified node from the starting node of the most recent search operation (BFS, Dijkstra).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1985495531%2FFunctions%2F-1349670334" anchor-label="edges" id="1985495531%2FFunctions%2F-1349670334" data-filterable-set="graphmatekt/JVM"></a>
+          <div class="table-row table-row_content" data-filterable-current="graphmatekt/JVM" data-filterable-set="graphmatekt/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../-base-graph/edges.html"><span><span>edges</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1985495531%2FFunctions%2F-1349670334"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="graphmatekt/JVM"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../-base-graph/edges.html"><span class="token function">edges</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">t<span class="token operator">: </span><span data-unresolved-link="kotlin/Int///PointingToDeclaration/">Int</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="kotlin.collections/List///PointingToDeclaration/">List</span><span class="token operator">&lt;</span><span data-unresolved-link="kotlin/Pair///PointingToDeclaration/">Pair</span><span class="token operator">&lt;</span><span data-unresolved-link="kotlin/Double///PointingToDeclaration/">Double</span><span class="token punctuation">, </span><span data-unresolved-link="kotlin/Int///PointingToDeclaration/">Int</span><span class="token operator">&gt;</span><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Retrieves a list of edges connected to the specified node.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-938016711%2FFunctions%2F-1349670334" anchor-label="finalPath" id="-938016711%2FFunctions%2F-1349670334" data-filterable-set="graphmatekt/JVM"></a>
+          <div class="table-row table-row_content" data-filterable-current="graphmatekt/JVM" data-filterable-set="graphmatekt/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../-base-graph/final-path.html"><span>final</span><wbr></wbr><span><span>Path</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-938016711%2FFunctions%2F-1349670334"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="graphmatekt/JVM"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../-base-graph/final-path.html"><span class="token function">finalPath</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="kotlin.collections/List///PointingToDeclaration/">List</span><span class="token operator">&lt;</span><span data-unresolved-link="kotlin/Int///PointingToDeclaration/">Int</span><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Retrieves the shortest path from the start to target node path during the most recent search operation (DFS, BFS, Dijkstra)</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1584505724%2FFunctions%2F-1349670334" anchor-label="floydWarshall" id="1584505724%2FFunctions%2F-1349670334" data-filterable-set="graphmatekt/JVM"></a>
+          <div class="table-row table-row_content" data-filterable-current="graphmatekt/JVM" data-filterable-set="graphmatekt/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../-base-graph/floyd-warshall.html"><span>floyd</span><wbr></wbr><span><span>Warshall</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1584505724%2FFunctions%2F-1349670334"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="graphmatekt/JVM"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../-base-graph/floyd-warshall.html"><span class="token function">floydWarshall</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Executes the Floyd-Warshall algorithm on the graph to compute the shortest paths between all pairs of nodes.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-255930239%2FFunctions%2F-1349670334" anchor-label="foundTarget" id="-255930239%2FFunctions%2F-1349670334" data-filterable-set="graphmatekt/JVM"></a>
+          <div class="table-row table-row_content" data-filterable-current="graphmatekt/JVM" data-filterable-set="graphmatekt/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../-base-graph/found-target.html"><span>found</span><wbr></wbr><span><span>Target</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-255930239%2FFunctions%2F-1349670334"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="graphmatekt/JVM"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../-base-graph/found-target.html"><span class="token function">foundTarget</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="kotlin/Boolean///PointingToDeclaration/">Boolean</span></div><div class="brief "><p class="paragraph">Checks if the target node was found during the most recent search operation (BFS, Dijkstra).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1529213675%2FFunctions%2F-1349670334" anchor-label="furthestNode" id="-1529213675%2FFunctions%2F-1349670334" data-filterable-set="graphmatekt/JVM"></a>
+          <div class="table-row table-row_content" data-filterable-current="graphmatekt/JVM" data-filterable-set="graphmatekt/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../-base-graph/furthest-node.html"><span>furthest</span><wbr></wbr><span><span>Node</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1529213675%2FFunctions%2F-1349670334"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="graphmatekt/JVM"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../-base-graph/furthest-node.html"><span class="token function">furthestNode</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="kotlin/Int///PointingToDeclaration/">Int</span></div><div class="brief "><p class="paragraph">Retrieves the node that is the farthest from the starting node in the most recent search operation (BFS, Dijkstra).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1998312378%2FFunctions%2F-1349670334" anchor-label="getPath" id="-1998312378%2FFunctions%2F-1349670334" data-filterable-set="graphmatekt/JVM"></a>
+          <div class="table-row table-row_content" data-filterable-current="graphmatekt/JVM" data-filterable-set="graphmatekt/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../-base-graph/get-path.html"><span>get</span><wbr></wbr><span><span>Path</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1998312378%2FFunctions%2F-1349670334"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="graphmatekt/JVM"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../-base-graph/get-path.html"><span class="token function">getPath</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">target<span class="token operator">: </span><span data-unresolved-link="kotlin/Int///PointingToDeclaration/">Int</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="kotlin.collections/List///PointingToDeclaration/">List</span><span class="token operator">&lt;</span><span data-unresolved-link="kotlin/Int///PointingToDeclaration/">Int</span><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Retrieves the path from the starting node to the specified target node based on the most recent search results.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="395744635%2FFunctions%2F-1349670334" anchor-label="maxDistance" id="395744635%2FFunctions%2F-1349670334" data-filterable-set="graphmatekt/JVM"></a>
+          <div class="table-row table-row_content" data-filterable-current="graphmatekt/JVM" data-filterable-set="graphmatekt/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../-base-graph/max-distance.html"><span>max</span><wbr></wbr><span><span>Distance</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="395744635%2FFunctions%2F-1349670334"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="graphmatekt/JVM"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../-base-graph/max-distance.html"><span class="token function">maxDistance</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="kotlin/Double///PointingToDeclaration/">Double</span></div><div class="brief "><p class="paragraph">Retrieves the maximum distance from the starting node to any other node of the most recent search operation (BFS, Dijkstra).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-367788502%2FFunctions%2F-1349670334" anchor-label="minimumSpanningTree" id="-367788502%2FFunctions%2F-1349670334" data-filterable-set="graphmatekt/JVM"></a>
+          <div class="table-row table-row_content" data-filterable-current="graphmatekt/JVM" data-filterable-set="graphmatekt/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../-base-graph/minimum-spanning-tree.html"><span>minimum</span><wbr></wbr><span>Spanning</span><wbr></wbr><span><span>Tree</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-367788502%2FFunctions%2F-1349670334"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="graphmatekt/JVM"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../-base-graph/minimum-spanning-tree.html"><span class="token function">minimumSpanningTree</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="kotlin/Pair///PointingToDeclaration/">Pair</span><span class="token operator">&lt;</span><span data-unresolved-link="kotlin/Double///PointingToDeclaration/">Double</span><span class="token punctuation">, </span><a href="../-graph/index.html">Graph</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Computes the Minimum Spanning Tree (MST) of the graph using Prim's algorithm.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1761802627%2FFunctions%2F-1349670334" anchor-label="neighbours" id="-1761802627%2FFunctions%2F-1349670334" data-filterable-set="graphmatekt/JVM"></a>
+          <div class="table-row table-row_content" data-filterable-current="graphmatekt/JVM" data-filterable-set="graphmatekt/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../-base-graph/neighbours.html"><span><span>neighbours</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1761802627%2FFunctions%2F-1349670334"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="graphmatekt/JVM"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../-base-graph/neighbours.html"><span class="token function">neighbours</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">t<span class="token operator">: </span><span data-unresolved-link="kotlin/Int///PointingToDeclaration/">Int</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="kotlin.collections/List///PointingToDeclaration/">List</span><span class="token operator">&lt;</span><span data-unresolved-link="kotlin/Int///PointingToDeclaration/">Int</span><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Retrieves a list the neighboring nodes of the specified node.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1632970761%2FFunctions%2F-1349670334" anchor-label="nodes" id="-1632970761%2FFunctions%2F-1349670334" data-filterable-set="graphmatekt/JVM"></a>
+          <div class="table-row table-row_content" data-filterable-current="graphmatekt/JVM" data-filterable-set="graphmatekt/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="nodes.html"><span><span>nodes</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1632970761%2FFunctions%2F-1349670334"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="graphmatekt/JVM"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="nodes.html"><span class="token function">nodes</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="kotlin.collections/List///PointingToDeclaration/">List</span><span class="token operator">&lt;</span><span data-unresolved-link="kotlin/Int///PointingToDeclaration/">Int</span><span class="token operator">&gt;</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1375077132%2FFunctions%2F-1349670334" anchor-label="print" id="1375077132%2FFunctions%2F-1349670334" data-filterable-set="graphmatekt/JVM"></a>
+          <div class="table-row table-row_content" data-filterable-current="graphmatekt/JVM" data-filterable-set="graphmatekt/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../-base-graph/print.html"><span><span>print</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1375077132%2FFunctions%2F-1349670334"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="graphmatekt/JVM"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../-base-graph/print.html"><span class="token function">print</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">isWeighted<span class="token operator">: </span><span data-unresolved-link="kotlin/Boolean///PointingToDeclaration/">Boolean</span></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Prints the graph's adjacency list to the standard error stream.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="582573114%2FFunctions%2F-1349670334" anchor-label="removeEdge" id="582573114%2FFunctions%2F-1349670334" data-filterable-set="graphmatekt/JVM"></a>
+          <div class="table-row table-row_content" data-filterable-current="graphmatekt/JVM" data-filterable-set="graphmatekt/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../-base-graph/remove-edge.html"><span>remove</span><wbr></wbr><span><span>Edge</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="582573114%2FFunctions%2F-1349670334"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="graphmatekt/JVM"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../-base-graph/remove-edge.html"><span class="token function">removeEdge</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">node1<span class="token operator">: </span><span data-unresolved-link="kotlin/Int///PointingToDeclaration/">Int</span><span class="token punctuation">, </span></span><span class="parameter ">node2<span class="token operator">: </span><span data-unresolved-link="kotlin/Int///PointingToDeclaration/">Int</span></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Removes the edge(s) between two nodes in the graph.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1560606599%2FFunctions%2F-1349670334" anchor-label="resetSearchResults" id="1560606599%2FFunctions%2F-1349670334" data-filterable-set="graphmatekt/JVM"></a>
+          <div class="table-row table-row_content" data-filterable-current="graphmatekt/JVM" data-filterable-set="graphmatekt/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../-base-graph/reset-search-results.html"><span>reset</span><wbr></wbr><span>Search</span><wbr></wbr><span><span>Results</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1560606599%2FFunctions%2F-1349670334"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="graphmatekt/JVM"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../-base-graph/reset-search-results.html"><span class="token function">resetSearchResults</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Clears the search results stored in the graph.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-718038619%2FFunctions%2F-1349670334" anchor-label="size" id="-718038619%2FFunctions%2F-1349670334" data-filterable-set="graphmatekt/JVM"></a>
+          <div class="table-row table-row_content" data-filterable-current="graphmatekt/JVM" data-filterable-set="graphmatekt/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../-base-graph/size.html"><span><span>size</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-718038619%2FFunctions%2F-1349670334"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="graphmatekt/JVM"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../-base-graph/size.html"><span class="token function">size</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="kotlin/Int///PointingToDeclaration/">Int</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-514832071%2FFunctions%2F-1349670334" anchor-label="stronglyConnectedComponents" id="-514832071%2FFunctions%2F-1349670334" data-filterable-set="graphmatekt/JVM"></a>
+          <div class="table-row table-row_content" data-filterable-current="graphmatekt/JVM" data-filterable-set="graphmatekt/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../-base-graph/strongly-connected-components.html"><span>strongly</span><wbr></wbr><span>Connected</span><wbr></wbr><span><span>Components</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-514832071%2FFunctions%2F-1349670334"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="graphmatekt/JVM"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../-base-graph/strongly-connected-components.html"><span class="token function">stronglyConnectedComponents</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="kotlin.collections/List///PointingToDeclaration/">List</span><span class="token operator">&lt;</span><span data-unresolved-link="kotlin.collections/List///PointingToDeclaration/">List</span><span class="token operator">&lt;</span><span data-unresolved-link="kotlin/Int///PointingToDeclaration/">Int</span><span class="token operator">&gt;</span><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Identifies groups where each node is reachable from every other node in the group.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1139629401%2FFunctions%2F-1349670334" anchor-label="topologicalSort" id="-1139629401%2FFunctions%2F-1349670334" data-filterable-set="graphmatekt/JVM"></a>
+          <div class="table-row table-row_content" data-filterable-current="graphmatekt/JVM" data-filterable-set="graphmatekt/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../-base-graph/topological-sort.html"><span>topological</span><wbr></wbr><span><span>Sort</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1139629401%2FFunctions%2F-1349670334"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="graphmatekt/JVM"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../-base-graph/topological-sort.html"><span class="token function">topologicalSort</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="kotlin.collections/List///PointingToDeclaration/">List</span><span class="token operator">&lt;</span><span data-unresolved-link="kotlin/Int///PointingToDeclaration/">Int</span><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Builds an order of nodes so that the first nodes has no outgoing edges, then nodes with edges pointing to these and so on, assuming the graph is a Directed Acyclic Graph (DAG). This is done by running a DFS from each node and ordering the nodes by descending depth (post-order).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="322457023%2FFunctions%2F-1349670334" anchor-label="visitedNodes" id="322457023%2FFunctions%2F-1349670334" data-filterable-set="graphmatekt/JVM"></a>
+          <div class="table-row table-row_content" data-filterable-current="graphmatekt/JVM" data-filterable-set="graphmatekt/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../-base-graph/visited-nodes.html"><span>visited</span><wbr></wbr><span><span>Nodes</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="322457023%2FFunctions%2F-1349670334"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="graphmatekt/JVM"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../-base-graph/visited-nodes.html"><span class="token function">visitedNodes</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="kotlin.collections/List///PointingToDeclaration/">List</span><span class="token operator">&lt;</span><span data-unresolved-link="kotlin/Int///PointingToDeclaration/">Int</span><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Retrieves a (unordered) list of all visited nodes during any non-reset search operation (DFS, BFS, Dijkstra).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1212659742%2FFunctions%2F-1349670334" anchor-label="visualizeGraph" id="1212659742%2FFunctions%2F-1349670334" data-filterable-set="graphmatekt/JVM"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_FUNCTION" data-filterable-current="graphmatekt/JVM" data-filterable-set="graphmatekt/JVM">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../../graphMateKT.graphGraphics/visualize-graph.html"><span>visualize</span><wbr></wbr><span><span>Graph</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1212659742%2FFunctions%2F-1349670334"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable="graphmatekt/JVM"><div class="symbol monospace"><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="../../graphMateKT.graphGraphics/visualize-graph.html">T</a><span class="token operator"> : </span><span data-unresolved-link="kotlin/Any///PointingToDeclaration/">Any</span><span class="token operator">&gt; </span><a href="../-base-graph/index.html">BaseGraph</a><span class="token operator">&lt;</span><a href="../../graphMateKT.graphGraphics/visualize-graph.html">T</a><span class="token operator">&gt;</span><span class="token punctuation">.</span><a href="../../graphMateKT.graphGraphics/visualize-graph.html"><span class="token function">visualizeGraph</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">bidirectional<span class="token operator">: </span><span data-unresolved-link="kotlin/Boolean///PointingToDeclaration/">Boolean</span><span class="token operator"> = </span><span class="token boolean">false</span><span class="token punctuation">, </span></span><span class="parameter ">finalPath<span class="token operator">: </span><span data-unresolved-link="kotlin.collections/List///PointingToDeclaration/">List</span><span class="token operator">&lt;</span><a href="../../graphMateKT.graphGraphics/visualize-graph.html">T</a><span class="token operator">&gt;</span><span class="token operator"> = </span>finalPath()<span class="token punctuation">, </span></span><span class="parameter ">screenTitle<span class="token operator">: </span><span data-unresolved-link="kotlin/String///PointingToDeclaration/">String</span><span class="token operator"> = </span><span class="token string">&quot;Graph visualizer (Click or space to pause and resume)&quot;</span><span class="token punctuation">, </span></span><span class="parameter ">animationTicTimeOverride<span class="token operator">: </span><span data-unresolved-link="kotlin/Double///PointingToDeclaration/">Double</span><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">closeOnEnd<span class="token operator">: </span><span data-unresolved-link="kotlin/Boolean///PointingToDeclaration/">Boolean</span><span class="token operator"> = </span><span class="token boolean">false</span><span class="token punctuation">, </span></span><span class="parameter ">startPaused<span class="token operator">: </span><span data-unresolved-link="kotlin/Boolean///PointingToDeclaration/">Boolean</span><span class="token operator"> = </span><span class="token boolean">false</span><span class="token punctuation">, </span></span><span class="parameter ">screenWidthOverride<span class="token operator">: </span><span data-unresolved-link="kotlin/Double///PointingToDeclaration/">Double</span><span class="token operator">?</span><span class="token operator"> = </span>null</span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">The function visualizes nodes with edges using a force-directed algorithm. Then it animates the traversal of the graph, highlighting visited nodes and the final path from the start node to the target node if a search has been performed.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    <div class="footer">
+        <div class="footer--container">
+            <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+            <div class="footer--content">
+                <div>
+                    <span>Generated by </span>
+                    <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                        Dokka
+                    </a>
+                    <div>© 2025 Copyright</div>
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
