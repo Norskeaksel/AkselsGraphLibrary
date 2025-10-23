@@ -4,7 +4,7 @@ import graphClasses.Grid
 import graphClasses.Tile
 import javafx.application.Application
 
-fun main() {
+private fun main() {
     val gridWidth = 5
     val gridHeight = 5
     val grid = Grid(gridWidth, gridHeight)

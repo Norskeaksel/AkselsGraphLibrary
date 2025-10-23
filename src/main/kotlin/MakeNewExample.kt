@@ -55,7 +55,7 @@ class ${name.capitalize()}Test {
 }
 
 
-fun main() {
+private fun main() {
     print("Name of the programming puzzle: ")
     val name = readString()
     print("How many sample inputs? ")

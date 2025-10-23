@@ -1,6 +1,9 @@
+package examples
 //https://open.kattis.com/problems/shortestpath1
 
 import graphClasses.IntGraph
+import readInt
+import readInts
 
 fun main(){
     while(true){

@@ -1,1 +1,1 @@
-sourceset_dependencies='{"GraphMateKT/JVM":[]}'
+sourceset_dependencies='{"graphmatekt/JVM":[]}'

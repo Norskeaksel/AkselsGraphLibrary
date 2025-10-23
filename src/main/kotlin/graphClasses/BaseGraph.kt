@@ -92,7 +92,7 @@ abstract class BaseGraph<T : Any>(size: Int, private val isWeighted: Boolean = t
      * Depth is defined as the deepest level of recursion or the maximum distance from the starting node to
      * any other node during the search traversal if the weights are counted as 1.
      * @return The depth of the graph.
-     * @throws IllegalStateException If nighter DFS, BFS has been run yet.*/
+     * @throws IllegalStateException If neither DFS nor BFS has been run yet.*/
     fun depth() =
         searchResults?.depth ?: error("Can't retrieve depth because no search (DFS, BFS, Dijkstra) has been run yet")
 
@@ -213,24 +213,8 @@ abstract class BaseGraph<T : Any>(size: Int, private val isWeighted: Boolean = t
         }
     }
 
-    /** Performs a Breadth-First Search, which finds the shortest path from the starting node to all other nodes,
-     * assuming the graph is unweighted (all edges have a weight of 1.0)
-     * It stores results that can be retrieved with the following functions:
-     *
-     * - `depth()`
-     * - `currentVisitedNodes()`
-     * - `visitedNodes()`
-     * - `finalPath()`
-     * - `foundTarget()`
-     * - `distanceTo(node: T)`
-     * - `maxDistance()`
-     * - `furthestNode()`
-     *
-     * @param startNode The starting node for the BFS traversal.
-     * @param target An optional target node. If specified, the search will stop once the target is found,
-     * flag the target as found so that foundTarget() returns true, and store the path to the target node for use in visualization.
-     * @param reset A boolean indicating whether to reset the previous search results. If set to false, previously visited nodes will not be visited again.
-     * @throws IllegalStateException If the starting node or the target node is not found in the graph. */
+    /** Overload of fun bfs(startNodes: List<T>, target: T?, reset: Boolean) that accepts a single starting node istead of a list
+     * @returnRuns bfs(listOf(startNode), target, reset) */
     fun bfs(startNode: T, target: T? = null, reset: Boolean = true) = bfs(listOf(startNode), target, reset)
 
     /** Performs a Depth-First Search on the graph which finds all nodes that's reachable from the starting node it.
