@@ -1,8 +1,8 @@
-package examples
+package graphMateKT.examples
 
-import graphClasses.*
-import readInt
-import readString
+import graphMateKT.graphClasses.Graph
+import graphMateKT.readInt
+import graphMateKT.readString
 
 fun main() {
     val ans = importspaghetti()

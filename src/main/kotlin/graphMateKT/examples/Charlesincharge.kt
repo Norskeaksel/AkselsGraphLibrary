@@ -1,9 +1,9 @@
-package examples
+package graphMateKT.examples
 
-import AdjacencyList
-import Edge
-import graphAlgorithms.Dijkstra
-import readInts
+import graphMateKT.AdjacencyList
+import graphMateKT.Edge
+import graphMateKT.graphAlgorithms.Dijkstra
+import graphMateKT.readInts
 
 fun main() {
     val ans = charlesincharge()

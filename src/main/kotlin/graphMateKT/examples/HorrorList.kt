@@ -1,7 +1,7 @@
-package examples
+package graphMateKT.examples
 
-import graphClasses.*
-import readInts
+import graphMateKT.graphClasses.IntGraph
+import graphMateKT.readInts
 
 fun main() {
     val ans = horrorList()

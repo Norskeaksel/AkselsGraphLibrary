@@ -1,4 +1,6 @@
-import examples.walkforest
+import graphMateKT.INPUT
+import graphMateKT._reader
+import graphMateKT.examples.walkforest
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.AfterAll
 import java.io.File

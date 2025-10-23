@@ -1,9 +1,9 @@
-package examples
+package graphMateKT.examples
 
-import graphClasses.*
-import readInt
-import readInts
-import readString
+import graphMateKT.graphClasses.IntGraph
+import graphMateKT.readInt
+import graphMateKT.readInts
+import graphMateKT.readString
 import kotlin.math.ceil
 import kotlin.math.roundToInt
 

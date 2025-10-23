@@ -1,3 +1,5 @@
+import graphMateKT.readInt
+import graphMateKT.readString
 import java.io.File
 import java.nio.file.Files.createDirectories
 import kotlin.io.path.Path
@@ -24,7 +26,7 @@ fun $name(): String {
 """
 
 private fun createExampleTest(name: String, nrOfSampleInputs: Int): String {
-    var test = """import examples.$name
+    var test = """import graphMateKT.examples.$name
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.AfterAll
 import java.io.File
@@ -63,7 +65,7 @@ private fun main() {
     val example = createExample(name)
     val exampleTest = createExampleTest(name, nrOfSampleInputs)
 
-    val exampleFile = File("src/main/kotlin/examples/${name.capitalize()}.kt")
+    val exampleFile = File("src/main/kotlin/graphMateKTexamples/${name.capitalize()}.kt")
     val exampleTestFile = File("src/test/kotlin/Test${name.capitalize()}.kt")
     val testInputDirectoryPath = "src/test/SampleInput/${name.capitalize()}"
     exampleFile.writeText(example)

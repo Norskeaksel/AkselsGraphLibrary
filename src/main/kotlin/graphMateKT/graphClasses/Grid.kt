@@ -1,7 +1,7 @@
-package graphClasses
+package graphMateKT.graphClasses
 
-import Edge
-import graphAlgorithms.DFS
+import graphMateKT.Edge
+import graphMateKT.graphAlgorithms.DFS
 
 /** Represents a node in the Grid graph with x and y coordinates and optional data, which can be considered the node value
  *

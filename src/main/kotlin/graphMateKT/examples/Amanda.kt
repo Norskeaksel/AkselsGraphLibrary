@@ -1,9 +1,9 @@
-package examples
+package graphMateKT.examples
 
-import graphClasses.ClauseGraph
-import graphClasses.Not
-import graphClasses.not
-import readInts
+import graphMateKT.graphClasses.ClauseGraph
+import graphMateKT.graphClasses.Not
+import graphMateKT.graphClasses.not
+import graphMateKT.readInts
 
 fun main(){
     val ans = amanda()

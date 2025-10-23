@@ -1,6 +1,6 @@
-package graphAlgorithms
+package graphMateKT.graphAlgorithms
 
-import UnweightedAdjacencyList
+import graphMateKT.UnweightedAdjacencyList
 
 internal class BFS(private val graph: UnweightedAdjacencyList) {
     fun bfs(

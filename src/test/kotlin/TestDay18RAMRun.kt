@@ -1,4 +1,3 @@
-import examples.day18a
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
@@ -32,7 +31,7 @@ class Day18RAMRunTest{
     """.trimIndent().lines()
     @Test
     fun test1a(){
-        val ans = day18a(input, 7, 12)
+        val ans = graphMateKT.examples.day18a(input, 7, 12)
         assertThat(ans).isEqualTo(22)
     }
 }

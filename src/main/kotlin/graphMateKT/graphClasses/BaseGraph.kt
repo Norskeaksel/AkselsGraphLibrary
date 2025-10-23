@@ -1,10 +1,15 @@
-package graphClasses
+package graphMateKT.graphClasses
 
-import AdjacencyList
-import UnweightedAdjacencyList
-import graphAlgorithms.*
-import toUnweightedAdjacencyList
-import toWeightedAdjacencyList
+import graphMateKT.AdjacencyList
+import graphMateKT.UnweightedAdjacencyList
+import graphMateKT.graphAlgorithms.*
+import graphMateKT.graphAlgorithms.BFS
+import graphMateKT.graphAlgorithms.DFS
+import graphMateKT.graphAlgorithms.Dijkstra
+import graphMateKT.graphAlgorithms.FloydWarshall
+import graphMateKT.graphAlgorithms.GraphSearchResults
+import graphMateKT.toUnweightedAdjacencyList
+import graphMateKT.toWeightedAdjacencyList
 
 /** And abstract class that's used by the Graph, IntGraph and Grid classes for common functionality */
 abstract class BaseGraph<T : Any>(size: Int, private val isWeighted: Boolean = true) {

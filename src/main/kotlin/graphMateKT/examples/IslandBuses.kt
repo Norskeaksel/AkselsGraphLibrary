@@ -1,7 +1,7 @@
-package examples
+package graphMateKT.examples
 
-import graphClasses.*
-import readLines
+import graphMateKT.graphClasses.Grid
+import graphMateKT.readLines
 
 fun main() {
     val ans = islandBuses()

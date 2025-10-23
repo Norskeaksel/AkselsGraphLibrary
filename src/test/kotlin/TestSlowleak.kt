@@ -1,4 +1,6 @@
-import examples.slowleak
+import graphMateKT.INPUT
+import graphMateKT._reader
+import graphMateKT.examples.slowleak
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.AfterAll
 import java.io.File

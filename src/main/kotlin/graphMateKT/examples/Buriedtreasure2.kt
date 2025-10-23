@@ -1,8 +1,9 @@
-package examples
+package graphMateKT.examples
 
-import debug
-import graphClasses.*
-import readInts
+import graphMateKT.debug
+import graphMateKT.graphClasses.ClauseGraph
+import graphMateKT.graphClasses.not
+import graphMateKT.readInts
 import kotlin.math.abs
 
 fun main() {

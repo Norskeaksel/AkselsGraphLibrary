@@ -1,9 +1,9 @@
-package examples
+package graphMateKT.examples
 //https://open.kattis.com/problems/shortestpath1
 
-import graphClasses.IntGraph
-import readInt
-import readInts
+import graphMateKT.graphClasses.IntGraph
+import graphMateKT.readInt
+import graphMateKT.readInts
 
 fun main(){
     while(true){

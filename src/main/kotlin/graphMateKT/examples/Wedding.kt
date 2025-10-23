@@ -1,8 +1,9 @@
-package examples
+package graphMateKT.examples
 
-import graphClasses.*
-import readInts
-import readStrings
+import graphMateKT.graphClasses.ClauseGraph
+import graphMateKT.graphClasses.not
+import graphMateKT.readInts
+import graphMateKT.readStrings
 
 fun main() {
     val ans = wedding()

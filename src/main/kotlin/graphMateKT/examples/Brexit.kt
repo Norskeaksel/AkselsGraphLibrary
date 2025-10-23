@@ -1,7 +1,7 @@
-package examples
+package graphMateKT.examples
 
-import graphClasses.IntGraph
-import readInts
+import graphMateKT.graphClasses.IntGraph
+import graphMateKT.readInts
 
 fun main() {
     val ans = brexit()

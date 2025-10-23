@@ -1,4 +1,6 @@
-import examples.horrorList
+import graphMateKT.INPUT
+import graphMateKT._reader
+import graphMateKT.examples.horrorList
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.AfterAll
 import java.io.File

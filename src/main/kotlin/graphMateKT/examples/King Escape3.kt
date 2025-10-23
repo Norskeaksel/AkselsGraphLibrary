@@ -1,7 +1,7 @@
-package examples
+package graphMateKT.examples
 
-import readInt
-import readInts
+import graphMateKT.readInt
+import graphMateKT.readInts
 
 fun main() {
     val ans = kingEscape3()

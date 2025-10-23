@@ -1,5 +1,6 @@
-import examples.boggle
-import graphClasses.*
+import graphMateKT.examples.boggle
+import graphMateKT.INPUT
+import graphMateKT._reader
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.AfterAll
 import java.io.File

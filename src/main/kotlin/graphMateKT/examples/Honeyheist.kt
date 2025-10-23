@@ -1,9 +1,10 @@
-package examples
+package graphMateKT.examples
 
-import debug
-import graphClasses.*
-import readInt
-import readInts
+import graphMateKT.debug
+import graphMateKT.graphClasses.Grid
+import graphMateKT.graphClasses.Tile
+import graphMateKT.readInt
+import graphMateKT.readInts
 
 import java.lang.Math.pow
 

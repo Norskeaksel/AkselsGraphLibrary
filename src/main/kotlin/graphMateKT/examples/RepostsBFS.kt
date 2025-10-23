@@ -1,8 +1,8 @@
-package examples
+package graphMateKT.examples
 
-import graphClasses.Graph
-import readInt
-import readStrings
+import graphMateKT.graphClasses.Graph
+import graphMateKT.readInt
+import graphMateKT.readStrings
 import java.util.*
 import kotlin.math.max
 

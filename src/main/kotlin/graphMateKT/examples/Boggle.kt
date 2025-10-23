@@ -1,11 +1,11 @@
-package examples
+package graphMateKT.examples
 
-import graphClasses.Grid
-import graphClasses.PrefixTree
-import graphClasses.Tile
-import graphClasses.TrieNode
-import readInt
-import readString
+import graphMateKT.graphClasses.Grid
+import graphMateKT.graphClasses.PrefixTree
+import graphMateKT.graphClasses.Tile
+import graphMateKT.graphClasses.TrieNode
+import graphMateKT.readInt
+import graphMateKT.readString
 
 //Contraints: 4x4 grid, letter only valid once per word
 private val wordScore = IntArray(9).apply {

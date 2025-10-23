@@ -1,8 +1,8 @@
-package examples
+package graphMateKT.examples
 
-import graphClasses.Grid
-import graphClasses.Tile
-import readString
+import graphMateKT.graphClasses.Grid
+import graphMateKT.graphClasses.Tile
+import graphMateKT.readString
 import kotlin.system.exitProcess
 
 fun main() {

@@ -1,4 +1,4 @@
-package graphGraphics
+package graphMateKT.graphGraphics
 
 import com.brunomnsilva.smartgraph.containers.SmartGraphDemoContainer
 import com.brunomnsilva.smartgraph.graph.GraphEdgeList

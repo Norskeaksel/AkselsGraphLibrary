@@ -1,5 +1,9 @@
 // Solves https://open.kattis.com/problems/crosscountry?tab=metadata
-import graphClasses.*
+import graphMateKT.INPUT
+import graphMateKT._reader
+import graphMateKT.graphClasses.IntGraph
+import graphMateKT.readDoubles
+import graphMateKT.readInts
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.AfterAll
 import org.junit.jupiter.api.BeforeAll

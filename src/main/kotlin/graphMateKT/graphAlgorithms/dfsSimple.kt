@@ -1,6 +1,6 @@
-package graphAlgorithms
+package graphMateKT.graphAlgorithms
 
-import UnweightedAdjacencyList
+import graphMateKT.UnweightedAdjacencyList
 
 internal fun dfsSimple(graph: UnweightedAdjacencyList, start: Int, currentVisited: MutableSet<Int> = mutableSetOf()): Set<Int> {
     if (start !in currentVisited) {

@@ -1,12 +1,12 @@
-package examples
+package graphMateKT.examples
 
-import AdjacencyList
-import Edge
-import deepCopy
-import graphAlgorithms.Dijkstra
-import graphClasses.Graph
-import readInt
-import readInts
+import graphMateKT.AdjacencyList
+import graphMateKT.Edge
+import graphMateKT.deepCopy
+import graphMateKT.graphAlgorithms.Dijkstra
+import graphMateKT.graphClasses.Graph
+import graphMateKT.readInt
+import graphMateKT.readInts
 import java.util.*
 
 

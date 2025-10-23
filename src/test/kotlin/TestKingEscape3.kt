@@ -1,5 +1,7 @@
 // Solves https://open.kattis.com/problems/crosscountry?tab=metadata
-import examples.kingEscape3
+import graphMateKT.INPUT
+import graphMateKT._reader
+import graphMateKT.examples.kingEscape3
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.AfterAll
 import java.io.File

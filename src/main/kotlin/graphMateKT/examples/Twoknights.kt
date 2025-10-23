@@ -1,7 +1,8 @@
-package examples
+package graphMateKT.examples
 
-import graphClasses.*
-import readString
+import graphMateKT.graphClasses.Grid
+import graphMateKT.graphClasses.Tile
+import graphMateKT.readString
 import kotlin.collections.ArrayDeque
 
 // Solves https://open.kattis.com/problems/twoknights

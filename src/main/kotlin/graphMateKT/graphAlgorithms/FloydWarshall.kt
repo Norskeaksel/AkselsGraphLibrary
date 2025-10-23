@@ -1,6 +1,6 @@
-package graphAlgorithms
+package graphMateKT.graphAlgorithms
 
-import AdjacencyList
+import graphMateKT.AdjacencyList
 import kotlin.math.min
 
 internal class FloydWarshall(val graph: AdjacencyList) {

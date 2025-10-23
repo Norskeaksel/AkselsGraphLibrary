@@ -1,6 +1,6 @@
-package graphClasses
+package graphMateKT.graphClasses
 
-/** A Graph data structure supports noes of any datatype.
+/** A Graph data structure supports nodes of any datatype.
  *
  * Any new node is given an ID upon creation, which is used to build an adjacency list. The class maintains internal
  * maps between ID's and nodes and vice versa. Nodes can be connected unidirectional with `.addEdge(node1, node2)`

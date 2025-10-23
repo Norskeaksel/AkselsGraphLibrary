@@ -1,4 +1,4 @@
-package graphClasses
+package graphMateKT.graphClasses
 
 /** The IntGraph class behaves a lot like the Graph class when used with integers like the example above.
  * However, * it's more performant, because it does not need to maintain an internal mapping between the nodes and their

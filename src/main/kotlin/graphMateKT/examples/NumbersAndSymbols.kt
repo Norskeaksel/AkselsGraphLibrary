@@ -1,7 +1,7 @@
-package examples
+package graphMateKT.examples
 
-import graphClasses.Grid
-import graphClasses.Tile
+import graphMateKT.graphClasses.Grid
+import graphMateKT.graphClasses.Tile
 
 /** Solves https://adventofcode.com/2023/day/3 */
 fun numbersConnectedToSymbol(input: List<String>): Int {

@@ -1,7 +1,7 @@
-package graphAlgorithms
+package graphMateKT.graphAlgorithms
 
-import AdjacencyList
-import Edge
+import graphMateKT.AdjacencyList
+import graphMateKT.Edge
 import java.util.*
 
 internal class Dijkstra(private val graph: AdjacencyList) {

@@ -1,4 +1,4 @@
-# GraphMateKT
+# graphMateKT
 
 ![My Workflow Status](https://github.com/Norskeaksel/GraphMateKT/actions/workflows/ci.yml/badge.svg)
 
@@ -47,7 +47,7 @@ Once the graph is built, you may use one of the following graph algorithms:
 - **Prims (MST)**:
     - `minimumSpanningTree()`
 
-[Example usage:](src/main/kotlin/examples/GraphExample.kt)
+[Example usage:](src/main/kotlin/graphMateKT/examples/GraphExample.kt)
 
 ```kotlin
 package examples
@@ -132,7 +132,7 @@ fun main() {
 The IntGraph class behaves a lot like the Graph class when used with integers like the example above. However,
 it's more performant, because it does not need to maintain an internal mapping between the nodes and their indexes in
 the adjacency list. The obvious drawback being it only supports integer nodes.
-[Example usage.](src/main/kotlin/examples/GraphExample.kt)
+[Example usage.](src/main/kotlin/graphMateKT/examples/GraphExample.kt)
 
 ## The Grid class
 
@@ -145,7 +145,7 @@ but it also has some additional methods for connecting the grid without explicit
 edges. `.connectGridDefault()` connects each node to nodes up, down, left and right of it, if they exist.
 If some customization is needed, `.connectGrid(::yourCustomFunction)` (also written like `.connectGrid{ yourLambda}`)
 can be used, where yourCustomFunction takes a `Tile` and returns a `List<Tile>` to connect
-to. [Example usage:](src/main/kotlin/examples/GridExample.kt)
+to. [Example usage:](src/main/kotlin/graphMateKT/examples/GridExample.kt)
 
 ```kotlin
 import graphClasses.Grid

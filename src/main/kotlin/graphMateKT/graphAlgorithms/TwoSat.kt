@@ -1,6 +1,6 @@
-package graphAlgorithms
+package graphMateKT.graphAlgorithms
 
-import IntComponents
+import graphMateKT.IntComponents
 import graphMateKT.graphClasses.Graph
 
 

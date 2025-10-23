@@ -1,8 +1,8 @@
-package examples
+package graphMateKT.examples
 
-import graphClasses.Grid
-import graphClasses.Tile
-import gridGraphics.visualizeGrid
+import graphMateKT.graphClasses.Grid
+import graphMateKT.graphClasses.Tile
+import graphMateKT.gridGraphics.visualizeGrid
 
 fun main() {
     // Example Grid Definition. We can also initialize it with a with and a height, e.g. `Grid(3, 3)`,

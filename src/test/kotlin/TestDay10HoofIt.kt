@@ -1,4 +1,4 @@
-import examples.day10a
+import graphMateKT.examples.day10a
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 

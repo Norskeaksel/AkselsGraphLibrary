@@ -1,8 +1,8 @@
-package examples
+package graphMateKT.examples
 
-import graphClasses.Graph
-import graphClasses.IntGraph
-import graphGraphics.visualizeGraph
+import graphMateKT.graphClasses.Graph
+import graphMateKT.graphClasses.IntGraph
+import graphMateKT.graphGraphics.visualizeGraph
 
 
 fun main() {

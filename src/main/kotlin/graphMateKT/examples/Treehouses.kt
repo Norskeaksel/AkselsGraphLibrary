@@ -1,8 +1,8 @@
-package examples
+package graphMateKT.examples
 
-import graphClasses.*
-import readDoubles
-import readInts
+import graphMateKT.graphClasses.Graph
+import graphMateKT.readDoubles
+import graphMateKT.readInts
 import kotlin.math.pow
 import kotlin.math.sqrt
 

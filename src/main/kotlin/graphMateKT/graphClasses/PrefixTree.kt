@@ -1,6 +1,6 @@
-package graphClasses
+package graphMateKT.graphClasses
 
-internal data class TrieNode(val children:MutableMap<Char,TrieNode> = mutableMapOf(), var isTerminal:Boolean = false)
+internal data class TrieNode(val children:MutableMap<Char, TrieNode> = mutableMapOf(), var isTerminal:Boolean = false)
 
 internal class PrefixTree {
     val root = TrieNode()

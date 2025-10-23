@@ -1,3 +1,5 @@
+package graphMateKT
+
 /** Edge has a weight w to a destination node v */
 typealias Edge = Pair<Double, Int>
 /** List of edges */

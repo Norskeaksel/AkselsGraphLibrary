@@ -1,4 +1,4 @@
-package graphAlgorithms
+package graphMateKT.graphAlgorithms
 
 internal data class GraphSearchResults(private val graphSize: Int) {
     val visited = BooleanArray(graphSize)

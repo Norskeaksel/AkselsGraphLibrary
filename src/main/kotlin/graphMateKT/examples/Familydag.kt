@@ -1,7 +1,7 @@
-package examples
+package graphMateKT.examples
 
-import graphClasses.Graph
-import readString
+import graphMateKT.graphClasses.Graph
+import graphMateKT.readString
 
 
 fun main() {

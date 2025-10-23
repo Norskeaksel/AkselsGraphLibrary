@@ -1,9 +1,9 @@
-package examples
+package graphMateKT.examples
 
-import graphClasses.Grid
-import graphClasses.Tile
-import readInt
-import readInts
+import graphMateKT.graphClasses.Grid
+import graphMateKT.graphClasses.Tile
+import graphMateKT.readInt
+import graphMateKT.readInts
 
 fun main() {
     val ans = watersheds()

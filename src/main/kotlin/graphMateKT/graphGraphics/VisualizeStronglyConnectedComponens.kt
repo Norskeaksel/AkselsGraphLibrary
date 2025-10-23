@@ -1,7 +1,7 @@
-package graphGraphics
+package graphMateKT.graphGraphics
 
-import Components
-import IntComponents
+import graphMateKT.Components
+import graphMateKT.IntComponents
 import graphMateKT.graphClasses.Graph
 
 /** Visualizes the strongly connected components (SCCs) of a graph.

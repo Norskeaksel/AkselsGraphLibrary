@@ -1,4 +1,6 @@
-import examples.familydag
+import graphMateKT.INPUT
+import graphMateKT._reader
+import graphMateKT.examples.familydag
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.AfterAll
 import java.io.File

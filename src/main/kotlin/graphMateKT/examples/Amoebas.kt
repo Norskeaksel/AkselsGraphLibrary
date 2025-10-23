@@ -1,8 +1,8 @@
-package examples
+package graphMateKT.examples
 
-import graphClasses.Grid
-import readInts
-import readString
+import graphMateKT.graphClasses.Grid
+import graphMateKT.readInts
+import graphMateKT.readString
 
 fun main() {
     val ans = amoebas()

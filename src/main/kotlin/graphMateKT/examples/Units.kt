@@ -1,7 +1,7 @@
-package examples
+package graphMateKT.examples
 
-import readInt
-import readString
+import graphMateKT.readInt
+import graphMateKT.readString
 
 fun main() {
     val ans = units()

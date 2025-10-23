@@ -1,8 +1,9 @@
-package examples
+package graphMateKT.examples
 
-import graphClasses.*
-import readInts
-import readString
+import graphMateKT.graphClasses.Grid
+import graphMateKT.graphClasses.Tile
+import graphMateKT.readInts
+import graphMateKT.readString
 import kotlin.system.measureTimeMillis
 
 fun main() {

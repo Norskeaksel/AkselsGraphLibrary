@@ -1,5 +1,5 @@
-package examples
-import graphClasses.Grid
+package graphMateKT.examples
+import graphMateKT.graphClasses.Grid
 
 /** Solves https://adventofcode.com/2024/day/10 */
 fun day10a(input: List<String>): Long {

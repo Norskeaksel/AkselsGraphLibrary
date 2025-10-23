@@ -1,7 +1,7 @@
-package examples
-import graphClasses.IntGraph
-import readDoubles
-import readInts
+package graphMateKT.examples
+import graphMateKT.graphClasses.IntGraph
+import graphMateKT.readDoubles
+import graphMateKT.readInts
 
 fun main() {
     val ans = crossCountry()

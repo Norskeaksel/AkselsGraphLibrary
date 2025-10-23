@@ -1,9 +1,9 @@
-package examples
+package graphMateKT.examples
 
-import graphClasses.Graph
-import graphClasses.IntGraph
-import readInt
-import readInts
+import graphMateKT.graphClasses.Graph
+import graphMateKT.graphClasses.IntGraph
+import graphMateKT.readInt
+import graphMateKT.readInts
 
 fun main() {
     val ans = walkforest()

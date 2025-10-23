@@ -1,7 +1,7 @@
-package graphAlgorithms
+package graphMateKT.graphAlgorithms
 
-import IntComponents
-import UnweightedAdjacencyList
+import graphMateKT.IntComponents
+import graphMateKT.UnweightedAdjacencyList
 
 
 internal class DFS(private val graph: UnweightedAdjacencyList) {
@@ -39,7 +39,7 @@ internal class DFS(private val graph: UnweightedAdjacencyList) {
                 }
             }
         val topologicalOrder = DFS(reversedGraph).topologicalSort(deleted).reversed()
-        val stronglyConnectedComponents:IntComponents = topologicalOrder.mapNotNull { id ->
+        val stronglyConnectedComponents: IntComponents = topologicalOrder.mapNotNull { id ->
             if (r.visited[id]) null
             else {
                 dfs(id, r)

@@ -1,8 +1,8 @@
-package examples
+package graphMateKT.examples
 
-import graphClasses.IntGraph
-import readInt
-import readInts
+import graphMateKT.graphClasses.IntGraph
+import graphMateKT.readInt
+import graphMateKT.readInts
 
 fun main() {
     val ans = buttonbashing()

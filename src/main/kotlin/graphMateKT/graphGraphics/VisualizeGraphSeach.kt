@@ -1,4 +1,4 @@
-package graphGraphics
+package graphMateKT.graphGraphics
 
 import graphMateKT.graphClasses.BaseGraph
 import javafx.application.Application

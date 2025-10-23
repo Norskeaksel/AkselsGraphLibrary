@@ -1,7 +1,7 @@
-package graphClasses
+package graphMateKT.graphClasses
 
-import Components
-import graphAlgorithms.twoSat
+import graphMateKT.Components
+import graphMateKT.graphAlgorithms.twoSat
 
 internal data class Not(val node: Any)
 
