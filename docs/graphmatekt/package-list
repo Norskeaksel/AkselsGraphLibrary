@@ -84,14 +84,14 @@ $dokka.location:graphMateKT.graphClasses/Graph/toString/#/PointingToDeclaration/
 $dokka.location:graphMateKT.graphClasses/Grid///PointingToDeclaration/graphmatekt/graphMateKT.graphClasses/-grid/index.html
 $dokka.location:graphMateKT.graphClasses/Grid/Grid/#kotlin.Int#kotlin.Int#kotlin.Boolean#kotlin.Boolean/PointingToDeclaration/graphmatekt/graphMateKT.graphClasses/-grid/-grid.html
 $dokka.location:graphMateKT.graphClasses/Grid/Grid/#kotlin.collections.List[kotlin.String]/PointingToDeclaration/graphmatekt/graphMateKT.graphClasses/-grid/-grid.html
-$dokka.location:graphMateKT.graphClasses/Grid/addNode/#graphMateKT.graphClasses.Tile/PointingToDeclaration/graphmatekt/graphMateKT.graphClasses/-grid/add-node.html
-$dokka.location:graphMateKT.graphClasses/Grid/connectGrid/#kotlin.Boolean#kotlin.Function1[graphMateKT.graphClasses.Tile,kotlin.collections.List[graphMateKT.graphClasses.Tile]]/PointingToDeclaration/graphmatekt/graphMateKT.graphClasses/-grid/connect-grid.html
+$dokka.location:graphMateKT.graphClasses/Grid/addNode/#graphMateKT.Tile/PointingToDeclaration/graphmatekt/graphMateKT.graphClasses/-grid/add-node.html
+$dokka.location:graphMateKT.graphClasses/Grid/connectGrid/#kotlin.Boolean#kotlin.Function1[graphMateKT.Tile,kotlin.collections.List[graphMateKT.Tile]]/PointingToDeclaration/graphmatekt/graphMateKT.graphClasses/-grid/connect-grid.html
 $dokka.location:graphMateKT.graphClasses/Grid/connectGridDefault/#/PointingToDeclaration/graphmatekt/graphMateKT.graphClasses/-grid/connect-grid-default.html
 $dokka.location:graphMateKT.graphClasses/Grid/deleteNodeAtXY/#kotlin.Int#kotlin.Int/PointingToDeclaration/graphmatekt/graphMateKT.graphClasses/-grid/delete-node-at-x-y.html
 $dokka.location:graphMateKT.graphClasses/Grid/deleteNodesWithData/#kotlin.Any?/PointingToDeclaration/graphmatekt/graphMateKT.graphClasses/-grid/delete-nodes-with-data.html
-$dokka.location:graphMateKT.graphClasses/Grid/getAllNeighbours/#graphMateKT.graphClasses.Tile/PointingToDeclaration/graphmatekt/graphMateKT.graphClasses/-grid/get-all-neighbours.html
-$dokka.location:graphMateKT.graphClasses/Grid/getDiagonalNeighbours/#graphMateKT.graphClasses.Tile/PointingToDeclaration/graphmatekt/graphMateKT.graphClasses/-grid/get-diagonal-neighbours.html
-$dokka.location:graphMateKT.graphClasses/Grid/getStraightNeighbours/#graphMateKT.graphClasses.Tile/PointingToDeclaration/graphmatekt/graphMateKT.graphClasses/-grid/get-straight-neighbours.html
+$dokka.location:graphMateKT.graphClasses/Grid/getAllNeighbours/#graphMateKT.Tile/PointingToDeclaration/graphmatekt/graphMateKT.graphClasses/-grid/get-all-neighbours.html
+$dokka.location:graphMateKT.graphClasses/Grid/getDiagonalNeighbours/#graphMateKT.Tile/PointingToDeclaration/graphmatekt/graphMateKT.graphClasses/-grid/get-diagonal-neighbours.html
+$dokka.location:graphMateKT.graphClasses/Grid/getStraightNeighbours/#graphMateKT.Tile/PointingToDeclaration/graphmatekt/graphMateKT.graphClasses/-grid/get-straight-neighbours.html
 $dokka.location:graphMateKT.graphClasses/Grid/height/#/PointingToDeclaration/graphmatekt/graphMateKT.graphClasses/-grid/height.html
 $dokka.location:graphMateKT.graphClasses/Grid/nodes/#/PointingToDeclaration/graphmatekt/graphMateKT.graphClasses/-grid/nodes.html
 $dokka.location:graphMateKT.graphClasses/Grid/print/#/PointingToDeclaration/graphmatekt/graphMateKT.graphClasses/-grid/print.html
@@ -103,19 +103,12 @@ $dokka.location:graphMateKT.graphClasses/IntGraph///PointingToDeclaration/graph
 $dokka.location:graphMateKT.graphClasses/IntGraph/IntGraph/#kotlin.Int#kotlin.Boolean/PointingToDeclaration/graphmatekt/graphMateKT.graphClasses/-int-graph/-int-graph.html
 $dokka.location:graphMateKT.graphClasses/IntGraph/addNode/#kotlin.Int/PointingToDeclaration/graphmatekt/graphMateKT.graphClasses/-int-graph/add-node.html
 $dokka.location:graphMateKT.graphClasses/IntGraph/nodes/#/PointingToDeclaration/graphmatekt/graphMateKT.graphClasses/-int-graph/nodes.html
-$dokka.location:graphMateKT.graphClasses/Tile///PointingToDeclaration/graphmatekt/graphMateKT.graphClasses/-tile/index.html
-$dokka.location:graphMateKT.graphClasses/Tile/Tile/#kotlin.Int#kotlin.Int#kotlin.Any?/PointingToDeclaration/graphmatekt/graphMateKT.graphClasses/-tile/-tile.html
-$dokka.location:graphMateKT.graphClasses/Tile/data/#/PointingToDeclaration/graphmatekt/graphMateKT.graphClasses/-tile/data.html
-$dokka.location:graphMateKT.graphClasses/Tile/dataIsDigit/#/PointingToDeclaration/graphmatekt/graphMateKT.graphClasses/-tile/data-is-digit.html
-$dokka.location:graphMateKT.graphClasses/Tile/x/#/PointingToDeclaration/graphmatekt/graphMateKT.graphClasses/-tile/x.html
-$dokka.location:graphMateKT.graphClasses/Tile/xPlusYTimesWidth/#kotlin.Int/PointingToDeclaration/graphmatekt/graphMateKT.graphClasses/-tile/x-plus-y-times-width.html
-$dokka.location:graphMateKT.graphClasses/Tile/y/#/PointingToDeclaration/graphmatekt/graphMateKT.graphClasses/-tile/y.html
 $dokka.location:graphMateKT.graphGraphics////PointingToDeclaration/graphmatekt/graphMateKT.graphGraphics/index.html
 $dokka.location:graphMateKT.graphGraphics//visualizeComponents/kotlin.collections.List[kotlin.collections.List[kotlin.Any]]#/PointingToDeclaration/graphmatekt/graphMateKT.graphGraphics/visualize-components.html
 $dokka.location:graphMateKT.graphGraphics//visualizeGraph/graphMateKT.graphClasses.BaseGraph[TypeParam(bounds=[kotlin.Any])]#kotlin.Boolean#kotlin.collections.List[TypeParam(bounds=[kotlin.Any])]#kotlin.String#kotlin.Double?#kotlin.Boolean#kotlin.Boolean#kotlin.Double?/PointingToDeclaration/graphmatekt/graphMateKT.graphGraphics/visualize-graph.html
 $dokka.location:graphMateKT.graphGraphics//visualizeIntComponents/kotlin.collections.List[kotlin.collections.List[kotlin.Int]]#/PointingToDeclaration/graphmatekt/graphMateKT.graphGraphics/visualize-int-components.html
 $dokka.location:graphMateKT.gridGraphics////PointingToDeclaration/graphmatekt/graphMateKT.gridGraphics/index.html
-$dokka.location:graphMateKT.gridGraphics//visualizeGrid/graphMateKT.graphClasses.Grid#kotlin.collections.List[graphMateKT.graphClasses.Tile]#kotlin.collections.List[graphMateKT.graphClasses.Tile]#kotlin.collections.List[kotlin.Double]#kotlin.String#kotlin.Double?#kotlin.Boolean#kotlin.Boolean#kotlin.Double?/PointingToDeclaration/graphmatekt/graphMateKT.gridGraphics/visualize-grid.html
+$dokka.location:graphMateKT.gridGraphics//visualizeGrid/graphMateKT.graphClasses.Grid#kotlin.collections.List[graphMateKT.Tile]#kotlin.collections.List[graphMateKT.Tile]#kotlin.collections.List[kotlin.Double]#kotlin.String#kotlin.Double?#kotlin.Boolean#kotlin.Boolean#kotlin.Double?/PointingToDeclaration/graphmatekt/graphMateKT.gridGraphics/visualize-grid.html
 $dokka.location:graphMateKT////PointingToDeclaration/graphmatekt/graphMateKT/index.html
 $dokka.location:graphMateKT//deepCopy/kotlin.collections.MutableList[graphMateKT.Edges]#/PointingToDeclaration/graphmatekt/graphMateKT/deep-copy.html
 $dokka.location:graphMateKT//toUnweightedAdjacencyList/kotlin.collections.MutableList[graphMateKT.Edges]#/PointingToDeclaration/graphmatekt/graphMateKT/to-unweighted-adjacency-list.html
@@ -125,6 +118,13 @@ $dokka.location:graphMateKT/Components///PointingToDeclaration/graphmatekt/grap
 $dokka.location:graphMateKT/Edge///PointingToDeclaration/graphmatekt/graphMateKT/-edge/index.html
 $dokka.location:graphMateKT/Edges///PointingToDeclaration/graphmatekt/graphMateKT/-edges/index.html
 $dokka.location:graphMateKT/IntComponents///PointingToDeclaration/graphmatekt/graphMateKT/-int-components/index.html
+$dokka.location:graphMateKT/Tile///PointingToDeclaration/graphmatekt/graphMateKT/-tile/index.html
+$dokka.location:graphMateKT/Tile/Tile/#kotlin.Int#kotlin.Int#kotlin.Any?/PointingToDeclaration/graphmatekt/graphMateKT/-tile/-tile.html
+$dokka.location:graphMateKT/Tile/data/#/PointingToDeclaration/graphmatekt/graphMateKT/-tile/data.html
+$dokka.location:graphMateKT/Tile/dataIsDigit/#/PointingToDeclaration/graphmatekt/graphMateKT/-tile/data-is-digit.html
+$dokka.location:graphMateKT/Tile/x/#/PointingToDeclaration/graphmatekt/graphMateKT/-tile/x.html
+$dokka.location:graphMateKT/Tile/xPlusYTimesWidth/#kotlin.Int/PointingToDeclaration/graphmatekt/graphMateKT/-tile/x-plus-y-times-width.html
+$dokka.location:graphMateKT/Tile/y/#/PointingToDeclaration/graphmatekt/graphMateKT/-tile/y.html
 $dokka.location:graphMateKT/UnweightedAdjacencyList///PointingToDeclaration/graphmatekt/graphMateKT/-unweighted-adjacency-list/index.html
 graphMateKT
 graphMateKT.examples
