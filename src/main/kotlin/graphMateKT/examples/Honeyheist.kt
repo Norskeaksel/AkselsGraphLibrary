@@ -2,7 +2,7 @@ package graphMateKT.examples
 
 import graphMateKT.debug
 import graphMateKT.graphClasses.Grid
-import graphMateKT.graphClasses.Tile
+import graphMateKT.Tile
 import graphMateKT.readInt
 import graphMateKT.readInts
 

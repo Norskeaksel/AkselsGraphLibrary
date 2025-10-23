@@ -1,11 +1,9 @@
 package graphMateKT.graphClasses
 
 import graphMateKT.Components
+import graphMateKT.Not
 import graphMateKT.graphAlgorithms.twoSat
-
-internal data class Not(val node: Any)
-
-internal operator fun Any.not() = Not(this)
+import graphMateKT.not
 
 internal class ClauseGraph {
     private val nodes = mutableListOf<Any?>()

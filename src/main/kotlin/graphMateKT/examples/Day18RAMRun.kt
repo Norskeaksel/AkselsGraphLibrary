@@ -1,6 +1,6 @@
 package graphMateKT.examples
 import graphMateKT.graphClasses.Grid
-import graphMateKT.graphClasses.Tile
+import graphMateKT.Tile
 
 /** Solves https://adventofcode.com/2024/day/18 */
 fun day18a(input: List<String>, gridSize: Int, lineCount: Int): Int {

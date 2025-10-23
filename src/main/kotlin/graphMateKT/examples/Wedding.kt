@@ -1,7 +1,7 @@
 package graphMateKT.examples
 
 import graphMateKT.graphClasses.ClauseGraph
-import graphMateKT.graphClasses.not
+import graphMateKT.not
 import graphMateKT.readInts
 import graphMateKT.readStrings
 

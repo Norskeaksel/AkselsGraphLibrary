@@ -1,7 +1,7 @@
 package graphMateKT.gridGraphics
 
 import graphMateKT.graphClasses.Grid
-import graphMateKT.graphClasses.Tile
+import graphMateKT.Tile
 import javafx.animation.KeyFrame
 import javafx.animation.PauseTransition
 import javafx.animation.Timeline

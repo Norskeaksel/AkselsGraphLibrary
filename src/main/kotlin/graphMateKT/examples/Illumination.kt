@@ -1,8 +1,8 @@
 package graphMateKT.examples
 
 import graphMateKT.graphClasses.ClauseGraph
-import graphMateKT.graphClasses.Tile
-import graphMateKT.graphClasses.not
+import graphMateKT.Tile
+import graphMateKT.not
 import graphMateKT.readInts
 import kotlin.math.abs
 

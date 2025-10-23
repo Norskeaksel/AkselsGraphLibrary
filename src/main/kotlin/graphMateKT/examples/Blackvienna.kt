@@ -2,7 +2,7 @@ package graphMateKT.examples
 
 import graphMateKT.debug
 import graphMateKT.graphClasses.ClauseGraph
-import graphMateKT.graphClasses.not
+import graphMateKT.not
 import graphMateKT.readInt
 import graphMateKT.readString
 import java.util.ArrayList

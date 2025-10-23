@@ -2,8 +2,8 @@ package graphMateKT.examples
 
 import graphMateKT.graphClasses.Grid
 import graphMateKT.graphClasses.PrefixTree
-import graphMateKT.graphClasses.Tile
-import graphMateKT.graphClasses.TrieNode
+import graphMateKT.Tile
+import graphMateKT.TrieNode
 import graphMateKT.readInt
 import graphMateKT.readString
 

@@ -1,7 +1,7 @@
 package graphMateKT.gridGraphics
 
+import graphMateKT.Tile
 import graphMateKT.graphClasses.Grid
-import graphMateKT.graphClasses.Tile
 import javafx.application.Application
 
 private fun main() {

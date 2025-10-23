@@ -1,7 +1,7 @@
 package graphMateKT.gridGraphics
 
 import graphMateKT.graphClasses.Grid
-import graphMateKT.graphClasses.Tile
+import graphMateKT.Tile
 import javafx.application.Application
 
 /** Visualizes the grid and optionally its traversal process using a graphical interface.

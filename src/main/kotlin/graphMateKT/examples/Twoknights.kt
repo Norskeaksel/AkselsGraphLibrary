@@ -1,7 +1,7 @@
 package graphMateKT.examples
 
 import graphMateKT.graphClasses.Grid
-import graphMateKT.graphClasses.Tile
+import graphMateKT.Tile
 import graphMateKT.readString
 import kotlin.collections.ArrayDeque
 

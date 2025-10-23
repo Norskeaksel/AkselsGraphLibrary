@@ -1,8 +1,8 @@
 package graphMateKT.examples
 
+import graphMateKT.Not
 import graphMateKT.graphClasses.ClauseGraph
-import graphMateKT.graphClasses.Not
-import graphMateKT.graphClasses.not
+import graphMateKT.not
 import graphMateKT.readInts
 
 fun main(){
