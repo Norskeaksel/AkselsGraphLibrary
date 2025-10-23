@@ -4,13 +4,13 @@
 
 This repository contains classes and algorithms for making graphs, traversing them and vi in various ways.
 This can for example be used to solve competitive programming problems.
-The [examples](src/main/kotlin/examples) folder contains example code solutions using this graphLibraryPackage to solve
+The [examples](src/main/kotlin/graphMateKT/examples) folder contains example code solutions using this graphLibraryPackage to solve
 various problems.
 The library contains the general `Graph` class, which can be used to create graphs of any datatype,
 the `IntGraph` class, which is performance optimized for integer nodes,
 and the `Grid` class, where each node has x and y coordinates in addition to containing any data type.
-All the classes inherit from the [BaseGraph.kt](src%2Fmain%2Fkotlin%2FgraphClasses%2FBaseGraph.kt) interface,
-which defines the basic functionality of a graph.
+All the classes inherit from the abstract [BaseGraph.kt](src/main/kotlin/graphMateKT/graphClasses/BaseGraph.kt)
+class, which defines the basic functionality of a graph.
 
 ## API Reference
 
@@ -23,7 +23,7 @@ A Graph data structure supports nodes of any datatype.
 Any new node is given an ID upon creation, which is used to build an adjacency list. The class maintains internal
 maps between IDs and nodes and vice versa. Nodes can be connected unidirectionally with `.addEdge(node1, node2)`
 or bidirectionally with `.connect(node1, node2)`.
-Once the graph is built, you may use one of the following graph algorithms:
+Once the graph is built, you may use the following graph algorithms:
 
 - **Breadth-First Search (BFS)**:
     - `bfs(startNode: T, target: T? = null, reset: Boolean = true)`
@@ -46,7 +46,6 @@ Once the graph is built, you may use one of the following graph algorithms:
 
 - **Prims (MST)**:
     - `minimumSpanningTree()`
-
 [Example usage:](src/main/kotlin/graphMateKT/examples/GraphExample.kt)
 
 ```kotlin
