@@ -9,7 +9,7 @@ various problems.
 The library contains the general `Graph` class, which can be used to create graphs of any datatype,
 the `IntGraph` class, which is performance optimized for integer nodes,
 and the `Grid` class, where each node has x and y coordinates in addition to containing any data type.
-All the classes inherit from the abstract [BaseGraph.kt](src/main/kotlin/graphMateKT/graphClasses/BaseGraph.kt)
+All the classes inherit from the abstract [BaseGraph](https://norskeaksel.github.io/GraphMateKT/graphmatekt/graphMateKT.graphClasses/-base-graph/index.html)
 class, which defines the basic functionality of a graph.
 
 ## API Reference
@@ -62,7 +62,7 @@ Once the graph is built, you may use the following graph algorithms:
 
 - **Prims (MST)**:
     - `minimumSpanningTree()`
-[Example usage:](src/main/kotlin/graphMateKT/examples/GraphExample.kt)
+[Example usage:](SampleProject/src/main/kotlin/GraphExample.kt)
 
 ```kotlin
 package examples
@@ -147,7 +147,7 @@ fun main() {
 The IntGraph class behaves a lot like the Graph class when used with integers like the example above. However,
 it's more performant, because it does not need to maintain an internal mapping between the nodes and their indexes in
 the adjacency list. The obvious drawback being it only supports integer nodes.
-[Example usage.](src/main/kotlin/graphMateKT/examples/GraphExample.kt)
+[Example usage.](SampleProject/src/main/kotlin/GraphExample.kt)
 
 ## The Grid class
 
@@ -160,7 +160,7 @@ but it also has some additional methods for connecting the grid without explicit
 edges. `.connectGridDefault()` connects each node to nodes up, down, left and right of it, if they exist.
 If some customization is needed, `.connectGrid(::yourCustomFunction)` (also written like `.connectGrid{ yourLambda}`)
 can be used, where yourCustomFunction takes a `Tile` and returns a `List<Tile>` to connect
-to. [Example usage:](src/main/kotlin/graphMateKT/examples/GridExample.kt)
+to. [Example usage:](SampleProject/src/main/kotlin/GridExample.kt)
 
 ```kotlin
 import graphMateKT.graphClasses.Grid

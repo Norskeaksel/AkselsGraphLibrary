@@ -1,4 +1,4 @@
-package graphMateKT.examples
+package org.example
 
 import graphMateKT.graphClasses.Graph
 import graphMateKT.graphClasses.IntGraph
