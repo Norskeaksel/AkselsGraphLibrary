@@ -6,7 +6,7 @@ package graphMateKT.graphClasses
  *
  * <i>Example usage:<i>
  * ```
- * val intGraph = IntGraph(5) // Creates a graph with 3 nodes (0 to 2)
+ * val intGraph = IntGraph(3) // Creates a graph with nodes 0, 1 and 2
  * graph.addEdge(0, 1, 5.0)
  * graph.addEdge(0, 2, 2.0)
  * graph.addEdge(2, 1, 1.0)
