@@ -2,7 +2,7 @@
 
 ![My Workflow Status](https://github.com/Norskeaksel/GraphMateKT/actions/workflows/ci.yml/badge.svg)
 
-This repository contains classes and algorithms for making graphs, traversing them and vi in various ways.
+This repository contains classes and algorithms for making graphs, traversing and visualizing.
 This can for example be used to solve competitive programming problems.
 The [examples](src/main/kotlin/graphMateKT/examples) folder contains example code solutions using this graphLibraryPackage to solve
 various problems.
@@ -15,6 +15,22 @@ class, which defines the basic functionality of a graph.
 ## API Reference
 
 [![kdoc](https://img.shields.io/badge/kdoc-1.0.0-brightgreen)](https://norskeaksel.github.io/GraphMateKT)
+
+
+## Using the library
+Add the following dependency to your `pom.xml` file:
+```xml
+<dependency>
+  <groupId>me.ahsor</groupId>
+  <artifactId>graphmatekt</artifactId>
+  <version>1.0-SNAPSHOT</version>
+</dependency>
+```
+See [here](https://github.com/Norskeaksel/GraphMateKT/packages/) for the latest version number.
+
+:warning: Please note that to use the ```Graph().visualizeGraph() function```, the files `smartgraph.css` and
+`smartgraph.properties` **must be added manually** to the root of your project, as described in [Bruno Silva](https://github.com/brunomnsilva)'s
+[JavaFXSmartGraph](https://github.com/brunomnsilva/JavaFXSmartGraph) repository.
 
 ## The Graph class
 

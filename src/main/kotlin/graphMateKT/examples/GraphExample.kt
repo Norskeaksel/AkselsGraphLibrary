@@ -21,7 +21,7 @@ fun main() {
     val targetNode = 3
     graph.dijkstra(startNode, targetNode) // Provide a goal target node to stop the search when the target is found
     val nodes: List<Int> =
-        graph.nodes().map { it as Int } // Nodes are of type Any and must therefore be casted to Int
+        graph.nodes().map { it as Int } // Nodes are of type Any and must therefore be cast to Int
     println("Shortest paths from source node $startNode:")
     nodes.forEach { node ->
         val distValue = graph.distanceTo(node)

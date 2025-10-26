@@ -4,7 +4,7 @@ import java.io.File
 import java.nio.file.Files.createDirectories
 import kotlin.io.path.Path
 
-private fun createExample(name: String) = """package examples
+private fun createExample(name: String) = """package graphMateKT.examples
 
 import readInt
 import readInts

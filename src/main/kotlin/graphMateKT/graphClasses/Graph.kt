@@ -3,11 +3,20 @@ package graphMateKT.graphClasses
 /** A Graph data structure supports nodes of any datatype.
  *
  * Any new node is given an ID upon creation, which is used to build an adjacency list. The class maintains internal
- * maps between ID's and nodes and vice versa. Nodes can be connected unidirectional with `.addEdge(node1, node2)`
- * or bidirectional with `.connect(node1, node2)`.
+ * maps between ID's and nodes and vice versa.
  *
- * @param isWeighted Indicates whether it uses weighted or unweigtred edges. Traversel algorithms like BFS and DFS
- * operate on unweighted graphs, while minimum cost algorithms like Dijkstra, floyd warshall and prims is based on weighted edges */
+ * Example usage:
+ * ```
+ * val graph = Graph()
+ * graph.addEdge("A", "B", 5.0)
+ * graph.addEdge("A", "C", 2.0)
+ * graph.addEdge("C", "B", 1.0)
+ * graph.dijkstra("A", "B")
+ * graph.visualizeGraph()
+ * ```
+ *
+ * @param isWeighted Indicates whether it uses weighted or unweighted edges. Traversal algorithms like BFS and DFS
+ * operate on unweighted graphs, while minimum cost algorithms like Dijkstra, Floyd Warshall and Prims are based on weighted edges */
 class Graph(isWeighted:Boolean=true): BaseGraph<Any>(0, isWeighted) {
     private var nrOfNodes = 0
     private val node2id = mutableMapOf<Any, Int>()
