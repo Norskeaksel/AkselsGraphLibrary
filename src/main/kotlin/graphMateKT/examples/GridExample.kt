@@ -1,4 +1,4 @@
-package org.example
+package graphMateKT.examples
 
 import graphMateKT.graphClasses.Grid
 import graphMateKT.Tile
