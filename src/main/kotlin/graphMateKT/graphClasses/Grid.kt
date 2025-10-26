@@ -26,7 +26,6 @@ import graphMateKT.graphAlgorithms.DFS
  * grid.connectGridDefault()
  * grid.bfs(Tile(50,50), Tile(0,0))
  * grid.visualizeGrid()
- * ```
  *
  * @param width The width of the grid (number of columns).
  * @param height The height of the grid (number of rows).
@@ -166,6 +165,16 @@ class Grid(val width: Int, val height: Int, initWithDatalessTiles: Boolean = fal
      * This function iterates through all nodes in the grid and connects each node to its neighbors as determined
      * by the `getNeighbours` function. The connections can be either unidirectional or bidirectional, based on the
      * `bidirectional` parameter.
+     *
+     * <i>Example usage:<i>
+     * ```
+     * val grid = Grid(100,100, true)
+     * grid.connectGrid { t ->
+     *     grid.getStraightNeighbours(t) + grid.getDiagonalNeighbours(t)
+     * }
+     * grid.bfs(Tile(50,50))
+     * grid.visualizeGrid()
+     * ```
      *
      * @param bidirectional If `true`, connections between nodes are bidirectional. If `false`, connections are unidirectional.
      * @param getNeighbours A function that takes a `Tile` as input and returns a list of neighboring `Tile` objects to connect to.
