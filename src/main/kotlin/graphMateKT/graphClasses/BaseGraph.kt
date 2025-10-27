@@ -133,7 +133,7 @@ abstract class BaseGraph<T : Any>(size: Int, private val isWeighted: Boolean = t
      *
      * @param node The target node whose distance is to be retrieved.
      * @return The distance to the specified node.
-     * @throws IllegalStateException If no search algorithm (BFS, Dijkstra) has been executed yet. */
+     * @throws IllegalStateException If neither BFS nor Dijkstra has been executed yet. */
     fun distanceTo(node: T) =
         if (isWeighted) distanceWeightedTo(node)
         else distanceUnweightedTo(node).toDouble()
@@ -143,7 +143,7 @@ abstract class BaseGraph<T : Any>(size: Int, private val isWeighted: Boolean = t
         searchResults?.let {
             return it.distances[id]
         }
-        error("Haven't computed distance to $node because no search algorithm (dfs, bfs, dijkstra) has been run yet.")
+        error("Haven't computed distance to $node because neither BFS nor Dijkstra  has been run yet.")
     }
 
     private fun distanceUnweightedTo(node: T): Int {
@@ -151,7 +151,7 @@ abstract class BaseGraph<T : Any>(size: Int, private val isWeighted: Boolean = t
         searchResults?.let {
             return it.unweightedDistances[id]
         }
-        error("Haven't computed distance to $node because no search algorithm (dfs, bfs, dijkstra) has been run yet.")
+        error("Haven't computed distance to $node because neither BFS nor Dijkstra has been run yet.")
     }
 
     /** Retrieves the maximum distance from the starting node to any other node of the most recent search operation (BFS, Dijkstra).

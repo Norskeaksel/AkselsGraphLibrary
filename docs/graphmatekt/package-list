@@ -1,7 +1,5 @@
 $dokka.format:html-v1
 $dokka.linkExtension:html
-$dokka.location:////PointingToDeclaration/graphmatekt/[root]/index.html
-$dokka.location://main/#/PointingToDeclaration/graphmatekt/[root]/main.html
 $dokka.location:graphMateKT.examples////PointingToDeclaration/graphmatekt/graphMateKT.examples/index.html
 $dokka.location:graphMateKT.examples//amanda/#/PointingToDeclaration/graphmatekt/graphMateKT.examples/amanda.html
 $dokka.location:graphMateKT.examples//amazing/#/PointingToDeclaration/graphmatekt/graphMateKT.examples/amazing.html
