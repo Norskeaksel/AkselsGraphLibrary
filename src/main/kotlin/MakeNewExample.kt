@@ -9,14 +9,14 @@ private fun createExample(name: String) = """package graphMateKT.examples
 import readInt
 import readInts
 
-fun main() {
+internal fun main() {
     val ans = $name()
     println(ans)
     System.out.flush()
 }
 
 /** Solves https://open.kattis.com/problems/$name */
-fun $name(): String {
+internal fun $name(): String {
     val n = readInt()
     repeat(n){
     
