@@ -7,11 +7,11 @@ import graphMateKT.graphAlgorithms.DFS
 /** The Grid class is a specialized graph class.
  *
  * It uses the data class:
- * ```Tile(val x: Int, val y: Int, var data: Any? = null)```
+ * `Tile(val x: Int, val y: Int, var data: Any? = null)`
  * to represent nodes of any datatype, where each node also has x and y coordinates.
  *
  * The grid can be created in two ways:
- * - By specifying a `width` and `height`, optionally initializing it with dataless tiles.
+ * - By specifying a `width` and `height`, optionally initializing it with tiles that has `data=null`.
  * - By passing a list of strings, where each string represents a row, and all strings must have the same length.
  *
  * The Grid class supports the same algorithms as the Graph class. Additionally, it
@@ -20,21 +20,47 @@ import graphMateKT.graphAlgorithms.DFS
  * - `.connectGrid(::yourCustomFunction)` (or `.connectGrid { yourLambda }`) allows custom connections, where the function
  *   takes a `Tile` and returns a `List<Tile>` to connect to.
  *
- * <i>Example usage:<i>
+ * <i>Simple example usage:<i>
  * ```
  * val grid = Grid(100,100,true)
  * grid.connectGridDefault()
- * grid.bfs(Tile(50,50), Tile(0,0))
+ * grid.bfs(Tile(50,50))
  * grid.visualizeGrid()
+ * ```
+ * <i>String constructor and custom connections example usage:<i>
+ *
+ * ```
+ * val stringList = listOf(
+ * "0#4",
+ * "123",
+ * "234"
+ * )
+ * val grid = Grid(stringList)
+ * grid.deleteNodesWithData('#')
+ * grid.connectGrid { t ->
+ *     grid.getStraightNeighbours(t).filter { it.x >= t.x || it.y > t.y } // connect right and down
+ * }
+ * grid.bfs(Tile(0, 0, 'S'))
+ * grid.visualizeGrid()
+ * ```
  *
  * @param width The width of the grid (number of columns).
  * @param height The height of the grid (number of rows).
  * @param initWithDatalessTiles If `true`, initializes the grid with empty tiles.
  * @param isWeighted Indicates whether the grid uses weighted or unweighted edges. */
-class Grid(val width: Int, val height: Int, initWithDatalessTiles: Boolean = false, isWeighted:Boolean=false) : BaseGraph<Tile>(width * height, isWeighted) {
+class Grid(val width: Int, val height: Int, initWithDatalessTiles: Boolean = false, isWeighted: Boolean = false) :
+    BaseGraph<Tile>(width * height, isWeighted) {
+    /** Construct the grid from a list of strings, where each string represents a row in the grid.
+     *
+     * Sets the grid height to the list size and the width to the length of the first string.
+     * Requires that all strings have the same length. If some cells should be deleted,
+     * `deleteNodeAtXY(x,y)` or `deleteNodesWithData(data)` can be used after the grid is created.
+     *
+     * @param stringGrid A list of strings representing the grid
+     * */
     constructor(stringGrid: List<String>) : this(stringGrid[0].length, stringGrid.size) {
-        if (stringGrid.any { it.length != width })
-            error("All lines in the string grid must have the same length")
+        require(stringGrid.any { it.length == width })
+        { "All lines in the string grid must have the same length" }
         stringGrid.forEachIndexed { y, line ->
             line.forEachIndexed { x, c ->
                 val t = Tile(x, y, c)
@@ -206,7 +232,7 @@ class Grid(val width: Int, val height: Int, initWithDatalessTiles: Boolean = fal
         connectGrid { getStraightNeighbours(it) }
     }
 
-/** Print the content of the grid, tile by tile */
+    /** Print the content of the grid, tile by tile */
     fun print() {
         val padding = nodes().maxOf { it.data.toString().length }
         nodes.forEachIndexed { id, t ->

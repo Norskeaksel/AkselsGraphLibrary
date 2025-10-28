@@ -62,7 +62,8 @@ Once the graph is built, you may use the following graph algorithms:
 
 - **Prims (MST)**:
     - `minimumSpanningTree()`
-[Example usage:](SampleProject/src/main/kotlin/GraphExample.kt)
+
+[Example usage:](src/main/kotlin/graphMateKT/examples/GraphExample.kt)
 
 ```kotlin
 package examples
@@ -147,7 +148,7 @@ fun main() {
 The IntGraph class behaves a lot like the Graph class when used with integers like the example above. However,
 it's more performant, because it does not need to maintain an internal mapping between the nodes and their indexes in
 the adjacency list. The obvious drawback being it only supports integer nodes.
-[Example usage.](SampleProject/src/main/kotlin/GraphExample.kt)
+[Example usage.](src/main/kotlin/graphMateKT/examples/GraphExample.kt)
 
 ## The Grid class
 
@@ -208,7 +209,6 @@ fun main() {
         closeOnEnd = false
     )
 }
-
 ```
 
 ## Graphics
