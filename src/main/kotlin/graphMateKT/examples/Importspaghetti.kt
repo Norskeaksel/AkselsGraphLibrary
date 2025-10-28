@@ -4,14 +4,14 @@ import graphMateKT.graphClasses.Graph
 import graphMateKT.readInt
 import graphMateKT.readString
 
-fun main() {
+internal fun main() {
     val ans = importspaghetti()
     println(ans)
     System.out.flush()
 }
 
 /** Solves https://open.kattis.com/problems/importspaghetti */
-fun importspaghetti(): String {
+internal fun importspaghetti(): String {
     val n = readInt()
     val g = Graph(false)
     val files = readString().split(" ")

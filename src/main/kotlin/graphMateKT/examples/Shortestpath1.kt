@@ -5,7 +5,7 @@ import graphMateKT.graphClasses.IntGraph
 import graphMateKT.readInt
 import graphMateKT.readInts
 
-fun main(){
+internal fun main(){
     while(true){
         val (n,m,q,s) = readInts(4)
         if(n+m+q+s == 0)

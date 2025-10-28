@@ -7,12 +7,12 @@ import java.util.*
 import kotlin.math.max
 
 
-fun main() {
+internal fun main() {
     print(repostsBFS())
 }
 
 /** Solves https://codeforces.com/problemset/problem/522/A */
-fun repostsBFS(): Int {
+internal fun repostsBFS(): Int {
     val n = readInt()
     val g = Graph()
     repeat(n) {

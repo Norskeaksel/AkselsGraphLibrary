@@ -5,14 +5,14 @@ import graphMateKT.not
 import graphMateKT.readInts
 import graphMateKT.readStrings
 
-fun main() {
+internal fun main() {
     val ans = wedding()
     println(ans)
     System.out.flush()
 }
 
 /** Solves https://open.kattis.com/problems/wedding */
-fun wedding(): String {
+internal fun wedding(): String {
     val (n, m) = readInts(2)
     val g = ClauseGraph()
     repeat(n) {

@@ -3,14 +3,14 @@ package graphMateKT.examples
 import graphMateKT.readInt
 import graphMateKT.readInts
 
-fun main() {
+internal fun main() {
     val ans = kingEscape3()
     println(ans)
     System.out.flush()
 }
 
 /** https://codeforces.com/problemset/problem/1033/A */
-fun kingEscape3(): String {
+internal fun kingEscape3(): String {
     val n = readInt()
     var (ax, ay) = readInts(2)
     var (bx, by) = readInts(2)

@@ -3,14 +3,14 @@ import graphMateKT.graphClasses.IntGraph
 import graphMateKT.readDoubles
 import graphMateKT.readInts
 
-fun main() {
+internal fun  main() {
     val ans = crossCountry()
     println(ans)
     System.out.flush()
 }
 
 /** Solves https://open.kattis.com/problems/crosscountry?tab=metadata */
-fun crossCountry(): Int {
+internal fun  crossCountry(): Int {
     val (n, s, t) = readInts(3)
     val graph = IntGraph(n)
     repeat(n){i ->

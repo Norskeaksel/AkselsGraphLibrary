@@ -4,7 +4,7 @@ import graphMateKT.graphClasses.Grid
 import graphMateKT.Tile
 
 /** Solves https://adventofcode.com/2023/day/3 */
-fun numbersConnectedToSymbol(input: List<String>): Int {
+internal fun numbersConnectedToSymbol(input: List<String>): Int {
     val grid = Grid(input[0].length, input.size)
     initializeGrid(input, grid)
     val numbers = grid.nodes().filter { it.data.toString().toIntOrNull() !in listOf(null, 0) }
@@ -68,7 +68,7 @@ private fun starWith2Numbers(input: List<String>): Long {
     return partNumbers.sumOf { it.first * it.second }
 }
 
-fun main() {
+internal fun main() {
     val input = """
         467..114..
         ...*......

@@ -3,7 +3,7 @@ package graphMateKT.examples
 import graphMateKT.graphClasses.IntGraph
 import graphMateKT.readInts
 
-fun main() {
+internal fun  main() {
     val path = dijkstraCF()
     path.forEach {
         print("$it ")
@@ -11,7 +11,7 @@ fun main() {
 }
 
 /** Solves https://codeforces.com/problemset/problem/20/C */
-fun dijkstraCF(): List<Int> {
+internal fun  dijkstraCF(): List<Int> {
     val (n, m) = readInts(2)
     val g = IntGraph(n+1)
     repeat(m) {

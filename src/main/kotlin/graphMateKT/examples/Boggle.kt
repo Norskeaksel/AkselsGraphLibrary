@@ -17,14 +17,14 @@ private val wordScore = IntArray(9).apply {
     this[8] = 11
 }
 
-fun main() {
+internal fun main() {
     val ans = boggle()
     println(ans)
     System.out.flush()
 }
 
 /** Solves https://open.kattis.com/problems/boggle */
-fun boggle(): String {
+internal fun boggle(): String {
     val w = readInt()
 
     val trie = PrefixTree()

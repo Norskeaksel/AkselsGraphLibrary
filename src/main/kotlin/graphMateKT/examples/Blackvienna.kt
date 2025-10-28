@@ -8,7 +8,7 @@ import graphMateKT.readString
 import java.util.ArrayList
 import kotlin.system.measureTimeMillis
 
-fun main() {
+internal fun main() {
     val ans = blackvienna()
     println(ans)
     System.out.flush()
@@ -26,7 +26,7 @@ private fun all3SetsOfLetters(): List<List<Int>> {
 }
 
 /** Solves https://open.kattis.com/problems/blackvienna */
-fun blackvienna(): String {
+internal fun blackvienna(): String {
     var graphInitiationTime = 0L
     var inputProcessingTime = 0L
     var twoSatTime = 0L

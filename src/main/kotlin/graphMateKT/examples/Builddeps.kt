@@ -4,14 +4,14 @@ import graphMateKT.graphClasses.Graph
 import graphMateKT.readInt
 import graphMateKT.readString
 
-fun main() {
+internal fun  main() {
     val ans = builddeps()
     println(ans)
     System.out.flush()
 }
 
 /** Solves https://open.kattis.com/problems/builddeps */
-fun builddeps(): String {
+internal fun  builddeps(): String {
     val n = readInt()
     val g = Graph(false)
     repeat(n) {

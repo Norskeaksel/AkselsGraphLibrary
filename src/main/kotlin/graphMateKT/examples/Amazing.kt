@@ -5,7 +5,7 @@ import graphMateKT.Tile
 import graphMateKT.readString
 import kotlin.system.exitProcess
 
-fun main() {
+internal fun main() {
     val ans = amazing()
     println(ans)
     System.out.flush()
@@ -17,7 +17,7 @@ private val dy = intArrayOf(-1, 0, 0, 1)
 
 private val visited = BooleanArray(DIM * DIM)
 /** Solves https://open.kattis.com/problems/amazing */
-fun amazing(): String {
+internal fun amazing(): String {
     val g = Grid(DIM, DIM, true)
     val s = Tile(DIM / 2, DIM / 2)
     val currentVisited = mutableListOf(s)

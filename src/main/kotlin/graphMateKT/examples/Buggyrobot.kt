@@ -6,14 +6,14 @@ import graphMateKT.readInts
 import graphMateKT.readString
 import kotlin.system.measureTimeMillis
 
-fun main() {
+internal fun  main() {
     val ans = buggyrobot()
     println(ans)
     System.out.flush()
 }
 
 /** Solves https://open.kattis.com/problems/buggyrobot */
-fun buggyrobot(): String {
+internal fun  buggyrobot(): String {
     var (height, width) = readInts(2)
     width++
     val rows = mutableListOf<String>()

@@ -1,50 +1,5 @@
 $dokka.format:html-v1
 $dokka.linkExtension:html
-$dokka.location:graphMateKT.examples////PointingToDeclaration/graphmatekt/graphMateKT.examples/index.html
-$dokka.location:graphMateKT.examples//amanda/#/PointingToDeclaration/graphmatekt/graphMateKT.examples/amanda.html
-$dokka.location:graphMateKT.examples//amazing/#/PointingToDeclaration/graphmatekt/graphMateKT.examples/amazing.html
-$dokka.location:graphMateKT.examples//amoebas/#/PointingToDeclaration/graphmatekt/graphMateKT.examples/amoebas.html
-$dokka.location:graphMateKT.examples//baas/#/PointingToDeclaration/graphmatekt/graphMateKT.examples/baas.html
-$dokka.location:graphMateKT.examples//bigtruck/#/PointingToDeclaration/graphmatekt/graphMateKT.examples/bigtruck.html
-$dokka.location:graphMateKT.examples//birthday/#/PointingToDeclaration/graphmatekt/graphMateKT.examples/birthday.html
-$dokka.location:graphMateKT.examples//blackvienna/#/PointingToDeclaration/graphmatekt/graphMateKT.examples/blackvienna.html
-$dokka.location:graphMateKT.examples//boggle/#/PointingToDeclaration/graphmatekt/graphMateKT.examples/boggle.html
-$dokka.location:graphMateKT.examples//brexit/#/PointingToDeclaration/graphmatekt/graphMateKT.examples/brexit.html
-$dokka.location:graphMateKT.examples//buggyrobot/#/PointingToDeclaration/graphmatekt/graphMateKT.examples/buggyrobot.html
-$dokka.location:graphMateKT.examples//builddeps/#/PointingToDeclaration/graphmatekt/graphMateKT.examples/builddeps.html
-$dokka.location:graphMateKT.examples//buriedtreasure2/#/PointingToDeclaration/graphmatekt/graphMateKT.examples/buriedtreasure2.html
-$dokka.location:graphMateKT.examples//buttonbashing/#/PointingToDeclaration/graphmatekt/graphMateKT.examples/buttonbashing.html
-$dokka.location:graphMateKT.examples//cantinaOfBabel/#/PointingToDeclaration/graphmatekt/graphMateKT.examples/cantina-of-babel.html
-$dokka.location:graphMateKT.examples//charlesincharge/#/PointingToDeclaration/graphmatekt/graphMateKT.examples/charlesincharge.html
-$dokka.location:graphMateKT.examples//crossCountry/#/PointingToDeclaration/graphmatekt/graphMateKT.examples/cross-country.html
-$dokka.location:graphMateKT.examples//day10a/#kotlin.collections.List[kotlin.String]/PointingToDeclaration/graphmatekt/graphMateKT.examples/day10a.html
-$dokka.location:graphMateKT.examples//day18a/#kotlin.collections.List[kotlin.String]#kotlin.Int#kotlin.Int/PointingToDeclaration/graphmatekt/graphMateKT.examples/day18a.html
-$dokka.location:graphMateKT.examples//day20a/#kotlin.collections.List[kotlin.String]#kotlin.Int#kotlin.Int/PointingToDeclaration/graphmatekt/graphMateKT.examples/day20a.html
-$dokka.location:graphMateKT.examples//day3GearRatios2023/#/PointingToDeclaration/graphmatekt/graphMateKT.examples/day3-gear-ratios2023.html
-$dokka.location:graphMateKT.examples//dijkstraCF/#/PointingToDeclaration/graphmatekt/graphMateKT.examples/dijkstra-c-f.html
-$dokka.location:graphMateKT.examples//familydag/#/PointingToDeclaration/graphmatekt/graphMateKT.examples/familydag.html
-$dokka.location:graphMateKT.examples//faultyrobot/#/PointingToDeclaration/graphmatekt/graphMateKT.examples/faultyrobot.html
-$dokka.location:graphMateKT.examples//grid/#/PointingToDeclaration/graphmatekt/graphMateKT.examples/grid.html
-$dokka.location:graphMateKT.examples//honeyheist/#/PointingToDeclaration/graphmatekt/graphMateKT.examples/honeyheist.html
-$dokka.location:graphMateKT.examples//horrorList/#/PointingToDeclaration/graphmatekt/graphMateKT.examples/horror-list.html
-$dokka.location:graphMateKT.examples//illumination/#/PointingToDeclaration/graphmatekt/graphMateKT.examples/illumination.html
-$dokka.location:graphMateKT.examples//importspaghetti/#/PointingToDeclaration/graphmatekt/graphMateKT.examples/importspaghetti.html
-$dokka.location:graphMateKT.examples//islandBuses/#/PointingToDeclaration/graphmatekt/graphMateKT.examples/island-buses.html
-$dokka.location:graphMateKT.examples//kingEscape3/#/PointingToDeclaration/graphmatekt/graphMateKT.examples/king-escape3.html
-$dokka.location:graphMateKT.examples//main/#/PointingToDeclaration/graphmatekt/graphMateKT.examples/main.html
-$dokka.location:graphMateKT.examples//numbersConnectedToSymbol/#kotlin.collections.List[kotlin.String]/PointingToDeclaration/graphmatekt/graphMateKT.examples/numbers-connected-to-symbol.html
-$dokka.location:graphMateKT.examples//repostsBFS/#/PointingToDeclaration/graphmatekt/graphMateKT.examples/reposts-b-f-s.html
-$dokka.location:graphMateKT.examples//repostsDFS/#/PointingToDeclaration/graphmatekt/graphMateKT.examples/reposts-d-f-s.html
-$dokka.location:graphMateKT.examples//rumor/#/PointingToDeclaration/graphmatekt/graphMateKT.examples/rumor.html
-$dokka.location:graphMateKT.examples//slowleak/#/PointingToDeclaration/graphmatekt/graphMateKT.examples/slowleak.html
-$dokka.location:graphMateKT.examples//speedyescape/#/PointingToDeclaration/graphmatekt/graphMateKT.examples/speedyescape.html
-$dokka.location:graphMateKT.examples//torn2pieces/#/PointingToDeclaration/graphmatekt/graphMateKT.examples/torn2pieces.html
-$dokka.location:graphMateKT.examples//treehouses/#/PointingToDeclaration/graphmatekt/graphMateKT.examples/treehouses.html
-$dokka.location:graphMateKT.examples//twoknights/#/PointingToDeclaration/graphmatekt/graphMateKT.examples/twoknights.html
-$dokka.location:graphMateKT.examples//units/#/PointingToDeclaration/graphmatekt/graphMateKT.examples/units.html
-$dokka.location:graphMateKT.examples//walkforest/#/PointingToDeclaration/graphmatekt/graphMateKT.examples/walkforest.html
-$dokka.location:graphMateKT.examples//watersheds/#/PointingToDeclaration/graphmatekt/graphMateKT.examples/watersheds.html
-$dokka.location:graphMateKT.examples//wedding/#/PointingToDeclaration/graphmatekt/graphMateKT.examples/wedding.html
 $dokka.location:graphMateKT.graphClasses////PointingToDeclaration/graphmatekt/graphMateKT.graphClasses/index.html
 $dokka.location:graphMateKT.graphClasses/BaseGraph///PointingToDeclaration/graphmatekt/graphMateKT.graphClasses/-base-graph/index.html
 $dokka.location:graphMateKT.graphClasses/BaseGraph/BaseGraph/#kotlin.Int#kotlin.Boolean/PointingToDeclaration/graphmatekt/graphMateKT.graphClasses/-base-graph/-base-graph.html
@@ -127,7 +82,6 @@ $dokka.location:graphMateKT/Tile/xPlusYTimesWidth/#kotlin.Int/PointingToDeclarat
 $dokka.location:graphMateKT/Tile/y/#/PointingToDeclaration/graphmatekt/graphMateKT/-tile/y.html
 $dokka.location:graphMateKT/UnweightedAdjacencyList///PointingToDeclaration/graphmatekt/graphMateKT/-unweighted-adjacency-list/index.html
 graphMateKT
-graphMateKT.examples
 graphMateKT.graphClasses
 graphMateKT.graphGraphics
 graphMateKT.gridGraphics

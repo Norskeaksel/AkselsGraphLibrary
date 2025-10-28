@@ -3,14 +3,14 @@ package graphMateKT.examples
 import graphMateKT.graphClasses.IntGraph
 import graphMateKT.readInts
 
-fun main() {
+internal fun main() {
     val ans = birthday()
     println(ans)
     System.out.flush()
 }
 
 /** Solves https://open.kattis.com/problems/birthday */
-fun birthday(): String {
+internal fun birthday(): String {
     val stringBuilder = StringBuilder()
     (0..9).forEach { _ ->
         val (p, c) = readInts(2)

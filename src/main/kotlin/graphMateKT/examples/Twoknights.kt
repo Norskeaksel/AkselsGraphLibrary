@@ -6,14 +6,14 @@ import graphMateKT.readString
 import kotlin.collections.ArrayDeque
 
 // Solves https://open.kattis.com/problems/twoknights
-fun main() {
+internal fun main() {
     val ans = twoknights()
     println(ans)
     System.out.flush()
 }
 
 /** Solves https://open.kattis.com/problems/twoknights */
-fun twoknights(): String {
+internal fun twoknights(): String {
     val lowercaseKeyboard = """qwertyuiop
 asdfghjkl;
 zxcvbnm,./

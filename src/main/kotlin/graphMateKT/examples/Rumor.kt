@@ -4,7 +4,7 @@ import graphMateKT.graphClasses.IntGraph
 import graphMateKT.readInts
 
 /** Solves https://codeforces.com/problemset/problem/893/C */
-fun rumor(): Long {
+internal fun rumor(): Long {
     val (n, m) = readInts(2)
     val g = IntGraph(n+1, false)
     val c = listOf(0) + readInts(n)
@@ -22,6 +22,6 @@ fun rumor(): Long {
     return sum
 }
 
-fun main() {
+internal fun main() {
     println(rumor())
 }

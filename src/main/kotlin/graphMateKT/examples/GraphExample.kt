@@ -5,7 +5,7 @@ import graphMateKT.graphClasses.IntGraph
 import graphMateKT.graphGraphics.visualizeGraph
 
 
-fun main() {
+internal fun main() {
     // --- Example Graph Definition ---
     val graph = Graph()
     graph.addEdge(0, 1, 10.0)

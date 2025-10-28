@@ -3,14 +3,14 @@ package graphMateKT.examples
 import graphMateKT.graphClasses.Grid
 import graphMateKT.readLines
 
-fun main() {
+internal fun main() {
     val ans = islandBuses()
     println(ans)
     System.out.flush()
 }
 
 /** Solves https://open.kattis.com/problems/island */
-fun islandBuses(): String {
+internal fun islandBuses(): String {
     val input = readLines()
     val maps = input.joinToString("\n").split("\n\n")
     val ans = mutableListOf<String>()

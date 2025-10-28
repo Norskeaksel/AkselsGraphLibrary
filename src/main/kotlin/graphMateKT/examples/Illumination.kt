@@ -6,14 +6,14 @@ import graphMateKT.not
 import graphMateKT.readInts
 import kotlin.math.abs
 
-fun main() {
+internal fun main() {
     val ans = illumination()
     println(ans)
     System.out.flush()
 }
 
 /** Solves https://open.kattis.com/problems/illumination */
-fun illumination(): String {
+internal fun illumination(): String {
     val (_, r, k) = readInts(3)
     val g = ClauseGraph()
     repeat(k) {

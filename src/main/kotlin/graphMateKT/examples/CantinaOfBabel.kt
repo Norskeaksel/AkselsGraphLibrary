@@ -6,14 +6,14 @@ import graphMateKT.readString
 
 internal data class Man(val name: String, val languages: MutableList<String>)
 
-fun main() {
+internal fun  main() {
     val ans = cantinaOfBabel()
     println(ans)
     System.out.flush()
 }
 
 /** Solves https://open.kattis.com/problems/cantinaofbabel */
-fun cantinaOfBabel(): Int {
+internal fun  cantinaOfBabel(): Int {
     val n = readInt()
     val graph = Graph()
     repeat(n) {

@@ -6,7 +6,7 @@ import graphMateKT.readInts
 import kotlin.math.pow
 import kotlin.math.sqrt
 
-fun main() {
+internal fun main() {
     val ans = treehouses()
     println(ans)
     System.out.flush()
@@ -15,7 +15,7 @@ fun main() {
 internal data class Point(val x: Double, val y: Double)
 
 /** Solves https://open.kattis.com/problems/treehouses */
-fun treehouses(): Double {
+internal fun treehouses(): Double {
     val (n, e, p) = readInts(3)
     val g = Graph()
     val t8s = mutableListOf<Point>()

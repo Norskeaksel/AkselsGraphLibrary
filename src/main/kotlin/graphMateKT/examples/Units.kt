@@ -3,7 +3,7 @@ package graphMateKT.examples
 import graphMateKT.readInt
 import graphMateKT.readString
 
-fun main() {
+internal fun main() {
     val ans = units()
     println(ans)
     System.out.flush()
@@ -30,7 +30,7 @@ private fun floydWarshallMultiplication(conversionMatrix: MutableList<MutableLis
 }
 
 /** Solves https://open.kattis.com/problems/units */
-fun units(): String {
+internal fun units(): String {
     var ans = ""
     while (true) {
         val n = readInt()

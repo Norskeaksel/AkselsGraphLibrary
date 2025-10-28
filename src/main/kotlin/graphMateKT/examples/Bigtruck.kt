@@ -9,14 +9,14 @@ import kotlin.math.roundToInt
 
 private const val ITEM_BOOST = 1E-9
 
-fun main() {
+internal fun main() {
     val ans = bigtruck()
     println(ans)
     System.out.flush()
 }
 
 /** Solves https://open.kattis.com/problems/bigtruck */
-fun bigtruck(): String {
+internal fun bigtruck(): String {
     val n = readInt()
     val ig = IntGraph(n + 1)
     val items = listOf(0) + readString().split(" ").map { it.toInt() }

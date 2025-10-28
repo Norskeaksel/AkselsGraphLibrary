@@ -5,14 +5,14 @@ import graphMateKT.Tile
 import graphMateKT.readInt
 import graphMateKT.readInts
 
-fun main() {
+internal fun main() {
     val ans = watersheds()
     println(ans)
     System.out.flush()
 }
 
 /** Solves https://open.kattis.com/problems/watersheds */
-fun watersheds(): String {
+internal fun watersheds(): String {
     val n = readInt()
     var ans = ""
     repeat(n) { caseNr ->

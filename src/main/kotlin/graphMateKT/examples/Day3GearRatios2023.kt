@@ -4,14 +4,14 @@ import graphMateKT.graphClasses.Grid
 import graphMateKT.Tile
 import graphMateKT.readString
 
-fun main() {
+internal fun main() {
     val ans = day3GearRatios2023()
     println(ans)
     System.out.flush()
 }
 
 /** Solves https://adventofcode.com/2023/day/3 */
-fun day3GearRatios2023(): Int {
+internal fun day3GearRatios2023(): Int {
     val lines = mutableListOf<String>()
     while (true) {
         val line = readString()

@@ -4,7 +4,7 @@ import graphMateKT.graphClasses.Grid
 import graphMateKT.Tile
 import graphMateKT.gridGraphics.visualizeGrid
 
-fun main() {
+internal fun main() {
     // Example Grid Definition. We can also initialize it with a with and a height, e.g. `Grid(3, 3)`,
     val stringList = listOf(
         "S1X",

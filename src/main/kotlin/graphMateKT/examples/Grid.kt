@@ -5,14 +5,14 @@ import graphMateKT.Tile
 import graphMateKT.readInts
 import graphMateKT.readString
 
-fun main() {
+internal fun main() {
     val ans = grid()
     println(ans)
     System.out.flush()
 }
 
 /** Solves https://open.kattis.com/problems/grid */
-fun grid(): Int {
+internal fun grid(): Int {
     val (n, m) = readInts(2)
     val lines = mutableListOf<String>()
     repeat(n) {

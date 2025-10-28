@@ -6,12 +6,12 @@ import graphMateKT.readStrings
 import java.util.*
 import kotlin.math.max
 
-fun main() {
+internal fun  main() {
     print(repostsDFS())
 }
 
 /** Solves https://codeforces.com/problemset/problem/522/A */
-fun repostsDFS(): Int {
+internal fun  repostsDFS(): Int {
     val n = readInt()
     val g = Graph()
     repeat(n) {

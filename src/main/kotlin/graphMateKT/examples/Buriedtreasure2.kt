@@ -6,14 +6,14 @@ import graphMateKT.not
 import graphMateKT.readInts
 import kotlin.math.abs
 
-fun main() {
+internal fun  main() {
     val ans = buriedtreasure2()
     println(ans)
     System.out.flush()
 }
 
 /** Solves https://open.kattis.com/problems/buriedtreasure2 */
-fun buriedtreasure2(): String {
+internal fun  buriedtreasure2(): String {
     val (n,_) = readInts(2)
     val g = ClauseGraph()
     repeat(n){

@@ -4,14 +4,14 @@ import graphMateKT.graphClasses.Grid
 import graphMateKT.readInts
 import graphMateKT.readString
 
-fun main() {
+internal fun main() {
     val ans = amoebas()
     println(ans)
     System.out.flush()
 }
 
 /** Solves https://open.kattis.com/problems/amoebas */
-fun amoebas(): String {
+internal fun amoebas(): String {
     val (m,_) = readInts(2)
     val lines = mutableListOf<String>()
     repeat(m){

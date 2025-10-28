@@ -5,14 +5,14 @@ import graphMateKT.graphClasses.ClauseGraph
 import graphMateKT.not
 import graphMateKT.readInts
 
-fun main(){
+internal fun main(){
     val ans = amanda()
     println(ans)
     System.out.flush()
 }
 
 /** Solves https://open.kattis.com/problems/amanda */
-fun amanda(): String {
+internal fun amanda(): String {
     val (n, m) = readInts(2)
     val nodeValues = Array<Boolean?>(n + 1) { null }
     val g = ClauseGraph()

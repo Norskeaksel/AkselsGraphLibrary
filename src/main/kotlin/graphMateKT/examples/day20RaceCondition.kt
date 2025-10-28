@@ -5,7 +5,7 @@ import graphMateKT.Tile
 
 
 /** Solves https://adventofcode.com/2024/day/20 */
-fun day20a(input: List<String>, cheatGoal: Int, fairTime: Int): Int {
+internal fun day20a(input: List<String>, cheatGoal: Int, fairTime: Int): Int {
     val shadowGrid = input.map { it + it }
     var grid = Grid(shadowGrid)
     grid.print()

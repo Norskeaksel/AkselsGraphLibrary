@@ -3,14 +3,14 @@ package graphMateKT.examples
 import graphMateKT.graphClasses.Graph
 import graphMateKT.readInts
 
-fun main() {
+internal fun main() {
     val ans = slowleak()
     println(ans)
     System.out.flush()
 }
 
 /** Solves https://open.kattis.com/problems/slowleak */
-fun slowleak(): String {
+internal fun slowleak(): String {
     val (n, m, t, d) = readInts(4)
     val g = Graph()
     val start = 1

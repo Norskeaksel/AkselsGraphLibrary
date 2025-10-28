@@ -5,14 +5,14 @@ import graphMateKT.graphClasses.IntGraph
 import graphMateKT.readInt
 import graphMateKT.readInts
 
-fun main() {
+internal fun main() {
     val ans = walkforest()
     println(ans)
     System.out.flush()
 }
 
 /** Solves https://open.kattis.com/problems/walkforest */
-fun walkforest(): String {
+internal fun walkforest(): String {
     val ans = StringBuilder()
     while (true) {
         val n = readInt()

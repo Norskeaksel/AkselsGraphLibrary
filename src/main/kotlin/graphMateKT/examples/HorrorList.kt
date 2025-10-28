@@ -3,14 +3,14 @@ package graphMateKT.examples
 import graphMateKT.graphClasses.IntGraph
 import graphMateKT.readInts
 
-fun main() {
+internal fun main() {
     val ans = horrorList()
     println(ans)
     System.out.flush()
 }
 
 /** Solves https://open.kattis.com/problems/horror */
-fun horrorList(): Int {
+internal fun horrorList(): Int {
     val (n, h, l) = readInts(3)
     val intGraph = IntGraph(n, false)
     val startIds = readInts(h)

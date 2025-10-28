@@ -4,14 +4,14 @@ import graphMateKT.graphClasses.Graph
 import graphMateKT.readInt
 import graphMateKT.readString
 
-fun main() {
+internal fun main() {
     val ans = torn2pieces()
     println(ans)
     System.out.flush()
 }
 
 /** Solves https://open.kattis.com/problems/torn2pieces */
-fun torn2pieces(): String {
+internal fun torn2pieces(): String {
     val n = readInt()
     val graph = Graph()
     repeat(n) {

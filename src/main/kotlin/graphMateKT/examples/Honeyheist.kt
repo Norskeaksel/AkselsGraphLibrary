@@ -8,14 +8,14 @@ import graphMateKT.readInts
 
 import java.lang.Math.pow
 
-fun main() {
+internal fun main() {
     val ans = honeyheist()
     println(ans)
     System.out.flush()
 }
 
 /** Solves https://open.kattis.com/problems/honeyheist */
-fun honeyheist(): String {
+internal fun honeyheist(): String {
     val (r, n, a, b, w) = readInts(5)
     val xy = 2 * r - 1
     val grid = Grid(xy, xy)

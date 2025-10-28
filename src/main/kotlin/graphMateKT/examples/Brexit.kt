@@ -3,14 +3,14 @@ package graphMateKT.examples
 import graphMateKT.graphClasses.IntGraph
 import graphMateKT.readInts
 
-fun main() {
+internal fun main() {
     val ans = brexit()
     println(ans)
     System.out.flush()
 }
 
 /** Solves https://open.kattis.com/problems/brexit */
-fun brexit(): String {
+internal fun brexit(): String {
     val (c, p, x, l) = readInts(4)
     val g = IntGraph(c + 1, false)
     repeat(p) {

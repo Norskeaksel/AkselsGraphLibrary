@@ -10,7 +10,7 @@ import graphMateKT.readInts
 import java.util.*
 
 
-fun main() {
+internal fun main() {
     val ans = speedyescape()
     if (ans == -1.0)
         println("IMPOSSIBLE")
@@ -19,7 +19,7 @@ fun main() {
 }
 
 /** Solves https://open.kattis.com/problems/speedyescape */
-fun speedyescape(): Double {
+internal fun speedyescape(): Double {
     val (n, m, e) = readInts(3)
     val g: AdjacencyList = MutableList(n) { mutableListOf() }
     val visualGraph = Graph()

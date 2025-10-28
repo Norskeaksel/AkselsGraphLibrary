@@ -4,14 +4,14 @@ import graphMateKT.graphClasses.IntGraph
 import graphMateKT.readInt
 import graphMateKT.readInts
 
-fun main() {
+internal fun  main() {
     val ans = buttonbashing()
     println(ans)
     System.out.flush()
 }
 
 /** Solves https://open.kattis.com/problems/buttonbashing */
-fun buttonbashing(): String {
+internal fun  buttonbashing(): String {
     val n = readInt()
     val ans = StringBuilder()
     repeat(n) {
