@@ -72,8 +72,9 @@ internal class GraphGraphics : Application() {
             timeline.keyFrames.add(keyFrame)
         }
 
-        timeline.play()
-
+        if (!startPaused) {
+            timeline.play()
+        }
         scene.setOnKeyPressed { event ->
             if (event.code == KeyCode.SPACE) {
                 toggleAnimation(timeline)

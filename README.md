@@ -211,6 +211,8 @@ fun main() {
     )
 }
 ```
+![GraphVizualization.gif](gifs/GraphVizualization.gif)
+
 
 ## Graphics
 

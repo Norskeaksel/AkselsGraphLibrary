@@ -66,9 +66,8 @@ internal fun main() {
 
     // Visualize the graph using brunomnsilva's JavaFXSmartGraph: https://github.com/brunomnsilva/JavaFXSmartGraph
     graph.visualizeGraph( // Also works with intGraph.visualizeSearch(
-        screenTitle = "Grid example visualizing",
+        screenTitle = "Visualizing Dijkstra's shortest path with GraphMateKT",
         animationTicTimeOverride = 1000.0,
-        startPaused = false,
-        closeOnEnd = false
+        startPaused = true,
     )
 }
