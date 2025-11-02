@@ -23,6 +23,9 @@ import javafx.application.Application
         screenWidthOverride = 300.0
 )
  * ```
+ * **NOTE:** to use this visualizeGraph() function, the files smartgraph.css and smartgraph.properties must be **added manually** to the root of your project,
+ * as described in Bruno Silva's JavaFXSmartGraph repository: https://github.com/brunomnsilva/JavaFXSmartGraph
+
  * @param bidirectional If `true`, visualizes the graph as bidirectional, otherwise as directed.
  * @param finalPath A list of nodes that can override the final path, and be animated instead. If not provided, the graph's own final path is used.
  * @param screenTitle The title of the visualization window.
