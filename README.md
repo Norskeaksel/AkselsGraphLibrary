@@ -142,6 +142,7 @@ fun main() {
     )
 }
 ```
+![GraphVizualization.gif](gifs/GraphVizualization.gif)
 
 ## The IntGraph class
 
@@ -211,7 +212,6 @@ fun main() {
     )
 }
 ```
-![GraphVizualization.gif](gifs/GraphVizualization.gif)
 
 
 ## Graphics
