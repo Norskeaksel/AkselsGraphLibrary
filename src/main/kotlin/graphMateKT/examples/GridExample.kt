@@ -3,55 +3,69 @@ package graphMateKT.examples
 import graphMateKT.graphClasses.Grid
 import graphMateKT.Tile
 import graphMateKT.gridGraphics.visualizeGrid
+import graphMateKT.solutions.grid
 
 internal fun main() {
-    // Example Grid Definition. We can also initialize it with a with and a height, e.g. `Grid(3, 3)`,
-    val stringList = listOf(
-        "S1X",
-        "1#O",
-        "23E"
-    )
-    val grid = Grid(stringList)
+    // Example Grid Definition. We can also initialize it with a list of strings
+    val width = 100
+    val height = 100
+    val grid = Grid(width, height, true)
 
     // We can delete nodes, by specifying them, their coordinates or their data. However, deletions MUST take place
     // before connections are added. Otherwise, the grid can contain connections to the deleted tiles
-    grid.deleteNodeAtXY(1, 1) // Deleting a node at specific coordinate
-    grid.deleteNodesWithData('O') // Deleting all nodes with data 'O'
+    // Let's use some custom functions to delete some patterns
+
+    grid.deleteSquareAtOffset(4)
+    grid.deleteDiamondAtOffset(8)
+    grid.deleteSquareAtOffset(10)
+    grid.deleteDiamondAtOffset(20)
+    grid.deleteSquareAtOffset(22)
+    grid.deleteDiamondAtOffset(44)
+    grid.deleteSquareAtOffset(46)
 
     // We could use `grid.connectGridDefault()` to connect all nodes, but let's define a custom connection instead.
     fun connectDownOrRight(t: Tile): List<Tile> = grid.getStraightNeighbours(t).filter { it.x >= t.x || it.y > t.y }
-    grid.connectGrid(false, ::connectDownOrRight)
+    grid.connectGrid(bidirectional = true, ::connectDownOrRight)
 
     // Nodes in a grid consists of Tile objects with x, y coordinates and data
-    val startNode = Tile(0, 0, 'S')
-
-
+    val startNode = Tile(width / 2, height / 2)
 
     // We can run a seach algorithm like BFS (Breadth-First Search) from a start node
-    val target = Tile(2, 2, 'E') // Define a target to find a path to it
+    val target = Tile(width-1, height-1) // Define a target to find a path to it
     grid.bfs(startNode, target)
-
-    // Printing distances to all nodes
-    val nodes = grid.nodes()
-    nodes.forEach { node ->
-        val distance = grid.distanceTo(node)
-        println("To node $node: $distance")
-    }
-    /* Output:
-        To node Tile(x=0, y=0, data=S): 0.0
-        To node Tile(x=1, y=0, data=1): 1.0
-        To node Tile(x=2, y=0, data=2): 2.0
-        To node Tile(x=0, y=1, data=1): 1.0
-        To node Tile(x=0, y=2, data=2): 2.0
-        To node Tile(x=1, y=2, data=3): 3.0
-        To node Tile(x=2, y=2, data=E): 4.0
-     */
 
     // Visualizing the grid, the BFS and the final fastest path to the target
     grid.visualizeGrid(
-        screenTitle = "Grid example visualizing",
-        animationTicTimeOverride = 500.0,
-        startPaused = false,
-        closeOnEnd = false
+        screenTitle = "Breadth-First Search to the bottom right corner with GraphMateKT",
+        screenWidthOverride = 900.0
     )
+}
+
+
+private fun Grid.deleteSquareAtOffset(centerOffset: Int) {
+    val center = width / 2
+    val lowerBound = center - centerOffset
+    val upperBound = center + centerOffset
+    for (x in lowerBound + 2 until upperBound - 1) {
+        deleteNodeAtXY(x, lowerBound)
+        deleteNodeAtXY(x, upperBound)
+    }
+    for (y in lowerBound + 2 until upperBound - 1) {
+        deleteNodeAtXY(lowerBound, y)
+        deleteNodeAtXY(upperBound, y)
+    }
+}
+
+private fun Grid.deleteDiamondAtOffset(centerOffset: Int) {
+    val center = width / 2
+    var dx = centerOffset
+    var dy = 1
+    repeat(centerOffset) {
+        deleteNodeAtXY(center - dx, center - dy)
+        deleteNodeAtXY(center + dx, center - dy)
+        deleteNodeAtXY(center - dx, center + dy)
+        deleteNodeAtXY(center + dx, center + dy)
+        dx--
+        dy++
+    }
 }

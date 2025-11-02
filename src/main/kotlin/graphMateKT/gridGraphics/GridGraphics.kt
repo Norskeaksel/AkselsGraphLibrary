@@ -14,6 +14,7 @@ import javafx.scene.input.KeyCode
 import javafx.scene.paint.Color
 import javafx.stage.Stage
 import javafx.util.Duration
+import java.lang.Thread.sleep
 import kotlin.math.max
 import kotlin.math.min
 
@@ -30,12 +31,14 @@ internal class GridGraphics : Application() {
         var closeOnEnd = false
         var screenWidthOverride: Double? = null
     }
-    val tilesToAnimate = if(currentVisitedNodes.isEmpty()) grid.currentVisitedNodes() else currentVisitedNodes
+
+    val tilesToAnimate = if (currentVisitedNodes.isEmpty()) grid.currentVisitedNodes() else currentVisitedNodes
     val ratio = min(grid.width, grid.height).toDouble() / max(grid.width, grid.height)
     val sceneWith = screenWidthOverride ?: 1000.0
     val sceneHeight = sceneWith * ratio
 
-    var animationKeyFrameTime = Duration.millis(animationKeyFrameOverride ?: (10_000.0 / tilesToAnimate.size.coerceAtLeast (10)))
+    var animationKeyFrameTime =
+        Duration.millis(animationKeyFrameOverride ?: (10_000.0 / tilesToAnimate.size.coerceAtLeast(10)))
     val canvas = Canvas(sceneWith, sceneHeight)
     val gc = canvas.graphicsContext2D
     val xNodes = sceneWith / (grid.width)
@@ -74,7 +77,8 @@ internal class GridGraphics : Application() {
             )
             timeline.keyFrames.add(keyFrame)
         }
-        finalPath.forEachIndexed { i, node ->
+        // Add extra tile to avoid closing on end too soon
+        (finalPath + listOf(Tile(-1,-1))).forEachIndexed { i, node ->
             val keyFrame = KeyFrame(
                 animationKeyFrameTime.multiply(1.05 * (i.toDouble() + tilesToAnimate.size + 1)),
                 squareDrawer(
@@ -83,11 +87,7 @@ internal class GridGraphics : Application() {
             )
             timeline.keyFrames.add(keyFrame)
         }
-        timeline.setOnFinished {
-            if (closeOnEnd) {
-                stage.close()
-            }
-        }
+
         val pause = PauseTransition(Duration.seconds(.5))
         pause.setOnFinished { timeline.play() }
         if (!startPaused)
@@ -101,6 +101,12 @@ internal class GridGraphics : Application() {
 
         scene.setOnMouseClicked {
             toggleAnimation(timeline)
+        }
+
+        timeline.setOnFinished {
+            if (closeOnEnd) {
+                stage.close()
+            }
         }
     }
 

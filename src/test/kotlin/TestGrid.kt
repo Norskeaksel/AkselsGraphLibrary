@@ -1,6 +1,6 @@
 import graphMateKT.INPUT
 import graphMateKT._reader
-import graphMateKT.examples.grid
+import graphMateKT.solutions.grid
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.AfterAll
 import java.io.File

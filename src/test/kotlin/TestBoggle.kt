@@ -1,4 +1,4 @@
-import graphMateKT.examples.boggle
+import graphMateKT.solutions.boggle
 import graphMateKT.INPUT
 import graphMateKT._reader
 import org.assertj.core.api.Assertions.assertThat

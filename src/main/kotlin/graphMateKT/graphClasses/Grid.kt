@@ -203,6 +203,7 @@ class Grid(val width: Int, val height: Int, initWithDatalessTiles: Boolean = fal
      * ```
      *
      * @param bidirectional If `true`, connections between nodes are bidirectional. If `false`, connections are unidirectional.
+     * Defaults to false because many connection pattens are inherently unidirectional, and we want to avoid duplicate edges.
      * @param getNeighbours A function that takes a `Tile` as input and returns a list of neighboring `Tile` objects to connect to.
      */
     fun connectGrid(bidirectional: Boolean = false, getNeighbours: (t: Tile) -> List<Tile>) {

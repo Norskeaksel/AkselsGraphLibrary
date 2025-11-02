@@ -1,6 +1,6 @@
 import graphMateKT.INPUT
 import graphMateKT._reader
-import graphMateKT.examples.dijkstraCF
+import graphMateKT.solutions.dijkstraCF
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.AfterAll
 import org.junit.jupiter.api.BeforeAll

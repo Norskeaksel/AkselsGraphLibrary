@@ -4,7 +4,7 @@
 
 This repository contains classes and algorithms for making graphs, traversing and visualizing.
 This can for example be used to solve competitive programming problems.
-The [examples](src/main/kotlin/graphMateKT/examples) folder contains example code solutions using this graphLibraryPackage to solve
+The [examples](src/main/kotlin/graphMateKT/solutions) folder contains example code solutions using this graphLibraryPackage to solve
 various problems.
 The library contains the general `Graph` class, which can be used to create graphs of any datatype,
 the `IntGraph` class, which is performance optimized for integer nodes,
@@ -171,15 +171,16 @@ import graphMateKT.gridGraphics.visualizeGrid
 fun main() {
     // --- Example Grid Definition ---
     val stringList = listOf(
-        "S12",
+        "S#4",
         "123",
         "23E"
     )
     val grid = Grid(stringList)
+    grid.deleteNodesWithData('#')
 
     // We could use `grid.connectGridDefault()` to connect all nodes, but let's define a custom connection instead.
     fun connectDownOrRight(t: Tile): List<Tile> = grid.getStraightNeighbours(t).filter { it.x >= t.x || it.y > t.y }
-    grid.connectGrid(::connectDownOrRight)
+    grid.connectGrid(bidirectional=true, ::connectDownOrRight)
 
     // Nodes in a grid consists of Tile objects with x, y coordinates and data
     val startNode = Tile(0, 0, 'S')

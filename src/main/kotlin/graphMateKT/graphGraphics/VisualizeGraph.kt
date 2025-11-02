@@ -8,6 +8,21 @@ import javafx.application.Application
  * The function visualizes nodes with edges using a force-directed algorithm. Then it animates the traversal of the graph,
  * highlighting visited nodes and the final path from the start node to the target node if a search has been performed.
  *
+ * Example usage:
+ * ```
+    val graph = Graph(false)
+    graph.connect("A", "B")
+    graph.connect("A", "C")
+    graph.visualizeGraph(
+        bidirectional = true,
+        finalPath = listOf("A", "B"),
+        screenTitle = "GraphMateKT visualizeGraph example usage",
+        animationTicTimeOverride = 2000.0,
+        closeOnEnd = true,
+        startPaused = true,
+        screenWidthOverride = 300.0
+)
+ * ```
  * @param bidirectional If `true`, visualizes the graph as bidirectional, otherwise as directed.
  * @param finalPath A list of nodes that can override the final path, and be animated instead. If not provided, the graph's own final path is used.
  * @param screenTitle The title of the visualization window.

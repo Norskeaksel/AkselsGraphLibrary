@@ -1,4 +1,4 @@
-import graphMateKT.examples.watersheds
+import graphMateKT.solutions.watersheds
 import graphMateKT.INPUT
 import graphMateKT._reader
 import graphMateKT.debug

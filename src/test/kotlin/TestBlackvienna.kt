@@ -1,7 +1,7 @@
 import graphMateKT.INPUT
 import graphMateKT._reader
 import graphMateKT.debug
-import graphMateKT.examples.blackvienna
+import graphMateKT.solutions.blackvienna
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.AfterAll
 import java.io.File

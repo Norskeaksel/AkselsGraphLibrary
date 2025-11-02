@@ -1,6 +1,6 @@
 import graphMateKT.INPUT
 import graphMateKT._reader
-import graphMateKT.examples.torn2pieces
+import graphMateKT.solutions.torn2pieces
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.AfterAll
 import java.io.File

@@ -1,5 +1,7 @@
 $dokka.format:html-v1
 $dokka.linkExtension:html
+$dokka.location:graphMateKT.examples////PointingToDeclaration/graphmatekt/graphMateKT.examples/index.html
+$dokka.location:graphMateKT.examples//main/#/PointingToDeclaration/graphmatekt/graphMateKT.examples/main.html
 $dokka.location:graphMateKT.graphClasses////PointingToDeclaration/graphmatekt/graphMateKT.graphClasses/index.html
 $dokka.location:graphMateKT.graphClasses/BaseGraph///PointingToDeclaration/graphmatekt/graphMateKT.graphClasses/-base-graph/index.html
 $dokka.location:graphMateKT.graphClasses/BaseGraph/BaseGraph/#kotlin.Int#kotlin.Boolean/PointingToDeclaration/graphmatekt/graphMateKT.graphClasses/-base-graph/-base-graph.html
@@ -82,6 +84,7 @@ $dokka.location:graphMateKT/Tile/xPlusYTimesWidth/#kotlin.Int/PointingToDeclarat
 $dokka.location:graphMateKT/Tile/y/#/PointingToDeclaration/graphmatekt/graphMateKT/-tile/y.html
 $dokka.location:graphMateKT/UnweightedAdjacencyList///PointingToDeclaration/graphmatekt/graphMateKT/-unweighted-adjacency-list/index.html
 graphMateKT
+graphMateKT.examples
 graphMateKT.graphClasses
 graphMateKT.graphGraphics
 graphMateKT.gridGraphics

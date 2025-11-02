@@ -1,9 +1,3 @@
-import graphMateKT.examples.honeyheist
-import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.AfterAll
-import java.io.File
-import org.junit.jupiter.api.Test
-
 /*class HoneyheistTest {
     companion object {
         @JvmStatic
