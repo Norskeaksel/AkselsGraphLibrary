@@ -15,7 +15,7 @@ class, which defines the basic functionality of the graphs.
 
 ## API Reference
 
-[![kdoc](https://img.shields.io/badge/kdoc-1.0.0-brightgreen)](https://norskeaksel.github.io/GraphMateKT)
+[![kdoc](https://img.shields.io/badge/kdoc-1.0.0-brightgreen)](https://norskeaksel.github.io/GraphMateKT  )
 
 ## Using the library
 
@@ -147,8 +147,7 @@ fun main() {
     )
 }
 ```
-
-![GraphVizualization.gif](gifs/GraphVizualization.gif)
+<img src="gifs/GraphVizualization.gif" width=800, alt="">
 
 ## The IntGraph class
 
@@ -219,7 +218,7 @@ fun main() {
 }
 ```
 
-![GridVizualization.gif](gifs/GridVizualization.gif)
+<img src="gifs/GridVizualization.gif" width=800, alt="">
 
 ## License
 
