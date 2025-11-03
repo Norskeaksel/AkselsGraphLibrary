@@ -2,34 +2,39 @@
 
 ![My Workflow Status](https://github.com/Norskeaksel/GraphMateKT/actions/workflows/ci.yml/badge.svg)
 
-This repository contains classes and algorithms for making graphs, traversing and visualizing.
+This repository contains classes and algorithms for making graphs, traversing and visualizing them.
 This can for example be used to solve competitive programming problems.
-The [examples](src/main/kotlin/graphMateKT/solutions) folder contains example code solutions using this graphLibraryPackage to solve
+The [solutions](src/main/kotlin/graphMateKT/solutions) folder contains code using this graphLibraryPackage to solve
 various problems.
 The library contains the general `Graph` class, which can be used to create graphs of any datatype,
 the `IntGraph` class, which is performance optimized for integer nodes,
 and the `Grid` class, where each node has x and y coordinates in addition to containing any data type.
-All the classes inherit from the abstract [BaseGraph](https://norskeaksel.github.io/GraphMateKT/graphmatekt/graphMateKT.graphClasses/-base-graph/index.html)
-class, which defines the basic functionality of a graph.
+All the classes inherit from the
+abstract [BaseGraph](https://norskeaksel.github.io/GraphMateKT/graphmatekt/graphMateKT.graphClasses/-base-graph/index.html)
+class, which defines the basic functionality of the graphs.
 
 ## API Reference
 
 [![kdoc](https://img.shields.io/badge/kdoc-1.0.0-brightgreen)](https://norskeaksel.github.io/GraphMateKT)
 
-
 ## Using the library
+
 Add the following dependency to your `pom.xml` file:
+
 ```xml
+
 <dependency>
-  <groupId>me.ahsor</groupId>
-  <artifactId>graphmatekt</artifactId>
-  <version>1.0-SNAPSHOT</version>
+    <groupId>me.ahsor</groupId>
+    <artifactId>graphmatekt</artifactId>
+    <version>1.0-SNAPSHOT</version>
 </dependency>
 ```
+
 See [here](https://github.com/Norskeaksel/GraphMateKT/packages/) for the latest version number.
 
 :warning: Please note that to use the ```Graph().visualizeGraph() function```, the files `smartgraph.css` and
-`smartgraph.properties` **must be added manually** to the root of your project, as described in [Bruno Silva](https://github.com/brunomnsilva)'s
+`smartgraph.properties` **must be added manually** to the root of your project, as described
+in [Bruno Silva](https://github.com/brunomnsilva)'s
 [JavaFXSmartGraph](https://github.com/brunomnsilva/JavaFXSmartGraph) repository.
 
 ## The Graph class
@@ -142,6 +147,7 @@ fun main() {
     )
 }
 ```
+
 ![GraphVizualization.gif](gifs/GraphVizualization.gif)
 
 ## The IntGraph class
@@ -181,7 +187,7 @@ fun main() {
 
     // We could use `grid.connectGridDefault()` to connect all nodes, but let's define a custom connection instead.
     fun connectDownOrRight(t: Tile): List<Tile> = grid.getStraightNeighbours(t).filter { it.x >= t.x || it.y > t.y }
-    grid.connectGrid(bidirectional=true, ::connectDownOrRight)
+    grid.connectGrid(bidirectional = true, ::connectDownOrRight)
 
     // Nodes in a grid consists of Tile objects with x, y coordinates and data
     val startNode = Tile(0, 0, 'S')
@@ -213,12 +219,9 @@ fun main() {
 }
 ```
 
-
-## Graphics
-
-Some graph visualizations made with this library can be checked out
-[here](https://github.com/Norskeaksel/GridGraphics/).
+![GridVizualization.gif](gifs/GridVizualization.gif)
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE-AkselsGraphLibrary) files for details. **All derivative work should include this license**.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE-AkselsGraphLibrary) files for details. **All
+derivative work should include this license**.
