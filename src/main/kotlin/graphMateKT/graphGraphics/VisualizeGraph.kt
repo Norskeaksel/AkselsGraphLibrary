@@ -3,12 +3,13 @@ package graphMateKT.graphGraphics
 import graphMateKT.graphClasses.BaseGraph
 import javafx.application.Application
 
-/** * Visualizes the graph using a graphical interface, made by Bruno Silva's SmartGraph library.
+/** Visualizes the graph with Bruno Silva's JavaFXSmartGraph library.
  *
  * The function visualizes nodes with edges using a force-directed algorithm. Then it animates the traversal of the graph,
  * highlighting visited nodes and the final path from the start node to the target node if a search has been performed.
  *
- * Example usage:
+ * <i>Example usage:<i>
+ *
  * ```
     val graph = Graph(false)
     graph.connect("A", "B")

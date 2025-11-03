@@ -20,7 +20,8 @@ import graphMateKT.graphAlgorithms.DFS
  * - `.connectGrid(::yourCustomFunction)` (or `.connectGrid { yourLambda }`) allows custom connections, where the function
  *   takes a `Tile` and returns a `List<Tile>` to connect to.
  *
- * <i>Simple example usage:<i>
+ * <i>Example usage:<i>
+ *
  * ```
  * val grid = Grid(100,100,true)
  * grid.connectGridDefault()

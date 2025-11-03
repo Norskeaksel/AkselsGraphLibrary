@@ -8,8 +8,9 @@ import javafx.application.Application
  *
  * Distances are visualized by color gradients, with closer nodes appearing in warmer colors (red), and farther nodes in
  * cooler colors (blue). Deleted nodes are represented as white tiles, while unvisited nodes are shown in black.
+ * Does **not** require css files, unlike the graph visualization functions.
  *
- * Example usage:
+ * <i>Example usage:<i>
  * ```
     val grid = Grid(2, 2, true)
         grid.visualizeGrid(

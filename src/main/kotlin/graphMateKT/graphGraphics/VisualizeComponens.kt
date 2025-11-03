@@ -10,6 +10,7 @@ import graphMateKT.graphClasses.Graph
  * connecting its nodes in a circular manner. Then the graph is visualized.
  *
  * <i>Example usage:<i>
+ *
  * ```
  * val graph = Graph(false)
  * graph.addEdge("A", "B")
@@ -34,6 +35,7 @@ fun Components.visualizeComponents() {
  * This function is a specialized version of `visualizeComponents` for integer-based components.
  *
  * <i>Example usage:<i>
+ *
  * ```
  * val graph = IntGraph(3, false)
  * graph.addEdge(0, 1)

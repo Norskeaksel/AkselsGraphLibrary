@@ -3,12 +3,11 @@ package graphMateKT.examples
 import graphMateKT.graphClasses.Grid
 import graphMateKT.Tile
 import graphMateKT.gridGraphics.visualizeGrid
-import graphMateKT.solutions.grid
 
 internal fun main() {
     // Example Grid Definition. We can also initialize it with a list of strings
-    val width = 100
-    val height = 100
+    val width = 99
+    val height = 99
     val grid = Grid(width, height, true)
 
     // We can delete nodes, by specifying them, their coordinates or their data. However, deletions MUST take place
@@ -31,13 +30,14 @@ internal fun main() {
     val startNode = Tile(width / 2, height / 2)
 
     // We can run a seach algorithm like BFS (Breadth-First Search) from a start node
-    val target = Tile(width-1, height-1) // Define a target to find a path to it
+    val target = Tile(width - 1, height - 1) // Define a target to find a path to it
     grid.bfs(startNode, target)
 
     // Visualizing the grid, the BFS and the final fastest path to the target
     grid.visualizeGrid(
-        screenTitle = "Breadth-First Search to the bottom right corner with GraphMateKT",
-        screenWidthOverride = 900.0
+        screenTitle = "Breadth-First Search from the center to the bottom right corner, using GraphMateKT",
+        screenWidthOverride = 880.0,
+        startPaused = true,
     )
 }
 

@@ -1,18 +1,20 @@
 package graphMateKT.graphClasses
 
-/** A Graph data structure supports nodes of any datatype.
+/** A graph data structure that supports nodes of any datatype.
  *
  * Any new node is given an ID upon creation, which is used to build an adjacency list. The class maintains internal
  * maps between ID's and nodes and vice versa.
  *
  * <i>Example usage:<i>
+ *
  * ```
  * val graph = Graph()
  * graph.addEdge("A", "B", 5.0)
  * graph.addEdge("A", "C", 2.0)
  * graph.addEdge("C", "B", 1.0)
  * graph.dijkstra("A", "B")
- * graph.visualizeGraph()
+ * # NOTE: visualizeGraph() requires the smartgraph.css and smartgraph.properties files to be added to the root of your project.
+ * graph.visualizeGraph() # Find the needed files here: https://github.com/Norskeaksel/GraphMateKT
  * ```
  *
  * @param isWeighted Indicates whether it uses weighted or unweighted edges. Traversal algorithms like BFS and DFS
