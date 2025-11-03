@@ -219,7 +219,7 @@ fun main() {
 }
 ```
 
-![GridVizualization.gif](gifs/GridVizualization.gif)
+<img src="gifs/GridVizualization.gif" width="200%" alt="">
 
 ## License
 
