@@ -148,7 +148,7 @@ fun main() {
 }
 ```
 
-<img src="gifs/GraphVizualization.gif" width="200%" alt="">
+![GraphVizualization.gif](gifs/GraphVizualization.gif)
 
 ## The IntGraph class
 
@@ -219,7 +219,7 @@ fun main() {
 }
 ```
 
-<img src="gifs/GridVizualization.gif" width="200%" alt="">
+![GridVizualization.gif](gifs/GridVizualization.gif)
 
 ## License
 
