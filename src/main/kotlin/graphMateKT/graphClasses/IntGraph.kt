@@ -15,7 +15,7 @@ package graphMateKT.graphClasses
  * graph.addEdge(2, 1, 1.0)
  * graph.dijkstra(0, 1)
  * // NOTE: visualizeGraph() requires the smartgraph.css and smartgraph.properties files to be added to the root of your project.
- * graph.visualizeGraph() # Find the needed files here: https://github.com/Norskeaksel/GraphMateKT
+ * graph.visualizeGraph() // Find the needed files here: https://github.com/Norskeaksel/GraphMateKT
  * ```
  *
  * @param size The number of nodes in the graph. Nodes are represented as integers from 0 to size-1. This cannot be altered later
