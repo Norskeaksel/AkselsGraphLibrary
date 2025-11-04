@@ -28,7 +28,7 @@ import graphMateKT.graphAlgorithms.DFS
  * grid.bfs(Tile(50,50))
  * grid.visualizeGrid()
  * ```
- * <i>String constructor and custom connections example usage:<i>
+ * <i>String constructor and custom connections example usage:</i>
  *
  * ```
  * val stringList = listOf(

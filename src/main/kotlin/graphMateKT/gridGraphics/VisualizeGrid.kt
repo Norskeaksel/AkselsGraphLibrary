@@ -8,7 +8,7 @@ import javafx.application.Application
  *
  * Distances are visualized by color gradients, with closer nodes appearing in warmer colors (red), and farther nodes in
  * cooler colors (blue). Deleted nodes are represented as white tiles, while unvisited nodes are shown in black.
- * Does **not** require css files, unlike the graph visualization functions.
+ * Does **not** require css files, unlike the other graph visualization functions.
  *
  * <i>Example usage:</i>
  * ```
