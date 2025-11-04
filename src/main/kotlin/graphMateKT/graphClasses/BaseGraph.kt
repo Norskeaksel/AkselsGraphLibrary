@@ -202,6 +202,15 @@ abstract class BaseGraph<T : Any>(size: Int, private val isWeighted: Boolean = t
      * assuming the graph is unweighted (all edges have a weight of 1.0)
      * It stores results that can be retrieved with the following functions:
      *
+     * - `depth()`
+     * - `currentVisitedNodes()`
+     * - `visitedNodes()`
+     * - `finalPath()`
+     * - `foundTarget()`
+     * - `distanceTo(node: T)`
+     * - `maxDistance()`
+     * - `furthestNode()`
+     *
      * @param startNodes A list of starting nodes for the BFS traversal.
      * @param target An optional target node. If specified, the search will stop once the target is found,
      * flag the target as found so that foundTarget() returns true, and store the path to the target node for use in visualization.
