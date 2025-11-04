@@ -14,7 +14,7 @@ package graphMateKT.graphClasses
  * graph.addEdge(0, 2, 2.0)
  * graph.addEdge(2, 1, 1.0)
  * graph.dijkstra(0, 1)
- * # NOTE: visualizeGraph() requires the smartgraph.css and smartgraph.properties files to be added to the root of your project.
+ * // NOTE: visualizeGraph() requires the smartgraph.css and smartgraph.properties files to be added to the root of your project.
  * graph.visualizeGraph() # Find the needed files here: https://github.com/Norskeaksel/GraphMateKT
  * ```
  *
