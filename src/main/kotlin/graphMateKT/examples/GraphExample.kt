@@ -40,8 +40,8 @@ internal fun main() {
 
 
     /* --- Example IntGraph Definition ---
-         * An IntGraph can be defined the same way as the Graph same way as above,
-         * but it can also be initialized with a size, because the nodes are integers values from 0 to n-1.
+         * An IntGraph can needs to be initialized with a fixed size, because it will consist of integer nodes from
+         0 to size-1.
     */
 
     val n = graph.size()
@@ -65,7 +65,8 @@ internal fun main() {
     // Outputs the same as the code above
 
     // Visualize the graph using brunomnsilva's JavaFXSmartGraph: https://github.com/brunomnsilva/JavaFXSmartGraph
-    graph.visualizeGraph( // Also works with intGraph.visualizeSearch(
+    graph.visualizeGraph(
+        // Also works with intGraph.visualizeSearch(
         screenTitle = "Visualizing Dijkstra's shortest path with GraphMateKT",
         animationTicTimeOverride = 1000.0,
         startPaused = true,

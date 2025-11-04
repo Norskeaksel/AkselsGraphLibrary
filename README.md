@@ -113,10 +113,10 @@ fun main() {
         */
 
 
-    /* --- Example IntGraph Definition ---
-         * An IntGraph can be defined the same way as the Graph same way as above,
-         * but it can also be initialized with a size, because the nodes are integers values from 0 to n-1.
-    */
+  /* --- Example IntGraph Definition ---
+       * An IntGraph can needs to be initialized with a fixed size, because it will consist of integer nodes from 
+       0 to size-1.
+  */
 
     val n = graph.size()
     val intGraph = IntGraph(n)
@@ -168,7 +168,7 @@ but it also has some additional methods for connecting the grid without explicit
 edges. `.connectGridDefault()` connects each node to nodes up, down, left and right of it, if they exist.
 If some customization is needed, `.connectGrid(::yourCustomFunction)` (also written like `.connectGrid{ yourLambda}`)
 can be used, where yourCustomFunction takes a `Tile` and returns a `List<Tile>` to connect
-to. [Example usage:](SampleProject/src/main/kotlin/GridExample.kt)
+to. [Example usage:](src/main/kotlin/graphMateKT/examples/GridExample.kt)
 
 ```kotlin
 import graphMateKT.graphClasses.Grid

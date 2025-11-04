@@ -9,7 +9,7 @@ import graphMateKT.graphClasses.Graph
  * This function creates a new graph where each component is represented as a cycle,
  * connecting its nodes in a circular manner. Then the graph is visualized.
  *
- * <i>Example usage:<i>
+ * <i>Example usage:</i>
  *
  * ```
  * val graph = Graph(false)
@@ -34,7 +34,7 @@ fun Components.visualizeComponents() {
  *
  * This function is a specialized version of `visualizeComponents` for integer-based components.
  *
- * <i>Example usage:<i>
+ * <i>Example usage:</i>
  *
  * ```
  * val graph = IntGraph(3, false)

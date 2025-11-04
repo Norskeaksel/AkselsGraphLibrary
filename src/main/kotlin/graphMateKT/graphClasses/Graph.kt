@@ -5,7 +5,7 @@ package graphMateKT.graphClasses
  * Any new node is given an ID upon creation, which is used to build an adjacency list. The class maintains internal
  * maps between ID's and nodes and vice versa.
  *
- * <i>Example usage:<i>
+ * <i>Example usage:</i>
  *
  * ```
  * val graph = Graph()
