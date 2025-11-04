@@ -8,7 +8,7 @@ import javafx.application.Application
  * The function visualizes nodes with edges using a force-directed algorithm. Then it animates the traversal of the graph,
  * highlighting visited nodes and the final path from the start node to the target node if a search has been performed.
  *
- * <i>Example usage:<i>
+ * <i>Example usage:</i>
  *
  * ```
     val graph = Graph(false)
