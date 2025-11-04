@@ -13,7 +13,7 @@ All the classes inherit from the
 abstract [BaseGraph](https://norskeaksel.github.io/GraphMateKT/graphmatekt/graphMateKT.graphClasses/-base-graph/index.html)
 class, which defines the basic functionality of the graphs.
 
-## API Reference
+## Documentation
 
 [![kdoc](https://img.shields.io/badge/kdoc-1.0.0-brightgreen)](https://norskeaksel.github.io/GraphMateKT  )
 
