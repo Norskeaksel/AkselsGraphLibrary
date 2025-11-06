@@ -8,7 +8,7 @@ internal fun main() {
     // Example Grid Definition. We can also initialize it with a list of strings
     val width = 99
     val height = 99
-    val grid = Grid(width, height, true)
+    val grid = Grid(width, height)
 
     // We can delete nodes, by specifying them, their coordinates or their data. However, deletions MUST take place
     // before connections are added. Otherwise, the grid can contain connections to the deleted tiles

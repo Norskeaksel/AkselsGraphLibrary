@@ -5,7 +5,7 @@ import graphMateKT.graphClasses.Grid
 import graphMateKT.gridGraphics.visualizeGrid
 
 internal fun main() {
-    val grid = Grid(2, 2, true)
+    val grid = Grid(2, 2)
     grid.visualizeGrid(
         currentVisitedNodes = listOf(Tile(0, 0), Tile(1, 0), Tile(1, 1), Tile(0, 1)),
         finalPath = listOf(Tile(0, 0), Tile(1, 0), Tile(1, 1)),

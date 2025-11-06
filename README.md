@@ -26,7 +26,7 @@ Add the following dependency to your `pom.xml` file:
 <dependency>
     <groupId>me.ahsor</groupId>
     <artifactId>graphmatekt</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.0</version>
 </dependency>
 ```
 
@@ -176,46 +176,40 @@ import graphMateKT.Tile
 import graphMateKT.gridGraphics.visualizeGrid
 
 fun main() {
-    // --- Example Grid Definition ---
-    val stringList = listOf(
-        "S#4",
-        "123",
-        "23E"
-    )
-    val grid = Grid(stringList)
-    grid.deleteNodesWithData('#')
+  // Example Grid Definition. We can also initialize it with a list of strings
+  val width = 99
+  val height = 99
+  val grid = Grid(width, height)
 
-    // We could use `grid.connectGridDefault()` to connect all nodes, but let's define a custom connection instead.
-    fun connectDownOrRight(t: Tile): List<Tile> = grid.getStraightNeighbours(t).filter { it.x >= t.x || it.y > t.y }
-    grid.connectGrid(bidirectional = true, ::connectDownOrRight)
+  // We can delete nodes, by specifying them, their coordinates or their data. However, deletions MUST take place
+  // before connections are added. Otherwise, the grid can contain connections to the deleted tiles
+  // Let's use some custom functions to delete some patterns
 
-    // Nodes in a grid consists of Tile objects with x, y coordinates and data
-    val startNode = Tile(0, 0, 'S')
-    grid.bfs(startNode)
-    val nodes = grid.nodes()
-    nodes.forEach { node ->
-        val distValue = grid.distanceTo(node)
-        println("To node $node: $distValue")
-    }
-    /* Output:
-        To node Tile(x=0, y=0, data=S): 0
-        To node Tile(x=1, y=0, data=1): 1
-        To node Tile(x=2, y=0, data=2): 2
-        To node Tile(x=0, y=1, data=1): 1
-        To node Tile(x=1, y=1, data=2): 2
-        To node Tile(x=2, y=1, data=3): 3
-        To node Tile(x=0, y=2, data=2): 2
-        To node Tile(x=1, y=2, data=3): 3
-        To node Tile(x=2, y=2, data=E): 4
-     */
+  grid.deleteSquareAtOffset(4)
+  grid.deleteDiamondAtOffset(8)
+  grid.deleteSquareAtOffset(10)
+  grid.deleteDiamondAtOffset(20)
+  grid.deleteSquareAtOffset(22)
+  grid.deleteDiamondAtOffset(44)
+  grid.deleteSquareAtOffset(46)
 
-    // Visualizing the grid, the BFS and the final fastest path to the target
-    grid.visualizeSearch(
-        screenTitle = "Grid example visualizing",
-        animationTicTimeOverride = 500.0,
-        startPaused = false,
-        closeOnEnd = false
-    )
+  // We could use `grid.connectGridDefault()` to connect all nodes, but let's define a custom connection instead.
+  fun connectDownOrRight(t: Tile): List<Tile> = grid.getStraightNeighbours(t).filter { it.x >= t.x || it.y > t.y }
+  grid.connectGrid(bidirectional = true, ::connectDownOrRight)
+
+  // Nodes in a grid consists of Tile objects with x, y coordinates and data
+  val startNode = Tile(width / 2, height / 2)
+
+  // We can run a seach algorithm like BFS (Breadth-First Search) from a start node
+  val target = Tile(width - 1, height - 1) // Define a target to find a path to it
+  grid.bfs(startNode, target)
+
+  // Visualizing the grid, the BFS and the final fastest path to the target
+  grid.visualizeGrid(
+    screenTitle = "Breadth-First Search from the center to the bottom right corner, using GraphMateKT",
+    screenWidthOverride = 880.0,
+    startPaused = true,
+  )
 }
 ```
 

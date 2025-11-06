@@ -18,7 +18,7 @@ private val dy = intArrayOf(-1, 0, 0, 1)
 private val visited = BooleanArray(DIM * DIM)
 /** Solves https://open.kattis.com/problems/amazing */
 internal fun amazing(): String {
-    val g = Grid(DIM, DIM, true)
+    val g = Grid(DIM, DIM)
     val s = Tile(DIM / 2, DIM / 2)
     val currentVisited = mutableListOf(s)
     fun dfsMaze(c: Tile, p: Tile) {

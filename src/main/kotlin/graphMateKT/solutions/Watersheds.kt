@@ -17,7 +17,7 @@ internal fun watersheds(): String {
     var ans = ""
     repeat(n) { caseNr ->
         val (h, w) = readInts(2)
-        val grid = Grid(height = h, width = w)
+        val grid = Grid(width = w, height = h)
         repeat(h) { y ->
             repeat(w) { x ->
                 val data = readInt()

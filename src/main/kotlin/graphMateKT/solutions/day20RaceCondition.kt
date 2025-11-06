@@ -2,7 +2,7 @@ package graphMateKT.solutions
 
 import graphMateKT.graphClasses.Grid
 import graphMateKT.Tile
-
+import graphMateKT.gridGraphics.visualizeGrid
 
 /** Solves https://adventofcode.com/2024/day/20 */
 internal fun day20a(input: List<String>, cheatGoal: Int, fairTime: Int): Int {
@@ -31,7 +31,7 @@ internal fun day20a(input: List<String>, cheatGoal: Int, fairTime: Int): Int {
         val path = grid.getPath(endNode)
         grid = gridWithoutCheatPath(path, grid)
     }
-    // grid.visualizeSearch(screenWidthOverride=2000.0)
+    // grid.visualizeGrid(screenWidthOverride=2000.0)
     return c
 }
 
