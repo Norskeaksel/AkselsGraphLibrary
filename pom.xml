@@ -16,6 +16,13 @@
         </repository>
     </distributionManagement>
 
+    <name>GraphMateKT</name>
+    <description>A library for making graphs, traversing and visualizing graphs and grids.
+        This can for example be used to solve coding puzzles, like those found in Advent Of Code.
+    </description>
+    <url>http://www.example.com/example-application</url>
+
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <kotlin.version>2.0.0</kotlin.version>
