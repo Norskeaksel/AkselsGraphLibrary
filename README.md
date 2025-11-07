@@ -209,6 +209,34 @@ fun main() {
     startPaused = true,
   )
 }
+
+private fun Grid.deleteSquareAtOffset(centerOffset: Int) {
+  val center = width / 2
+  val lowerBound = center - centerOffset
+  val upperBound = center + centerOffset
+  for (x in lowerBound + 2 until upperBound - 1) {
+    deleteNodeAtXY(x, lowerBound)
+    deleteNodeAtXY(x, upperBound)
+  }
+  for (y in lowerBound + 2 until upperBound - 1) {
+    deleteNodeAtXY(lowerBound, y)
+    deleteNodeAtXY(upperBound, y)
+  }
+}
+
+private fun Grid.deleteDiamondAtOffset(centerOffset: Int) {
+  val center = width / 2
+  var dx = centerOffset
+  var dy = 1
+  repeat(centerOffset) {
+    deleteNodeAtXY(center - dx, center - dy)
+    deleteNodeAtXY(center + dx, center - dy)
+    deleteNodeAtXY(center - dx, center + dy)
+    deleteNodeAtXY(center + dx, center + dy)
+    dx--
+    dy++
+  }
+}
 ```
 
 <img src="gifs/GridVizualization.gif" width="200%" alt="">

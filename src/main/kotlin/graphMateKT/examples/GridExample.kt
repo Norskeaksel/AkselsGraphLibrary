@@ -41,7 +41,6 @@ internal fun main() {
     )
 }
 
-
 private fun Grid.deleteSquareAtOffset(centerOffset: Int) {
     val center = width / 2
     val lowerBound = center - centerOffset
