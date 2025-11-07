@@ -214,13 +214,11 @@ private fun Grid.deleteSquareAtOffset(centerOffset: Int) {
   val center = width / 2
   val lowerBound = center - centerOffset
   val upperBound = center + centerOffset
-  for (x in lowerBound + 2 until upperBound - 1) {
-    deleteNodeAtXY(x, lowerBound)
-    deleteNodeAtXY(x, upperBound)
-  }
-  for (y in lowerBound + 2 until upperBound - 1) {
-    deleteNodeAtXY(lowerBound, y)
-    deleteNodeAtXY(upperBound, y)
+  for (i in lowerBound + 2 until upperBound - 1) {
+    deleteNodeAtXY(i, lowerBound)
+    deleteNodeAtXY(i, upperBound)
+    deleteNodeAtXY(lowerBound, i)
+    deleteNodeAtXY(upperBound, i)
   }
 }
 
