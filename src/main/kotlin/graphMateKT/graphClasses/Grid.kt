@@ -23,7 +23,7 @@ import graphMateKT.graphAlgorithms.DFS
  * <i>Example usage:</i>
  *
  * ```
- * val grid = Grid(100,100,true)
+ * val grid = Grid(100,100)
  * grid.connectGridDefault()
  * grid.bfs(Tile(50,50))
  * grid.visualizeGrid()

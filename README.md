@@ -22,11 +22,10 @@ class, which defines the basic functionality of the graphs.
 Add the following dependency to your `pom.xml` file:
 
 ```xml
-
 <dependency>
-    <groupId>me.ahsor</groupId>
-    <artifactId>graphmatekt</artifactId>
-    <version>1.0.0</version>
+  <groupId>io.github.norskeaksel</groupId>
+  <artifactId>graphmatekt</artifactId>
+  <version>1.0.0</version>
 </dependency>
 ```
 
