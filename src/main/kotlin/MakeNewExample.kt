@@ -6,8 +6,10 @@ import kotlin.io.path.Path
 
 private fun createExample(name: String) = """package graphMateKT.examples
 
-import readInt
-import readInts
+import graphMateKT.INPUT
+import graphMateKT._reader
+import graphMateKT.readInt
+import graphMateKT.readInts
 
 internal fun main() {
     val ans = $name()
@@ -65,7 +67,7 @@ private fun main() {
     val example = createExample(name)
     val exampleTest = createExampleTest(name, nrOfSampleInputs)
 
-    val exampleFile = File("src/main/kotlin/graphMateKTexamples/${name.capitalize()}.kt")
+    val exampleFile = File("src/main/kotlin/graphMateKT/solutions/${name.capitalize()}.kt")
     val exampleTestFile = File("src/test/kotlin/Test${name.capitalize()}.kt")
     val testInputDirectoryPath = "src/test/SampleInput/${name.capitalize()}"
     exampleFile.writeText(example)
